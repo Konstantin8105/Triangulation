@@ -1,6 +1,6 @@
 package geometry;
 
-import com.home.fgd.stack.triangulation.elements.Coordinate;
+import elements.Coordinate;
 
 public class GeometryLineLine {
 

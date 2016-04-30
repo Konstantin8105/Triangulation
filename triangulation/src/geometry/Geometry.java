@@ -1,10 +1,6 @@
 package geometry;
 
-import com.home.fgd.stack.ClassNameUtil;
-import com.home.fgd.stack.Log;
-
 public class Geometry {
-//    static Log logger = Log.getLogger(ClassNameUtil.getCurrentClassName());
 
     public static double normalizeAngle(final double angle) {
         double result = angle;

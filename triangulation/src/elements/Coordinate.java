@@ -1,6 +1,7 @@
 package elements;
 
-import com.home.fgd.stack.triangulation.geometry.Precisions;
+
+import geometry.Precisions;
 
 public class Coordinate {
     private double x;

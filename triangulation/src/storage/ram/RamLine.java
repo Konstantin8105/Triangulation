@@ -1,17 +1,18 @@
 package storage.ram;
 
-import com.home.fgd.stack.triangulation.elements.Line;
+
+import elements.Line;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class RamLine{
+public class RamLine {
 
     List<Line> lines;
 
-    private static Comparator<Line> comparatorId =  new Comparator<Line>() {
+    private static Comparator<Line> comparatorId = new Comparator<Line>() {
         @Override
         public int compare(Line o1, Line o2) {
             return o1.getId() - o2.getId();
@@ -35,11 +36,11 @@ public class RamLine{
 //        return ids;
 //    }
 
-    public int sizeLines(){
+    public int sizeLines() {
         return lines.size();
     }
 
-    public List<Line> getLines(){
+    public List<Line> getLines() {
         return lines;
     }
 

@@ -1,12 +1,14 @@
 package geometry.test;
 
-import com.home.fgd.stack.triangulation.elements.Coordinate;
-import com.home.fgd.stack.triangulation.geometry.Geometry;
-import com.home.fgd.stack.triangulation.geometry.Precisions;
+import elements.Coordinate;
+import geometry.Geometry;
+import geometry.Precisions;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class GeometryTest {
 

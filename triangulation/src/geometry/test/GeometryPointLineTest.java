@@ -1,10 +1,10 @@
 package geometry.test;
 
-import com.home.fgd.stack.triangulation.elements.Coordinate;
-import com.home.fgd.stack.triangulation.geometry.GeometryPointLine;
+import elements.Coordinate;
+import geometry.GeometryPointLine;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class GeometryPointLineTest {
 

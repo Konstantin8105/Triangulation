@@ -1,7 +1,7 @@
 package geometry.test;
 
-import com.home.fgd.stack.triangulation.elements.Coordinate;
-import com.home.fgd.stack.triangulation.geometry.GeometryPointTriangle;
+import elements.Coordinate;
+import geometry.GeometryPointTriangle;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,10 +1,12 @@
 package geometry.test;
 
-import com.home.fgd.stack.triangulation.elements.Coordinate;
-import com.home.fgd.stack.triangulation.geometry.GeometryLineLine;
+
+import elements.Coordinate;
+import geometry.GeometryLineLine;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class GeometryLineLineTest {
 

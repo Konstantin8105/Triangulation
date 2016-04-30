@@ -1,6 +1,7 @@
 package elements;
 
-import com.home.fgd.stack.triangulation.id.GeneratorId;
+
+import id.GeneratorId;
 
 public class Line {
     private int id;

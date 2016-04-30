@@ -1,6 +1,6 @@
 package elements.test;
 
-import com.home.fgd.stack.triangulation.elements.Coordinate;
+import elements.Coordinate;
 import org.junit.Test;
 
 import java.util.Random;

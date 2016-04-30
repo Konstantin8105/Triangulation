@@ -1,4 +1,4 @@
-import com.home.fgd.stack.triangulation.elements.Line;
+import elements.Line;
 
 import java.util.ArrayList;
 import java.util.List;

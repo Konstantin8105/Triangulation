@@ -1,6 +1,6 @@
 package elements;
 
-import com.home.fgd.stack.triangulation.id.GeneratorId;
+import id.GeneratorId;
 
 public class Triangle {
 

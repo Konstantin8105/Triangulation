@@ -1,18 +1,8 @@
 package storage;
 
-import com.home.fgd.stack.ClassNameUtil;
-import com.home.fgd.stack.Log;
-import com.home.fgd.stack.triangulation.elements.Coordinate;
-import com.home.fgd.stack.triangulation.elements.Line;
-import com.home.fgd.stack.triangulation.elements.Triangle;
-import com.home.fgd.stack.triangulation.geometry.Precisions;
-import com.home.fgd.stack.triangulation.storage.ram.RamMesh;
-import com.home.fgd.stack.triangulation.triangulator.BorderLine;
-
 import java.util.*;
 
 public class AdvanceDataMesh<T extends RamMesh> {
-    Log logger = Log.getLogger(ClassNameUtil.getCurrentClassName());
     private T data;
     private int sizeMap;
 

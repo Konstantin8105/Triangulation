@@ -1,14 +1,13 @@
 package storage.ram;
 
-import com.home.fgd.stack.triangulation.elements.Triangle;
+import elements.Triangle;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class RamMesh{
+public class RamMesh {
 
     List<Triangle> triangles;
 
@@ -37,7 +36,7 @@ public class RamMesh{
     }
 
     public int[] getIdPointByTriangle(int idTriangle) throws Exception {
-        int index = Collections.binarySearch(triangles, new Triangle(idTriangle, 0, -1, -2),  comparatorId);
+        int index = Collections.binarySearch(triangles, new Triangle(idTriangle, 0, -1, -2), comparatorId);
         Triangle triangle = triangles.get(index);
         int[] id = new int[3];
         id[0] = triangle.getIdPoint1();
@@ -82,11 +81,11 @@ public class RamMesh{
 
     public void addTriangle(int idPoint1, int idPoint2, int idPoint3) throws Exception {
         triangles.add(new Triangle(idPoint1, idPoint2, idPoint3));
-        Collections.sort(triangles,  comparatorId);
+        Collections.sort(triangles, comparatorId);
     }
 
     public void deleteTriangle(int idTriangle) throws Exception {
-        int index = Collections.binarySearch(triangles, new Triangle(idTriangle, 0, -1, -2),  comparatorId);
+        int index = Collections.binarySearch(triangles, new Triangle(idTriangle, 0, -1, -2), comparatorId);
         triangles.remove(index);
     }
 //

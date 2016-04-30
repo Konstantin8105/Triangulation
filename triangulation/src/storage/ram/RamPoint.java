@@ -1,7 +1,7 @@
 package storage.ram;
 
-import com.home.fgd.stack.triangulation.elements.Coordinate;
-import com.home.fgd.stack.triangulation.elements.Point;
+import elements.Coordinate;
+import elements.Point;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,11 +43,11 @@ public class RamPoint {
         return coordinates;
     }
 
-    public int sizePoints(){
+    public int sizePoints() {
         return points.size();
     }
 
-    public List<Point> getPoints(){
+    public List<Point> getPoints() {
         return points;
     }
 

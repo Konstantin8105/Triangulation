@@ -1,13 +1,3 @@
-import com.home.fgd.stack.triangulation.elements.Coordinate;
-import com.home.fgd.stack.triangulation.elements.Line;
-import com.home.fgd.stack.triangulation.elements.Point;
-import com.home.fgd.stack.triangulation.geometry.GeometryCoordinate;
-import com.home.fgd.stack.triangulation.geometry.GeometryLineLine;
-import com.home.fgd.stack.triangulation.geometry.GeometryPointLine;
-import com.home.fgd.stack.triangulation.geometry.GeometryPointTriangle;
-import com.home.fgd.stack.triangulation.storage.AdvanceDataMesh;
-import com.home.fgd.stack.triangulation.storage.ram.RamMesh;
-
 import java.util.*;
 
 public class IterationTriangulator<T extends RamMesh> {

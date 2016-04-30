@@ -1,8 +1,7 @@
 package geometry;
 
-import com.home.fgd.stack.ClassNameUtil;
-import com.home.fgd.stack.Log;
-import com.home.fgd.stack.triangulation.elements.Coordinate;
+
+import elements.Coordinate;
 
 import java.util.List;
 
