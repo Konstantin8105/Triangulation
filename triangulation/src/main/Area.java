@@ -6,6 +6,8 @@ import un.impl.geometry.Point;
 public class Area {
     public static double area(Sequence triangles) {
         double area = 0;
+        if(triangles.getSize() < 1)
+            return -1;
         for (int i = 0; i < triangles.getSize(); i++) {
             Point[] points = (Point[]) triangles.get(i);
             area += area_3point(points);

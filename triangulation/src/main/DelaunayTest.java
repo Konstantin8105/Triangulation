@@ -103,5 +103,21 @@ public class DelaunayTest {
         Assert.assertTrue(triangles.getSize() == 0);
         System.out.println(triangles);
     }
+
+
+    @Test
+    public void triangleSmall() {
+        double shortDistance = 1.0D;
+        for (int i = 0; i < 10; i++) {
+            shortDistance /= 10;
+            Delaunay delaunay = new Delaunay();
+            delaunay.insertPoint(new Point(0.0D, 0.0D));
+            delaunay.insertPoint(new Point(0.0D, 1.0D));
+            delaunay.insertPoint(new Point(shortDistance, 0.5D));
+            System.out.println("shortDistance = " + shortDistance + ": Size of triangles = " + delaunay.computeTriangles().getSize());
+            Assert.assertTrue(delaunay.computeTriangles().getSize()>0);
+        }
+    }
+
 }
 

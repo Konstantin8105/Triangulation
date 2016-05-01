@@ -99,4 +99,18 @@ public class AreaTest {
         delaunay.insertPoint(new Point(+1.5D, +5.0D));
         Assert.assertEquals(Area.area(delaunay.computeTriangles()), 30, 0.000001);
     }
+
+    @Test
+    public void triangleSmall() {
+        double shortDistance = 1.0D;
+        for (int i = 0; i < 10; i++) {
+            shortDistance /= 10;
+            Delaunay delaunay = new Delaunay();
+            delaunay.insertPoint(new Point(0.0D, 0.0D));
+            delaunay.insertPoint(new Point(0.0D, 1.0D));
+            delaunay.insertPoint(new Point(shortDistance, 0.5D));
+            System.out.println("shortDistance = " + shortDistance + ": Area = " + Area.area(delaunay.computeTriangles()));
+            Assert.assertTrue(Area.area(delaunay.computeTriangles())>0);
+        }
+    }
 }
