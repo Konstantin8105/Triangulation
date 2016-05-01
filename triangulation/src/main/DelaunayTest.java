@@ -1,15 +1,14 @@
 package main;
 
-import java.util.Random;
 import org.junit.Assert;
 import org.junit.Test;
 import un.api.collection.Sequence;
 import un.impl.geometry.Point;
 import un.impl.geometry.triangulate.Delaunay;
 
+import java.util.Random;
+
 public class DelaunayTest {
-    public DelaunayTest() {
-    }
 
     @Test
     public void singleTest() {
@@ -18,15 +17,15 @@ public class DelaunayTest {
         delaunay.insertPoint(new Point(0.0D, 1.0D));
         delaunay.insertPoint(new Point(1.0D, 0.0D));
         Sequence edges = delaunay.computeEdges();
-        Assert.assertEquals(3L, (long)edges.getSize());
-        Assert.assertArrayEquals(new Point[]{new Point(0.0D, 1.0D), new Point(1.0D, 0.0D)}, (Point[])((Point[])edges.get(0)));
-        Assert.assertArrayEquals(new Point[]{new Point(0.0D, 0.0D), new Point(0.0D, 1.0D)}, (Point[])((Point[])edges.get(1)));
-        Assert.assertArrayEquals(new Point[]{new Point(0.0D, 0.0D), new Point(1.0D, 0.0D)}, (Point[])((Point[])edges.get(2)));
+        Assert.assertEquals(3L, (long) edges.getSize());
+        Assert.assertArrayEquals(new Point[]{new Point(0.0D, 1.0D), new Point(1.0D, 0.0D)}, (Point[]) ((Point[]) edges.get(0)));
+        Assert.assertArrayEquals(new Point[]{new Point(0.0D, 0.0D), new Point(0.0D, 1.0D)}, (Point[]) ((Point[]) edges.get(1)));
+        Assert.assertArrayEquals(new Point[]{new Point(0.0D, 0.0D), new Point(1.0D, 0.0D)}, (Point[]) ((Point[]) edges.get(2)));
         Sequence triangles = delaunay.computeTriangles();
-        Assert.assertEquals(1L, (long)triangles.getSize());
-        Assert.assertArrayEquals(new Point[]{new Point(1.0D, 0.0D), new Point(0.0D, 1.0D), new Point(0.0D, 0.0D)}, (Point[])((Point[])triangles.get(0)));
+        Assert.assertEquals(1L, (long) triangles.getSize());
+        Assert.assertArrayEquals(new Point[]{new Point(1.0D, 0.0D), new Point(0.0D, 1.0D), new Point(0.0D, 0.0D)}, (Point[]) ((Point[]) triangles.get(0)));
         Sequence voronoi = delaunay.computeVoronoi();
-        Assert.assertEquals(3L, (long)voronoi.getSize());
+        Assert.assertEquals(3L, (long) voronoi.getSize());
     }
 
     @Test
@@ -34,7 +33,7 @@ public class DelaunayTest {
         Random random = new Random();
         Delaunay delaunay = new Delaunay();
 
-        for(int triangles = 0; triangles < 10000; ++triangles) {
+        for (int triangles = 0; triangles < 10000; ++triangles) {
             delaunay.insertPoint(new Point(random.nextDouble(), random.nextDouble()));
         }
 
