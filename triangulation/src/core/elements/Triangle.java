@@ -1,6 +1,6 @@
 package core.elements;
 
-import core.id.GeneratorId;
+import core.old.id.GeneratorId;
 
 public class Triangle {
 

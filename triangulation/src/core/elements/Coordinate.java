@@ -1,6 +1,6 @@
 package core.elements;
 
-import core.Precisions;
+import core.old.Precisions;
 
 public class Coordinate {
     private double x;

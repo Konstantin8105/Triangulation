@@ -1,6 +1,6 @@
 package core.elements;
 
-import core.id.GeneratorId;
+import core.old.id.GeneratorId;
 
 public class Point{
     private int id;
@@ -28,7 +28,7 @@ public class Point{
     public String toString() {
         return "Point{" +
                 "coordinate=" + coordinate +
-                ", old.core.id=" + id +
+                ", old.core.old.id=" + id +
                 '}';
     }
 

@@ -1,7 +1,7 @@
 package core.elements;
 
 
-import core.id.GeneratorId;
+import core.old.id.GeneratorId;
 
 public class Line {
     private int id;
@@ -23,7 +23,7 @@ public class Line {
         if (idPointA == idPointB)
             throw new Exception("Can`t create line with same points");
         if (id < 0)
-            throw new Exception("Negative old.core.id");
+            throw new Exception("Negative old.core.old.id");
         this.idPointA = idPointA;
         this.idPointB = idPointB;
     }
@@ -49,7 +49,7 @@ public class Line {
     @Override
     public String toString() {
         return "Line{" +
-                "  old.core.id=" + id +
+                "  old.core.old.id=" + id +
                 ", idPointA=" + idPointA +
                 ", idPointB=" + idPointB +
                 '}';
