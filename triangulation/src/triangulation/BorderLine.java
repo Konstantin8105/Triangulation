@@ -8,36 +8,51 @@ import java.util.List;
 
 public class BorderLine {
 
-    List<Line> lines;
+    private List<Line> loop;
+    private List<Line> lineAdd;
+    private List<Line> lineDelete;
 
     public BorderLine() {
-        lines = new ArrayList<>();
+        loop = new ArrayList<>();
+        lineAdd = new ArrayList<>();
+        lineDelete = new ArrayList<>();
     }
 
     public void addLine(Line line) {
-        if (lines.size() < 4) {
-            lines.add(line);
-        }
-        // TODO:sdf
-        // TODO: 29.04.2016
+        lineAdd.add(line);
     }
 
     public void deleteLine(Line line) {
-        // TODO: 29.04.2016
-        // TODO:sdf
-        lines.remove(line);
+        lineDelete.add(line);
     }
 
-    public List<Integer> getBorderLine() {
-        List<Integer> idLines = new ArrayList<>(lines.size());
-        for (int i = 0; i < lines.size(); i++) {
-            idLines.add(lines.get(i).getId());
+    public List<Line> getBorderLine() {
+        if(loop.size() == 0){
+            return loop;
         }
-        return idLines;
-    }
+        List<Integer> removeIndex = new ArrayList<>();
+        for (int i = 0; i < loop.size(); i++) {
+            for (int j = 0; j < lineDelete.size(); j++) {
+                if (loop.get(i).equals(lineDelete.get(j))) {
+                    removeIndex.add(i);
+                    j = lineDelete.size();
+                }
+            }
+        }
+        for (int i = removeIndex.size() - 1; i >= 0; i--) {
+            loop.remove(removeIndex.get(i));
+        }
 
-    // TODO: 29.04.2016
-    private void sortLines(List<Line> listLines) throws Exception {
+
+//        List<Integer> idLines = new ArrayList<>(lines.size());
+//        for (int i = 0; i < lines.size(); i++) {
+//            idLines.add(lines.get(i).getId());
+//        }
+//        return idLines;
+//    }
+//
+//    // TODO: 29.04.2016
+//    private void sortLines(List<Line> listLines) throws Exception {
 //        logger.line();
 //        logger.info("In function sortLines()");
 //        logger.info("listLines = " + listLines);

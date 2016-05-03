@@ -38,9 +38,8 @@ public class Line {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Line line = (Line) o;
-        if (idPointA != line.idPointA) return false;
-        if (idPointB != line.idPointB) return false;
-        return true;
+        return (idPointA == line.idPointA && idPointB == line.idPointB) ||
+                (idPointB == line.idPointA && idPointA == line.idPointB);
 
     }
 
