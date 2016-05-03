@@ -1,4 +1,4 @@
-package old.core.geometry;
+package core;
 
 public class Precisions {
     public static double epsilon() {

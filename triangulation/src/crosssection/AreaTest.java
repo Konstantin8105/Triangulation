@@ -1,4 +1,4 @@
-package main;
+package crosssection;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -109,6 +109,20 @@ public class AreaTest {
             delaunay.insertPoint(new Point(0.0D, 0.0D));
             delaunay.insertPoint(new Point(0.0D, 1.0D));
             delaunay.insertPoint(new Point(shortDistance, 0.5D));
+            System.out.println("shortDistance = " + shortDistance + ": Area = " + Area.area(delaunay.computeTriangles()));
+            Assert.assertTrue(Area.area(delaunay.computeTriangles())>0);
+        }
+    }
+
+    @Test
+    public void triangleSmall2() {
+        double shortDistance = 1.0D;
+        for (int i = 0; i < 10; i++) {
+            shortDistance /= 10;
+            Delaunay delaunay = new Delaunay();
+            delaunay.insertPoint(new Point(0.0D, 0.0D));
+            delaunay.insertPoint(new Point(0.0D, 1.0D));
+            delaunay.insertPoint(new Point(shortDistance, 0.0D));
             System.out.println("shortDistance = " + shortDistance + ": Area = " + Area.area(delaunay.computeTriangles()));
             Assert.assertTrue(Area.area(delaunay.computeTriangles())>0);
         }

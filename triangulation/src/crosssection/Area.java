@@ -1,4 +1,4 @@
-package main;
+package crosssection;
 
 import un.api.collection.Sequence;
 import un.impl.geometry.Point;

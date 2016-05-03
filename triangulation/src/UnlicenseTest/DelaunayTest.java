@@ -1,4 +1,9 @@
-package main;
+package UnlicenseTest;
+
+//------------------------------------
+// Test created for check Delaunay triangulation
+// Created by: Izyumov Konstantin
+//------------------------------------
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,13 +37,10 @@ public class DelaunayTest {
     public void singleTest2() {
         Random random = new Random();
         Delaunay delaunay = new Delaunay();
-
         for (int triangles = 0; triangles < 10000; ++triangles) {
             delaunay.insertPoint(new Point(random.nextDouble(), random.nextDouble()));
         }
-
-        Sequence var4 = delaunay.computeTriangles();
-        Assert.assertTrue(var4.getSize() > 0);
+        Assert.assertTrue(delaunay.computeTriangles().getSize() > 0);
     }
 
     @Test
@@ -53,7 +55,6 @@ public class DelaunayTest {
         delaunay.insertPoint(new Point(6.0D, 0.0D));
         delaunay.insertPoint(new Point(7.0D, 0.0D));
         delaunay.insertPoint(new Point(0.0D, 1.0D));
-        Sequence edges = delaunay.computeEdges();
         Sequence triangles = delaunay.computeTriangles();
         Assert.assertTrue(triangles.getSize() > 0);
     }
@@ -62,10 +63,8 @@ public class DelaunayTest {
     public void singleTest4() {
         Delaunay delaunay = new Delaunay();
         delaunay.insertPoint(new Point(0.0D, 0.0D));
-        Sequence edges = delaunay.computeEdges();
         Sequence triangles = delaunay.computeTriangles();
         Assert.assertTrue(triangles.getSize() == 0);
-        System.out.println(triangles);
     }
 
     @Test
@@ -73,10 +72,8 @@ public class DelaunayTest {
         Delaunay delaunay = new Delaunay();
         delaunay.insertPoint(new Point(0.0D, 0.0D));
         delaunay.insertPoint(new Point(1.0D, 1.0D));
-        Sequence edges = delaunay.computeEdges();
         Sequence triangles = delaunay.computeTriangles();
         Assert.assertTrue(triangles.getSize() == 0);
-        System.out.println(triangles);
     }
 
     @Test
@@ -85,10 +82,8 @@ public class DelaunayTest {
         delaunay.insertPoint(new Point(0.0D, 0.0D));
         delaunay.insertPoint(new Point(1.0D, 1.0D));
         delaunay.insertPoint(new Point(2.0D, 2.0D));
-        Sequence edges = delaunay.computeEdges();
         Sequence triangles = delaunay.computeTriangles();
         Assert.assertTrue(triangles.getSize() == 0);
-        System.out.println(triangles);
     }
 
     @Test
@@ -98,15 +93,18 @@ public class DelaunayTest {
         delaunay.insertPoint(new Point(1.0D, 1.0D));
         delaunay.insertPoint(new Point(2.0D, 2.0D));
         delaunay.insertPoint(new Point(3.0D, 3.0D));
-        Sequence edges = delaunay.computeEdges();
         Sequence triangles = delaunay.computeTriangles();
         Assert.assertTrue(triangles.getSize() == 0);
-        System.out.println(triangles);
     }
 
-
+    //------------------------------------
+    // Uncorrect for small triangle
+    // Output: shortDistance = 0.001: Size of triangles = 0 ;
+    // Size can not be zero
+    //------------------------------------
+    //TODO: Add more precision for triangulation
     @Test
-    public void triangleSmall() {
+    public void triangleSmall1() {
         double shortDistance = 1.0D;
         for (int i = 0; i < 10; i++) {
             shortDistance /= 10;
@@ -115,7 +113,28 @@ public class DelaunayTest {
             delaunay.insertPoint(new Point(0.0D, 1.0D));
             delaunay.insertPoint(new Point(shortDistance, 0.5D));
             System.out.println("shortDistance = " + shortDistance + ": Size of triangles = " + delaunay.computeTriangles().getSize());
-            Assert.assertTrue(delaunay.computeTriangles().getSize()>0);
+            Assert.assertTrue(delaunay.computeTriangles().getSize() == 1);
+        }
+    }
+
+    //------------------------------------
+    // Uncorrect for small triangle
+    // Output: shortDistance = 0.001: Size of triangles = 0 ;
+    // Size can not be zero
+    //------------------------------------
+    //TODO: Add more precision for triangulation
+    @Test
+    public void triangleSmall2() {
+        double shortDistance = 1.0D;
+        for (int i = 0; i < 10; i++) {
+            shortDistance /= 10;
+            Delaunay delaunay = new Delaunay();
+            delaunay.insertPoint(new Point(0.0D, 0.0D));
+            delaunay.insertPoint(new Point(0.0D, 1.0D));
+            delaunay.insertPoint(new Point(shortDistance, 0.5D));
+            delaunay.insertPoint(new Point(shortDistance, -0.5D));
+            System.out.println("shortDistance = " + shortDistance + ": Size of triangles = " + delaunay.computeTriangles().getSize());
+            Assert.assertTrue(delaunay.computeTriangles().getSize() == 2);
         }
     }
 

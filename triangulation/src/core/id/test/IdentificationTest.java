@@ -1,6 +1,6 @@
-package old.core.id.test;
+package core.id.test;
 
-import old.core.id.GeneratorId;
+import core.id.GeneratorId;
 import org.junit.Test;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package old.core.elements.test;
+package core.elements.test;
 
-import old.core.elements.Coordinate;
+import core.elements.Coordinate;
 import org.junit.Test;
 
 import java.util.Random;

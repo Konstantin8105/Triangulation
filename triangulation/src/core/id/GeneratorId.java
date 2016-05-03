@@ -1,4 +1,4 @@
-package old.core.id;
+package core.id;
 
 public class GeneratorId {
     private static int position = 1;

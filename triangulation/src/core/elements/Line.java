@@ -1,7 +1,7 @@
-package old.core.elements;
+package core.elements;
 
 
-import old.core.id.GeneratorId;
+import core.id.GeneratorId;
 
 public class Line {
     private int id;
