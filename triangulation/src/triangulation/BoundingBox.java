@@ -1,4 +1,4 @@
-package core.old;
+package triangulation;
 
 public class BoundingBox {
     // TODO:sdf

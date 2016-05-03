@@ -1,7 +1,6 @@
-package core.old.geometry;
+package geometry;
 
-
-import core.elements.Coordinate;
+import elements.Point;
 
 public class GeometryPointLine {
 
@@ -12,12 +11,12 @@ public class GeometryPointLine {
     }
 
     public static PointLineState statePointOnLine(double x, double y,
-                                                  Coordinate p1Line,
-                                                  Coordinate p2Line){
+                                                  Point p1Line,
+                                                  Point p2Line){
 
-        if(p1Line.equals(new Coordinate(x,y)))
+        if(p1Line.equals(new Point(x,y)))
             return PointLineState.POINT_ON_CORNER;
-        if(p2Line.equals(new Coordinate(x,y)))
+        if(p2Line.equals(new Point(x,y)))
             return PointLineState.POINT_ON_CORNER;
 
         if (!Geometry.is3pointsCollinear(x, y,
@@ -31,10 +30,10 @@ public class GeometryPointLine {
         return PointLineState.POINT_ON_LINE;
     }
 
-    public static PointLineState statePointOnLine(Coordinate coordinate,
-                                                  Coordinate p1Line,
-                                                  Coordinate p2Line){
-        return statePointOnLine(coordinate.getX(),coordinate.getY(),
+    public static PointLineState statePointOnLine(Point Point,
+                                                  Point p1Line,
+                                                  Point p2Line){
+        return statePointOnLine(Point.getX(),Point.getY(),
                 p1Line,p2Line);
     }
 

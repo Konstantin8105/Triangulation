@@ -1,6 +1,7 @@
-package old.core.geometry;
+package geometry;
 
-import old.core.elements.Coordinate;
+
+import elements.Point;
 
 public class GeometryLineLine {
 
@@ -12,8 +13,8 @@ public class GeometryLineLine {
         INTERSECT_POINT_ON_LINE
     }
 
-    public static IntersectState stateLineLine(Coordinate p1Line1, Coordinate p2Line1,
-                                               Coordinate p1Line2, Coordinate p2Line2) {
+    public static IntersectState stateLineLine(Point p1Line1, Point p2Line1,
+                                               Point p1Line2, Point p2Line2) {
 //        System.out.println(GeometryPointLine.statePointOnLine(p2Line1, p1Line2, p2Line2).ordinal());
 //        System.out.println(GeometryPointLine.statePointOnLine(p1Line1, p1Line2, p2Line2).ordinal());
 //        System.out.println(GeometryPointLine.statePointOnLine(p2Line2, p1Line1, p2Line1).ordinal()); // true
@@ -78,8 +79,8 @@ public class GeometryLineLine {
 
     }
 
-    private static boolean isLinesIntersect(Coordinate p1, Coordinate p2, Coordinate p3, Coordinate p4) {
-        Coordinate intersect = coordinateIntersect(p1, p2, p3, p4);
+    private static boolean isLinesIntersect(Point p1, Point p2, Point p3, Point p4) {
+        Point intersect = coordinateIntersect(p1, p2, p3, p4);
         if (intersect == null)
             return false;
         if (GeometryCoordinate.isPointInRectangle(intersect, p1, p2) &&
@@ -90,7 +91,7 @@ public class GeometryLineLine {
     }
 
 
-    private static Coordinate coordinateIntersect(Coordinate p1, Coordinate p2, Coordinate p3, Coordinate p4) {
+    private static Point coordinateIntersect(Point p1, Point p2, Point p3, Point p4) {
         // Line p1-p2
         // Line p3-p4
         if (Math.abs((p4.getY() - p3.getY()) * (p2.getX() - p1.getX()) - (p4.getX() - p3.getX()) * (p2.getY() - p1.getY())) < Precisions.epsilon()) {
@@ -107,7 +108,7 @@ public class GeometryLineLine {
         double x = p1.getX() + Ua * (p2.getX() - p1.getX());
         double y = p1.getY() + Ua * (p2.getY() - p1.getY());
 
-        return new Coordinate(x, y);
+        return new Point(x, y);
     }
 
 }

@@ -1,8 +1,8 @@
-package core.old.geometry.test;
+package geometry.test;
 
-import old.core.elements.Coordinate;
-import old.core.geometry.Geometry;
-import old.core.geometry.Precisions;
+import elements.Point;
+import geometry.Geometry;
+import geometry.Precisions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,66 +16,66 @@ public class GeometryTest {
 
     @Test
     public void testAngle1() throws Exception {
-        Coordinate c1 = new Coordinate(0f, 0f);
-        Coordinate c2 = new Coordinate(1f, 0f);
+        Point c1 = new Point(0f, 0f);
+        Point c2 = new Point(1f, 0f);
         assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), 0d, epsilon);
     }
 
     @Test
     public void testAngle2() throws Exception {
-        Coordinate c1 = new Coordinate(0f, 0f);
-        Coordinate c2 = new Coordinate(0f, 1f);
+        Point c1 = new Point(0f, 0f);
+        Point c2 = new Point(0f, 1f);
         assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.PI / 2d, epsilon);
     }
 
     @Test
     public void testAngle3() throws Exception {
-        Coordinate c1 = new Coordinate(0f, 0f);
-        Coordinate c2 = new Coordinate(-1f, 0f);
+        Point c1 = new Point(0f, 0f);
+        Point c2 = new Point(-1f, 0f);
         assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.PI, epsilon);
     }
 
     @Test
     public void testAngle4() throws Exception {
-        Coordinate c1 = new Coordinate(0f, 0f);
-        Coordinate c2 = new Coordinate(0f, -1f);
+        Point c1 = new Point(0f, 0f);
+        Point c2 = new Point(0f, -1f);
         Assert.assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.PI * 1.5d, epsilon);
     }
 
     @Test
     public void testAngle5() throws Exception {
-        Coordinate c1 = new Coordinate(0f, 0f);
-        Coordinate c2 = new Coordinate(1f, 1f);
+        Point c1 = new Point(0f, 0f);
+        Point c2 = new Point(1f, 1f);
         Assert.assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.toRadians(45d), epsilon);
     }
 
     @Test
     public void testAngle6() throws Exception {
-        Coordinate c1 = new Coordinate(0f, 0f);
-        Coordinate c2 = new Coordinate(-1f, 1f);
+        Point c1 = new Point(0f, 0f);
+        Point c2 = new Point(-1f, 1f);
         Assert.assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.toRadians(135d), epsilon);
     }
 
     @Test
     public void testAngle7() throws Exception {
-        Coordinate c1 = new Coordinate(0f, 0f);
-        Coordinate c2 = new Coordinate(-1f, -1f);
+        Point c1 = new Point(0f, 0f);
+        Point c2 = new Point(-1f, -1f);
         Assert.assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.toRadians(225d), epsilon);
     }
 
     @Test
     public void testAngle8() throws Exception {
-        Coordinate c1 = new Coordinate(0f, 0f);
-        Coordinate c2 = new Coordinate(1f, -1f);
+        Point c1 = new Point(0f, 0f);
+        Point c2 = new Point(1f, -1f);
         Assert.assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.toRadians(315d), epsilon);
     }
 
     @Test
     public void testAngleAround() throws Exception {
-        Coordinate c1 = new Coordinate(0f, 0f);
+        Point c1 = new Point(0f, 0f);
         for (double i = 0; i < 360; i += 0.002) {
             double angle = Math.toRadians(i);
-            Coordinate c2 = new Coordinate((float) Math.cos(angle), (float) Math.sin(angle));
+            Point c2 = new Point((float) Math.cos(angle), (float) Math.sin(angle));
             Assert.assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), angle, epsilon);
         }
     }

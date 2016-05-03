@@ -4,8 +4,7 @@ package core.elements;
 import core.old.id.GeneratorId;
 
 public class Line {
-    private int id;
-
+    private int id
     private int idPointA;
     private int idPointB;
 

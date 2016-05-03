@@ -1,7 +1,7 @@
-package core.old;
+package triangulation;
 
 
-import core.elements.Line;
+import elements.Line;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class BorderLine {
     }
 
     public void addLine(Line line) {
-        if(lines.size() < 4){
+        if (lines.size() < 4) {
             lines.add(line);
         }
         // TODO:sdf

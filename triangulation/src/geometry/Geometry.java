@@ -1,6 +1,4 @@
-package core.old.geometry;
-
-import core.old.Precisions;
+package geometry;
 
 public class Geometry {
 
@@ -66,9 +64,9 @@ public class Geometry {
     }
 
     public static boolean isPointBetween2Border(double p, double pBorder1, double pBorder2) {
-        if (p < Math.min(pBorder1, pBorder2)-Precisions.epsilon())
+        if (p < Math.min(pBorder1, pBorder2) - Precisions.epsilon())
             return false;
-        if (p > Math.max(pBorder1, pBorder2)+Precisions.epsilon())
+        if (p > Math.max(pBorder1, pBorder2) + Precisions.epsilon())
             return false;
         return true;
     }
@@ -76,9 +74,9 @@ public class Geometry {
     public static boolean isPointInRectangle(double x, double y,
                                              double Line1X, double Line1Y,
                                              double Line2X, double Line2Y) {
-        if(!isPointBetween2Border(x,Line1X,Line2X))
+        if (!isPointBetween2Border(x, Line1X, Line2X))
             return false;
-        if(!isPointBetween2Border(y,Line1Y,Line2Y))
+        if (!isPointBetween2Border(y, Line1Y, Line2Y))
             return false;
         return true;
     }
@@ -89,11 +87,11 @@ public class Geometry {
             double x3, double y3
     ) {
         boolean result = false;
-        if(Math.abs(x1-x2) < Precisions.epsilon() && Math.abs(x3-x2) < Precisions.epsilon()){
+        if (Math.abs(x1 - x2) < Precisions.epsilon() && Math.abs(x3 - x2) < Precisions.epsilon()) {
             return true;
         }
 
-        if(Math.abs(y1-y2) < Precisions.epsilon() && Math.abs(y3-y2) < Precisions.epsilon()){
+        if (Math.abs(y1 - y2) < Precisions.epsilon() && Math.abs(y3 - y2) < Precisions.epsilon()) {
             return true;
         }
 
