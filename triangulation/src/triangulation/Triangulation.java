@@ -6,6 +6,9 @@ import elements.Mesh;
 import elements.Point;
 import elements.Triangle;
 import geometry.GeometryCoordinate;
+import geometry.GeometryLineLine;
+import geometry.GeometryPointLine;
+import geometry.GeometryPointTriangle;
 
 import java.util.*;
 
@@ -14,9 +17,7 @@ public class Triangulation {
     private BorderBox bBox = new BorderBox();
 
     public Triangulation(List<Point> points) throws Exception {
-        // ----
         // Delete same points
-        // ----
         Set<Point> set = new HashSet<>(points);
         points = new ArrayList<>(set);
 
@@ -52,14 +53,13 @@ public class Triangulation {
                 return;
             }
         }
-        // point is outside of triangles
+
         addNextPointOutside(nextPoint);
 
         bBox.addPoint((Point) nextPoint.value);
     }
 
     private void addNextPointWithoutBorder() throws Exception {
-        // if all points on NOT one line
         List<Point> points = new ArrayList<>();
         for (int i = 0; i < lastPoints.size(); i++) {
             points.add((Point) lastPoints.get(i).value);
@@ -68,7 +68,7 @@ public class Triangulation {
             return;
         }
         isNeedLastPointsSaving = false;
-        // create line, triangles between all points
+
         List<IDable.Element> point = new ArrayList<>();
         point.add(lastPoints.get(lastPoints.size() - 1));
         point.add(lastPoints.get(lastPoints.size() - 2));
@@ -132,28 +132,87 @@ public class Triangulation {
     private void addNextPointOutside(IDable.Element nextPoint) throws Exception {
         BorderLineConvexRegion borderLinesConvexRegion = mesh.getBorderLines();
 
-        List<IDable.Element> lines = getBorderLinesForNewConvex((Point) nextPoint.value, borderLinesConvexRegion);
+        List<Line> lines = getBorderLinesForNewConvex((Point) nextPoint.value, borderLinesConvexRegion);
+        mesh.addLine(new Line(nextPoint.id, lines.get(0).getIdPointA()));
         for (int i = 0; i < lines.size(); i++) {
-            mesh.addLine(new Line(nextPoint.id, ((Line) lines.get(i).value).getIdPointA()));
-            mesh.addLine(new Line(nextPoint.id, ((Line) lines.get(i).value).getIdPointB()));
+            mesh.addLine(new Line(nextPoint.id, lines.get(i).getIdPointB()));
             mesh.addTriangle(new Triangle(
                     nextPoint.id,
-                    ((Line) lines.get(i).value).getIdPointA(),
-                    ((Line) lines.get(i).value).getIdPointB()));
+                    lines.get(i).getIdPointA(),
+                    lines.get(i).getIdPointB()));
         }
     }
 
-    private List<IDable.Element> getBorderLinesForNewConvex(Point nextPoint, BorderLineConvexRegion border) {
-        // TODO: 5/4/16
-    }
-
-
     private IDable.Element getPointOnLine(IDable.Element nextPoint) {
-        // TODO: 5/4/16
+        List<IDable.Element> listLines = mesh.getLines((Point) nextPoint.value);
+        if (listLines == null)
+            return null;
+        if (listLines.size() == 0)
+            return null;
+
+        for (IDable.Element line : listLines) {
+            Point pointA = mesh.getPoints(((Line) line.value).getIdPointA());
+            Point pointB = mesh.getPoints(((Line) line.value).getIdPointB());
+            if (GeometryPointLine.statePointOnLine(((Point) nextPoint.value).getX(), ((Point) nextPoint.value).getY(),
+                    pointA, pointB)
+                    == GeometryPointLine.PointLineState.POINT_ON_LINE) {
+                return line;
+            }
+        }
+        return null;
     }
 
     private IDable.Element getPointInTriangle(IDable.Element nextPoint) {
-        // TODO: 5/4/16
+        List<IDable.Element> listTriangles = mesh.getTriangles((Point) nextPoint.value);
+        if (listTriangles == null)
+            return null;
+        if (listTriangles.size() == 0)
+            return null;
+
+        for (IDable.Element triangle : listTriangles) {
+            Point[] points = mesh.getPointsByTriangle(triangle);
+            if (GeometryPointTriangle.isPointInTriangle((Point) nextPoint.value, points) ==
+                    GeometryPointTriangle.PointTriangleState.POINT_INSIDE) {
+                return triangle;
+            }
+        }
+        return null;
+    }
+
+    private List<Line> getBorderLinesForNewConvex(Point nextPoint, BorderLineConvexRegion border) throws Exception {
+        List<Line> lines = border.getBorderLine();
+
+        Point[] pointsOfLine = new Point[lines.size() + 1];
+        pointsOfLine[0] = mesh.getPoints(lines.get(0).getIdPointA());
+        for (int i = 0; i < lines.size(); i++) {
+            pointsOfLine[i + 1] = mesh.getPoints(lines.get(i).getIdPointB());
+        }
+        pointsOfLine[lines.size()] = pointsOfLine[0];
+
+        Point[] pointsMiddleOfLine = new Point[lines.size()];
+        for (int i = 0; i < pointsMiddleOfLine.length; i++) {
+            pointsMiddleOfLine[i] = Point.middlePoint(pointsOfLine[i], pointsOfLine[i + 1]);
+        }
+
+        List<Integer> indexLinesDelete = new ArrayList<>();
+        for (int i = 0; i < lines.size(); i++) {
+            GeometryLineLine.IntersectState state = GeometryLineLine.stateLineLine(
+                    nextPoint,
+                    pointsMiddleOfLine[i],
+                    pointsOfLine[i],
+                    pointsOfLine[i + 1]);
+            if (state == GeometryLineLine.IntersectState.INTERSECT ||
+                    state == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE ||
+                    state == GeometryLineLine.IntersectState.LINE_IN_LINE) {
+                indexLinesDelete.add(i);
+            }
+        }
+
+        for (int i = indexLinesDelete.size() - 1; i >= 0; i++) {
+            lines.remove(indexLinesDelete.get(i));
+        }
+
+        return lines;
     }
 
 }

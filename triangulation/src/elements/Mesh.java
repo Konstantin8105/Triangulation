@@ -10,12 +10,6 @@ public class Mesh {
     private IDable<Point> points = new IDable<>();
     private IDable<Line> lines = new IDable<>();
     private IDable<Triangle> triangles = new IDable<>();
-/*
-
-    public void addPoint(Point point) {
-        points.add(point);
-    }
-*/
 
     public void addPoint(List<Point> point) {
         points.add(point);
@@ -29,13 +23,6 @@ public class Mesh {
         triangles.add(triangle);
     }
 
-    /*
-
-        public void deletePoint(int id) {
-            points.remove(id);
-        }
-
-    */
     public IDable<Point> getPoints() {
         return points;
     }
@@ -47,13 +34,6 @@ public class Mesh {
     public void deleteTriangle(int id) {
         triangles.remove(id);
     }
-/*
-    public void deleteTriangle(IDable.Element[] triangles) {
-        for (int i = 0; i < triangles.length; i++) {
-            if(triangles[i] != null)
-                deleteTriangle(triangles[i].id);
-        }
-    }*/
 
     public void deleteSamePoints() {
         // TODO: 5/4/16
@@ -64,6 +44,22 @@ public class Mesh {
     }
 
     public BorderLineConvexRegion getBorderLines() {
+        // TODO: 5/4/16
+    }
+
+    public Point getPoints(int idPoint) {
+        // TODO: 5/4/16
+    }
+
+    public List<IDable.Element> getLines(Point value) {
+        // TODO: 5/4/16
+    }
+
+    public List<IDable.Element> getTriangles(Point value) {
+        // TODO: 5/4/16
+    }
+
+    public Point[] getPointsByTriangle(IDable.Element triangle) {
         // TODO: 5/4/16
     }
 }

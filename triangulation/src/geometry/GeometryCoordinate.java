@@ -3,6 +3,7 @@ package geometry;
 
 import elements.Point;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class GeometryCoordinate extends Geometry {
@@ -49,7 +50,7 @@ public class GeometryCoordinate extends Geometry {
         return isPointInRectangle(x, y, p1Line.getX(), p1Line.getY(), p2Line.getX(), p2Line.getY());
     }
 
-    static boolean isPointInRectangle(Point Point, List<Point> list) {
+    static boolean isPointInRectangle(Point point, List<Point> list) {
         double minX = list.get(0).getX();
         double maxX = list.get(0).getX();
         double minY = list.get(0).getY();
@@ -60,6 +61,10 @@ public class GeometryCoordinate extends Geometry {
             if (minY > c.getY()) minY = c.getY();
             if (maxY < c.getY()) maxY = c.getY();
         }
-        return isPointInRectangle(Point.getX(), Point.getY(), minX, minY, maxX, maxY);
+        return isPointInRectangle(point.getX(), point.getY(), minX, minY, maxX, maxY);
+    }
+
+    static boolean isPointInRectangle(Point point, Point[] list) {
+        return isPointInRectangle(point, Arrays.asList(list));
     }
 }

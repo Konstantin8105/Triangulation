@@ -50,6 +50,7 @@ public class BorderLineConvexRegion {
             loop.remove(removeIndex.get(i));
         }
 
+        MUST BE LOOP
 
 //        List<Integer> idLines = new ArrayList<>(lines.size());
 //        for (int i = 0; i < lines.size(); i++) {
