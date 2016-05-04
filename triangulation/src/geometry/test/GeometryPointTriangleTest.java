@@ -19,7 +19,7 @@ public class GeometryPointTriangleTest {
         list.add(new Point(-27.65f, 35.68f));
         list.add(new Point(19.10f, -57.66f));
 
-        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,list),GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE);
+        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,(Point[])list.toArray()),GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class GeometryPointTriangleTest {
         list.add(new Point(1,-1));
         list.add(new Point(-1,-1));
 
-        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,list),GeometryPointTriangle.PointTriangleState.POINT_INSIDE);
+        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,(Point[])list.toArray()),GeometryPointTriangle.PointTriangleState.POINT_INSIDE);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class GeometryPointTriangleTest {
         list.add(new Point(1,-1));
         list.add(new Point(-1,-1));
 
-        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,list),GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE);
+        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,(Point[])list.toArray()),GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class GeometryPointTriangleTest {
         list.add(new Point(2,2));
         list.add(new Point(2,0));
 
-        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,list),GeometryPointTriangle.PointTriangleState.POINT_ON_LINE);
+        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,(Point[])list.toArray()),GeometryPointTriangle.PointTriangleState.POINT_ON_LINE);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class GeometryPointTriangleTest {
         list.add(new Point(2,2));
         list.add(new Point(2,0));
 
-        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,list),GeometryPointTriangle.PointTriangleState.POINT_ON_LINE);
+        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,(Point[])list.toArray()),GeometryPointTriangle.PointTriangleState.POINT_ON_LINE);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class GeometryPointTriangleTest {
         list.add(new Point(2,2));
         list.add(new Point(2,0));
 
-        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,list),GeometryPointTriangle.PointTriangleState.POINT_ON_LINE);
+        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,(Point[])list.toArray()),GeometryPointTriangle.PointTriangleState.POINT_ON_LINE);
     }
 
     @Test
@@ -91,6 +91,6 @@ public class GeometryPointTriangleTest {
         list.add(new Point(2,2));
         list.add(new Point(2,0));
 
-        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,list),GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE);
+        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint,(Point[])list.toArray()),GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE);
     }
 }

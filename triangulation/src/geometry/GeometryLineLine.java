@@ -15,68 +15,51 @@ public class GeometryLineLine {
 
     public static IntersectState stateLineLine(Point p1Line1, Point p2Line1,
                                                Point p1Line2, Point p2Line2) {
-//        System.out.println(GeometryPointLine.statePointOnLine(p2Line1, p1Line2, p2Line2).ordinal());
-//        System.out.println(GeometryPointLine.statePointOnLine(p1Line1, p1Line2, p2Line2).ordinal());
-//        System.out.println(GeometryPointLine.statePointOnLine(p2Line2, p1Line1, p2Line1).ordinal()); // true
-//        System.out.println(GeometryPointLine.statePointOnLine(p1Line2, p1Line1, p2Line1).ordinal());
-//        System.out.println(p1Line1.equals(p1Line2));
-//        System.out.println(p1Line1.equals(p2Line2));
-//        System.out.println(p2Line1.equals(p1Line2)); // true
-//        System.out.println(p2Line1.equals(p2Line2));
 
-        if (p1Line1.equals(p1Line2) && p2Line1.equals(p2Line2)) {
-            return IntersectState.LINE_IN_LINE;
+        int[] state = {
+                GeometryPointLine.statePointOnLine(p1Line1, p1Line2, p2Line2).ordinal(),
+                GeometryPointLine.statePointOnLine(p2Line1, p1Line2, p2Line2).ordinal(),
+                GeometryPointLine.statePointOnLine(p1Line2, p1Line1, p2Line1).ordinal(),
+                GeometryPointLine.statePointOnLine(p2Line2, p1Line1, p2Line1).ordinal()};
+
+        int[] statePointOnLine = new int[GeometryPointLine.PointLineState.values().length];
+        for (int i = 0; i < statePointOnLine.length; i++) {
+            statePointOnLine[i] = 0;
         }
-        if (p2Line1.equals(p1Line2) && p1Line1.equals(p2Line2)) {
-            return IntersectState.LINE_IN_LINE;
+
+        for (int i = 0; i < state.length; i++) {
+            statePointOnLine[state[i]]++;
         }
-        if (GeometryPointLine.statePointOnLine(p1Line1, p1Line2, p2Line2) == GeometryPointLine.PointLineState.POINT_ON_LINE &&
-                (p2Line1.equals(p2Line2) || p2Line1.equals(p1Line2))) {
-            return IntersectState.LINE_IN_LINE;
+
+        System.out.println(" ------ ");
+        System.out.println(p1Line1);
+        System.out.println(p2Line1);
+        System.out.println(p1Line2);
+        System.out.println(p2Line2);
+        for (int i = 0; i < 3; i++) {
+            System.out.println(GeometryPointLine.PointLineState.values()[i].toString() + "\t"+statePointOnLine[i]);
         }
-        if ((p1Line1.equals(p2Line2) || p1Line1.equals(p1Line2)) &&
-                GeometryPointLine.statePointOnLine(p2Line1, p1Line2, p2Line2) == GeometryPointLine.PointLineState.POINT_ON_LINE) {
-            return IntersectState.LINE_IN_LINE;
-        }
-        if (GeometryPointLine.statePointOnLine(p1Line2, p1Line1, p2Line1) == GeometryPointLine.PointLineState.POINT_ON_LINE &&
-                (p2Line2.equals(p2Line1) || p2Line2.equals(p1Line1))) {
-            return IntersectState.LINE_IN_LINE;
-        }
-        if ((p1Line2.equals(p2Line1) || p1Line2.equals(p1Line1)) &&
-                GeometryPointLine.statePointOnLine(p2Line2, p1Line1, p2Line1) == GeometryPointLine.PointLineState.POINT_ON_LINE) {
-            return IntersectState.LINE_IN_LINE;
-        }
-//        if (p1Line1.equals(p1Line2) &&
-//                (p2Line1.equals(p2Line2) || GeometryPointLine.statePointOnLine(p2Line1, p1Line2, p2Line2) == GeometryPointLine.PointLineState.POINT_ON_LINE) ) {
-//            return IntersectState.LINE_IN_LINE;
-//        }
-//        if (p1Line1.equals(p2Line2) &&
-//                (p2Line1.equals(p1Line2) || GeometryPointLine.statePointOnLine(p2Line1, p1Line2, p2Line2) == GeometryPointLine.PointLineState.POINT_ON_LINE)) {
-//            return IntersectState.LINE_IN_LINE;
-//        }
-        if (GeometryPointLine.statePointOnLine(p1Line1, p1Line2, p2Line2) == GeometryPointLine.PointLineState.POINT_ON_LINE) {
+
+        if (statePointOnLine[GeometryPointLine.PointLineState.POINT_OUTSIDE_LINE.ordinal()] == 4) {
+            if (isLinesIntersect(p1Line1, p2Line1, p1Line2, p2Line2)) {
+                return IntersectState.INTERSECT;
+            }
+        } else if (statePointOnLine[GeometryPointLine.PointLineState.POINT_OUTSIDE_LINE.ordinal()] == 3 &&
+                statePointOnLine[GeometryPointLine.PointLineState.POINT_ON_LINE.ordinal()] == 1) {
             return IntersectState.INTERSECT_POINT_ON_LINE;
-        }
-        if (GeometryPointLine.statePointOnLine(p2Line1, p1Line2, p2Line2) == GeometryPointLine.PointLineState.POINT_ON_LINE) {
-            return IntersectState.INTERSECT_POINT_ON_LINE;
-        }
-        if (GeometryPointLine.statePointOnLine(p1Line2, p1Line1, p2Line1) == GeometryPointLine.PointLineState.POINT_ON_LINE) {
-            return IntersectState.INTERSECT_POINT_ON_LINE;
-        }
-        if (GeometryPointLine.statePointOnLine(p2Line2, p1Line1, p2Line1) == GeometryPointLine.PointLineState.POINT_ON_LINE) {
-            return IntersectState.INTERSECT_POINT_ON_LINE;
-        }
-        if (p1Line1.equals(p1Line2) || p1Line1.equals(p2Line2)) {
+        } else if (statePointOnLine[GeometryPointLine.PointLineState.POINT_OUTSIDE_LINE.ordinal()] == 2 &&
+                statePointOnLine[GeometryPointLine.PointLineState.POINT_ON_CORNER.ordinal()] == 2) {
             return IntersectState.INTERSECT_CORNER;
+        } else if (statePointOnLine[GeometryPointLine.PointLineState.POINT_OUTSIDE_LINE.ordinal()] == 2 &&
+                statePointOnLine[GeometryPointLine.PointLineState.POINT_ON_LINE.ordinal()] == 2) {
+            return IntersectState.LINE_IN_LINE;
+        } else if (statePointOnLine[GeometryPointLine.PointLineState.POINT_ON_LINE.ordinal()] == 1 &&
+                statePointOnLine[GeometryPointLine.PointLineState.POINT_OUTSIDE_LINE.ordinal()] == 1 &&
+                statePointOnLine[GeometryPointLine.PointLineState.POINT_ON_CORNER.ordinal()] == 2) {
+            return IntersectState.LINE_IN_LINE;
         }
-        if (p2Line1.equals(p1Line2) || p2Line1.equals(p2Line2)) {
-            return IntersectState.INTERSECT_CORNER;
-        }
-        if (isLinesIntersect(p1Line1, p2Line1, p1Line2, p2Line2)) {
-            return IntersectState.INTERSECT;
-        }
+
         return IntersectState.NOT_INTERSECT;
-
     }
 
     private static boolean isLinesIntersect(Point p1, Point p2, Point p3, Point p4) {

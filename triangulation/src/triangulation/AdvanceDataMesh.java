@@ -2,8 +2,8 @@ package triangulation;
 
 import java.util.*;
 
-public class AdvanceDataMesh<T extends RamMesh> {
-    private T data;
+public class AdvanceDataMesh {
+/*    private T data;
     private int sizeMap;
 
     //todo GridIndex
@@ -243,5 +243,5 @@ public class AdvanceDataMesh<T extends RamMesh> {
     private int min(int a, int b, int c) {
         return min(a, min(b, c));
     }
-
+*/
 }

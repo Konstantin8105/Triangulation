@@ -28,7 +28,7 @@ public class Line {
     @Override
     public String toString() {
         return "Line{" +
-                ", idPointA=" + idPointA +
+                "idPointA=" + idPointA +
                 ", idPointB=" + idPointB +
                 '}';
     }

@@ -24,12 +24,12 @@ public class BorderBox {
         if (!haveFirstPoint) {
             x_min = x_max = point.getX();
             y_min = y_max = point.getY();
+            haveFirstPoint = true;
         } else {
             x_min = Math.min(x_min, point.getX());
             x_max = Math.max(x_max, point.getX());
             y_min = Math.min(y_min, point.getY());
             y_max = Math.max(y_max, point.getY());
-            haveFirstPoint = true;
         }
     }
 

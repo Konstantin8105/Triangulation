@@ -4,7 +4,7 @@ import java.util.*;
 
 public class IDable<T> {
 
-    public class Element {
+    public class Element<T> {
         public int id;
         public T value;
 
@@ -18,7 +18,7 @@ public class IDable<T> {
         }
     }
 
-    private List<Element> list;
+    private List<elements.Collections.IDable.Element> list = new ArrayList<>();
 
     private static class GeneratorId {
         private static int position = 1;
@@ -35,10 +35,6 @@ public class IDable<T> {
         }
     };
 
-    public IDable() {
-        list = new ArrayList<>();
-    }
-
     public void add(T value) {
         Element element = new Element(GeneratorId.getID(), value);
         list.add(element);
@@ -51,35 +47,27 @@ public class IDable<T> {
         }
     }
 
-
     public void remove(int id) {
         Element search = new Element(id);
         int index = Collections.binarySearch(list, search, comparatorId);
         list.remove(index);
     }
 
-    public void remove(T value) {
-        int index = -1;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).value.equals(value)) {
-                index = i;
-                break;
-            }
-        }
-        list.remove(index);
-    }
-
-    public T get(int id) {
+    public T getById(int id) {
         Element search = new Element(id);
         int index = Collections.binarySearch(list, search, comparatorId);
-        return list.get(index).value;
+        return (T)list.get(index).value;
     }
 
-    public Element getElement(int index){
+    public T getByIndex(int index) {
+        return (T)list.get(index).value;
+    }
+
+    public Element<T> getElement(int index) {
         return list.get(index);
     }
 
-    public List<Element> getListElements(){
+    public List<elements.Collections.IDable.Element> getListElements() {
         return list;
     }
 

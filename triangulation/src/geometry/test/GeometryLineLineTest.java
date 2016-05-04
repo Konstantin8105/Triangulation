@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 public class GeometryLineLineTest {
 
     @Test
-    public void testIsLinesIntersect() throws Exception {
+    public void test001() throws Exception {
         Point c1 = new Point(0f, 2f);
         Point c2 = new Point(2f, 0f);
         Point a1 = new Point(-5f, -5f);
@@ -21,33 +21,69 @@ public class GeometryLineLineTest {
             Point q2 = new Point(10f, 10f);
             assertTrue(GeometryLineLine.stateLineLine(c1, c2, q1, q2) == GeometryLineLine.IntersectState.NOT_INTERSECT);
         }
+    }
+
+    @Test
+    public void test002() throws Exception {
+        Point c1 = new Point(0f, 2f);
+        Point c2 = new Point(2f, 0f);
+        Point a1 = new Point(-5f, -5f);
+        Point a2 = new Point(10f, 10f);
         {
             Point q1 = new Point(5f, 5f);
             Point q2 = new Point(10f, 10f);
             assertTrue(GeometryLineLine.stateLineLine(c1, c2, q1, q2) == GeometryLineLine.IntersectState.NOT_INTERSECT);
         }
+    }
+
+    @Test
+    public void test003() throws Exception {
+        Point c1 = new Point(0f, 2f);
+        Point c2 = new Point(2f, 0f);
         {
             Point q1 = new Point(0f, 0f);
             Point q2 = new Point(1f, 1f);
-            assertTrue(GeometryLineLine.stateLineLine(c1, c2, q1, q2) == GeometryLineLine.IntersectState.INTERSECT);
+            assertTrue(GeometryLineLine.stateLineLine(c1, c2, q1, q2) == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE);
         }
+    }
+
+    @Test
+    public void test004() throws Exception {
+        Point c1 = new Point(0f, 2f);
+        Point c2 = new Point(2f, 0f);
         {
             Point q1 = new Point(0f, 2f);
             Point q2 = new Point(12f, 12f);
             assertTrue(GeometryLineLine.stateLineLine(c1, c2, q1, q2) == GeometryLineLine.IntersectState.INTERSECT_CORNER);
         }
+    }
+
+    @Test
+    public void test005() throws Exception {
+        Point c1 = new Point(0f, 2f);
+        Point c2 = new Point(2f, 0f);
         {
             Point q1 = new Point(0.5f, 1.5f);
             Point q2 = new Point(1.5f, 0.5f);
             assertTrue(GeometryLineLine.stateLineLine(c1, c2, q1, q2) == GeometryLineLine.IntersectState.LINE_IN_LINE);
         }
-        {
-            Point q1 = new Point(5f, 5f);
-            Point q2 = new Point(0f, 0f);
-            Point w1 = new Point(1f, 0f);
-            Point w2 = new Point(4f, 4f);
-            assertTrue(GeometryLineLine.stateLineLine(q1, q2, w1, w2) == GeometryLineLine.IntersectState.INTERSECT);
-        }
+    }
+
+    @Test
+    public void test006() throws Exception {
+        Point q1 = new Point(5f, 5f);
+        Point q2 = new Point(0f, 0f);
+        Point w1 = new Point(1f, 0f);
+        Point w2 = new Point(4f, 4f);
+        assertTrue(GeometryLineLine.stateLineLine(q1, q2, w1, w2) == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE);
+    }
+
+    @Test
+    public void test007() throws Exception {
+        Point c1 = new Point(0f, 2f);
+        Point c2 = new Point(2f, 0f);
+        Point a1 = new Point(-5f, -5f);
+        Point a2 = new Point(10f, 10f);
         {
 //            p1Line1 = Point{ x = 4.00, y = 4.00}
 //            p2Line1 = Point{ x = 0.00, y = 0.00}
@@ -60,18 +96,23 @@ public class GeometryLineLineTest {
             Point w2 = new Point(5f, 5f);
             assertTrue(GeometryLineLine.stateLineLine(q1, q2, w1, w2) == GeometryLineLine.IntersectState.INTERSECT_CORNER);
         }
-        {
-//            p1Line1 = Point{ x = -3.00, y = -3.00}
-//            p2Line1 = Point{ x = 1.00, y = 1.00}
-//            p1Line2 = Point{ x = 1.00, y = -1.00}
-//            p2Line2 = Point{ x = 0.00, y = 0.00}
-//            result = NOT_INTERSECT
-            Point q1 = new Point(-3f, -3f);
-            Point q2 = new Point(1f, 1f);
-            Point w1 = new Point(1f, -1f);
-            Point w2 = new Point(0f, 0f);
-            assertTrue(GeometryLineLine.stateLineLine(q1, q2, w1, w2) == GeometryLineLine.IntersectState.INTERSECT);
-        }
+    }
+
+    @Test
+    public void test008() throws Exception {
+        Point q1 = new Point(-3f, -3f);
+        Point q2 = new Point(1f, 1f);
+        Point w1 = new Point(1f, -1f);
+        Point w2 = new Point(0f, 0f);
+        assertTrue(GeometryLineLine.stateLineLine(q1, q2, w1, w2) == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE);
+    }
+
+    @Test
+    public void test009() throws Exception {
+        Point c1 = new Point(0f, 2f);
+        Point c2 = new Point(2f, 0f);
+        Point a1 = new Point(-5f, -5f);
+        Point a2 = new Point(10f, 10f);
         {
 //            p1Line1 = Point{ x = 1.00, y = -1.00}
 //            p2Line1 = Point{ x = 2.00, y = 2.00}
@@ -159,7 +200,6 @@ public class GeometryLineLineTest {
 
         assertEquals(GeometryLineLine.stateLineLine(c[0], c[1], c[2], c[3]), GeometryLineLine.IntersectState.INTERSECT);
     }
-
 
 
     @Test
