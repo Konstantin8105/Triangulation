@@ -10,7 +10,7 @@ public class AdvanceDataMesh<T extends RamMesh> {
     private List<Integer>[][] mapLines;
     private List<Integer>[][] mapTriangles;
 
-    private BorderLine borderLine = new BorderLine();
+    private BorderLine borderLineConvexRegion = new BorderLine();
 
     private double minX;
     private double minY;

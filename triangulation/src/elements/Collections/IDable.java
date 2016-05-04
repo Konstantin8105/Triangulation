@@ -3,7 +3,8 @@ package elements.Collections;
 import java.util.*;
 
 public class IDable<T> {
-    private class Element {
+
+    public class Element {
         public int id;
         public T value;
 
@@ -43,16 +44,24 @@ public class IDable<T> {
         list.add(element);
     }
 
+    public void add(List<T> list) {
+        for (int i = 0; i < list.size(); i++) {
+            Element element = new Element(GeneratorId.getID(), list.get(i));
+            this.list.add(element);
+        }
+    }
+
+
     public void remove(int id) {
         Element search = new Element(id);
-        int index = Collections.binarySearch(list,search,comparatorId);
+        int index = Collections.binarySearch(list, search, comparatorId);
         list.remove(index);
     }
 
-    public void remove(T value){
+    public void remove(T value) {
         int index = -1;
         for (int i = 0; i < list.size(); i++) {
-            if(list.get(i).value.equals(value)){
+            if (list.get(i).value.equals(value)) {
                 index = i;
                 break;
             }
@@ -60,21 +69,36 @@ public class IDable<T> {
         list.remove(index);
     }
 
-    public T get(int id){
+    public T get(int id) {
         Element search = new Element(id);
-        int index = Collections.binarySearch(list,search,comparatorId);
+        int index = Collections.binarySearch(list, search, comparatorId);
         return list.get(index).value;
     }
 
-    public int size(){
+    public int size() {
         return list.size();
     }
 
-    public List<Integer> getListId(){
+    public List<Integer> getListId() {
         List<Integer> ids = new ArrayList<>(list.size());
         for (int i = 0; i < list.size(); i++) {
             ids.add(list.get(i).id);
         }
         return ids;
+    }
+
+    int iteratorPosition;
+
+    public Iterator<Element> iterator() {
+        iteratorPosition = 0;
+        return list.iterator();
+    }
+
+    public boolean hasNext() {
+        return iteratorPosition < list.size();
+    }
+
+    public Element next() {
+        return list.get(iteratorPosition++);
     }
 }

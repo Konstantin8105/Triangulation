@@ -1,18 +1,20 @@
 package triangulation;
 
 
+import elements.Collections.IDable;
 import elements.Line;
+import elements.Point;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BorderLine {
+public class BorderLineConvexRegion {
 
     private List<Line> loop;
     private List<Line> lineAdd;
     private List<Line> lineDelete;
 
-    public BorderLine() {
+    public BorderLineConvexRegion() {
         loop = new ArrayList<>();
         lineAdd = new ArrayList<>();
         lineDelete = new ArrayList<>();
@@ -95,4 +97,5 @@ public class BorderLine {
 //        logger.info("end of sortLines()");
 //        logger.line();
     }
+
 }

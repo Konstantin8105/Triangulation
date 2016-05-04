@@ -1,6 +1,7 @@
 package triangulation;
 
 import elements.Point;
+import geometry.GeometryLineLine;
 
 import java.util.*;
 
@@ -51,7 +52,7 @@ public class IterationTriangulator<T extends RamMesh> {
         addNextPointOutside(nextPoint.getId());
     }
 
-
+/*
     private Integer getLineOnPoint(Coordinate coordinate) throws Exception {
 //        logger.line();
 //        logger.info("In function getLineOnPoint()");
@@ -81,9 +82,9 @@ public class IterationTriangulator<T extends RamMesh> {
 //        logger.info("result getLineOnPoint() = null");
 //        logger.line();
         return null;
-    }
+    }*/
 
-
+/*
     private Integer getTriangleOnPoint(Coordinate coordinate) throws Exception {
 //        logger.line();
 //        logger.info("In function getTriangleOnPoint()");
@@ -107,7 +108,7 @@ public class IterationTriangulator<T extends RamMesh> {
 //        logger.info("result getTriangleOnPoint() = null");
 //        logger.line();
         return null;
-    }
+    }*//*
 
     private void addNextPointOutside(Integer idNextPoint) throws Exception {
 //        logger.line();
@@ -123,7 +124,7 @@ public class IterationTriangulator<T extends RamMesh> {
 //        logger.info("idBorderLines = " + idBorderLines);
         // create list of all lines, triangles
 
-        /*
+        *//*
         List<Line> borderLines = new ArrayList<>();
         for (int i = 0; i < idBorderLines.size(); i++) {
             //int[] points = data.getData().getIdPointsByLine(idBorderLines.get(i));
@@ -131,7 +132,7 @@ public class IterationTriangulator<T extends RamMesh> {
             borderLines.add(data.getData().getLinesID(idBorderLines.get(i)));
         }
         sortLines(borderLines);
-        */
+        *//*
 
         List<Boolean> addList = new ArrayList<>();
         for (int i = 0; i < borderLines.size(); i++) {
@@ -194,8 +195,8 @@ public class IterationTriangulator<T extends RamMesh> {
 //        logger.info("end of addNextPointOutside()");
 //        logger.line();
         addNextPointInOutsideLoop(idNextPoint, listLineWithoutIntersect);
-    }
-
+    }*/
+/*
     private void addNextPointWithoutBorder(Integer idNextPoint) throws Exception {
 //        logger.line();
 //        logger.info("In function addNextPointWithoutBorder()");
@@ -232,7 +233,7 @@ public class IterationTriangulator<T extends RamMesh> {
 //        logger.info("end of addNextPointWithoutBorder()");
 //        logger.line();
         return;
-    }
+    }*/
 
 /*
     private void sortLines(List<Line> listLines) throws Exception {
@@ -274,6 +275,7 @@ public class IterationTriangulator<T extends RamMesh> {
 //        logger.line();
     }
     */
+/*
 
     private void addSimpleTriangle(List<Integer> point) throws Exception {
 //        logger.line();
@@ -290,6 +292,7 @@ public class IterationTriangulator<T extends RamMesh> {
 //        logger.info("end of addSimpleTriangle()");
 //        logger.line();
     }
+*/
 
 
     private void addNextPointInOutsideLoop(Integer idNextPoint, List<Line> listLineWithoutIntersect) throws Exception {
@@ -321,7 +324,7 @@ public class IterationTriangulator<T extends RamMesh> {
 //        logger.info("end of addNextPointInOutsideLoop()");
 //        logger.line();
     }
-
+/*
     private void addNextPointInTriangle(int idNextPoint, int idTriangleWithNextPoint) throws Exception {
         int[] idPointTriangle = data.getData().getIdPointByTriangle(idTriangleWithNextPoint);
 
@@ -334,8 +337,8 @@ public class IterationTriangulator<T extends RamMesh> {
         data.addTriangle(idNextPoint, idPointTriangle[2], idPointTriangle[0]);
 
         data.deleteTriangle(idTriangleWithNextPoint);
-    }
-
+    }*/
+/*
     private void addNextPointOnLine(Point nextPoint, Integer idLineWithNextPoint) throws Exception {
 //        logger.line();
 //        logger.info("In function addNextPointOnLine()");
@@ -383,5 +386,5 @@ public class IterationTriangulator<T extends RamMesh> {
         data.deleteLine(idLineWithNextPoint);
 //        logger.info("End of function addNextPointOnLine()");
 //        logger.line();
-    }
+    }*/
 }
