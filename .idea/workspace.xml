@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/IterationTriangulator.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/elements/Collections/IDable.java" afterPath="$PROJECT_DIR$/triangulation/src/elements/Collections/IDable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/elements/Mesh.java" afterPath="$PROJECT_DIR$/triangulation/src/elements/Mesh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/elements/Point.java" afterPath="$PROJECT_DIR$/triangulation/src/elements/Point.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/geometry/GeometryCoordinate.java" afterPath="$PROJECT_DIR$/triangulation/src/geometry/GeometryCoordinate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/geometry/GeometryPointTriangle.java" afterPath="$PROJECT_DIR$/triangulation/src/geometry/GeometryPointTriangle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/BorderLineConvexRegion.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/BorderLineConvexRegion.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/elements/Triangle.java" afterPath="$PROJECT_DIR$/triangulation/src/elements/Triangle.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/Triangulation.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/Triangulation.java" />
     </list>
     <manually-removed-from-ignored>
@@ -31,24 +28,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Triangulation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/Triangulation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="175" column="32" selection-start-line="175" selection-start-column="32" selection-end-line="175" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Mesh.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/triangulation/src/elements/Mesh.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="37" column="36" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
-              <folding />
+            <state relative-caret-position="120">
+              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1464#1465#0" expanded="true" />
+                <element signature="e#1506#1507#0" expanded="true" />
+                <element signature="e#1563#1564#0" expanded="true" />
+                <element signature="e#1609#1610#0" expanded="true" />
+                <element signature="e#1670#1671#0" expanded="true" />
+                <element signature="e#1720#1721#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -114,8 +107,6 @@
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/BorderBox.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/BorderLine.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/AdvanceDataMesh.java" />
-        <option value="$PROJECT_DIR$/triangulation/src/elements/Collections/IDable.java" />
-        <option value="$PROJECT_DIR$/triangulation/src/elements/Triangle.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/GridIndex.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/IterationTriangulator.java" />
         <option value="$PROJECT_DIR$/triangulation/src/geometry/GeometryPointTriangle.java" />
@@ -123,14 +114,17 @@
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/BorderLineConvexRegion.java" />
         <option value="$PROJECT_DIR$/triangulation/src/elements/Point.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/Triangulation.java" />
+        <option value="$PROJECT_DIR$/triangulation/src/elements/Triangle.java" />
+        <option value="$PROJECT_DIR$/triangulation/src/elements/Collections/IDable.java" />
         <option value="$PROJECT_DIR$/triangulation/src/elements/Mesh.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="-4" />
     <option name="y" value="33" />
-    <option name="width" value="1593" />
-    <option name="height" value="1047" />
+    <option name="width" value="1928" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -821,7 +815,14 @@
       <option name="project" value="LOCAL" />
       <updated>1462369680092</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="update&#10;">
+      <created>1462380808558</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1462380808558</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -866,7 +867,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="33" width="1593" height="1047" extended-state="0" />
+    <frame x="-4" y="33" width="1928" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -879,9 +880,9 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26377186" sideWeight="0.5532831" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21671991" sideWeight="0.55364805" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26377186" sideWeight="0.4467169" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21671991" sideWeight="0.44635195" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1215,32 +1216,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/BorderBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/elements/Collections/IDable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="57" column="27" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/elements/Triangle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/GridIndex.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1275,22 +1250,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/AdvanceDataMesh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="48" selection-start-line="41" selection-start-column="48" selection-end-line="41" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/BorderLineConvexRegion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/elements/Point.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1307,16 +1266,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/Triangulation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="175" column="32" selection-start-line="175" selection-start-column="32" selection-end-line="175" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/IterationTriangulator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="872">
@@ -1325,11 +1274,76 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/BorderLineConvexRegion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/AdvanceDataMesh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/elements/Triangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1658#1659#0" expanded="true" />
+            <element signature="e#1724#1725#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/elements/Collections/IDable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="605">
+          <caret line="84" column="4" selection-start-line="84" selection-start-column="4" selection-end-line="84" selection-end-column="4" />
+          <folding>
+            <element signature="e#1907#1908#0" expanded="true" />
+            <element signature="e#1934#1935#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/BorderBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/Triangulation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="190" column="0" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/elements/Mesh.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="37" column="36" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
-          <folding />
+        <state relative-caret-position="120">
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1464#1465#0" expanded="true" />
+            <element signature="e#1506#1507#0" expanded="true" />
+            <element signature="e#1563#1564#0" expanded="true" />
+            <element signature="e#1609#1610#0" expanded="true" />
+            <element signature="e#1670#1671#0" expanded="true" />
+            <element signature="e#1720#1721#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

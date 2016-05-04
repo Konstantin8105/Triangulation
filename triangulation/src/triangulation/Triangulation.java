@@ -170,7 +170,7 @@ public class Triangulation {
             return null;
 
         for (IDable.Element triangle : listTriangles) {
-            Point[] points = mesh.getPointsByTriangle(triangle);
+            Point[] points = mesh.getPointsByTriangle((Triangle)triangle.value);
             if (GeometryPointTriangle.isPointInTriangle((Point) nextPoint.value, points) ==
                     GeometryPointTriangle.PointTriangleState.POINT_INSIDE) {
                 return triangle;

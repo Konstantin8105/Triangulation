@@ -75,17 +75,18 @@ public class IDable<T> {
         return list.get(index).value;
     }
 
+    public Element getElement(int index){
+        return list.get(index);
+    }
+
+    public List<Element> getListElements(){
+        return list;
+    }
+
     public int size() {
         return list.size();
     }
 
-    public List<Integer> getListId() {
-        List<Integer> ids = new ArrayList<>(list.size());
-        for (int i = 0; i < list.size(); i++) {
-            ids.add(list.get(i).id);
-        }
-        return ids;
-    }
 
     int iteratorPosition;
 

@@ -2,21 +2,22 @@ package elements;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class Triangle {
     private int idPoint1;
     private int idPoint2;
     private int idPoint3;
     private Collection<? extends Point> pointsId;
-//    Line[] lines = new Line[3];
+    Line[] lines = new Line[3];
 
     public Triangle(int idPoint1, int idPoint2, int idPoint3) throws Exception {
         this.idPoint1 = idPoint1;
         this.idPoint2 = idPoint2;
         this.idPoint3 = idPoint3;
-//        lines[0] = new Line(this.idPoint1, this.idPoint2);
-//        lines[1] = new Line(this.idPoint2, this.idPoint3);
-//        lines[2] = new Line(this.idPoint3, this.idPoint1);
+        lines[0] = new Line(this.idPoint1, this.idPoint2);
+        lines[1] = new Line(this.idPoint2, this.idPoint3);
+        lines[2] = new Line(this.idPoint3, this.idPoint1);
     }
 
     public int getIdPoint1() {
@@ -61,11 +62,11 @@ public class Triangle {
         return result;
     }
 
-    public Collection<Integer> getPointsId() {
+    public List<Integer> getPointsId() {
         return Arrays.asList(idPoint1, idPoint2, idPoint3);
     }
 
-//    public Line[] getLines(){
-//        return lines;
-//    }
+    public Line[] getLines() throws Exception {
+        return lines;
+    }
 }
