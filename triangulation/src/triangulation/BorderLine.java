@@ -26,8 +26,13 @@ public class BorderLine {
         lineDelete.add(line);
     }
 
-    public List<Line> getBorderLine() {
-        if(loop.size() == 0){
+    public List<Line> getBorderLine() throws Exception {
+        if (loop.size() == 0) {
+            loop.addAll(lineAdd);
+            lineAdd.clear();
+            if (lineDelete.size() != 0) {
+                throw new Exception("Please check the algorithm. lineDelete is not empty. lineDelete = " + lineDelete);
+            }
             return loop;
         }
         List<Integer> removeIndex = new ArrayList<>();

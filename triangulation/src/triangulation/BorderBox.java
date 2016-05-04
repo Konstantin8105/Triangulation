@@ -4,15 +4,16 @@ import elements.Point;
 
 /**
  * Create rectangle for future check point outside rectangle.
+ * Dimension: 2D
  *
  * @author Izyumov Konstantin
  * @since 05/04/2016
  */
 public class BorderBox {
-    private double xmin;
-    private double xmax;
-    private double ymin;
-    private double ymax;
+    private double x_min;
+    private double x_max;
+    private double y_min;
+    private double y_max;
     boolean haveFirstPoint = false;
 
     /**
@@ -21,28 +22,26 @@ public class BorderBox {
      */
     public void addPoint(Point point) {
         if (!haveFirstPoint) {
-            xmin = xmax = point.getX();
-            ymin = ymax = point.getY();
+            x_min = x_max = point.getX();
+            y_min = y_max = point.getY();
         } else {
-            xmin = Math.min(xmin, point.getX());
-            xmax = Math.max(xmax, point.getX());
-            ymin = Math.min(ymin, point.getY());
-            ymax = Math.max(ymax, point.getY());
+            x_min = Math.min(x_min, point.getX());
+            x_max = Math.max(x_max, point.getX());
+            y_min = Math.min(y_min, point.getY());
+            y_max = Math.max(y_max, point.getY());
             haveFirstPoint = true;
         }
     }
 
     /**
      * @param point
-     * @return true - if point outside of box or you don`t add any points, and false - if point on border or inside box.
+     * @return true - if point inside or on border of the box, and false - if point outside the box or you don`t add any points.
      * @see Point
      */
     public boolean isInBox(Point point) {
-        if (!haveFirstPoint) {
-            return true;
-        } else {
-            if (xmin < point.getX() && point.getX() < xmax)
-                if (ymin < point.getY() && point.getY() < ymax)
+        if (haveFirstPoint) {
+            if (x_min <= point.getX() && point.getX() <= x_max)
+                if (y_min <= point.getY() && point.getY() <= y_max)
                     return true;
         }
         return false;

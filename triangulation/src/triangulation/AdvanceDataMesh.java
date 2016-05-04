@@ -1,9 +1,4 @@
-package core.old;
-
-import core.elements.Coordinate;
-import core.elements.Line;
-import core.elements.Triangle;
-import core.old.storage.RamMesh;
+package triangulation;
 
 import java.util.*;
 

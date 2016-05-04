@@ -1,13 +1,6 @@
-package core.old;
+package triangulation;
 
-import core.elements.Coordinate;
-import core.elements.Line;
-import core.elements.Point;
-import core.old.geometry.GeometryCoordinate;
-import core.old.geometry.GeometryLineLine;
-import core.old.geometry.GeometryPointLine;
-import core.old.geometry.GeometryPointTriangle;
-import core.old.storage.RamMesh;
+import elements.Point;
 
 import java.util.*;
 

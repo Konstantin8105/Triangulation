@@ -19,5 +19,19 @@ public class Mesh {
         triangles.add(triangle);
     }
 
+    public void deletePoint(int id) {
+        points.remove(id);
+    }
 
+    public void deleteLine(int id) {
+        lines.remove(id);
+    }
+
+    public void deleteTriangle(int id) {
+        triangles.remove(id);
+    }
+
+    public void deleteSamePoints(){
+        // TODO: 5/4/16
+    }
 }
