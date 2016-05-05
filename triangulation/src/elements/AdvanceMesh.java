@@ -1,24 +1,32 @@
 package elements;
 
 import elements.Collections.IDable;
+import geometry.Precisions;
+import triangulation.GridIndex;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdvanceMesh extends Mesh {
+
+
+    @Override
+    public void addLine(Line line) {
+        super.addLine(line);
+    }
+
+    @Override
+    public void deleteLine(int id) {
+        super.deleteLine(id);
+    }
 
     @Override
     public List<IDable.Element> getLines(Point point) {
         return super.getLines(point);
     }
 
-    @Override
-    public List<IDable.Element> getTriangles(Point point) {
-        return super.getTriangles(point);
-    }
-
-
-
-/*    private T data;
+    /*
+    private T data;
     private int sizeMap;
 
     //todo GridIndex
@@ -42,16 +50,16 @@ public class AdvanceMesh extends Mesh {
         if (data.getCoordinate().size() < 1)
             throw new Exception("Not enough coordinates");
 
-        List<Coordinate> coordinates = data.getCoordinate();
+        List<Point> coordinates = data.getCoordinate();
         double minX = coordinates.get(0).getX();
         double maxX = coordinates.get(0).getX();
         double minY = coordinates.get(0).getY();
         double maxY = coordinates.get(0).getY();
-        for (Coordinate coordinate : coordinates) {
-            if (minX > coordinate.getX()) minX = coordinate.getX();
-            if (minY > coordinate.getY()) minY = coordinate.getY();
-            if (maxX < coordinate.getX()) maxX = coordinate.getX();
-            if (maxY < coordinate.getY()) maxY = coordinate.getY();
+        for (Point Point : coordinates) {
+            if (minX > Point.getX()) minX = Point.getX();
+            if (minY > Point.getY()) minY = Point.getY();
+            if (maxX < Point.getX()) maxX = Point.getX();
+            if (maxY < Point.getY()) maxY = Point.getY();
         }
         this.minX = minX - Precisions.epsilon();
         this.minY = minY - Precisions.epsilon();
@@ -81,14 +89,14 @@ public class AdvanceMesh extends Mesh {
         return data;
     }
 
-    public List<Integer> getLinesID(Coordinate coordinate){
-        Position position = convertToPosition(coordinate);
+    public List<Integer> getLinesID(Point Point){
+        Position position = convertToPosition(Point);
         List<Integer> result = mapLines[position.i][position.j];
         return result;
     }
 
-    public List<Integer> getTrianglesID(Coordinate coordinate){
-        Position position = convertToPosition(coordinate);
+    public List<Integer> getTrianglesID(Point Point){
+        Position position = convertToPosition(Point);
         List<Integer> result = mapTriangles[position.i][position.j];
         return result;
     }
@@ -199,17 +207,17 @@ public class AdvanceMesh extends Mesh {
         }
     }
 
-    private Position convertToPosition(Coordinate coordinate) {
-        double x = coordinate.getX() - minX;
-        double y = coordinate.getY() - minY;
+    private Position convertToPosition(Point Point) {
+        double x = Point.getX() - minX;
+        double y = Point.getY() - minY;
         Position result = new Position((int)(x / dx), (int) (y / dy));
         return result;
     }
 
     private List<Position> convert(Integer idPoint1, Integer idPoint2) throws Exception {
         List<Position> out = new ArrayList<>();
-        Coordinate p1 = data.getCoordinateByPointId(idPoint1);
-        Coordinate p2 = data.getCoordinateByPointId(idPoint2);
+        Point p1 = data.getCoordinateByPointId(idPoint1);
+        Point p2 = data.getCoordinateByPointId(idPoint2);
         Position position1 = convertToPosition(p1);
         Position position2 = convertToPosition(p2);
         Position min = new Position(min(position1.i, position2.i), min(position1.j, position2.j));
@@ -224,9 +232,9 @@ public class AdvanceMesh extends Mesh {
 
 
     private List<Position> convert(Integer idPoint1, Integer idPoint2, Integer idPoint3) throws Exception {
-        Coordinate p1 = data.getCoordinateByPointId(idPoint1);
-        Coordinate p2 = data.getCoordinateByPointId(idPoint2);
-        Coordinate p3 = data.getCoordinateByPointId(idPoint3);
+        Point p1 = data.getCoordinateByPointId(idPoint1);
+        Point p2 = data.getCoordinateByPointId(idPoint2);
+        Point p3 = data.getCoordinateByPointId(idPoint3);
         Position position1 = convertToPosition(p1);
         Position position2 = convertToPosition(p2);
         Position position3 = convertToPosition(p3);
@@ -258,5 +266,6 @@ public class AdvanceMesh extends Mesh {
     private int min(int a, int b, int c) {
         return min(a, min(b, c));
     }
+
 */
 }

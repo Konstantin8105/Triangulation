@@ -1,8 +1,10 @@
 package triangulation.test;
 
 import elements.Point;
+import org.junit.Assert;
 import org.junit.Test;
 import triangulation.Triangulation;
+import un.impl.geometry.triangulate.Delaunay;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -570,5 +572,77 @@ public class TriangulationTest {
 
         Triangulation triangulation = new Triangulation(coordinates);
         assertTrue(triangulation.getMesh().sizeTriangles() > 0);
+    }
+
+    @Test
+    public void triangleSmall1() throws Exception {
+        double shortDistance = 1.0D;
+        for (int i = 0; i < 9; i++) {
+            shortDistance /= 10;
+            Point[] points = new Point[]{
+                    new Point(0.0D, 0.0D),
+                    new Point(0.0D, 1.0D),
+                    new Point(shortDistance, 0.5D)
+            };
+            Triangulation triangulation = new Triangulation(Arrays.asList(points));
+            System.out.println(
+                    "shortDistance = " + String.format("%.3e",shortDistance)
+                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+            Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
+        }
+    }
+
+    @Test
+    public void triangleSmall2() throws Exception {
+        double height = 1.0D;
+        for (int i = 0; i < 300; i++) {
+            height *= 10;
+            Point[] points = new Point[]{
+                    new Point(0.0D, 0.0D),
+                    new Point(0.0D, height),
+                    new Point(1.0D, 0.5D*height)
+            };
+            Triangulation triangulation = new Triangulation(Arrays.asList(points));
+            System.out.println(
+                    "height = " + String.format("%.3e",height)
+                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+            Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
+        }
+    }
+
+    @Test
+    public void triangleSmall3() throws Exception {
+        double height = 1.0D;
+        for (int i = 0; i < 9; i++) {
+            height *= 10;
+            Point[] points = new Point[]{
+                    new Point(0.0D, 0.0D),
+                    new Point(height, height),
+                    new Point(0.5D*height+1.0D, 0.5D*height)
+            };
+            Triangulation triangulation = new Triangulation(Arrays.asList(points));
+            System.out.println(
+                    "height = " + String.format("%.3e",height)
+                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+            Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
+        }
+    }
+
+    @Test
+    public void triangleSmall4() throws Exception {
+        double height = 10.D;
+        for (int i = 0; i < 9; i++) {
+            height /= 10;
+            Point[] points = new Point[]{
+                    new Point(0.0D, 0.0D),
+                    new Point(height, height),
+                    new Point(0.5D*height+1.0D, 0.5D*height)
+            };
+            Triangulation triangulation = new Triangulation(Arrays.asList(points));
+            System.out.println(
+                    "height = " + String.format("%.3e",height)
+                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+            Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
+        }
     }
 }

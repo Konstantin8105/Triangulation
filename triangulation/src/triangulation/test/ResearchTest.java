@@ -23,7 +23,7 @@ public class ResearchTest {
         test(1000);
         test(2000);
         test(5000);
-//        test(10000);
+        test(10000);
     }
 
 /*
@@ -105,6 +105,7 @@ Average speed for  500 point is     0.52 ms/point; Time is   262.50 ms
 Average speed for 1000 point is     0.70 ms/point; Time is   696.50 ms
 Average speed for 2000 point is     1.37 ms/point; Time is  2742.50 ms
 Average speed for 5000 point is     4.43 ms/point; Time is 22158.00 ms
+Average speed for 10000 point is  11.02 ms/point; Time is 110203.00 ms
 */
     static void test(int size) throws Exception {
         int amountTest = 2;
