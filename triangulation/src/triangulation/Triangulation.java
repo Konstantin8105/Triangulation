@@ -1,10 +1,7 @@
 package triangulation;
 
+import elements.*;
 import elements.Collections.IDable;
-import elements.Line;
-import elements.Mesh;
-import elements.Point;
-import elements.Triangle;
 import geometry.GeometryCoordinate;
 import geometry.GeometryLineLine;
 import geometry.GeometryPointLine;
@@ -13,7 +10,7 @@ import geometry.GeometryPointTriangle;
 import java.util.*;
 
 public class Triangulation {
-    private Mesh mesh = new Mesh();
+    private Mesh mesh = new AdvanceMesh();
     private BorderBox bBox = new BorderBox();
 
     public Triangulation(List<Point> points) throws Exception {
@@ -103,21 +100,24 @@ public class Triangulation {
         if (triangles.length > 2 || triangles.length < 1)
             throw new Exception(
                     "Cannot more 2 triangles for 1 line. triangles" + triangles.toString()
-                    + " . line = " + line.toString());
+                            + " . line = " + line.toString());
 
         mesh.addLine(new Line(nextPoint.id, ((Line) line.value).getIdPointA()));
         mesh.addLine(new Line(nextPoint.id, ((Line) line.value).getIdPointB()));
         for (int i = 0; i < triangles.length; i++) {
             Triangle triangle = ((Triangle) triangles[i].value);
-            if (triangle.getIdPoint1() != ((Line) line.value).getIdPointA() || triangle.getIdPoint1() != ((Line) line.value).getIdPointB()) {
+            if (triangle.getIdPoint1() != ((Line) line.value).getIdPointA() && triangle.getIdPoint1() != ((Line) line.value).getIdPointB()) {
                 mesh.addTriangle(new Triangle(nextPoint.id, triangle.getIdPoint1(), ((Line) line.value).getIdPointA()));
                 mesh.addTriangle(new Triangle(nextPoint.id, triangle.getIdPoint1(), ((Line) line.value).getIdPointB()));
-            } else if (triangle.getIdPoint2() != ((Line) line.value).getIdPointA() || triangle.getIdPoint2() != ((Line) line.value).getIdPointB()) {
+                mesh.addLine(new Line(nextPoint.id, triangle.getIdPoint1()));
+            } else if (triangle.getIdPoint2() != ((Line) line.value).getIdPointA() && triangle.getIdPoint2() != ((Line) line.value).getIdPointB()) {
                 mesh.addTriangle(new Triangle(nextPoint.id, triangle.getIdPoint2(), ((Line) line.value).getIdPointA()));
                 mesh.addTriangle(new Triangle(nextPoint.id, triangle.getIdPoint2(), ((Line) line.value).getIdPointB()));
+                mesh.addLine(new Line(nextPoint.id, triangle.getIdPoint2()));
             } else {
                 mesh.addTriangle(new Triangle(nextPoint.id, triangle.getIdPoint3(), ((Line) line.value).getIdPointA()));
                 mesh.addTriangle(new Triangle(nextPoint.id, triangle.getIdPoint3(), ((Line) line.value).getIdPointB()));
+                mesh.addLine(new Line(nextPoint.id, triangle.getIdPoint3()));
             }
             mesh.deleteTriangle(triangles[i].id);
         }
@@ -186,8 +186,7 @@ public class Triangulation {
     }
 
     private List<Line> getBorderLinesForNewConvex(Point nextPoint) throws Exception {
-        System.out.println("START");
-        List<Line> borderLine = mesh.getBorderLine();
+        List<Line> borderLine = BorderLineConvexRegion.createLoop(mesh.getBorderLine());
 
         Point[] pointsOfLine = new Point[borderLine.size() + 1];
         pointsOfLine[0] = mesh.getPoints(borderLine.get(0).getIdPointA());
@@ -203,25 +202,29 @@ public class Triangulation {
 
         List<Integer> indexLinesDelete = new ArrayList<>();
         for (int i = 0; i < borderLine.size(); i++) {
-            GeometryLineLine.IntersectState state = GeometryLineLine.stateLineLine(
-                    nextPoint,
-                    pointsMiddleOfLine[i],
-                    pointsOfLine[i],
-                    pointsOfLine[i + 1]);
-            if (state == GeometryLineLine.IntersectState.INTERSECT ||
-                    //state == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE ||
-                    state == GeometryLineLine.IntersectState.LINE_IN_LINE) {
-                indexLinesDelete.add(i);
+            for (int j = 0; j < borderLine.size(); j++) {
+                if (i != j) {
+                    GeometryLineLine.IntersectState state = GeometryLineLine.stateLineLine(
+                            nextPoint,
+                            pointsMiddleOfLine[i],
+                            pointsOfLine[j],
+                            pointsOfLine[j + 1]);
+                    if (state == GeometryLineLine.IntersectState.INTERSECT ||
+                            state == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE ||
+                            state == GeometryLineLine.IntersectState.LINE_IN_LINE) {
+                        indexLinesDelete.add(i);
+                        j = borderLine.size();
+                    }
+                }
             }
+
         }
 
         for (int i = indexLinesDelete.size() - 1; i >= 0; i--) {
             borderLine.remove((int) indexLinesDelete.get(i));
         }
 
-        System.out.println("borderLine " +borderLine );
-        System.out.println("FINISH");
-        return borderLine;
+        return BorderLineConvexRegion.createSequence(borderLine);
     }
 
     public Mesh getMesh() {

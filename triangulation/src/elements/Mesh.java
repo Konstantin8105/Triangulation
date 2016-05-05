@@ -48,6 +48,8 @@ public class Mesh {
                 }
             }
         }
+        if (presentPosition == 0)
+            throw new Exception("Line without triangle. line = " + (Line) line.value);
         return new IDable.Element[]{tri[0]};
     }
 
@@ -62,7 +64,6 @@ public class Mesh {
     public List<elements.Collections.IDable.Element> getTriangles(Point point) {
         return triangles.getListElements();
     }
-    //Error:(63, 41) java: incompatible types: java.util.List<elements.Collections.IDable<elements.Triangle>.Element<elements.Triangle>> cannot be converted to java.util.List<elements.Collections.IDable.Element>
 
     public Point[] getPointsByTriangle(Triangle triangle) {
         Point[] points = new Point[3];
@@ -75,12 +76,10 @@ public class Mesh {
     public List<Line> getBorderLine() throws Exception {
         List<Line> borderLines = new ArrayList<>();
         for (int i = 0; i < lines.size(); i++) {
-            if(getTrianglesByLine(lines.getElement(i)).length == 1){
+            if (getTrianglesByLine(lines.getElement(i)).length == 1) {
                 borderLines.add(lines.getByIndex(i));
             }
         }
-        // TODO: 5/4/16 LOOP sasd
-        //sad
         return borderLines;
     }
 

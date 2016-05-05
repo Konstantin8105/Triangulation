@@ -1,6 +1,7 @@
-package core.old;
+package triangulation.test;
 
-import core.elements.Coordinate;
+import elements.Point;
+import triangulation.Triangulation;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -91,21 +92,33 @@ Average speed for 1000 point is      0.9 ms/point; Time is    927.5 ms
 Average speed for 2000 point is      1.2 ms/point; Time is   2399.0 ms
 Average speed for 5000 point is      1.7 ms/point; Time is   8372.0 ms
  */
+/*
+Without advance mesh
+Average speed for    3 point is     3.50 ms/point; Time is    10.50 ms
+Average speed for    5 point is     1.00 ms/point; Time is     5.00 ms
+Average speed for   10 point is     0.30 ms/point; Time is     3.00 ms
+Average speed for   20 point is     0.40 ms/point; Time is     8.00 ms
+Average speed for   50 point is     0.42 ms/point; Time is    21.00 ms
+Average speed for  100 point is     0.38 ms/point; Time is    37.50 ms
+Average speed for  200 point is     0.34 ms/point; Time is    69.00 ms
+Average speed for  500 point is     0.52 ms/point; Time is   262.50 ms
+Average speed for 1000 point is     0.70 ms/point; Time is   696.50 ms
+Average speed for 2000 point is     1.37 ms/point; Time is  2742.50 ms
+Average speed for 5000 point is     4.43 ms/point; Time is 22158.00 ms
+*/
     static void test(int size) throws Exception {
         int amountTest = 2;
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageSpeed = 0;
         float averageTime = 0;
-        Coordinate[] coordinates = new Coordinate[size];
+        Point[] coordinates = new Point[size];
         for (int j = 0; j < coordinates.length; j++) {
-            coordinates[j] = new Coordinate((random.nextFloat() - 0.5f) * 120, (random.nextFloat() - 0.5f) * 120);
+            coordinates[j] = new Point((random.nextFloat() - 0.5f) * 120, (random.nextFloat() - 0.5f) * 120);
         }
         for (int i = 0; i < amountTest; i++) {
-            Triangulation triangulation = new Triangulation();
-            triangulation.add(Arrays.asList(coordinates));
             start[i] = (new Date()).getTime();
-            triangulation.run();
+            Triangulation triangulation = new Triangulation(Arrays.asList(coordinates));
             finish[i] = (new Date()).getTime();
             //System.out.println("Time = " + (finish[i]-start[i]));
         }

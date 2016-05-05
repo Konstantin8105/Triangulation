@@ -31,15 +31,6 @@ public class GeometryLineLine {
             statePointOnLine[state[i]]++;
         }
 
-        System.out.println(" ------ ");
-        System.out.println(p1Line1);
-        System.out.println(p2Line1);
-        System.out.println(p1Line2);
-        System.out.println(p2Line2);
-        for (int i = 0; i < 3; i++) {
-            System.out.println(GeometryPointLine.PointLineState.values()[i].toString() + "\t"+statePointOnLine[i]);
-        }
-
         if (statePointOnLine[GeometryPointLine.PointLineState.POINT_OUTSIDE_LINE.ordinal()] == 4) {
             if (isLinesIntersect(p1Line1, p2Line1, p1Line2, p2Line2)) {
                 return IntersectState.INTERSECT;
@@ -56,6 +47,8 @@ public class GeometryLineLine {
         } else if (statePointOnLine[GeometryPointLine.PointLineState.POINT_ON_LINE.ordinal()] == 1 &&
                 statePointOnLine[GeometryPointLine.PointLineState.POINT_OUTSIDE_LINE.ordinal()] == 1 &&
                 statePointOnLine[GeometryPointLine.PointLineState.POINT_ON_CORNER.ordinal()] == 2) {
+            return IntersectState.LINE_IN_LINE;
+        } else if (statePointOnLine[GeometryPointLine.PointLineState.POINT_ON_CORNER.ordinal()] == 4) {
             return IntersectState.LINE_IN_LINE;
         }
 

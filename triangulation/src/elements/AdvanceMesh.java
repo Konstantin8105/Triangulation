@@ -1,8 +1,23 @@
-package triangulation;
+package elements;
 
-import java.util.*;
+import elements.Collections.IDable;
 
-public class AdvanceDataMesh {
+import java.util.List;
+
+public class AdvanceMesh extends Mesh {
+
+    @Override
+    public List<IDable.Element> getLines(Point point) {
+        return super.getLines(point);
+    }
+
+    @Override
+    public List<IDable.Element> getTriangles(Point point) {
+        return super.getTriangles(point);
+    }
+
+
+
 /*    private T data;
     private int sizeMap;
 
@@ -17,7 +32,7 @@ public class AdvanceDataMesh {
     private double dx;
     private double dy;
 
-    public AdvanceDataMesh(T data) throws Exception {
+    public AdvanceMesh(T data) throws Exception {
         this.data = data;
         createAdvanceMesh();
     }
