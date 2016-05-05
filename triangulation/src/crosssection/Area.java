@@ -1,17 +1,14 @@
 package crosssection;
 
-import elements.Collections.IDable;
-import elements.Mesh;
 import un.api.collection.Sequence;
 import un.impl.geometry.Point;
 
 public class Area {
-    public static double area(Mesh mesh) {
+    public static double area(Sequence triangles) {
         double area = 0;
-        if(mesh.sizeTriangles() < 1)
+        if(triangles.getSize() < 1)
             return -1;
-        mesh.tri
-        for (int i = 0; i < mesh.sizeTriangles(); i++) {
+        for (int i = 0; i < triangles.getSize(); i++) {
             Point[] points = (Point[]) triangles.get(i);
             area += area_3point(points);
         }

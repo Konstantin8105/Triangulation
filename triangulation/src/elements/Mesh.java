@@ -7,19 +7,19 @@ import java.util.List;
 
 public class Mesh {
     private IDable<Point> points = new IDable<>();
-    private IDable<Line> lines = new IDable<>();
-    private IDable<Triangle> triangles = new IDable<>();
+    protected IDable<Line> lines = new IDable<>();
+    protected IDable<Triangle> triangles = new IDable<>();
 
     public void addPoint(List<Point> point) {
         points.add(point);
     }
 
-    public void addLine(Line line) {
-        lines.add(line);
+    public int addLine(Line line) throws Exception {
+        return lines.add(line);
     }
 
-    public void addTriangle(Triangle triangle) {
-        triangles.add(triangle);
+    public int addTriangle(Triangle triangle) throws Exception {
+        return triangles.add(triangle);
     }
 
     public IDable<Point> getPoints() {
@@ -80,6 +80,8 @@ public class Mesh {
                 borderLines.add(lines.getByIndex(i));
             }
         }
+        if(borderLines.size() == 0)
+            throw new Exception("Border don`t found any lines");
         return borderLines;
     }
 

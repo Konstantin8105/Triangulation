@@ -35,9 +35,11 @@ public class IDable<T> {
         }
     };
 
-    public void add(T value) {
-        Element element = new Element(GeneratorId.getID(), value);
+    public int add(T value) {
+        int id = GeneratorId.getID();
+        Element element = new Element(id, value);
         list.add(element);
+        return id;
     }
 
     public void add(List<T> list) {
@@ -56,11 +58,17 @@ public class IDable<T> {
     public T getById(int id) {
         Element search = new Element(id);
         int index = Collections.binarySearch(list, search, comparatorId);
-        return (T)list.get(index).value;
+        return (T) list.get(index).value;
+    }
+
+    public Element<T> getElementById(int id) {
+        Element search = new Element(id);
+        int index = Collections.binarySearch(list, search, comparatorId);
+        return list.get(index);
     }
 
     public T getByIndex(int index) {
-        return (T)list.get(index).value;
+        return (T) list.get(index).value;
     }
 
     public Element<T> getElement(int index) {

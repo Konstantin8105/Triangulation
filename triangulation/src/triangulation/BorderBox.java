@@ -46,4 +46,20 @@ public class BorderBox {
         }
         return false;
     }
+
+    public double getX_min() {
+        return x_min;
+    }
+
+    public double getX_max() {
+        return x_max;
+    }
+
+    public double getY_min() {
+        return y_min;
+    }
+
+    public double getY_max() {
+        return y_max;
+    }
 }

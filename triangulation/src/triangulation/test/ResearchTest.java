@@ -139,9 +139,9 @@ Average speed for 10000 point is  11.02 ms/point; Time is 110203.00 ms
         averageSpeed /= amountTest;
         averageTime /= amountTest;
         //System.out.println("Average time  for " + size + " point is " + String.format("%.3f", averageTime ) + "ms");
-        System.out.println("Average speed for " + String.format("%4d",size) + " point is "
-                + String.format("%8.2f", averageSpeed) + " ms/point; "
+        System.out.println("Average speed for " + String.format("%6d",size) + " point is "
+                + String.format("%3.2f", averageSpeed) + " ms/point; "
                 + "Time is "
-                + String.format("%8.2f", averageTime) + " ms");
+                + String.format("%10.2f", averageTime) + " ms");
     }
 }
