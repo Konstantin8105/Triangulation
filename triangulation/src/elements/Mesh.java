@@ -57,11 +57,15 @@ public class Mesh {
         return points.getById(idPoint);
     }
 
-    public List<IDable.Element> getLines(Point point) {
+    public List<IDable.Element> getLines(Point point) throws Exception {
         return lines.getListElements();
     }
 
-    public List<elements.Collections.IDable.Element> getTriangles(Point point) {
+    public List<elements.Collections.IDable.Element> getTriangles(Point point) throws Exception {
+        return triangles.getListElements();
+    }
+
+    public List<elements.Collections.IDable.Element> getTriangles() throws Exception {
         return triangles.getListElements();
     }
 

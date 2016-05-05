@@ -2,12 +2,10 @@ package elements;
 
 import elements.Collections.IDable;
 import triangulation.BorderBox;
-import triangulation.BorderLineConvexRegion;
 import triangulation.GridIndex;
+import triangulation.Triangulation;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class AdvanceMesh extends Mesh {
 
@@ -58,15 +56,14 @@ public class AdvanceMesh extends Mesh {
     }
 
     @Override
-    public List<IDable.Element> getLines(Point point) {
-        List<Integer> idLines = lineGrid.get(point);
-        Collections.sort(idLines);
+    public List<IDable.Element> getLines(Point point) throws Exception {
+        List<Integer> ids = lineGrid.get(point);
         List<IDable.Element> out = new ArrayList<>();
         int position = 0;
         for (int i = 0; i < lines.getListElements().size(); i++) {
-            if (position == idLines.size())
+            if (position == ids.size())
                 break;
-            if (lines.getListElements().get(i).id == idLines.get(position)) {
+            if (lines.getListElements().get(i).id == ids.get(position)) {
                 out.add(lines.getListElements().get(i));
                 position++;
             }
@@ -96,12 +93,11 @@ public class AdvanceMesh extends Mesh {
     }
 
     @Override
-    public List<IDable.Element> getTriangles(Point point) {
+    public List<IDable.Element> getTriangles(Point point) throws Exception {
         List<Integer> ids = triangleGrid.get(point);
-        Collections.sort(ids);
-        List<IDable.Element> out = new ArrayList<>();
+        List<IDable.Element> out = new ArrayList<>(ids.size());
         int position = 0;
-        for (int i = 0; i < lines.getListElements().size(); i++) {
+        for (int i = 0; i < triangles.getListElements().size(); i++) {
             if (position == ids.size())
                 break;
             if (triangles.getListElements().get(i).id == ids.get(position)) {
@@ -112,16 +108,19 @@ public class AdvanceMesh extends Mesh {
         return out;
     }
 
-    /*
+/*
     @Override
     public IDable.Element[] getTrianglesByLine(IDable.Element line) throws Exception {
         BorderBox bBox = new BorderBox();
         bBox.addPoint(getPoints(((Line) line.value).getIdPointA()));
         bBox.addPoint(getPoints(((Line) line.value).getIdPointB()));
-        List<Integer> idTriangles = triangleGrid.get(bBox);
+
+        Set<Integer> idTriangles = new HashSet<>(triangleGrid.get(bBox));
+        Iterator<Integer> iterator = idTriangles.iterator();
+
         List<IDable.Element> localTriangles = new ArrayList<>(idTriangles.size());
-        for (int i = 0; i < idTriangles.size(); i++) {
-            localTriangles.add(this.triangles.getElementById(idTriangles.get(i)));
+        while (iterator.hasNext()) {
+            localTriangles.add(this.triangles.getElementById(iterator.next()));
         }
 
         IDable.Element[] tri = new IDable.Element[2];
@@ -140,13 +139,15 @@ public class AdvanceMesh extends Mesh {
         if (presentPosition == 0)
             throw new Exception("Line without triangle. line = " + (Line) line.value);
         return new IDable.Element[]{tri[0]};
-    }*/
+    }
+*/
+
 
     private int calculateSize() throws Exception {
         //0.1 * Math.pow(data.getCoordinate().size(), 3d / 8d);
         //0.1d * Math.sqrt(data.getCoordinate().size());
         //Math.sqrt(sizePoints());
-        double size = 0.3D * Math.pow(sizePoints(), 3D / 8D);
+        double size = 0.1D * Math.pow(sizePoints(), 3D / 8D);
         double minimalAmount = 1d;
         return (int) Math.max(minimalAmount, size);
     }

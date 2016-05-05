@@ -3,6 +3,7 @@ package triangulation;
 import elements.Point;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GridIndex {
@@ -31,7 +32,7 @@ public class GridIndex {
         }
     }
 
-    public void add(int id, BorderBox borderBox) {
+    public void add(int id, BorderBox borderBox) throws Exception {
         List<Position> positions = convert(borderBox);
         for (int i = 0; i < positions.size(); i++) {
             map[position(positions.get(i).i)][position(positions.get(i).j)].add(id);
@@ -57,12 +58,13 @@ public class GridIndex {
         }
     }
 
-    public List<Integer> get(Point point) {
-        Position position = convertToPosition(point.getX(), point.getY());
-        return map[position.i][position.j];
+    public List<Integer> get(Point point) throws Exception {
+        BorderBox bBox = new BorderBox();
+        bBox.addPoint(point);
+        return get(bBox);
     }
 
-    public List<Integer> get(BorderBox box) {
+    public List<Integer> get(BorderBox box) throws Exception {
         List<Position> positions = convert(box);
         List<Integer> out = new ArrayList<>();
         for (int i = 0; i < positions.size(); i++) {
@@ -89,7 +91,7 @@ public class GridIndex {
         }
     }
 
-    private List<Position> convert(BorderBox borderBox) {
+    private List<Position> convert(BorderBox borderBox) throws Exception {
         Position position1 = convertToPosition(borderBox.getX_min(), borderBox.getY_min());
         Position position2 = convertToPosition(borderBox.getX_max(), borderBox.getY_max());
         Position min = new Position(
@@ -97,15 +99,18 @@ public class GridIndex {
                 min(max(0, position1.j - 1), max(0, position2.j - 1))
         );
         Position max = new Position(
-                max(min(gridAmount - 1, position1.i), min(gridAmount - 1, position2.i)),
-                max(min(gridAmount - 1, position1.j), min(gridAmount - 1, position2.j))
+                max(min(gridAmount - 1, position1.i + 1), min(gridAmount - 1, position2.i + 1)),
+                max(min(gridAmount - 1, position1.j + 1), min(gridAmount - 1, position2.j + 1))
         );
+
         List<Position> out = new ArrayList<>();
         for (int i = min.i; i <= max.i; i++) {
             for (int j = min.j; j <= max.j; j++) {
                 out.add(new Position(i, j));
             }
         }
+        if (out.size() == 0)
+            throw new Exception("Size of grid cannot be zero");
         return out;
     }
 

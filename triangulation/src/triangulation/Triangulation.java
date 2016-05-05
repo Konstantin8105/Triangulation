@@ -149,7 +149,7 @@ public class Triangulation {
         }
     }
 
-    private IDable.Element getPointOnLine(IDable.Element nextPoint) {
+    private IDable.Element getPointOnLine(IDable.Element nextPoint) throws Exception {
         List<IDable.Element> listLines = mesh.getLines((Point) nextPoint.value);
         if (listLines == null)
             return null;
@@ -168,7 +168,7 @@ public class Triangulation {
         return null;
     }
 
-    private IDable.Element getPointInTriangle(IDable.Element nextPoint) {
+    private IDable.Element getPointInTriangle(IDable.Element nextPoint) throws Exception {
         List<IDable.Element> listTriangles = mesh.getTriangles((Point) nextPoint.value);
         if (listTriangles == null)
             return null;
