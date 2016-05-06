@@ -2,12 +2,15 @@ package elements;
 
 import elements.Collections.IDable;
 import triangulation.BorderBox;
+import triangulation.BorderLineConvexRegion;
 import triangulation.GridIndex;
 import triangulation.Triangulation;
 
 import java.util.*;
 
 public class AdvanceMesh extends Mesh {
+
+    BorderLineConvexRegion border = new BorderLineConvexRegion();
 
     GridIndex lineGrid;
     boolean isLineGridCreated = false;
@@ -142,12 +145,16 @@ public class AdvanceMesh extends Mesh {
     }
 */
 
+//    @Override
+//    public List<Line> getBorderLine() throws Exception {
+//        return border.getBorderLine();
+//    }
 
     private int calculateSize() throws Exception {
         //0.1 * Math.pow(data.getCoordinate().size(), 3d / 8d);
         //0.1d * Math.sqrt(data.getCoordinate().size());
-        //Math.sqrt(sizePoints());
-        double size = 0.1D * Math.pow(sizePoints(), 3D / 8D);
+        //0.1D * Math.pow(sizePoints(), 3D / 8D);
+        double size = 0.1D * Math.sqrt(sizePoints());
         double minimalAmount = 1d;
         return (int) Math.max(minimalAmount, size);
     }

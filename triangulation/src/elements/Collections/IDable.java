@@ -61,12 +61,6 @@ public class IDable<T> {
         return (T) list.get(index).value;
     }
 
-    public Element<T> getElementById(int id) {
-        Element search = new Element(id);
-        int index = Collections.binarySearch(list, search, comparatorId);
-        return list.get(index);
-    }
-
     public T getByIndex(int index) {
         return (T) list.get(index).value;
     }
@@ -81,21 +75,5 @@ public class IDable<T> {
 
     public int size() {
         return list.size();
-    }
-
-
-    int iteratorPosition;
-
-    public Iterator<Element> iterator() {
-        iteratorPosition = 0;
-        return list.iterator();
-    }
-
-    public boolean hasNext() {
-        return iteratorPosition < list.size();
-    }
-
-    public Element next() {
-        return list.get(iteratorPosition++);
     }
 }

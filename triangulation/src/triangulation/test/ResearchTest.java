@@ -108,7 +108,7 @@ Average speed for 5000 point is     4.43 ms/point; Time is 22158.00 ms
 Average speed for 10000 point is  11.02 ms/point; Time is 110203.00 ms
 */
     static void test(int size) throws Exception {
-        int amountTest = 2;
+        int amountTest = 1;
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageSpeed = 0;
@@ -142,6 +142,6 @@ Average speed for 10000 point is  11.02 ms/point; Time is 110203.00 ms
         System.out.println("Average speed for " + String.format("%6d",size) + " point is "
                 + String.format("%3.2f", averageSpeed) + " ms/point; "
                 + "Time is "
-                + String.format("%10.2f", averageTime) + " ms");
+                + String.format("%12.2f", averageTime) + " ms");
     }
 }

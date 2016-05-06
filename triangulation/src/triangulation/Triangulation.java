@@ -19,9 +19,10 @@ public class Triangulation {
         points = new ArrayList<>(set);
 
         mesh.addPoint(points);
-        Iterator<IDable.Element> iterator = mesh.getPoints().iterator();
-        while (iterator.hasNext()) {
-            addNextPoint(iterator.next());
+
+        List<elements.Collections.IDable.Element> pointArray = mesh.getPoints().getListElements();
+        for (int i = 0; i < pointArray.size(); i++) {
+            addNextPoint(pointArray.get(i));
         }
     }
 
