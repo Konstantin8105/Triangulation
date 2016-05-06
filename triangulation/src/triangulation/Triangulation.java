@@ -97,7 +97,7 @@ public class Triangulation {
 
     private void addNextPointOnLine(IDable.Element nextPoint, IDable.Element line) throws Exception {
 
-        IDable.Element[] triangles = mesh.getTrianglesByLine(line);
+        IDable.Element[] triangles = mesh.getTrianglesByLine((Line)line.value);
         if (triangles.length > 2 || triangles.length < 1)
             throw new Exception(
                     "Cannot more 2 triangles for 1 line. triangles" + triangles.toString()

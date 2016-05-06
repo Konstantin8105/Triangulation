@@ -3,7 +3,6 @@ package elements;
 import elements.Collections.IDable;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Mesh {
@@ -35,13 +34,33 @@ public class Mesh {
         triangles.remove(id);
     }
 
-    public IDable.Element[] getTrianglesByLine(IDable.Element line) throws Exception {
+//    public IDable.Element[] getTrianglesByLine(IDable.Element line) throws Exception {
+//        return getTrianglesByLine((Line) line.value);
+////        IDable.Element[] tri = new IDable.Element[2];
+////        int presentPosition = 0;
+////        for (int i = 0; i < triangles.size(); i++) {
+////            Line[] lines = triangles.getByIndex(i).getLines();
+////            for (int j = 0; j < lines.length; j++) {
+////                if (((Line) line.value).equals(lines[j])) {
+////                    tri[presentPosition++] = triangles.getElement(i);
+////                    if (presentPosition == 2) {
+////                        return tri;
+////                    }
+////                }
+////            }
+////        }
+////        if (presentPosition == 0)
+////            throw new Exception("Line without triangle. line = " + (Line) line.value);
+////        return new IDable.Element[]{tri[0]};
+//    }
+
+    public IDable.Element[] getTrianglesByLine(Line line) throws Exception {
         IDable.Element[] tri = new IDable.Element[2];
         int presentPosition = 0;
         for (int i = 0; i < triangles.size(); i++) {
             Line[] lines = triangles.getByIndex(i).getLines();
             for (int j = 0; j < lines.length; j++) {
-                if (((Line) line.value).equals(lines[j])) {
+                if (line.equals(lines[j])) {
                     tri[presentPosition++] = triangles.getElement(i);
                     if (presentPosition == 2) {
                         return tri;
@@ -50,12 +69,12 @@ public class Mesh {
             }
         }
         if (presentPosition == 0)
-            throw new Exception("Line without triangle. line = " + (Line) line.value);
+            throw new Exception("Line without triangle. line = " + line);
         return new IDable.Element[]{tri[0]};
     }
 
     public Point getPoints(int idPoint) {
-        return points.getById(idPoint);
+        return points.getById(idPoint).value;
     }
 
     public List<IDable.Element> getLines(Point point) throws Exception {
@@ -81,11 +100,11 @@ public class Mesh {
     public List<Line> getBorderLine() throws Exception {
         List<Line> borderLines = new ArrayList<>();
         for (int i = 0; i < lines.size(); i++) {
-            if (getTrianglesByLine(lines.getElement(i)).length == 1) {
+            if (getTrianglesByLine(lines.getElement(i).value).length == 1) {
                 borderLines.add(lines.getByIndex(i));
             }
         }
-        if(borderLines.size() == 0)
+        if (borderLines.size() == 0)
             throw new Exception("Border don`t found any lines");
         return borderLines;
     }
@@ -101,4 +120,5 @@ public class Mesh {
     public int sizeTriangles() {
         return triangles.size();
     }
+
 }

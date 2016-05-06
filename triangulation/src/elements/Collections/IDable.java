@@ -21,7 +21,7 @@ public class IDable<T> {
     private List<elements.Collections.IDable.Element> list = new ArrayList<>();
 
     private static class GeneratorId {
-        private static int position = 1;
+        private static int position = 0;
 
         public static int getID() {
             return position++;
@@ -55,10 +55,10 @@ public class IDable<T> {
         list.remove(index);
     }
 
-    public T getById(int id) {
+    public Element<T> getById(int id) {
         Element search = new Element(id);
         int index = Collections.binarySearch(list, search, comparatorId);
-        return (T) list.get(index).value;
+        return list.get(index);
     }
 
     public T getByIndex(int index) {

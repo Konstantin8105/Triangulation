@@ -49,6 +49,7 @@ public class AdvanceMesh extends Mesh {
         lineBox.addPoint(getPoints(line.getIdPointA()));
         lineBox.addPoint(getPoints(line.getIdPointB()));
         lineGrid.add(idLine, lineBox);
+        border.addLine(line);
         return idLine;
     }
 
@@ -111,19 +112,19 @@ public class AdvanceMesh extends Mesh {
         return out;
     }
 
-/*
+
     @Override
-    public IDable.Element[] getTrianglesByLine(IDable.Element line) throws Exception {
+    public IDable.Element[] getTrianglesByLine(Line line) throws Exception {
         BorderBox bBox = new BorderBox();
-        bBox.addPoint(getPoints(((Line) line.value).getIdPointA()));
-        bBox.addPoint(getPoints(((Line) line.value).getIdPointB()));
+        bBox.addPoint(getPoints(line.getIdPointA()));
+        bBox.addPoint(getPoints(line.getIdPointB()));
 
         Set<Integer> idTriangles = new HashSet<>(triangleGrid.get(bBox));
         Iterator<Integer> iterator = idTriangles.iterator();
 
         List<IDable.Element> localTriangles = new ArrayList<>(idTriangles.size());
         while (iterator.hasNext()) {
-            localTriangles.add(this.triangles.getElementById(iterator.next()));
+            localTriangles.add(this.triangles.getById(iterator.next()));
         }
 
         IDable.Element[] tri = new IDable.Element[2];
@@ -131,7 +132,7 @@ public class AdvanceMesh extends Mesh {
         for (int i = 0; i < localTriangles.size(); i++) {
             Line[] lines = ((Triangle) localTriangles.get(i).value).getLines();
             for (int j = 0; j < lines.length; j++) {
-                if (((Line) line.value).equals(lines[j])) {
+                if (line.equals(lines[j])) {
                     tri[presentPosition++] = localTriangles.get(i);
                     if (presentPosition == 2) {
                         return tri;
@@ -140,21 +141,21 @@ public class AdvanceMesh extends Mesh {
             }
         }
         if (presentPosition == 0)
-            throw new Exception("Line without triangle. line = " + (Line) line.value);
+            throw new Exception("Line without triangle. line = " + line);
         return new IDable.Element[]{tri[0]};
     }
-*/
 
-//    @Override
-//    public List<Line> getBorderLine() throws Exception {
-//        return border.getBorderLine();
-//    }
+
+    @Override
+    public List<Line> getBorderLine() throws Exception {
+        return border.getBorderLine(this);
+    }
 
     private int calculateSize() throws Exception {
         //0.1 * Math.pow(data.getCoordinate().size(), 3d / 8d);
         //0.1d * Math.sqrt(data.getCoordinate().size());
-        //0.1D * Math.pow(sizePoints(), 3D / 8D);
-        double size = 0.1D * Math.sqrt(sizePoints());
+        //0.1D * Math.pow(sizePoints(), 3D / 8D);0.1D * Math.sqrt(sizePoints());
+        double size = 0.1D * Math.pow(sizePoints(), 3D / 8D);
         double minimalAmount = 1d;
         return (int) Math.max(minimalAmount, size);
     }

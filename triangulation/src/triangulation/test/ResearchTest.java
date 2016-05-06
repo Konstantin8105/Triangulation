@@ -5,6 +5,7 @@ import triangulation.Triangulation;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class ResearchTest {
@@ -26,15 +27,15 @@ public class ResearchTest {
         test(10000);
     }
 
-/*
-With test, without advance
-Average speed for    5 point is     13.8 ms/point; Time is     69.0 ms
-Average speed for   10 point is     28.5 ms/point; Time is    284.5 ms
-Average speed for   20 point is     51.8 ms/point; Time is   1036.0 ms
-Average speed for   50 point is    107.0 ms/point; Time is   5351.5 ms
-Average speed for  100 point is    194.8 ms/point; Time is  19479.5 ms
-Average speed for  200 point is    467.8 ms/point; Time is  93551.5 ms
- */
+    /*
+    With test, without advance
+    Average speed for    5 point is     13.8 ms/point; Time is     69.0 ms
+    Average speed for   10 point is     28.5 ms/point; Time is    284.5 ms
+    Average speed for   20 point is     51.8 ms/point; Time is   1036.0 ms
+    Average speed for   50 point is    107.0 ms/point; Time is   5351.5 ms
+    Average speed for  100 point is    194.8 ms/point; Time is  19479.5 ms
+    Average speed for  200 point is    467.8 ms/point; Time is  93551.5 ms
+     */
 /*
 Without test, without Advance
 Average speed for    5 point is     16.5 ms/point; Time is     82.5 ms
@@ -107,41 +108,70 @@ Average speed for 2000 point is     1.37 ms/point; Time is  2742.50 ms
 Average speed for 5000 point is     4.43 ms/point; Time is 22158.00 ms
 Average speed for 10000 point is  11.02 ms/point; Time is 110203.00 ms
 */
+/* Regular mesh
+Average speed for      3 point. Time is        13.00 ms. Triangles is      1 triangles.
+Average speed for      5 point. Time is         4.00 ms. Triangles is      3 triangles.
+Average speed for     10 point. Time is         5.00 ms. Triangles is      8 triangles.
+Average speed for     20 point. Time is        16.00 ms. Triangles is     18 triangles.
+Average speed for     50 point. Time is        83.00 ms. Triangles is     48 triangles.
+Average speed for    100 point. Time is        91.00 ms. Triangles is     98 triangles.
+Average speed for    200 point. Time is       377.00 ms. Triangles is    198 triangles.
+Average speed for    500 point. Time is      2371.00 ms. Triangles is    498 triangles.
+Average speed for   1000 point. Time is     14886.00 ms. Triangles is    998 triangles.
+     */
     static void test(int size) throws Exception {
         int amountTest = 1;
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
-        float averageSpeed = 0;
+//        float averageSpeed = 0;
         float averageTime = 0;
-        Point[] coordinates = new Point[size];
-        for (int j = 0; j < coordinates.length; j++) {
-            coordinates[j] = new Point((random.nextFloat() - 0.5f) * 120, (random.nextFloat() - 0.5f) * 120);
-        }
+        int sizeTriangles = 0;
+        List<Point> mav = getPoints(size);
         for (int i = 0; i < amountTest; i++) {
             start[i] = (new Date()).getTime();
-            Triangulation triangulation = new Triangulation(Arrays.asList(coordinates));
+            Triangulation triangulation = new Triangulation(mav);
             finish[i] = (new Date()).getTime();
+            sizeTriangles = triangulation.getMesh().sizeTriangles();
             //System.out.println("Time = " + (finish[i]-start[i]));
         }
         for (int i = 0; i < amountTest; i++) {
             float time = (float) (finish[i] - start[i]);
-            float speed = time / (float) size;
+//            float speed = time / (float) size;
             /*System.out.println(
                     "i = " + i
                             + " : size = " + size
                             + " : Time = " + time + " msec"
                             + " : Speed = " + String.format("%.3f", speed) + "ms/point"
             );*/
-            averageSpeed += speed;
+//            averageSpeed += speed;
             averageTime += time;
         }
 
-        averageSpeed /= amountTest;
+//        averageSpeed /= amountTest;
         averageTime /= amountTest;
         //System.out.println("Average time  for " + size + " point is " + String.format("%.3f", averageTime ) + "ms");
-        System.out.println("Average speed for " + String.format("%6d",size) + " point is "
-                + String.format("%3.2f", averageSpeed) + " ms/point; "
-                + "Time is "
-                + String.format("%12.2f", averageTime) + " ms");
+        System.out.println("Average speed for " + String.format("%6d", size)
+                        + " point. "
+//                + String.format("%03.2f", averageSpeed) + " ms/point; "
+                        + "Time is "
+                        + String.format("%12.2f", averageTime) + " ms. "
+                        + "Triangles is "
+                        + String.format("%6d", sizeTriangles) + " triangles. "
+        );
     }
+//
+    private static List<Point> getPoints(int size) {
+        Point[] coordinates = new Point[size];
+        for (int j = 0; j < coordinates.length; j++) {
+            coordinates[j] = new Point((random.nextFloat() - 0.5f) * 120, (random.nextFloat() - 0.5f) * 120);
+        }
+        return Arrays.asList(coordinates);
+    }
+//    private static List<Point> getPoints(int size) {
+//        Point[] coordinates = new Point[size];
+//        for (int j = 0; j < size; j++) {
+//            coordinates[j] = new Point(size * Math.sin(2 * 3.1415 / size * j), size * Math.cos(2 * 3.1415 / size * j));
+//        }
+//        return Arrays.asList(coordinates);
+//    }
 }

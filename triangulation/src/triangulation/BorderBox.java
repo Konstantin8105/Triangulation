@@ -20,7 +20,9 @@ public class BorderBox {
      * @param point
      * @see Point
      */
-    public void addPoint(Point point) {
+    public void addPoint(Point point) throws Exception {
+        if(point == null)
+            throw new Exception("Point is null in BorderBox");
         if (!haveFirstPoint) {
             x_min = x_max = point.getX();
             y_min = y_max = point.getY();
