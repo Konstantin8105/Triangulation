@@ -32,6 +32,20 @@ public class GridIndex {
         }
     }
 
+    public GridIndex(GridIndex grid) {
+        this.minX = grid.minX;
+        this.minY = grid.minY;
+        this.dx = grid.dx;
+        this.dy = grid.dy;
+        this.gridAmount = grid.gridAmount;
+        map = new List[gridAmount][gridAmount];
+        for (int i = 0; i < gridAmount; i++) {
+            for (int j = 0; j < gridAmount; j++) {
+                map[i][j] = new ArrayList<>();
+            }
+        }
+    }
+
     public void add(int id, BorderBox borderBox) throws Exception {
         List<Position> positions = convert(borderBox);
         for (int i = 0; i < positions.size(); i++) {
@@ -118,8 +132,8 @@ public class GridIndex {
         x = x - minX;
         y = y - minY;
         Position result = new Position(
-                (int) (x / dx),
-                (int) (y / dy)
+                (int) Math.round(x / dx),
+                (int) Math.round(y / dy)
         );
         return result;
     }

@@ -119,6 +119,16 @@ Average speed for    200 point. Time is       377.00 ms. Triangles is    198 tri
 Average speed for    500 point. Time is      2371.00 ms. Triangles is    498 triangles.
 Average speed for   1000 point. Time is     14886.00 ms. Triangles is    998 triangles.
      */
+    /*
+Average speed for      3 point. Time is        44.00 ms. Triangles is      1 triangles.
+Average speed for      5 point. Time is         9.00 ms. Triangles is      3 triangles.
+Average speed for     10 point. Time is        11.00 ms. Triangles is      8 triangles.
+Average speed for     20 point. Time is        31.00 ms. Triangles is     18 triangles.
+Average speed for     50 point. Time is       144.00 ms. Triangles is     48 triangles.
+Average speed for    100 point. Time is       326.00 ms. Triangles is     98 triangles.
+Average speed for    200 point. Time is      1017.00 ms. Triangles is    198 triangles.
+Average speed for    500 point. Time is      7685.00 ms. Triangles is    498 triangles.
+     */
     static void test(int size) throws Exception {
         int amountTest = 1;
         long start[] = new long[amountTest];
@@ -160,18 +170,18 @@ Average speed for   1000 point. Time is     14886.00 ms. Triangles is    998 tri
         );
     }
 //
-    private static List<Point> getPoints(int size) {
-        Point[] coordinates = new Point[size];
-        for (int j = 0; j < coordinates.length; j++) {
-            coordinates[j] = new Point((random.nextFloat() - 0.5f) * 120, (random.nextFloat() - 0.5f) * 120);
-        }
-        return Arrays.asList(coordinates);
-    }
 //    private static List<Point> getPoints(int size) {
 //        Point[] coordinates = new Point[size];
-//        for (int j = 0; j < size; j++) {
-//            coordinates[j] = new Point(size * Math.sin(2 * 3.1415 / size * j), size * Math.cos(2 * 3.1415 / size * j));
+//        for (int j = 0; j < coordinates.length; j++) {
+//            coordinates[j] = new Point((random.nextFloat() - 0.5f) * 120, (random.nextFloat() - 0.5f) * 120);
 //        }
 //        return Arrays.asList(coordinates);
 //    }
+    private static List<Point> getPoints(int size) {
+        Point[] coordinates = new Point[size];
+        for (int j = 0; j < size; j++) {
+            coordinates[j] = new Point(size * Math.sin(2 * 3.1415 / size * j), size * Math.cos(2 * 3.1415 / size * j));
+        }
+        return Arrays.asList(coordinates);
+    }
 }

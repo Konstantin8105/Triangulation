@@ -29,13 +29,17 @@ public class AdvanceMesh extends Mesh {
     }
 
     public void createTriangleGrid() throws Exception {
-        int gridAmount = calculateSize();
-        BorderBox bBox = new BorderBox();
-        IDable<Point> pointIDable = getPoints();
-        for (int i = 0; i < pointIDable.size(); i++) {
-            bBox.addPoint(pointIDable.getByIndex(i));
+        if (lineGrid == null) {
+            int gridAmount = calculateSize();
+            BorderBox bBox = new BorderBox();
+            IDable<Point> pointIDable = getPoints();
+            for (int i = 0; i < pointIDable.size(); i++) {
+                bBox.addPoint(pointIDable.getByIndex(i));
+            }
+            triangleGrid = new GridIndex(gridAmount, bBox);
+        } else {
+            triangleGrid = new GridIndex(lineGrid);
         }
-        triangleGrid = new GridIndex(gridAmount, bBox);
     }
 
     @Override
@@ -63,14 +67,8 @@ public class AdvanceMesh extends Mesh {
     public List<IDable.Element> getLines(Point point) throws Exception {
         List<Integer> ids = lineGrid.get(point);
         List<IDable.Element> out = new ArrayList<>();
-        int position = 0;
-        for (int i = 0; i < lines.getListElements().size(); i++) {
-            if (position == ids.size())
-                break;
-            if (lines.getListElements().get(i).id == ids.get(position)) {
-                out.add(lines.getListElements().get(i));
-                position++;
-            }
+        for (int i = 0; i < ids.size(); i++) {
+            out.add(lines.getById(ids.get(i)));
         }
         return out;
     }
@@ -100,14 +98,8 @@ public class AdvanceMesh extends Mesh {
     public List<IDable.Element> getTriangles(Point point) throws Exception {
         List<Integer> ids = triangleGrid.get(point);
         List<IDable.Element> out = new ArrayList<>(ids.size());
-        int position = 0;
-        for (int i = 0; i < triangles.getListElements().size(); i++) {
-            if (position == ids.size())
-                break;
-            if (triangles.getListElements().get(i).id == ids.get(position)) {
-                out.add(triangles.getListElements().get(i));
-                position++;
-            }
+        for (int i = 0; i < ids.size(); i++) {
+            out.add(triangles.getById(ids.get(i)));
         }
         return out;
     }
@@ -115,9 +107,15 @@ public class AdvanceMesh extends Mesh {
 
     @Override
     public IDable.Element[] getTrianglesByLine(Line line) throws Exception {
+        Point A = getPoints(line.getIdPointA());
+        Point B = getPoints(line.getIdPointB());
+        Point middleOfLine = new Point(
+                (A.getX() + B.getX()) / 2.0D,
+                (A.getY() + B.getY()) / 2.0D
+        );
+
         BorderBox bBox = new BorderBox();
-        bBox.addPoint(getPoints(line.getIdPointA()));
-        bBox.addPoint(getPoints(line.getIdPointB()));
+        bBox.addPoint(middleOfLine);
 
         Set<Integer> idTriangles = new HashSet<>(triangleGrid.get(bBox));
         Iterator<Integer> iterator = idTriangles.iterator();
