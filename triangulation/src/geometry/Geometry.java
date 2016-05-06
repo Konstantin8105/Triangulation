@@ -99,5 +99,12 @@ public class Geometry {
         if (factor < Precisions.epsilon())
             result = true;
         return result;
+//        return ((y2 - y1) * (x3 - x2) - (y3 - y2) * (x2 - x1)) == 0.0D;
     }
+
+//
+//    public static double lineSide(double[] a, double[] b, double[] c) {// TODO:sdf
+//        return (b[0] - a[0]) * (c[1] - a[1]) - (c[0] - a[0]) * (b[1] - a[1]);
+//    }
+
 }

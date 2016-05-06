@@ -36,10 +36,4 @@ public class GeometryPointLine {
         return statePointOnLine(Point.getX(),Point.getY(),
                 p1Line,p2Line);
     }
-
-
-    public static double lineSide(double[] a, double[] b, double[] c) {// TODO:sdf
-        return (b[0] - a[0]) * (c[1] - a[1]) - (c[0] - a[0]) * (b[1] - a[1]);
-    }
-
 }

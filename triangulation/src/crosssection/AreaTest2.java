@@ -76,4 +76,20 @@ public class AreaTest2 {
             Assert.assertTrue(Area.area(triangulation.getMesh()) > 0);
         }
     }
+
+    @Test
+    public void triangleSmall3() throws Exception {
+        double shortDistance = 1.0D;
+        for (int i = 0; i < 30; i++) {
+            shortDistance *= 10;
+            Point[] points = new Point[]{
+                    new Point(0.0D, 0.0D),
+                    new Point(shortDistance, shortDistance),
+                    new Point(shortDistance*0.5D+1.0D, shortDistance*0.5D)
+            };
+            Triangulation triangulation = new Triangulation(Arrays.asList(points));
+            System.out.println("shortDistance = " + String.format("%.2e", shortDistance) + ": Area = " + String.format("%.2e", Area.area(triangulation.getMesh())));
+            Assert.assertTrue(Area.area(triangulation.getMesh()) > 0);
+        }
+    }
 }
