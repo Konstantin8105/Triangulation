@@ -1,12 +1,10 @@
+import org.junit.Assert;
+import org.junit.Test;
 import triangulation.elements.Point;
 import triangulation.geometry.Geometry;
 import triangulation.geometry.Precisions;
-import org.junit.Assert;
-import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class GeometryTest {
 
@@ -16,56 +14,56 @@ public class GeometryTest {
     public void testAngle1() throws Exception {
         Point c1 = new Point(0f, 0f);
         Point c2 = new Point(1f, 0f);
-        assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), 0d, epsilon);
+        assertEquals(Geometry.angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), 0d, epsilon);
     }
 
     @Test
     public void testAngle2() throws Exception {
         Point c1 = new Point(0f, 0f);
         Point c2 = new Point(0f, 1f);
-        assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.PI / 2d, epsilon);
+        assertEquals(Geometry.angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), Math.PI / 2d, epsilon);
     }
 
     @Test
     public void testAngle3() throws Exception {
         Point c1 = new Point(0f, 0f);
         Point c2 = new Point(-1f, 0f);
-        assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.PI, epsilon);
+        assertEquals(Geometry.angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), Math.PI, epsilon);
     }
 
     @Test
     public void testAngle4() throws Exception {
         Point c1 = new Point(0f, 0f);
         Point c2 = new Point(0f, -1f);
-        Assert.assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.PI * 1.5d, epsilon);
+        Assert.assertEquals(Geometry.angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), Math.PI * 1.5d, epsilon);
     }
 
     @Test
     public void testAngle5() throws Exception {
         Point c1 = new Point(0f, 0f);
         Point c2 = new Point(1f, 1f);
-        Assert.assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.toRadians(45d), epsilon);
+        Assert.assertEquals(Geometry.angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), Math.toRadians(45d), epsilon);
     }
 
     @Test
     public void testAngle6() throws Exception {
         Point c1 = new Point(0f, 0f);
         Point c2 = new Point(-1f, 1f);
-        Assert.assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.toRadians(135d), epsilon);
+        Assert.assertEquals(Geometry.angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), Math.toRadians(135d), epsilon);
     }
 
     @Test
     public void testAngle7() throws Exception {
         Point c1 = new Point(0f, 0f);
         Point c2 = new Point(-1f, -1f);
-        Assert.assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.toRadians(225d), epsilon);
+        Assert.assertEquals(Geometry.angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), Math.toRadians(225d), epsilon);
     }
 
     @Test
     public void testAngle8() throws Exception {
         Point c1 = new Point(0f, 0f);
         Point c2 = new Point(1f, -1f);
-        Assert.assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), Math.toRadians(315d), epsilon);
+        Assert.assertEquals(Geometry.angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), Math.toRadians(315d), epsilon);
     }
 
     @Test
@@ -73,36 +71,36 @@ public class GeometryTest {
         Point c1 = new Point(0f, 0f);
         for (double i = 0; i < 360; i += 0.002) {
             double angle = Math.toRadians(i);
-            Point c2 = new Point((float) Math.cos(angle), (float) Math.sin(angle));
-            Assert.assertEquals(Geometry.angle(c1.getX(),c1.getY(), c2.getX(), c2.getY()), angle, epsilon);
+            Point c2 = new Point(Math.cos(angle), Math.sin(angle));
+            Assert.assertEquals(Geometry.angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), angle, epsilon);
         }
     }
 
     @Test
     public void testNormalizeAnglePositive() throws Exception {
         for (int i = 0; i < 359; i++) {
-            assertEquals(Geometry.normalizeAngle(Math.toRadians(i)),Math.toRadians(i), Precisions.epsilon());
+            assertEquals(Geometry.normalizeAngle(Math.toRadians(i)), Math.toRadians(i), Precisions.epsilon());
         }
     }
 
     @Test
     public void testNormalizeAngleNegative() throws Exception {
         for (int i = 1; i < 359; i++) {
-            assertEquals(Geometry.normalizeAngle(Math.toRadians(-i)),Math.toRadians(360d-i), Precisions.epsilon());
+            assertEquals(Geometry.normalizeAngle(Math.toRadians(-i)), Math.toRadians(360d - i), Precisions.epsilon());
         }
     }
 
     @Test
     public void testNormalizeAnglePositiveCircle() throws Exception {
         for (int i = 360; i < 500; i++) {
-            assertEquals(Geometry.normalizeAngle(Math.toRadians(i)),Math.toRadians(i-360d), Precisions.epsilon());
+            assertEquals(Geometry.normalizeAngle(Math.toRadians(i)), Math.toRadians(i - 360d), Precisions.epsilon());
         }
     }
 
     @Test
     public void testNormalizeAngleNegativeCircle() throws Exception {
         for (int i = -500; i < -361; i++) {
-            assertEquals(Math.toDegrees(Geometry.normalizeAngle(Math.toRadians(i))),i+2*360d, Precisions.epsilon());
+            assertEquals(Math.toDegrees(Geometry.normalizeAngle(Math.toRadians(i))), i + 2 * 360d, Precisions.epsilon());
         }
     }
 
@@ -114,7 +112,7 @@ public class GeometryTest {
         double y1 = 0d;
         double x2 = 5d;
         double y2 = 5d;
-        assertEquals(Geometry.angleBetween2Line(vertexX,vertexY,x1,y1,x2,y2),Math.toRadians(45d),Precisions.epsilon());
+        assertEquals(Geometry.angleBetween2Line(vertexX, vertexY, x1, y1, x2, y2), Math.toRadians(45d), Precisions.epsilon());
     }
 
     @Test
@@ -127,15 +125,15 @@ public class GeometryTest {
         double y2 = 5d;
         for (int i = 0; i < 360; i++) {
             double angle = Math.toRadians(i);
-            double A = Geometry.lengthBetweenPoints(vertexX,vertexY,x1,y1);
-            double B = Geometry.lengthBetweenPoints(vertexX,vertexY,x2,y2);
-            double a1 = Geometry.angle(vertexX,vertexY,x1,y1);
-            double a2 = Geometry.angle(vertexX,vertexY,x2,y2);
-            x1 = A*Math.cos(angle+a1);
-            y1 = A*Math.sin(angle+a1);
-            x2 = B*Math.cos(angle+a2);
-            y2 = B*Math.sin(angle+a2);
-            assertEquals(Geometry.angleBetween2Line(vertexX,vertexY,x1,y1,x2,y2),Math.toRadians(45d),Precisions.epsilon());
+            double A = Geometry.lengthBetweenPoints(vertexX, vertexY, x1, y1);
+            double B = Geometry.lengthBetweenPoints(vertexX, vertexY, x2, y2);
+            double a1 = Geometry.angle(vertexX, vertexY, x1, y1);
+            double a2 = Geometry.angle(vertexX, vertexY, x2, y2);
+            x1 = A * Math.cos(angle + a1);
+            y1 = A * Math.sin(angle + a1);
+            x2 = B * Math.cos(angle + a2);
+            y2 = B * Math.sin(angle + a2);
+            assertEquals(Geometry.angleBetween2Line(vertexX, vertexY, x1, y1, x2, y2), Math.toRadians(45d), Precisions.epsilon());
         }
     }
 
@@ -145,32 +143,32 @@ public class GeometryTest {
             double angle = Math.toRadians(i);
             double x = 2d;
             double y = 0d;
-            double A = Geometry.lengthBetweenPoints(0,0,x,y);
-            x = A*Math.cos(angle);
-            y = A*Math.sin(angle);
-            assertEquals(Geometry.lengthBetweenPoints(0d,0d,x,y),2d,Precisions.epsilon());
+            double A = Geometry.lengthBetweenPoints(0, 0, x, y);
+            x = A * Math.cos(angle);
+            y = A * Math.sin(angle);
+            assertEquals(Geometry.lengthBetweenPoints(0d, 0d, x, y), 2d, Precisions.epsilon());
         }
     }
 
     @Test
     public void testIsPointInRectangle() throws Exception {
-        assertTrue(Geometry.isPointInRectangle(0f,0f,-1f,-1f,1f,1f));
-        assertTrue(Geometry.isPointInRectangle(-0.5f,0f,-1f,-1f,1f,1f));
-        assertTrue(Geometry.isPointInRectangle(0.5f,0.5f,-1f,-1f,1f,1f));
-        assertTrue(Geometry.isPointInRectangle(0.5f,-0.5f,-1f,-1f,1f,1f));
-        assertTrue(Geometry.isPointInRectangle(-0.5f,0.5f,-1f,-1f,1f,1f));
-        assertTrue(Geometry.isPointInRectangle(-0.5f,-0.5f,-1f,-1f,1f,1f));
+        assertTrue(Geometry.isPointInRectangle(0f, 0f, -1f, -1f, 1f, 1f));
+        assertTrue(Geometry.isPointInRectangle(-0.5f, 0f, -1f, -1f, 1f, 1f));
+        assertTrue(Geometry.isPointInRectangle(0.5f, 0.5f, -1f, -1f, 1f, 1f));
+        assertTrue(Geometry.isPointInRectangle(0.5f, -0.5f, -1f, -1f, 1f, 1f));
+        assertTrue(Geometry.isPointInRectangle(-0.5f, 0.5f, -1f, -1f, 1f, 1f));
+        assertTrue(Geometry.isPointInRectangle(-0.5f, -0.5f, -1f, -1f, 1f, 1f));
 
-        assertTrue(Geometry.isPointInRectangle(1f,1f,-1f,-1f,1f,1f));
-        assertTrue(Geometry.isPointInRectangle(1f,-1f,-1f,-1f,1f,1f));
-        assertTrue(Geometry.isPointInRectangle(-1f,1f,-1f,-1f,1f,1f));
-        assertTrue(Geometry.isPointInRectangle(-1f,-1f,-1f,-1f,1f,1f));
+        assertTrue(Geometry.isPointInRectangle(1f, 1f, -1f, -1f, 1f, 1f));
+        assertTrue(Geometry.isPointInRectangle(1f, -1f, -1f, -1f, 1f, 1f));
+        assertTrue(Geometry.isPointInRectangle(-1f, 1f, -1f, -1f, 1f, 1f));
+        assertTrue(Geometry.isPointInRectangle(-1f, -1f, -1f, -1f, 1f, 1f));
 
-        assertFalse(Geometry.isPointInRectangle(2f,2f,-1f,-1f,1f,1f));
-        assertFalse(Geometry.isPointInRectangle(0f,2f,-1f,-1f,1f,1f));
-        assertFalse(Geometry.isPointInRectangle(2f,0f,-1f,-1f,1f,1f));
-        assertFalse(Geometry.isPointInRectangle(0f,-2f,-1f,-1f,1f,1f));
-        assertFalse(Geometry.isPointInRectangle(-2f,0f,-1f,-1f,1f,1f));
+        assertFalse(Geometry.isPointInRectangle(2f, 2f, -1f, -1f, 1f, 1f));
+        assertFalse(Geometry.isPointInRectangle(0f, 2f, -1f, -1f, 1f, 1f));
+        assertFalse(Geometry.isPointInRectangle(2f, 0f, -1f, -1f, 1f, 1f));
+        assertFalse(Geometry.isPointInRectangle(0f, -2f, -1f, -1f, 1f, 1f));
+        assertFalse(Geometry.isPointInRectangle(-2f, 0f, -1f, -1f, 1f, 1f));
     }
 
 

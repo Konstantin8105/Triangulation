@@ -18,9 +18,10 @@ public class BorderBox {
 
     /**
      * Box change the size by X or Y and input point will be inside in rectangle or on border of rectangle
+     *
      * @param point input data
+     * @throws if input point is null
      * @see Point
-     * @exception if input point is null
      */
     public void addPoint(Point point) throws NullPointerException {
         if (point == null)
@@ -39,10 +40,11 @@ public class BorderBox {
 
     /**
      * Checking input point - is inside Box?
+     *
      * @param point input data
      * @return true - if point inside or on border of the box, and false - if point outside the box or you don`t add any points.
+     * @throws if input point is null or don`t add any point in box
      * @see Point
-     * @exception if input point is null or don`t add any point in box
      */
     public boolean isInBox(Point point) throws NullPointerException {
         if (point == null)
