@@ -1,4 +1,4 @@
-package geometry;
+package triangulation.geometry;
 
 public class Geometry {
 

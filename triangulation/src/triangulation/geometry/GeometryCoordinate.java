@@ -1,7 +1,7 @@
-package geometry;
+package triangulation.geometry;
 
 
-import elements.Point;
+import triangulation.elements.Point;
 
 import java.util.Arrays;
 import java.util.List;

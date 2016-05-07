@@ -1,8 +1,6 @@
-package triangulation.test;
-
-import elements.Line;
+import triangulation.elements.Line;
+import triangulation.elements.Mesh;
 import org.junit.Test;
-import triangulation.BorderLineConvexRegion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +8,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class BorderLineConvexRegionTest {
+public class SequenceTest {
 
     @Test
     public void test1() throws Exception {
@@ -20,7 +18,7 @@ public class BorderLineConvexRegionTest {
         lines.add(new Line(3, 2));
         lines.add(new Line(2, 1));
         print("Before",lines);
-        List<Line> out = BorderLineConvexRegion.createSequence(lines);
+        List<Line> out = Mesh.createSequence(lines);
         print("After ",out);
         assertTrue(check(out));
     }
@@ -33,7 +31,7 @@ public class BorderLineConvexRegionTest {
         lines.add(new Line(2, 1));
         lines.add(new Line(2, 0));
         print("Before",lines);
-        List<Line> out = BorderLineConvexRegion.createSequence(lines);
+        List<Line> out = Mesh.createSequence(lines);
         print("After ",out);
         assertTrue(check(out));
     }
@@ -45,7 +43,7 @@ public class BorderLineConvexRegionTest {
         lines.add(new Line(2, 5));
         lines.add(new Line(2, 0));
         print("Before",lines);
-        List<Line> out = BorderLineConvexRegion.createSequence(lines);
+        List<Line> out = Mesh.createSequence(lines);
         print("After ",out);
         assertTrue(check(out));
     }
@@ -57,7 +55,7 @@ public class BorderLineConvexRegionTest {
         lines.add(new Line(2, 5));
         lines.add(new Line(2, 0));
         print("Before",lines);
-        List<Line> out = BorderLineConvexRegion.createSequence(lines);
+        List<Line> out = Mesh.createSequence(lines);
         print("After ",out);
         assertTrue(check(out));
     }
@@ -69,7 +67,7 @@ public class BorderLineConvexRegionTest {
         lines.add(new Line(2, 0));
         lines.add(new Line(2, 5));
         print("Before",lines);
-        List<Line> out = BorderLineConvexRegion.createSequence(lines);
+        List<Line> out = Mesh.createSequence(lines);
         print("After ",out);
         assertTrue(check(out));
     }
@@ -83,7 +81,7 @@ public class BorderLineConvexRegionTest {
         lines.add(new Line(5, 2));
         lines.add(new Line(2, 1));
         print("Before",lines);
-        List<Line> out = BorderLineConvexRegion.createSequence(lines);
+        List<Line> out = Mesh.createSequence(lines);
         print("After ",out);
         assertTrue(check(out));
     }
@@ -94,7 +92,7 @@ public class BorderLineConvexRegionTest {
         lines.add(new Line(174, 175));
         lines.add(new Line(191, 174));
         print("Before",lines);
-        List<Line> out = BorderLineConvexRegion.createSequence(lines);
+        List<Line> out = Mesh.createSequence(lines);
         print("After ",out);
         assertTrue(check(out));
     }
@@ -105,7 +103,19 @@ public class BorderLineConvexRegionTest {
         lines.add(new Line(174, 175));
         lines.add(new Line(174, 191));
         print("Before",lines);
-        List<Line> out = BorderLineConvexRegion.createSequence(lines);
+        List<Line> out = Mesh.createSequence(lines);
+        print("After ",out);
+        assertTrue(check(out));
+    }
+
+    @Test
+    public void test9() throws Exception {
+        List<Line> lines = new ArrayList<>();
+        lines.add(new Line(174, 175));
+        lines.add(new Line(175, 150));
+        lines.add(new Line(174, 191));
+        print("Before",lines);
+        List<Line> out = Mesh.createSequence(lines);
         print("After ",out);
         assertTrue(check(out));
     }

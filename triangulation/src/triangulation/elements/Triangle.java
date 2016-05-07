@@ -1,4 +1,4 @@
-package elements;
+package triangulation.elements;
 
 import java.util.Arrays;
 import java.util.Collection;

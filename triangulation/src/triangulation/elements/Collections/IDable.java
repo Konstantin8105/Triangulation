@@ -1,4 +1,4 @@
-package elements.Collections;
+package triangulation.elements.Collections;
 
 import java.util.*;
 
@@ -18,7 +18,7 @@ public class IDable<T> {
         }
     }
 
-    private List<elements.Collections.IDable.Element> list = new ArrayList<>();
+    private List<triangulation.elements.Collections.IDable.Element> list = new ArrayList<>();
 
     private static class GeneratorId {
         private static int position = 0;
@@ -69,7 +69,7 @@ public class IDable<T> {
         return list.get(index);
     }
 
-    public List<elements.Collections.IDable.Element> getListElements() {
+    public List<triangulation.elements.Collections.IDable.Element> getListElements() {
         return list;
     }
 

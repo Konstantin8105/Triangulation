@@ -1,8 +1,8 @@
 package crosssection;
 
-import elements.Collections.IDable;
-import elements.Mesh;
-import elements.Triangle;
+import triangulation.elements.Collections.IDable;
+import triangulation.elements.Mesh;
+import triangulation.elements.Triangle;
 import un.api.collection.Sequence;
 import un.impl.geometry.Point;
 
@@ -31,7 +31,7 @@ public class Area {
                     ((Triangle) list.get(i).value).getIdPoint2(),
                     ((Triangle) list.get(i).value).getIdPoint3()
             };
-            elements.Point[] points = new elements.Point[3];
+            triangulation.elements.Point[] points = new triangulation.elements.Point[3];
             for (int j = 0; j < idPoint.length; j++) {
                 points[j] = mesh.getPoints(idPoint[j]);
             }
@@ -63,7 +63,7 @@ public class Area {
         return -1;
     }
 
-    static private double area_3point(elements.Point[] points) {
+    static private double area_3point(triangulation.elements.Point[] points) {
         //
         // Area of triangle
         // https://en.wikipedia.org/wiki/Triangle#Computing_the_area_of_a_triangle

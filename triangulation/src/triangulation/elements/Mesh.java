@@ -1,8 +1,9 @@
-package elements;
+package triangulation.elements;
 
-import elements.Collections.IDable;
+import triangulation.elements.Collections.IDable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Mesh {
@@ -34,26 +35,6 @@ public class Mesh {
         triangles.remove(id);
     }
 
-//    public IDable.Element[] getTrianglesByLine(IDable.Element line) throws Exception {
-//        return getTrianglesByLine((Line) line.value);
-////        IDable.Element[] tri = new IDable.Element[2];
-////        int presentPosition = 0;
-////        for (int i = 0; i < triangles.size(); i++) {
-////            Line[] lines = triangles.getByIndex(i).getLines();
-////            for (int j = 0; j < lines.length; j++) {
-////                if (((Line) line.value).equals(lines[j])) {
-////                    tri[presentPosition++] = triangles.getElement(i);
-////                    if (presentPosition == 2) {
-////                        return tri;
-////                    }
-////                }
-////            }
-////        }
-////        if (presentPosition == 0)
-////            throw new Exception("Line without triangle. line = " + (Line) line.value);
-////        return new IDable.Element[]{tri[0]};
-//    }
-
     public IDable.Element[] getTrianglesByLine(Line line) throws Exception {
         IDable.Element[] tri = new IDable.Element[2];
         int presentPosition = 0;
@@ -81,11 +62,11 @@ public class Mesh {
         return lines.getListElements();
     }
 
-    public List<elements.Collections.IDable.Element> getTriangles(Point point) throws Exception {
+    public List<triangulation.elements.Collections.IDable.Element> getTriangles(Point point) throws Exception {
         return triangles.getListElements();
     }
 
-    public List<elements.Collections.IDable.Element> getTriangles() throws Exception {
+    public List<triangulation.elements.Collections.IDable.Element> getTriangles() throws Exception {
         return triangles.getListElements();
     }
 
@@ -120,5 +101,54 @@ public class Mesh {
     public int sizeTriangles() {
         return triangles.size();
     }
+
+    public static List<Line> createLoop(List<Line> listLines) throws Exception {
+        List<Line> loop = createSequence(listLines);
+        if (loop.get(0).getIdPointA() != loop.get(loop.size() - 1).getIdPointB())
+            throw new Exception("Not correct loop ={"
+                    + loop.get(0).getIdPointA()
+                    + " ; "
+                    + loop.get(loop.size() - 1).getIdPointB()
+                    + " } ");
+        return loop;
+    }
+
+    public static List<Line> createSequence(List<Line> listLines) {
+        if (listLines.size() == 1)
+            return listLines;
+        int idBeforeLine = listLines.get(0).getIdPointB();
+        int position = 1;
+        boolean changes = true;
+        while (changes) {
+            changes = false;
+            for (int i = position; i < listLines.size(); i++) {
+                if (idBeforeLine == listLines.get(i).getIdPointA()) {
+                    if (position != i)
+                        Collections.swap(listLines, position, i);
+                    position++;
+                    idBeforeLine = listLines.get(position - 1).getIdPointB();
+                    changes = true;
+                } else if (idBeforeLine == listLines.get(i).getIdPointB()) {
+                    listLines.get(i).swapPoints();
+                    if (position != i)
+                        Collections.swap(listLines, position, i);
+                    position++;
+                    idBeforeLine = listLines.get(position - 1).getIdPointB();
+                    changes = true;
+                }
+            }
+        }
+        if (position != listLines.size()) {
+            if (listLines.get(0).getIdPointA() == listLines.get(position).getIdPointA())
+                listLines.get(position).swapPoints();
+            List<Line> out = new ArrayList<>(listLines.size());
+            out.addAll(listLines.subList(position, listLines.size()));
+            out.addAll(listLines.subList(0, position));
+            listLines.clear();
+            return createSequence(out);
+        }
+        return listLines;
+    }
+
 
 }

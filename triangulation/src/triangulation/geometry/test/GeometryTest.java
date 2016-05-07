@@ -1,8 +1,6 @@
-package geometry.test;
-
-import elements.Point;
-import geometry.Geometry;
-import geometry.Precisions;
+import triangulation.elements.Point;
+import triangulation.geometry.Geometry;
+import triangulation.geometry.Precisions;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,9 +1,9 @@
-package triangulation;
+package core.old;
 
 import elements.Point;
+import triangulation.BorderBox;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class GridIndex {

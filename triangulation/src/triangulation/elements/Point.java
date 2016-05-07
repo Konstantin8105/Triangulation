@@ -1,6 +1,6 @@
-package elements;
+package triangulation.elements;
 
-import geometry.Precisions;
+import triangulation.geometry.Precisions;
 
 public class Point {
     private double x;

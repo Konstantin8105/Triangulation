@@ -1,16 +1,22 @@
 package triangulation;
 
-import elements.*;
-import elements.Collections.IDable;
-import geometry.GeometryCoordinate;
-import geometry.GeometryLineLine;
-import geometry.GeometryPointLine;
-import geometry.GeometryPointTriangle;
+import triangulation.elements.Collections.IDable;
+import triangulation.elements.Line;
+import triangulation.elements.Mesh;
+import triangulation.elements.Point;
+import triangulation.elements.Triangle;
+import triangulation.geometry.GeometryCoordinate;
+import triangulation.geometry.GeometryLineLine;
+import triangulation.geometry.GeometryPointLine;
+import triangulation.geometry.GeometryPointTriangle;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Triangulation {
-    private Mesh mesh = new AdvanceMesh();
+    private Mesh mesh = new Mesh();
     private BorderBox bBox = new BorderBox();
 
     public Triangulation(List<Point> points) throws Exception {
@@ -20,7 +26,7 @@ public class Triangulation {
 
         mesh.addPoint(points);
 
-        List<elements.Collections.IDable.Element> pointArray = mesh.getPoints().getListElements();
+        List<triangulation.elements.Collections.IDable.Element> pointArray = mesh.getPoints().getListElements();
         for (int i = 0; i < pointArray.size(); i++) {
             addNextPoint(pointArray.get(i));
         }
@@ -97,7 +103,7 @@ public class Triangulation {
 
     private void addNextPointOnLine(IDable.Element nextPoint, IDable.Element line) throws Exception {
 
-        IDable.Element[] triangles = mesh.getTrianglesByLine((Line)line.value);
+        IDable.Element[] triangles = mesh.getTrianglesByLine((Line) line.value);
         if (triangles.length > 2 || triangles.length < 1)
             throw new Exception(
                     "Cannot more 2 triangles for 1 line. triangles" + triangles.toString()
@@ -187,7 +193,7 @@ public class Triangulation {
     }
 
     private List<Line> getBorderLinesForNewConvex(Point nextPoint) throws Exception {
-        List<Line> borderLine = BorderLineConvexRegion.createLoop(mesh.getBorderLine());
+        List<Line> borderLine = mesh.createLoop(mesh.getBorderLine());
 
         Point[] pointsOfLine = new Point[borderLine.size() + 1];
         pointsOfLine[0] = mesh.getPoints(borderLine.get(0).getIdPointA());
@@ -225,7 +231,7 @@ public class Triangulation {
             borderLine.remove((int) indexLinesDelete.get(i));
         }
 
-        return BorderLineConvexRegion.createSequence(borderLine);
+        return mesh.createSequence(borderLine);
     }
 
     public Mesh getMesh() {

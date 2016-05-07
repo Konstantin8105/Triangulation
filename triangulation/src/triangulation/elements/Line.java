@@ -1,4 +1,4 @@
-package elements;
+package triangulation.elements;
 
 public class Line {
     private int idPointA;

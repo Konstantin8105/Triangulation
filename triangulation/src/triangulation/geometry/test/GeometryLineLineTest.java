@@ -1,7 +1,5 @@
-package geometry.test;
-
-import elements.Point;
-import geometry.GeometryLineLine;
+import triangulation.elements.Point;
+import triangulation.geometry.GeometryLineLine;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

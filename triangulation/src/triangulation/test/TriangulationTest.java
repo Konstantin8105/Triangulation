@@ -1,10 +1,7 @@
-package triangulation.test;
-
-import elements.Point;
+import triangulation.elements.Point;
 import org.junit.Assert;
 import org.junit.Test;
 import triangulation.Triangulation;
-import un.impl.geometry.triangulate.Delaunay;
 
 import java.util.ArrayList;
 import java.util.Arrays;

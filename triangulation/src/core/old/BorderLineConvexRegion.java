@@ -1,6 +1,6 @@
-package triangulation;
+package core.old;
 
-import elements.AdvanceMesh;
+import core.old.AdvanceMesh;
 import elements.Line;
 
 import java.util.ArrayList;

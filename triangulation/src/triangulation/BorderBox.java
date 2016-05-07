@@ -1,6 +1,6 @@
 package triangulation;
 
-import elements.Point;
+import triangulation.elements.Point;
 
 /**
  * Create rectangle for future check point outside rectangle.

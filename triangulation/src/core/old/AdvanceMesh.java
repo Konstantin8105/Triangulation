@@ -1,10 +1,11 @@
-package elements;
+package core.old;
 
 import elements.Collections.IDable;
+import elements.Line;
+import elements.Mesh;
+import elements.Point;
+import elements.Triangle;
 import triangulation.BorderBox;
-import triangulation.BorderLineConvexRegion;
-import triangulation.GridIndex;
-import triangulation.Triangulation;
 
 import java.util.*;
 

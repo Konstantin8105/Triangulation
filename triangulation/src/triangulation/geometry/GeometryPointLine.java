@@ -1,6 +1,6 @@
-package geometry;
+package triangulation.geometry;
 
-import elements.Point;
+import triangulation.elements.Point;
 
 public class GeometryPointLine {
 
