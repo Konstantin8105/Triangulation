@@ -71,27 +71,42 @@ Performance for special test:
 
 ========================================
 
-    Class name              |    Input data    |    Description    |    Status
-                            |                  |                   |
-    Triangulation           |    Points ony    |   triangulation   |    DONE
-                            |                  |                   |
-    ------------------------+------------------+-------------------+----------------
-                            |                  |                   |
-    PSLG                    |  Points and      |                   |   TODO
-    (Planar Straight        |  Lines           |                   |
-        Line Graph)         |                  |                   |
-                            |                  |                   |
-    ------------------------+------------------+-------------------+----------------
-                            |                  |                   |
-    TriangulationPSLG       |  Points and      |  triangulation    |   TODO
-                            |  Lines           |                   |
-                            |                  |                   |
-    ------------------------+------------------+-------------------+----------------
-                            |                  |                   |
-    TriangulationCDT        | Points,          |                   |   TODO
-    (Conforming             | Lines,           |                   |
-       Delaunay             | Minimal area     |                   |
-          Triangulation)    | Max. area        |                   |
-                            |                  |                   |
+    ------------------------+------------------+-------------------+----------------+
+                            |                  |                   |                |
+    Class name              |    Input data    |    Description    |    Status      |
+                            |                  |                   |                |
+    ------------------------+------------------+-------------------+----------------+
+                            |                  |                   |                |
+    Triangulation           |    Points ony    |   triangulation   |    DONE        |
+                            |                  |                   |                |
+    ------------------------+------------------+-------------------+----------------+
+                            |                  |                   |                |
+    TriangulationDelaunay   |   Points only    |  triangulation    |   TODO         |
+                            |                  |  with success     |                |
+                            |                  |  Delaunay case    |                |
+                            |                  |                   |                |
+    ------------------------+------------------+-------------------+----------------+
+                            |                  |                   |                |
+    PSLG                    |  Points and      |                   |   TODO         |
+    (Planar Straight        |  Lines           |                   |                |
+        Line Graph)         |                  |                   |                |
+                            |                  |                   |                |
+    ------------------------+------------------+-------------------+----------------+
+                            |                  |                   |                |
+    TriangulationPSLG       |  Points and      |  triangulation    |   TODO         |
+                            |  Lines           |  with input       |                |
+                            |                  |  borders          |                |
+                            |                  |                   |                |
+    ------------------------+------------------+-------------------+----------------+
+                            |                  |                   |                |
+    TriangulationCDT        | Points,          |  triangulation    |   TODO         |
+    (Conforming             | Lines,           |  with input       |                |
+       Delaunay             | Minimal area     |  borders and      |                |
+          Triangulation)    | Max. area        |  separation big   |                |
+                            |                  |  triangles        |                |
+                            |                  |                   |                |
+    ------------------------+------------------+-------------------+----------------+
 
 See [Definitions](https://www.cs.cmu.edu/~quake/triangle.defs.html)
+
+========================================
