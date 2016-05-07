@@ -609,17 +609,17 @@ public class TriangulationTest {
 
     @Test
     public void triangleSmall3() throws Exception {
-        double height = 1.0D;
+        double width = 1.0D;
         for (int i = 0; i < 9; i++) {
-            height *= 10;
+            width *= 10;
             Point[] points = new Point[]{
                     new Point(0.0D, 0.0D),
-                    new Point(height, height),
-                    new Point(0.5D*height+1.0D, 0.5D*height)
+                    new Point(width, width),
+                    new Point(0.5D*width+1.0D, 0.5D*width)
             };
             Triangulation triangulation = new Triangulation(Arrays.asList(points));
             System.out.println(
-                    "height = " + String.format("%.3e",height)
+                    "height = " + String.format("%.3e",width)
                             + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
             Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
         }
@@ -627,17 +627,17 @@ public class TriangulationTest {
 
     @Test
     public void triangleSmall4() throws Exception {
-        double height = 10.D;
+        double width = 10.D;
         for (int i = 0; i < 9; i++) {
-            height /= 10;
+            width /= 10;
             Point[] points = new Point[]{
                     new Point(0.0D, 0.0D),
-                    new Point(height, height),
-                    new Point(0.5D*height+1.0D, 0.5D*height)
+                    new Point(width, width),
+                    new Point(0.5D*width+1.0D, 0.5D*width)
             };
             Triangulation triangulation = new Triangulation(Arrays.asList(points));
             System.out.println(
-                    "height = " + String.format("%.3e",height)
+                    "height = " + String.format("%.3e",width)
                             + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
             Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
         }

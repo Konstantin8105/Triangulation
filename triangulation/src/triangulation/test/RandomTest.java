@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class RandomTest {
 
-    static Random random = new Random();
+    private static Random random = new Random();
 
     public static void main(String[] args) throws Exception {
         List<Point> list = new ArrayList<>();
@@ -21,6 +21,7 @@ public class RandomTest {
                 System.out.println(String.format("\"%+5.8f\"", list.get(j).getX()) + "," + String.format("\"%+5.8f\",", list.get(j).getY()));
             }
             Triangulation triangulation = new Triangulation(list);
+            System.out.println("Amount of triangles = " + triangulation.getMesh().sizeTriangles());
             list.clear();
         }
     }

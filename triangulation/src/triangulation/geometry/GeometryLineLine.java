@@ -27,8 +27,8 @@ public class GeometryLineLine {
             statePointOnLine[i] = 0;
         }
 
-        for (int i = 0; i < state.length; i++) {
-            statePointOnLine[state[i]]++;
+        for (int aState : state) {
+            statePointOnLine[aState]++;
         }
 
         if (statePointOnLine[GeometryPointLine.PointLineState.POINT_OUTSIDE_LINE.ordinal()] == 4) {
@@ -59,11 +59,8 @@ public class GeometryLineLine {
         Point intersect = coordinateIntersect(p1, p2, p3, p4);
         if (intersect == null)
             return false;
-        if (GeometryCoordinate.isPointInRectangle(intersect, p1, p2) &&
-                GeometryCoordinate.isPointInRectangle(intersect, p3, p4)) {
-            return true;
-        }
-        return false;
+        return GeometryCoordinate.isPointInRectangle(intersect, p1, p2) &&
+                GeometryCoordinate.isPointInRectangle(intersect, p3, p4);
     }
 
 

@@ -34,9 +34,7 @@ public class Point {
         Point that = (Point) o;
         if (Math.abs(that.x - x) > Precisions.epsilon())
             return false;
-        if (Math.abs(that.y - y) > Precisions.epsilon())
-            return false;
-        return true;
+        return Math.abs(that.y - y) <= Precisions.epsilon();
     }
 
     @Override

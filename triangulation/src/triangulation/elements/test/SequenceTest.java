@@ -1,11 +1,10 @@
+import org.junit.Test;
 import triangulation.elements.Line;
 import triangulation.elements.Mesh;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class SequenceTest {
@@ -17,9 +16,9 @@ public class SequenceTest {
         lines.add(new Line(0, 1));
         lines.add(new Line(3, 2));
         lines.add(new Line(2, 1));
-        print("Before",lines);
+        print("Before", lines);
         List<Line> out = Mesh.createSequence(lines);
-        print("After ",out);
+        print("After ", out);
         assertTrue(check(out));
     }
 
@@ -30,9 +29,9 @@ public class SequenceTest {
         lines.add(new Line(0, 1));
         lines.add(new Line(2, 1));
         lines.add(new Line(2, 0));
-        print("Before",lines);
+        print("Before", lines);
         List<Line> out = Mesh.createSequence(lines);
-        print("After ",out);
+        print("After ", out);
         assertTrue(check(out));
     }
 
@@ -42,9 +41,9 @@ public class SequenceTest {
         lines.add(new Line(0, 5));
         lines.add(new Line(2, 5));
         lines.add(new Line(2, 0));
-        print("Before",lines);
+        print("Before", lines);
         List<Line> out = Mesh.createSequence(lines);
-        print("After ",out);
+        print("After ", out);
         assertTrue(check(out));
     }
 
@@ -54,9 +53,9 @@ public class SequenceTest {
         lines.add(new Line(10, 5));
         lines.add(new Line(2, 5));
         lines.add(new Line(2, 0));
-        print("Before",lines);
+        print("Before", lines);
         List<Line> out = Mesh.createSequence(lines);
-        print("After ",out);
+        print("After ", out);
         assertTrue(check(out));
     }
 
@@ -66,9 +65,9 @@ public class SequenceTest {
         lines.add(new Line(10, 5));
         lines.add(new Line(2, 0));
         lines.add(new Line(2, 5));
-        print("Before",lines);
+        print("Before", lines);
         List<Line> out = Mesh.createSequence(lines);
-        print("After ",out);
+        print("After ", out);
         assertTrue(check(out));
     }
 
@@ -80,9 +79,9 @@ public class SequenceTest {
         lines.add(new Line(0, 10));
         lines.add(new Line(5, 2));
         lines.add(new Line(2, 1));
-        print("Before",lines);
+        print("Before", lines);
         List<Line> out = Mesh.createSequence(lines);
-        print("After ",out);
+        print("After ", out);
         assertTrue(check(out));
     }
 
@@ -91,9 +90,9 @@ public class SequenceTest {
         List<Line> lines = new ArrayList<>();
         lines.add(new Line(174, 175));
         lines.add(new Line(191, 174));
-        print("Before",lines);
+        print("Before", lines);
         List<Line> out = Mesh.createSequence(lines);
-        print("After ",out);
+        print("After ", out);
         assertTrue(check(out));
     }
 
@@ -102,9 +101,9 @@ public class SequenceTest {
         List<Line> lines = new ArrayList<>();
         lines.add(new Line(174, 175));
         lines.add(new Line(174, 191));
-        print("Before",lines);
+        print("Before", lines);
         List<Line> out = Mesh.createSequence(lines);
-        print("After ",out);
+        print("After ", out);
         assertTrue(check(out));
     }
 
@@ -114,21 +113,22 @@ public class SequenceTest {
         lines.add(new Line(174, 175));
         lines.add(new Line(175, 150));
         lines.add(new Line(174, 191));
-        print("Before",lines);
+        print("Before", lines);
         List<Line> out = Mesh.createSequence(lines);
-        print("After ",out);
+        print("After ", out);
         assertTrue(check(out));
     }
 
     private void print(String str, List<Line> lines) {
         System.out.println(str);
-        for (int i = 0; i < lines.size(); i++) {
-            System.out.println(lines.get(i));
+        for (Line line : lines) {
+            System.out.println(line);
         }
     }
-    private boolean check(List<Line> listLines){
+
+    private boolean check(List<Line> listLines) {
         for (int i = 1; i < listLines.size(); i++) {
-            if(listLines.get(i-1).getIdPointB() != listLines.get(i).getIdPointA())
+            if (listLines.get(i - 1).getIdPointB() != listLines.get(i).getIdPointA())
                 return false;
         }
         return true;

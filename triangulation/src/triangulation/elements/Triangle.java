@@ -1,15 +1,13 @@
 package triangulation.elements;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class Triangle {
     private int idPoint1;
     private int idPoint2;
     private int idPoint3;
-    private Collection<? extends Point> pointsId;
-    Line[] lines = new Line[3];
+    private Line[] lines = new Line[3];
 
     public Triangle(int idPoint1, int idPoint2, int idPoint3) throws Exception {
         this.idPoint1 = idPoint1;
@@ -66,7 +64,7 @@ public class Triangle {
         return Arrays.asList(idPoint1, idPoint2, idPoint3);
     }
 
-    public Line[] getLines() throws Exception {
+    public Line[] getLines() {
         return lines;
     }
 }

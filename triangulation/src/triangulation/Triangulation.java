@@ -27,8 +27,8 @@ public class Triangulation {
         mesh.addPoint(points);
 
         List<triangulation.elements.Collections.IDable.Element> pointArray = mesh.getPoints().getListElements();
-        for (int i = 0; i < pointArray.size(); i++) {
-            addNextPoint(pointArray.get(i));
+        for (IDable.Element aPointArray : pointArray) {
+            addNextPoint(aPointArray);
         }
     }
 
@@ -71,8 +71,8 @@ public class Triangulation {
 
     private void addNextPointWithoutBorder() throws Exception {
         List<Point> points = new ArrayList<>();
-        for (int i = 0; i < lastPoints.size(); i++) {
-            points.add((Point) lastPoints.get(i).value);
+        for (IDable.Element lastPoint : lastPoints) {
+            points.add((Point) lastPoint.value);
         }
         if (GeometryCoordinate.isPointsOnOneLine(points)) {
             return;
@@ -106,7 +106,7 @@ public class Triangulation {
         IDable.Element[] triangles = mesh.getTrianglesByLine((Line) line.value);
         if (triangles.length > 2 || triangles.length < 1)
             throw new Exception(
-                    "Cannot more 2 triangles for 1 line. triangles" + triangles.toString()
+                    "Cannot more 2 triangles for 1 line. triangles" + triangles
                             + " . line = " + line.toString());
 
         mesh.addLine(new Line(nextPoint.id, ((Line) line.value).getIdPointA()));
@@ -193,7 +193,7 @@ public class Triangulation {
     }
 
     private List<Line> getBorderLinesForNewConvex(Point nextPoint) throws Exception {
-        List<Line> borderLine = mesh.createLoop(mesh.getBorderLine());
+        List<Line> borderLine = Mesh.createLoop(mesh.getBorderLine());
 
         Point[] pointsOfLine = new Point[borderLine.size() + 1];
         pointsOfLine[0] = mesh.getPoints(borderLine.get(0).getIdPointA());
@@ -231,7 +231,7 @@ public class Triangulation {
             borderLine.remove((int) indexLinesDelete.get(i));
         }
 
-        return mesh.createSequence(borderLine);
+        return Mesh.createSequence(borderLine);
     }
 
     public Mesh getMesh() {

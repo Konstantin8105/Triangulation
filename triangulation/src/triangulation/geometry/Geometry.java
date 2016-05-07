@@ -66,9 +66,7 @@ public class Geometry {
     public static boolean isPointBetween2Border(double p, double pBorder1, double pBorder2) {
         if (p < Math.min(pBorder1, pBorder2) - Precisions.epsilon())
             return false;
-        if (p > Math.max(pBorder1, pBorder2) + Precisions.epsilon())
-            return false;
-        return true;
+        return p <= Math.max(pBorder1, pBorder2) + Precisions.epsilon();
     }
 
     public static boolean isPointInRectangle(double x, double y,
@@ -76,9 +74,7 @@ public class Geometry {
                                              double Line2X, double Line2Y) {
         if (!isPointBetween2Border(x, Line1X, Line2X))
             return false;
-        if (!isPointBetween2Border(y, Line1Y, Line2Y))
-            return false;
-        return true;
+        return isPointBetween2Border(y, Line1Y, Line2Y);
     }
 
     public static boolean is3pointsCollinear(

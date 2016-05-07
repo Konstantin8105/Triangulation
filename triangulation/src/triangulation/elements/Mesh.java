@@ -8,18 +8,18 @@ import java.util.List;
 
 public class Mesh {
     private IDable<Point> points = new IDable<>();
-    protected IDable<Line> lines = new IDable<>();
-    protected IDable<Triangle> triangles = new IDable<>();
+    private IDable<Line> lines = new IDable<>();
+    private IDable<Triangle> triangles = new IDable<>();
 
     public void addPoint(List<Point> point) {
         points.add(point);
     }
 
-    public int addLine(Line line) throws Exception {
+    public int addLine(Line line){
         return lines.add(line);
     }
 
-    public int addTriangle(Triangle triangle) throws Exception {
+    public int addTriangle(Triangle triangle){
         return triangles.add(triangle);
     }
 
@@ -58,15 +58,15 @@ public class Mesh {
         return points.getById(idPoint).value;
     }
 
-    public List<IDable.Element> getLines(Point point) throws Exception {
+    public List<IDable.Element> getLines(Point point){
         return lines.getListElements();
     }
 
-    public List<triangulation.elements.Collections.IDable.Element> getTriangles(Point point) throws Exception {
+    public List<triangulation.elements.Collections.IDable.Element> getTriangles(Point point){
         return triangles.getListElements();
     }
 
-    public List<triangulation.elements.Collections.IDable.Element> getTriangles() throws Exception {
+    public List<triangulation.elements.Collections.IDable.Element> getTriangles(){
         return triangles.getListElements();
     }
 

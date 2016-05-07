@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 public class GeometryTest {
 
-    double epsilon = Precisions.epsilon();
+    private final static double epsilon = Precisions.epsilon();
 
     @Test
     public void testAngle1() throws Exception {

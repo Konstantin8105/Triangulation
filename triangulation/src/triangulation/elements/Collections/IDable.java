@@ -28,7 +28,7 @@ public class IDable<T> {
         }
     }
 
-    private Comparator<Element> comparatorId = new Comparator<Element>() {
+    private final Comparator<Element> comparatorId = new Comparator<Element>() {
         @Override
         public int compare(Element o1, Element o2) {
             return o1.id - o2.id;
@@ -43,8 +43,8 @@ public class IDable<T> {
     }
 
     public void add(List<T> list) {
-        for (int i = 0; i < list.size(); i++) {
-            Element element = new Element(GeneratorId.getID(), list.get(i));
+        for (T aList : list) {
+            Element element = new Element(GeneratorId.getID(), aList);
             this.list.add(element);
         }
     }

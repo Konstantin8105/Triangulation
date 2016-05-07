@@ -17,13 +17,13 @@ public class GeometriesTest {
 
     @Test
     public void testTrue2() {
-        double height = Math.PI;
+        double width = Math.PI;
         for (int i = 0; i < 300; i++) {
             Point point1 = new Point(0.0D, 0.0D);
-            Point point2 = new Point(height * 0.5D, 0.000D);
-            Point point3 = new Point(height, 0.0D);
+            Point point2 = new Point(width * 0.5D, 0.000D);
+            Point point3 = new Point(width, 0.0D);
             Assert.assertTrue(Geometries.isOnLine(point1, point2, point3));
-            height *= 10D;
+            width *= 10D;
         }
     }
 
@@ -53,13 +53,13 @@ public class GeometriesTest {
 
     @Test
     public void testFalse4() {
-        double height = Math.PI;
+        double width = Math.PI;
         for (int i = 0; i < 300; i++) {
             Point point1 = new Point(0.0D, 0.0D);
-            Point point2 = new Point(height * 0.5D, 1e-5);
-            Point point3 = new Point(height, 0.0D);
+            Point point2 = new Point(width * 0.5D, 1e-5);
+            Point point3 = new Point(width, 0.0D);
             Assert.assertFalse(Geometries.isOnLine(point1, point2, point3));
-            height *= 10D;
+            width *= 10D;
         }
     }
 }

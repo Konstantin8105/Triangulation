@@ -17,8 +17,8 @@ public class GeometryPointTriangle {
         if (!GeometryCoordinate.isPointInRectangle(Point, tri))
             return PointTriangleState.POINT_OUTSIDE;
 
-        for (int i = 0; i < tri.length; i++) {
-            if (Point.equals(tri[i]))
+        for (triangulation.elements.Point aTri : tri) {
+            if (Point.equals(aTri))
                 return PointTriangleState.POINT_ON_CORNER;
         }
 

@@ -16,24 +16,6 @@ import java.util.Random;
 public class DelaunayTest {
 
     @Test
-    public void singleTest() {
-        Delaunay delaunay = new Delaunay();
-        delaunay.insertPoint(new Point(0.0D, 0.0D));
-        delaunay.insertPoint(new Point(0.0D, 1.0D));
-        delaunay.insertPoint(new Point(1.0D, 0.0D));
-        Sequence edges = delaunay.computeEdges();
-        Assert.assertEquals(3L, (long) edges.getSize());
-        Assert.assertArrayEquals(new Point[]{new Point(0.0D, 1.0D), new Point(1.0D, 0.0D)}, (Point[]) ((Point[]) edges.get(0)));
-        Assert.assertArrayEquals(new Point[]{new Point(0.0D, 0.0D), new Point(0.0D, 1.0D)}, (Point[]) ((Point[]) edges.get(1)));
-        Assert.assertArrayEquals(new Point[]{new Point(0.0D, 0.0D), new Point(1.0D, 0.0D)}, (Point[]) ((Point[]) edges.get(2)));
-        Sequence triangles = delaunay.computeTriangles();
-        Assert.assertEquals(1L, (long) triangles.getSize());
-        Assert.assertArrayEquals(new Point[]{new Point(1.0D, 0.0D), new Point(0.0D, 1.0D), new Point(0.0D, 0.0D)}, (Point[]) ((Point[]) triangles.get(0)));
-        Sequence voronoi = delaunay.computeVoronoi();
-        Assert.assertEquals(3L, (long) voronoi.getSize());
-    }
-
-    @Test
     public void singleTest2() {
         Random random = new Random();
         Delaunay delaunay = new Delaunay();

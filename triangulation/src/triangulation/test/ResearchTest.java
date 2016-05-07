@@ -10,7 +10,7 @@ public class ResearchTest {
         CIRCLE
     }
 
-    static Random random = new Random();
+    private static Random random = new Random();
 
     public static void main(String[] args) throws Exception {
         int [] amountPoints = new int[]{3,5,10,20,50,100,200,500,1000,2000};
@@ -22,7 +22,7 @@ public class ResearchTest {
         }
     }
 
-    static void test(int size, TYPE_TEST type_test) throws Exception {
+    private static void test(int size, TYPE_TEST type_test) throws Exception {
         int amountTest = 1;
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
