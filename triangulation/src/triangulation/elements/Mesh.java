@@ -185,7 +185,6 @@ public class Mesh {
             builder.append("ID" + triangles.getElement(i).id + " : " + (Triangle) triangles.getElement(i).value + "\n");
         }
 
-
         return builder.toString();
     }
 }
