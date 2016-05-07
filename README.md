@@ -71,3 +71,27 @@ Performance for special test:
 
 ========================================
 
+    Class name              |    Input data    |    Description    |    Status
+                            |                  |                   |
+    Triangulation           |    Points ony    |   triangulation   |    DONE
+                            |                  |                   |
+    ------------------------+------------------+-------------------+----------------
+                            |                  |                   |
+    PSLG                    |  Points and      |                   |   TODO
+    (Planar Straight        |  Lines           |                   |
+        Line Graph)         |                  |                   |
+                            |                  |                   |
+    ------------------------+------------------+-------------------+----------------
+                            |                  |                   |
+    TriangulationPSLG       |  Points and      |  triangulation    |   TODO
+                            |  Lines           |                   |
+                            |                  |                   |
+    ------------------------+------------------+-------------------+----------------
+                            |                  |                   |
+    TriangulationCDT        | Points,          |                   |   TODO
+    (Conforming             | Lines,           |                   |
+       Delaunay             | Minimal area     |                   |
+          Triangulation)    | Max. area        |                   |
+                            |                  |                   |
+
+See [Definitions](https://www.cs.cmu.edu/~quake/triangle.defs.html)
