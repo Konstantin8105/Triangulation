@@ -73,6 +73,8 @@ Present algorithm complexity in worst case - O(n^2), average - O(N).
 
 // TODO: Optimization border line founding
 
+![CIRCLE](https://github.com/Konstantin8105/Triangulation/blob/master/triangulation/other/CIRCLE.png)
+
 ![RANDOM](https://github.com/Konstantin8105/Triangulation/blob/master/triangulation/other/RANDOM.png)
 
 ========================================
