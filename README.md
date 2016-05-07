@@ -69,5 +69,8 @@ Performance for special test:
 
 ![CIRCLE](https://github.com/Konstantin8105/Triangulation/blob/master/triangulation/other/CIRCLE.png)
 
+
+![RANDOM](https://github.com/Konstantin8105/Triangulation/blob/master/triangulation/other/RANDOM.png)
+
 ========================================
 
