@@ -1,11 +1,11 @@
-import triangulation.elements.Point;
 import triangulation.Triangulation;
+import triangulation.elements.Point;
 
 import java.util.*;
 
 public class ResearchTest {
 
-    enum TYPE_TEST{
+    enum TYPE_TEST {
         RANDOM,
         CIRCLE
     }
@@ -13,11 +13,11 @@ public class ResearchTest {
     private static Random random = new Random();
 
     public static void main(String[] args) throws Exception {
-        int [] amountPoints = new int[]{3,5,10,20,50,100,200,500,1000};
+        int[] amountPoints = new int[]{1000};//3,5,10,20,50,100,200,500,
         for (int i = 0; i < TYPE_TEST.values().length; i++) {
-            System.out.println("TYPE OF TEST: "+TYPE_TEST.values()[i].toString());
+            System.out.println("TYPE OF TEST: " + TYPE_TEST.values()[i].toString());
             for (int j = 0; j < amountPoints.length; j++) {
-                test(amountPoints[j],TYPE_TEST.values()[i]);
+                test(amountPoints[j], TYPE_TEST.values()[i]);
             }
         }
     }
@@ -29,7 +29,7 @@ public class ResearchTest {
         float averageTime = 0;
         int sizeTriangles = 0;
         List<Point> mav = new ArrayList<>();
-        switch(type_test){
+        switch (type_test) {
             case RANDOM:
                 mav = getRandomPoints(size);
                 break;
@@ -51,28 +51,29 @@ public class ResearchTest {
 
         averageTime /= amountTest;
         System.out.println("Amount points: " + String.format("%6d", size)
-                        + " point. "
-                        + "Time is "
-                        + String.format("%12.2f", averageTime) + " ms. "
-                        + "Triangles is "
-                        + String.format("%6d", sizeTriangles) + " triangles. "
+                + " point. "
+                + "Time is "
+                + String.format("%12.2f", averageTime) + " ms. "
+                + "Triangles is "
+                + String.format("%6d", sizeTriangles) + " triangles. "
         );
     }
 
 
-    private static List<Point> getRandomPoints(int size) {
+    public static List<Point> getRandomPoints(int size) {
         Point[] coordinates = new Point[size];
         for (int j = 0; j < coordinates.length; j++) {
-            coordinates[j] = new Point((random.nextFloat() - 0.5f) * 120, (random.nextFloat() - 0.5f) * 120);
+            coordinates[j] = new Point((random.nextFloat()) * 600, (random.nextFloat()) * 600);
         }
         return Arrays.asList(coordinates);
     }
 
-    private static List<Point> getCirclePoints(int size) {
+    public static List<Point> getCirclePoints(int size) {
         Point[] coordinates = new Point[size];
-        for (int j = 0; j < size; j++) {
-            coordinates[j] = new Point(size * Math.sin(2 * 3.1415 / size * j), size * Math.cos(2 * 3.1415 / size * j));
+        for (int j = 0; j < size - 1; j++) {
+            coordinates[j] = new Point(300 * Math.sin(2 * 3.1415 / size * j) + 300, 300 * Math.cos(2 * 3.1415 / size * j) + 300);
         }
+        coordinates[coordinates.length - 1] = new Point(300, 300);
         return Arrays.asList(coordinates);
     }
 }

@@ -27,6 +27,10 @@ public class Mesh {
         return points;
     }
 
+    public IDable<Line> getLines() {
+        return lines;
+    }
+
     public void deleteLine(int id) {
         lines.remove(id);
     }
