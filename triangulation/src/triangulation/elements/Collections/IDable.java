@@ -56,6 +56,10 @@ public class IDable<T> {
     }
 
     public Element<T> getById(int id) {
+        if(0 <= id && id < list.size()){
+            if(list.get(id).id == id)
+                return list.get(id);
+        }
         Element search = new Element(id);
         int index = Collections.binarySearch(list, search, comparatorId);
         return list.get(index);

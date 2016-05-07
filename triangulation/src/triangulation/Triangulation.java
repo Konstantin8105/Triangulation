@@ -11,19 +11,13 @@ import triangulation.geometry.GeometryPointLine;
 import triangulation.geometry.GeometryPointTriangle;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Triangulation {
     private Mesh mesh = new Mesh();
     private BorderBox bBox = new BorderBox();
 
     public Triangulation(List<Point> points) throws Exception {
-        // Delete same points
-        Set<Point> set = new HashSet<>(points);
-        points = new ArrayList<>(set);
-
         mesh.addPoint(points);
 
         List<triangulation.elements.Collections.IDable.Element> pointArray = mesh.getPoints().getListElements();

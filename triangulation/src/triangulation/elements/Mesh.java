@@ -13,6 +13,11 @@ public class Mesh {
 
     public void addPoint(List<Point> point) {
         points.add(point);
+        deleteSamePoints();
+    }
+
+    private void deleteSamePoints() {
+        // TODO: 5/7/16
     }
 
     public int addLine(Line line) {
