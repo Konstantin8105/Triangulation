@@ -67,10 +67,13 @@ Performance for special test:
     Amount points:    500 point. Time is      1902.00 ms. Triangles is    498 triangles.
     Amount points:   1000 point. Time is     15628.00 ms. Triangles is    998 triangles.
 
+
 ![CIRCLE](https://github.com/Konstantin8105/Triangulation/blob/master/triangulation/other/CIRCLE.png)
 
 
+
 ![RANDOM](https://github.com/Konstantin8105/Triangulation/blob/master/triangulation/other/RANDOM.png)
+
 
 ========================================
 
