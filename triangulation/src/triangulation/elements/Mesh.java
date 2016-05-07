@@ -15,11 +15,11 @@ public class Mesh {
         points.add(point);
     }
 
-    public int addLine(Line line){
+    public int addLine(Line line) {
         return lines.add(line);
     }
 
-    public int addTriangle(Triangle triangle){
+    public int addTriangle(Triangle triangle) {
         return triangles.add(triangle);
     }
 
@@ -58,15 +58,15 @@ public class Mesh {
         return points.getById(idPoint).value;
     }
 
-    public List<IDable.Element> getLines(Point point){
+    public List<IDable.Element> getLines(Point point) {
         return lines.getListElements();
     }
 
-    public List<triangulation.elements.Collections.IDable.Element> getTriangles(Point point){
+    public List<triangulation.elements.Collections.IDable.Element> getTriangles(Point point) {
         return triangles.getListElements();
     }
 
-    public List<triangulation.elements.Collections.IDable.Element> getTriangles(){
+    public List<triangulation.elements.Collections.IDable.Element> getTriangles() {
         return triangles.getListElements();
     }
 
@@ -150,5 +150,42 @@ public class Mesh {
         return listLines;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Mesh :\n");
 
+        for (int i = 0; i < 20; i++) {
+            builder.append("-");
+        }
+        builder.append("\n");
+
+        builder.append("Points :\n");
+        for (int i = 0; i < points.size(); i++) {
+            builder.append("ID" + points.getElement(i).id + " : " + (Point) points.getElement(i).value);
+        }
+
+        for (int i = 0; i < 20; i++) {
+            builder.append("-");
+        }
+        builder.append("\n");
+
+        builder.append("Line :\n");
+        for (int i = 0; i < lines.size(); i++) {
+            builder.append("ID" + lines.getElement(i).id + " : " + (Line) lines.getElement(i).value + "\n");
+        }
+
+        for (int i = 0; i < 20; i++) {
+            builder.append("-");
+        }
+        builder.append("\n");
+
+        builder.append("Triangles :\n");
+        for (int i = 0; i < triangles.size(); i++) {
+            builder.append("ID" + triangles.getElement(i).id + " : " + (Triangle) triangles.getElement(i).value + "\n");
+        }
+
+
+        return builder.toString();
+    }
 }
