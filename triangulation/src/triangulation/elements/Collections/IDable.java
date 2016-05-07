@@ -1,6 +1,9 @@
 package triangulation.elements.Collections;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class IDable<T> {
 
@@ -20,12 +23,10 @@ public class IDable<T> {
 
     private List<triangulation.elements.Collections.IDable.Element> list = new ArrayList<>();
 
-    private static class GeneratorId {
-        private static int position = 0;
+    private int generatorID = 0;
 
-        public static int getID() {
-            return position++;
-        }
+    private int getID() {
+        return generatorID++;
     }
 
     private final Comparator<Element> comparatorId = new Comparator<Element>() {
@@ -36,7 +37,7 @@ public class IDable<T> {
     };
 
     public int add(T value) {
-        int id = GeneratorId.getID();
+        int id = getID();
         Element element = new Element(id, value);
         list.add(element);
         return id;
@@ -44,7 +45,7 @@ public class IDable<T> {
 
     public void add(List<T> list) {
         for (T aList : list) {
-            Element element = new Element(GeneratorId.getID(), aList);
+            Element element = new Element(getID(), aList);
             this.list.add(element);
         }
     }
@@ -56,8 +57,8 @@ public class IDable<T> {
     }
 
     public Element<T> getById(int id) {
-        if(0 <= id && id < list.size()){
-            if(list.get(id).id == id)
+        if (0 <= id && id < list.size()) {
+            if (list.get(id).id == id)
                 return list.get(id);
         }
         Element search = new Element(id);
