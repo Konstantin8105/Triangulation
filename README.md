@@ -67,6 +67,10 @@ Performance for special test:
     Amount points:    500 point. Time is       636.00 ms. Triangles is    499 triangles.
     Amount points:   1000 point. Time is      4515.50 ms. Triangles is    999 triangles.
 
+Present algorithm complexity in worst case - O(n^2), average - O(N).
+
+// TODO: Dynamic caching of line and triangles maps for change algorithm complexity in worst case to O(N*LOG(N))
+
 ![RANDOM](https://github.com/Konstantin8105/Triangulation/blob/master/triangulation/other/RANDOM.png)
 
 ========================================
@@ -77,7 +81,7 @@ Performance for special test:
                             |                  |                   |                |
     ------------------------+------------------+-------------------+----------------+
                             |                  |                   |                |
-    Triangulation           |    Points ony    |   triangulation   |    DONE        |
+    Triangulation           |    Points ony    |   triangulation   |   DONE         |
                             |                  |                   |                |
     ------------------------+------------------+-------------------+----------------+
                             |                  |                   |                |
