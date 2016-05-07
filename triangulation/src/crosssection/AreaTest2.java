@@ -18,7 +18,7 @@ public class AreaTest2 {
                 new Point(1.0D, 1.0D)
         };
         Triangulation triangulation = new Triangulation(Arrays.asList(points));
-        Assert.assertEquals(Area.area(triangulation.getMesh()), 0.5, 0.000001);
+        Assert.assertEquals(Area.area(triangulation.getMesh()), 0.5, Precisions.epsilon());
     }
 
     @Test
@@ -30,7 +30,7 @@ public class AreaTest2 {
                 new Point(1.0D, 1.0D)
         };
         Triangulation triangulation = new Triangulation(Arrays.asList(points));
-        Assert.assertEquals(Area.area(triangulation.getMesh()), 1.0, 0.000001);
+        Assert.assertEquals(Area.area(triangulation.getMesh()), 1.0, Precisions.epsilon());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class AreaTest2 {
                 new Point(1.0D, 1.0D)
         };
         Triangulation triangulation = new Triangulation(Arrays.asList(points));
-        Assert.assertEquals(Area.area(triangulation.getMesh()), 1.0, 0.000001);
+        Assert.assertEquals(Area.area(triangulation.getMesh()), 1.0, Precisions.epsilon());
     }
 
     @Test
