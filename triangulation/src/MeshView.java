@@ -9,11 +9,14 @@ import java.util.List;
 
 public class MeshView extends JFrame {
 
+    int WINDOWS_SIZE = 700;
+
     class LineDraw {
         public triangulation.elements.Point p[] = new triangulation.elements.Point[2];
     }
 
     public MeshView(Mesh mesh) {
+
         List<LineDraw> lines = new ArrayList<>();
         for (int i = 0; i < mesh.getLines().size(); i++) {
             LineDraw line = new LineDraw();
@@ -52,7 +55,7 @@ public class MeshView extends JFrame {
         };
         setContentPane(panel);
 
-        this.setSize(new Dimension(800, 700));
+        this.setSize(new Dimension(WINDOWS_SIZE, WINDOWS_SIZE));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
     }

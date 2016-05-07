@@ -17,12 +17,14 @@ public class BorderBox {
     boolean haveFirstPoint = false;
 
     /**
-     * @param point
+     * Box change the size by X or Y and input point will be inside in rectangle or on border of rectangle
+     * @param point input data
      * @see Point
+     * @exception if input point is null
      */
-    public void addPoint(Point point) throws Exception {
-        if(point == null)
-            throw new Exception("Point is null in BorderBox");
+    public void addPoint(Point point) throws NullPointerException {
+        if (point == null)
+            throw new NullPointerException("Point is null in BorderBox");
         if (!haveFirstPoint) {
             x_min = x_max = point.getX();
             y_min = y_max = point.getY();
@@ -36,11 +38,17 @@ public class BorderBox {
     }
 
     /**
-     * @param point
+     * Checking input point - is inside Box?
+     * @param point input data
      * @return true - if point inside or on border of the box, and false - if point outside the box or you don`t add any points.
      * @see Point
+     * @exception if input point is null or don`t add any point in box
      */
-    public boolean isInBox(Point point) {
+    public boolean isInBox(Point point) throws NullPointerException {
+        if (point == null)
+            throw new NullPointerException("Point is null in BorderBox");
+        if (!haveFirstPoint)
+            throw new NullPointerException("You don`t input the point");
         if (haveFirstPoint) {
             if (x_min <= point.getX() && point.getX() <= x_max)
                 if (y_min <= point.getY() && point.getY() <= y_max)
