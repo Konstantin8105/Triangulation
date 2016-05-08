@@ -1,9 +1,12 @@
 package triangulation.elements;
 
 import triangulation.elements.Collections.IDable;
+import triangulation.geometry.GeometryPointLine;
+import triangulation.geometry.GeometryPointTriangle;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class Mesh {
@@ -36,6 +39,10 @@ public class Mesh {
         return lines;
     }
 
+    public IDable<Triangle> getTriangulate() {
+        return triangles;
+    }
+
     public void deleteLine(int id) {
         lines.remove(id);
     }
@@ -47,11 +54,14 @@ public class Mesh {
     public IDable.Element[] getTrianglesByLine(Line line) throws Exception {
         IDable.Element[] tri = new IDable.Element[2];
         int presentPosition = 0;
-        for (int i = 0; i < triangles.size(); i++) {
-            Line[] lines = triangles.getByIndex(i).getLines();
+
+        Iterator<IDable<Triangle>.Element<Triangle>> iterator = triangles.iterator();
+        while (iterator.hasNext()) {
+            IDable<Triangle>.Element<Triangle> triangle = iterator.next();
+            Line[] lines = triangle.value.getLines();
             for (int j = 0; j < lines.length; j++) {
                 if (line.equals(lines[j])) {
-                    tri[presentPosition++] = triangles.getElement(i);
+                    tri[presentPosition++] = triangle;
                     if (presentPosition == 2) {
                         return tri;
                     }
@@ -63,35 +73,19 @@ public class Mesh {
         return new IDable.Element[]{tri[0]};
     }
 
-    public Point getPoints(int idPoint) {
-        return points.getById(idPoint).value;
-    }
-
-    public List<IDable.Element> getLines(Point point) {
-        return lines.getListElements();
-    }
-
-    public List<triangulation.elements.Collections.IDable.Element> getTriangles(Point point) {
-        return triangles.getListElements();
-    }
-
-    public List<triangulation.elements.Collections.IDable.Element> getTriangles() {
-        return triangles.getListElements();
-    }
-
     public Point[] getPointsByTriangle(Triangle triangle) {
         Point[] points = new Point[3];
         for (int i = 0; i < triangle.getPointsId().size(); i++) {
-            points[i] = getPoints(triangle.getPointsId().get(i));
+            points[i] = this.points.getById(triangle.getPointsId().get(i)).value;
         }
         return points;
     }
 
     public List<Line> getBorderLine() throws Exception {
         List<Line> borderLines = new ArrayList<>();
-        for (int i = 0; i < lines.size(); i++) {
-            if (getTrianglesByLine(lines.getElement(i).value).length == 1) {
-                borderLines.add(lines.getByIndex(i));
+        for (IDable<Line>.Element<Line> line : lines) {
+            if (getTrianglesByLine(line.value).length == 1) {
+                borderLines.add(line.value);
             }
         }
         if (borderLines.size() == 0)
@@ -170,8 +164,8 @@ public class Mesh {
         builder.append("\n");
 
         builder.append("Points :\n");
-        for (int i = 0; i < points.size(); i++) {
-            builder.append("ID" + points.getElement(i).id + " : " + (Point) points.getElement(i).value);
+        for (IDable<Point>.Element<Point> point : points) {
+            builder.append("ID").append(point.id).append(" : ").append(point.value);
         }
 
         for (int i = 0; i < 20; i++) {
@@ -180,8 +174,8 @@ public class Mesh {
         builder.append("\n");
 
         builder.append("Line :\n");
-        for (int i = 0; i < lines.size(); i++) {
-            builder.append("ID" + lines.getElement(i).id + " : " + (Line) lines.getElement(i).value + "\n");
+        for (IDable<Line>.Element<Line> line : lines) {
+            builder.append("ID").append(line.id).append(" : ").append(line.value).append("\n");
         }
 
         for (int i = 0; i < 20; i++) {
@@ -190,10 +184,54 @@ public class Mesh {
         builder.append("\n");
 
         builder.append("Triangles :\n");
-        for (int i = 0; i < triangles.size(); i++) {
-            builder.append("ID" + triangles.getElement(i).id + " : " + (Triangle) triangles.getElement(i).value + "\n");
+        for (IDable<Triangle>.Element<Triangle> triangle : triangles) {
+            builder.append("ID").append(triangle.id).append(" : ").append(triangle.value).append("\n");
         }
 
         return builder.toString();
+    }
+
+    public IDable.Element getPointOnLine(IDable<Point>.Element<Point> nextPoint) {
+        if (lines == null)
+            return null;
+        if (lines.isEmpty())
+            return null;
+
+        Iterator<IDable<Line>.Element<Line>> iterator = lines.iterator();
+        while (iterator.hasNext()) {
+            IDable<Line>.Element<Line> line = iterator.next();
+            Point pointA = this.points.getById(((Line) line.value).getIdPointA()).value;
+            Point pointB = this.points.getById(((Line) line.value).getIdPointB()).value;
+            if (GeometryPointLine.statePointOnLine(((Point) nextPoint.value).getX(), ((Point) nextPoint.value).getY(),
+                    pointA, pointB)
+                    == GeometryPointLine.PointLineState.POINT_ON_LINE) {
+                return line;
+            }
+        }
+
+        return null;
+    }
+
+    public IDable.Element getPointInTriangle(IDable<Point>.Element<Point> nextPoint) {
+        if (triangles == null)
+            return null;
+        if (triangles.isEmpty())
+            return null;
+
+        Iterator<IDable<Triangle>.Element<Triangle>> iterator = triangles.iterator();
+        while (iterator.hasNext()) {
+            IDable<Triangle>.Element<Triangle> triangle = iterator.next();
+            Point[] points = getPointsByTriangle((Triangle) triangle.value);
+            if (GeometryPointTriangle.isPointInTriangle((Point) nextPoint.value, points) ==
+                    GeometryPointTriangle.PointTriangleState.POINT_INSIDE) {
+                return triangle;
+            }
+        }
+
+        return null;
+    }
+
+    public Point getPoints(int idPoint) {
+        return points.getById(idPoint).value;
     }
 }

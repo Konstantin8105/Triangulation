@@ -1,11 +1,8 @@
 package triangulation.elements.Collections;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-public class IDable<T> {
+public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
 
     public class Element<T> {
         public int id;
@@ -21,7 +18,7 @@ public class IDable<T> {
         }
     }
 
-    private List<triangulation.elements.Collections.IDable.Element> list = new ArrayList<>();
+    private ArrayList<triangulation.elements.Collections.IDable<T>.Element<T>> list = new ArrayList<>();
 
     private int generatorID = 0;
 
@@ -44,38 +41,42 @@ public class IDable<T> {
     }
 
     public void add(List<T> list) {
+        this.list.ensureCapacity(this.list.size()+list.size());
         for (T aList : list) {
             Element element = new Element(getID(), aList);
             this.list.add(element);
         }
     }
 
-    public void remove(int id) {
+    private int convertIDtoINDEX(int id) {
+        if (0 <= id && id < list.size()) {
+            if (list.get(id).id == id)
+                return id;
+        }
         Element search = new Element(id);
         int index = Collections.binarySearch(list, search, comparatorId);
+        return index;
+    }
+
+    public void remove(int id) {
+        int index = convertIDtoINDEX(id);
         list.remove(index);
     }
 
     public Element<T> getById(int id) {
-        if (0 <= id && id < list.size()) {
-            if (list.get(id).id == id)
-                return list.get(id);
-        }
-        Element search = new Element(id);
-        int index = Collections.binarySearch(list, search, comparatorId);
+        int index = convertIDtoINDEX(id);
         return list.get(index);
     }
 
-    public T getByIndex(int index) {
-        return (T) list.get(index).value;
+    @Override
+    public Iterator<IDable<T>.Element<T>> iterator() {
+        return list.iterator();
     }
 
-    public Element<T> getElement(int index) {
-        return list.get(index);
-    }
-
-    public List<triangulation.elements.Collections.IDable.Element> getListElements() {
-        return list;
+    public boolean isEmpty() {
+        if(size() == 0)
+            return true;
+        return false;
     }
 
     public int size() {

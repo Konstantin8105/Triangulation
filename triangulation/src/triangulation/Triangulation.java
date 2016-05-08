@@ -11,6 +11,7 @@ import triangulation.geometry.GeometryPointLine;
 import triangulation.geometry.GeometryPointTriangle;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Triangulation {
@@ -20,9 +21,9 @@ public class Triangulation {
     public Triangulation(List<Point> points) throws Exception {
         mesh.addPoint(points);
 
-        List<triangulation.elements.Collections.IDable.Element> pointArray = mesh.getPoints().getListElements();
-        for (IDable.Element aPointArray : pointArray) {
-            addNextPoint(aPointArray);
+        Iterator<IDable<Point>.Element<Point>> iterator = mesh.getPoints().iterator();
+        while(iterator.hasNext()){
+            addNextPoint(iterator.next());
         }
     }
 
@@ -43,14 +44,14 @@ public class Triangulation {
 
         if (bBox.isInBox((Point) nextPoint.value)) {
 
-            IDable.Element line = getPointOnLine(nextPoint);
+            IDable.Element line = mesh.getPointOnLine((IDable<Point>.Element<Point>)nextPoint);
             if (line != null) {
                 addNextPointOnLine(nextPoint, line);
                 bBox.addPoint((Point) nextPoint.value);
                 return;
             }
 
-            IDable.Element triangle = getPointInTriangle(nextPoint);
+            IDable.Element triangle = mesh.getPointInTriangle((IDable<Point>.Element<Point>)nextPoint);
             if (triangle != null) {
                 addNextPointInTriangle(nextPoint, triangle);
                 bBox.addPoint((Point) nextPoint.value);
@@ -148,42 +149,6 @@ public class Triangulation {
                     line.getIdPointA(),
                     line.getIdPointB()));
         }
-    }
-
-    private IDable.Element getPointOnLine(IDable.Element nextPoint) throws Exception {
-        List<IDable.Element> listLines = mesh.getLines((Point) nextPoint.value);
-        if (listLines == null)
-            return null;
-        if (listLines.size() == 0)
-            return null;
-
-        for (IDable.Element line : listLines) {
-            Point pointA = mesh.getPoints(((Line) line.value).getIdPointA());
-            Point pointB = mesh.getPoints(((Line) line.value).getIdPointB());
-            if (GeometryPointLine.statePointOnLine(((Point) nextPoint.value).getX(), ((Point) nextPoint.value).getY(),
-                    pointA, pointB)
-                    == GeometryPointLine.PointLineState.POINT_ON_LINE) {
-                return line;
-            }
-        }
-        return null;
-    }
-
-    private IDable.Element getPointInTriangle(IDable.Element nextPoint) throws Exception {
-        List<IDable.Element> listTriangles = mesh.getTriangles((Point) nextPoint.value);
-        if (listTriangles == null)
-            return null;
-        if (listTriangles.size() == 0)
-            return null;
-
-        for (IDable.Element triangle : listTriangles) {
-            Point[] points = mesh.getPointsByTriangle((Triangle) triangle.value);
-            if (GeometryPointTriangle.isPointInTriangle((Point) nextPoint.value, points) ==
-                    GeometryPointTriangle.PointTriangleState.POINT_INSIDE) {
-                return triangle;
-            }
-        }
-        return null;
     }
 
     private List<Line> getBorderLinesForNewConvex(Point nextPoint) throws Exception {

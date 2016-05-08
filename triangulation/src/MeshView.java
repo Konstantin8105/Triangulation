@@ -1,10 +1,12 @@
 import triangulation.Triangulation;
+import triangulation.elements.Collections.IDable;
 import triangulation.elements.Mesh;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class MeshView extends JFrame {
@@ -18,11 +20,13 @@ public class MeshView extends JFrame {
     public MeshView(Mesh mesh) {
 
         List<LineDraw> lines = new ArrayList<>();
-        for (int i = 0; i < mesh.getLines().size(); i++) {
-            LineDraw line = new LineDraw();
-            line.p[0] = new triangulation.elements.Point(mesh.getPoints(mesh.getLines().getByIndex(i).getIdPointA()));
-            line.p[1] = new triangulation.elements.Point(mesh.getPoints(mesh.getLines().getByIndex(i).getIdPointB()));
-            lines.add(line);
+        Iterator<IDable<triangulation.elements.Line>.Element<triangulation.elements.Line>> iterator = mesh.getLines().iterator();
+        while(iterator.hasNext()){
+            IDable<triangulation.elements.Line>.Element<triangulation.elements.Line> line = iterator.next();
+            LineDraw lineDraw = new LineDraw();
+            lineDraw.p[0] = new triangulation.elements.Point(mesh.getPoints(line.value.getIdPointA()));
+            lineDraw.p[1] = new triangulation.elements.Point(mesh.getPoints(line.value.getIdPointB()));
+            lines.add(lineDraw);
         }
 
         JPanel panel = new JPanel() {
