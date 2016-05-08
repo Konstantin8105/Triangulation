@@ -4,6 +4,7 @@ import triangulation.elements.Line;
 import triangulation.elements.Mesh;
 import triangulation.elements.Point;
 import triangulation.geometry.Geometry;
+import triangulation.geometry.GeometryLineLine;
 
 import java.util.*;
 
@@ -43,30 +44,32 @@ public class BorderLine {
 
         // то же самое в обратном направлениие
 
+        // сначало реализовать последовательный алгоритм, а после можно и галопирование попоробовать
 
-//        while (){
-//            for (int j = 0; j < loop.size(); j++) {
-//                if (i != j) {
-//                    GeometryLineLine.IntersectState state = GeometryLineLine.stateLineLine(
-//                            nextPoint,
-//                            pointsMiddleOfLine[i],
-//                            pointsOfLine[j],
-//                            pointsOfLine[j + 1]);
-//                    if (state == GeometryLineLine.IntersectState.INTERSECT ||
-//                            state == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE ||
-//                            state == GeometryLineLine.IntersectState.LINE_IN_LINE) {
-//                        borderSegment.add(loop.get(i));
-//                        j = loop.size();
-//                    }
-//                }
-//            }
-//        }
-//
-//        for (int i = indexLinesDelete.size() - 1; i >= 0; i--) {
-//            borderLine.remove((int) indexLinesDelete.get(i));
-//        }
-//
-//        return Mesh.createSequence(borderLine);
+
+        while (){
+            for (int j = 0; j < loop.size(); j++) {
+                if (i != j) {
+                    GeometryLineLine.IntersectState state = GeometryLineLine.stateLineLine(
+                            nextPoint,
+                            pointsMiddleOfLine[i],
+                            pointsOfLine[j],
+                            pointsOfLine[j + 1]);
+                    if (state == GeometryLineLine.IntersectState.INTERSECT ||
+                            state == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE ||
+                            state == GeometryLineLine.IntersectState.LINE_IN_LINE) {
+                        borderSegment.add(loop.get(i));
+                        j = loop.size();
+                    }
+                }
+            }
+        }
+
+        for (int i = indexLinesDelete.size() - 1; i >= 0; i--) {
+            borderLine.remove((int) indexLinesDelete.get(i));
+        }
+
+        return Mesh.createSequence(borderLine);
         return null;
     }
 
