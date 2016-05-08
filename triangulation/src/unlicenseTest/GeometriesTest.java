@@ -1,4 +1,4 @@
-package UnlicenseTest;
+package unlicenseTest;
 
 import org.junit.Assert;
 import org.junit.Test;

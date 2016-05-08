@@ -1,4 +1,4 @@
-package UnlicenseTest;
+package unlicenseTest;
 
 //------------------------------------
 // Test created for check Delaunay triangulation
