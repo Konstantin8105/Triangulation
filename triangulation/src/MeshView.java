@@ -1,17 +1,16 @@
 import triangulation.Triangulation;
 import triangulation.elements.Collections.IDable;
+import triangulation.elements.Line;
 import triangulation.elements.Mesh;
+import triangulation.elements.Point;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class MeshView extends JFrame {
-
-    int WINDOWS_SIZE = 700;
 
     class LineDraw {
         public triangulation.elements.Point p[] = new triangulation.elements.Point[2];
@@ -20,12 +19,10 @@ public class MeshView extends JFrame {
     public MeshView(Mesh mesh) {
 
         List<LineDraw> lines = new ArrayList<>();
-        Iterator<IDable<triangulation.elements.Line>.Element<triangulation.elements.Line>> iterator = mesh.getLines().iterator();
-        while(iterator.hasNext()){
-            IDable<triangulation.elements.Line>.Element<triangulation.elements.Line> line = iterator.next();
+        for (IDable<Line>.Element<Line> line : mesh.getLines()) {
             LineDraw lineDraw = new LineDraw();
             lineDraw.p[0] = new triangulation.elements.Point(mesh.getPoints(line.value.getIdPointA()));
-            lineDraw.p[1] = new triangulation.elements.Point(mesh.getPoints(line.value.getIdPointB()));
+            lineDraw.p[1] = new Point(mesh.getPoints(line.value.getIdPointB()));
             lines.add(lineDraw);
         }
 
@@ -59,6 +56,7 @@ public class MeshView extends JFrame {
         };
         setContentPane(panel);
 
+        int WINDOWS_SIZE = 700;
         this.setSize(new Dimension(WINDOWS_SIZE, WINDOWS_SIZE));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);

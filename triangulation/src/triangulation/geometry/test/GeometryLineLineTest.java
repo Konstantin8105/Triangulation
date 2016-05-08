@@ -150,11 +150,6 @@ public class GeometryLineLineTest {
 
     @Test
     public void testIntersect5() throws Exception {
-//        middle point = Point{ x = -0.50, y = 0.50}
-//        nextpoint    = Point{ x = 1.00, y = -1.00}
-//        A = Point{ x = 0.00, y = 0.00}
-//        B = Point{ x = 1.00, y = 1.00}
-//        RESULT = NOT_INTERSECT
         Point[] c = new Point[4];
         c[0] = new Point(-0.5f, 0.5f);
         c[1] = new Point(1f, -1f);
@@ -178,16 +173,6 @@ public class GeometryLineLineTest {
 
     @Test
     public void testIntersect7() throws Exception {
-//        middle point A = 1
-//        middle point B = 2
-//        middle point = Point{ x = 0.00, y = 25.00}
-//        id_nextpoint = 5
-//        nextpoint    = Point{ x = -0.00, y = -50.00}
-//        A = 3
-//        A = Point{ x = 43.30, y = 25.00}
-//        B = 4
-//        B = Point{ x = 43.30, y = -25.00}
-//        RESULT = NOT_INTERSECT
         Point[] c = new Point[4];
         c[0] = new Point(0f, 25f);
         c[1] = new Point(-0f, -50f);
@@ -200,16 +185,6 @@ public class GeometryLineLineTest {
 
     @Test
     public void testIntersect8() throws Exception {
-//        middle point A = 3
-//        middle point B = 1
-//        middle point = Point{ x = 1.804598, y = 3.072663}
-//        id_nextpoint = 4
-//        nextpoint    = Point{ x = 3.000000, y = 0.000000}
-//        A = 2
-//        A = Point{ x = 3.472594, y = 0.222331}
-//        B = 3
-//        B = Point{ x = 1.998920, y = 2.706861}
-//        RESULT = NOT_INTERSECT
         Point[] c = new Point[4];
         c[0] = new Point(1.804598f, 3.072663f);
         c[1] = new Point(3.000000f, 0f);

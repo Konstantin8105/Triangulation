@@ -4,11 +4,11 @@ import java.util.*;
 
 public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
 
-    public class Element<T> {
-        public int id;
-        public T value;
+    public class Element<V> {
+        final public int id;
+        public V value;
 
-        public Element(int id, T value) {
+        public Element(int id, V value) {
             this.id = id;
             this.value = value;
         }
@@ -35,7 +35,7 @@ public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
 
     public int add(T value) {
         int id = getID();
-        Element element = new Element(id, value);
+        Element<T> element = new Element<>(id, value);
         list.add(element);
         return id;
     }
@@ -43,7 +43,7 @@ public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
     public void add(List<T> list) {
         this.list.ensureCapacity(this.list.size()+list.size());
         for (T aList : list) {
-            Element element = new Element(getID(), aList);
+            Element<T> element = new Element<>(getID(), aList);
             this.list.add(element);
         }
     }
@@ -54,8 +54,7 @@ public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
                 return id;
         }
         Element search = new Element(id);
-        int index = Collections.binarySearch(list, search, comparatorId);
-        return index;
+        return Collections.binarySearch(list, search, comparatorId);
     }
 
     public void remove(int id) {
@@ -64,8 +63,7 @@ public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
     }
 
     public Element<T> getById(int id) {
-        int index = convertIDtoINDEX(id);
-        return list.get(index);
+        return list.get(convertIDtoINDEX(id));
     }
 
     @Override
@@ -74,9 +72,7 @@ public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
     }
 
     public boolean isEmpty() {
-        if(size() == 0)
-            return true;
-        return false;
+        return size() == 0;
     }
 
     public int size() {

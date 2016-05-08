@@ -80,7 +80,7 @@ public class DelaunayTest {
     }
 
     //------------------------------------
-    // Uncorrect for small triangle
+    // Incorrectly for small triangle
     // Output: shortDistance = 0.001: Size of triangles = 0 ;
     // Size can not be zero
     //------------------------------------
@@ -100,7 +100,7 @@ public class DelaunayTest {
     }
 
     //------------------------------------
-    // Uncorrect for small triangle
+    // Incorrectly for small triangle
     // Output: shortDistance = 0.001: Size of triangles = 0 ;
     // Size can not be zero
     //------------------------------------

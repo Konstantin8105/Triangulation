@@ -121,9 +121,7 @@ public class SequenceTest {
 
     private void print(String str, List<Line> lines) {
         System.out.println(str);
-        for (Line line : lines) {
-            System.out.println(line);
-        }
+        lines.forEach(System.out::println);
     }
 
     private boolean check(List<Line> listLines) {

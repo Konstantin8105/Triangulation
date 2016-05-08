@@ -7,11 +7,8 @@ import triangulation.elements.Point;
 import triangulation.elements.Triangle;
 import triangulation.geometry.GeometryCoordinate;
 import triangulation.geometry.GeometryLineLine;
-import triangulation.geometry.GeometryPointLine;
-import triangulation.geometry.GeometryPointTriangle;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Triangulation {
@@ -21,9 +18,8 @@ public class Triangulation {
     public Triangulation(List<Point> points) throws Exception {
         mesh.addPoint(points);
 
-        Iterator<IDable<Point>.Element<Point>> iterator = mesh.getPoints().iterator();
-        while(iterator.hasNext()){
-            addNextPoint(iterator.next());
+        for (IDable<Point>.Element<Point> pointElement : mesh.getPoints()) {
+            addNextPoint(pointElement);
         }
     }
 
@@ -44,14 +40,14 @@ public class Triangulation {
 
         if (bBox.isInBox((Point) nextPoint.value)) {
 
-            IDable.Element line = mesh.getPointOnLine((IDable<Point>.Element<Point>)nextPoint);
+            IDable<Line>.Element<Line> line = mesh.getPointOnLine((IDable<Point>.Element<Point>) nextPoint);
             if (line != null) {
                 addNextPointOnLine(nextPoint, line);
                 bBox.addPoint((Point) nextPoint.value);
                 return;
             }
 
-            IDable.Element triangle = mesh.getPointInTriangle((IDable<Point>.Element<Point>)nextPoint);
+            IDable<Triangle>.Element<Triangle> triangle = mesh.getPointInTriangle((IDable<Point>.Element<Point>) nextPoint);
             if (triangle != null) {
                 addNextPointInTriangle(nextPoint, triangle);
                 bBox.addPoint((Point) nextPoint.value);
@@ -99,15 +95,22 @@ public class Triangulation {
     private void addNextPointOnLine(IDable.Element nextPoint, IDable.Element line) throws Exception {
 
         IDable.Element[] triangles = mesh.getTrianglesByLine((Line) line.value);
-        if (triangles.length > 2 || triangles.length < 1)
+        if (triangles.length > 2 || triangles.length < 1) {
+            StringBuilder str = new StringBuilder();
+            for(IDable.Element triangle: triangles) {
+                str.append("ID").append(triangle.id);
+                str.append(" : ");
+                str.append(triangle.value);
+            }
             throw new Exception(
-                    "Cannot more 2 triangles for 1 line. triangles" + triangles
+                    "Cannot more 2 triangles for 1 line. triangles" + str
                             + " . line = " + line.toString());
+        }
 
         mesh.addLine(new Line(nextPoint.id, ((Line) line.value).getIdPointA()));
         mesh.addLine(new Line(nextPoint.id, ((Line) line.value).getIdPointB()));
-        for (int i = 0; i < triangles.length; i++) {
-            Triangle triangle = ((Triangle) triangles[i].value);
+        for (IDable.Element triangle1 : triangles) {
+            Triangle triangle = ((Triangle) triangle1.value);
             if (triangle.getIdPoint1() != ((Line) line.value).getIdPointA() && triangle.getIdPoint1() != ((Line) line.value).getIdPointB()) {
                 mesh.addTriangle(new Triangle(nextPoint.id, triangle.getIdPoint1(), ((Line) line.value).getIdPointA()));
                 mesh.addTriangle(new Triangle(nextPoint.id, triangle.getIdPoint1(), ((Line) line.value).getIdPointB()));
@@ -121,7 +124,7 @@ public class Triangulation {
                 mesh.addTriangle(new Triangle(nextPoint.id, triangle.getIdPoint3(), ((Line) line.value).getIdPointB()));
                 mesh.addLine(new Line(nextPoint.id, triangle.getIdPoint3()));
             }
-            mesh.deleteTriangle(triangles[i].id);
+            mesh.deleteTriangle(triangle1.id);
         }
         mesh.deleteLine(line.id);
     }

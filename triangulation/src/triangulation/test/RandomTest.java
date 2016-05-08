@@ -17,8 +17,8 @@ public class RandomTest {
             }
             System.out.println("\n*********");
             System.out.println("RandomTest #" + i);
-            for (int j = 0; j < list.size(); j++) {
-                System.out.println(String.format("\"%+5.8f\"", list.get(j).getX()) + "," + String.format("\"%+5.8f\",", list.get(j).getY()));
+            for (Point aList : list) {
+                System.out.println(String.format("\"%+5.8f\"", aList.getX()) + "," + String.format("\"%+5.8f\",", aList.getY()));
             }
             Triangulation triangulation = new Triangulation(list);
             System.out.println("Amount of triangles = " + triangulation.getMesh().sizeTriangles());

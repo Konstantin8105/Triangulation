@@ -30,8 +30,8 @@ public class BorderBoxTest {
                 new Point(0.0D, 1.0D)
         };
         BorderBox borderBox = new BorderBox();
-        for (int i = 0; i < points.length; i++) {
-            borderBox.addPoint(points[i]);
+        for (Point point : points) {
+            borderBox.addPoint(point);
         }
         Assert.assertTrue(borderBox.isInBox(new Point(0.5D, 0.5D)));
         Assert.assertTrue(borderBox.isInBox(new Point(1.0D, 1.0D)));

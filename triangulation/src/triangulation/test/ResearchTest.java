@@ -16,8 +16,8 @@ public class ResearchTest {
         int[] amountPoints = new int[]{3,5,10,20,50,100,200,500,1000};
         for (int i = 0; i < TYPE_TEST.values().length; i++) {
             System.out.println("TYPE OF TEST: " + TYPE_TEST.values()[i].toString());
-            for (int j = 0; j < amountPoints.length; j++) {
-                test(amountPoints[j], TYPE_TEST.values()[i]);
+            for (int amountPoint : amountPoints) {
+                test(amountPoint, TYPE_TEST.values()[i]);
             }
         }
     }

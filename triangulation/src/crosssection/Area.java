@@ -6,9 +6,6 @@ import triangulation.elements.Triangle;
 import un.api.collection.Sequence;
 import un.impl.geometry.Point;
 
-import java.util.Iterator;
-import java.util.List;
-
 public class Area {
     public static double area(Sequence triangles) {
         double area = 0;
@@ -21,13 +18,12 @@ public class Area {
         return area;
     }
 
-    public static double area(Mesh mesh) throws Exception {
+    public static double area(Mesh mesh) {
         double area = 0;
         if (mesh.sizeTriangles() < 1)
             return -1;
-        Iterator<IDable<Triangle>.Element<Triangle>> iterator = mesh.getTriangulate().iterator();
-        while (iterator.hasNext()){
-            Triangle triangle = (Triangle)iterator.next().value;
+        for (IDable<Triangle>.Element<Triangle> triangleElement : mesh.getTriangulate()) {
+            Triangle triangle = triangleElement.value;
             int[] idPoint = new int[]{
                     triangle.getIdPoint1(),
                     triangle.getIdPoint2(),
