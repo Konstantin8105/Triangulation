@@ -43,12 +43,12 @@ public class Mesh {
         return triangles;
     }
 
-    public void deleteLine(int id) {
-        lines.remove(id);
+    public void deleteLine(int idLine) {
+        lines.remove(idLine);
     }
 
-    public void deleteTriangle(int id) {
-        triangles.remove(id);
+    public void deleteTriangle(int idTriangle) {
+        triangles.remove(idTriangle);
     }
 
     public IDable.Element[] getTrianglesByLine(Line line) throws Exception {
@@ -153,44 +153,6 @@ public class Mesh {
         return listLines;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Mesh :\n");
-
-        for (int i = 0; i < 20; i++) {
-            builder.append("-");
-        }
-        builder.append("\n");
-
-        builder.append("Points :\n");
-        for (IDable<Point>.Element<Point> point : points) {
-            builder.append("ID").append(point.id).append(" : ").append(point.value);
-        }
-
-        for (int i = 0; i < 20; i++) {
-            builder.append("-");
-        }
-        builder.append("\n");
-
-        builder.append("Line :\n");
-        for (IDable<Line>.Element<Line> line : lines) {
-            builder.append("ID").append(line.id).append(" : ").append(line.value).append("\n");
-        }
-
-        for (int i = 0; i < 20; i++) {
-            builder.append("-");
-        }
-        builder.append("\n");
-
-        builder.append("Triangles :\n");
-        for (IDable<Triangle>.Element<Triangle> triangle : triangles) {
-            builder.append("ID").append(triangle.id).append(" : ").append(triangle.value).append("\n");
-        }
-
-        return builder.toString();
-    }
-
     public IDable.Element getPointOnLine(IDable<Point>.Element<Point> nextPoint) {
         if (lines == null)
             return null;
@@ -233,5 +195,43 @@ public class Mesh {
 
     public Point getPoints(int idPoint) {
         return points.getById(idPoint).value;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Mesh :\n");
+
+        for (int i = 0; i < 20; i++) {
+            builder.append("-");
+        }
+        builder.append("\n");
+
+        builder.append("Points :\n");
+        for (IDable<Point>.Element<Point> point : points) {
+            builder.append("ID").append(point.id).append(" : ").append(point.value);
+        }
+
+        for (int i = 0; i < 20; i++) {
+            builder.append("-");
+        }
+        builder.append("\n");
+
+        builder.append("Line :\n");
+        for (IDable<Line>.Element<Line> line : lines) {
+            builder.append("ID").append(line.id).append(" : ").append(line.value).append("\n");
+        }
+
+        for (int i = 0; i < 20; i++) {
+            builder.append("-");
+        }
+        builder.append("\n");
+
+        builder.append("Triangles :\n");
+        for (IDable<Triangle>.Element<Triangle> triangle : triangles) {
+            builder.append("ID").append(triangle.id).append(" : ").append(triangle.value).append("\n");
+        }
+
+        return builder.toString();
     }
 }
