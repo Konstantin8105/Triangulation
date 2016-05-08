@@ -1,12 +1,12 @@
 package triangulation;
 
+import triangulation.border.BorderBox;
 import triangulation.elements.Collections.IDable;
 import triangulation.elements.Line;
 import triangulation.elements.Mesh;
 import triangulation.elements.Point;
 import triangulation.elements.Triangle;
 import triangulation.geometry.GeometryCoordinate;
-import triangulation.geometry.GeometryLineLine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,38 +26,38 @@ public class Triangulation {
     private List<IDable.Element> lastPoints = new ArrayList<>();
     private boolean isNeedLastPointsSaving = true;
 
-    private void addNextPoint(IDable.Element nextPoint) throws Exception {
+    private void addNextPoint(IDable<Point>.Element<Point> nextPoint) throws Exception {
         if (isNeedLastPointsSaving) {
             lastPoints.add(nextPoint);
             if (lastPoints.size() < 3) {
-                bBox.addPoint((Point) nextPoint.value);
+                bBox.addPoint(nextPoint.value);
                 return;
             }
             addNextPointWithoutBorder();
-            bBox.addPoint((Point) nextPoint.value);
+            bBox.addPoint(nextPoint.value);
             return;
         }
 
-        if (bBox.isInBox((Point) nextPoint.value)) {
+        if (bBox.isInBox(nextPoint.value)) {
 
-            IDable<Line>.Element<Line> line = mesh.getPointOnLine((IDable<Point>.Element<Point>) nextPoint);
+            IDable<Line>.Element<Line> line = mesh.getPointOnLine(nextPoint);
             if (line != null) {
                 addNextPointOnLine(nextPoint, line);
-                bBox.addPoint((Point) nextPoint.value);
+                bBox.addPoint(nextPoint.value);
                 return;
             }
 
-            IDable<Triangle>.Element<Triangle> triangle = mesh.getPointInTriangle((IDable<Point>.Element<Point>) nextPoint);
+            IDable<Triangle>.Element<Triangle> triangle = mesh.getPointInTriangle(nextPoint);
             if (triangle != null) {
                 addNextPointInTriangle(nextPoint, triangle);
-                bBox.addPoint((Point) nextPoint.value);
+                bBox.addPoint(nextPoint.value);
                 return;
             }
         }
 
         addNextPointOutside(nextPoint);
 
-        bBox.addPoint((Point) nextPoint.value);
+        bBox.addPoint(nextPoint.value);
     }
 
     private void addNextPointWithoutBorder() throws Exception {
@@ -143,7 +143,7 @@ public class Triangulation {
     }
 
     private void addNextPointOutside(IDable.Element nextPoint) throws Exception {
-        List<Line> lines = getBorderLinesForNewConvex((Point) nextPoint.value);
+        List<Line> lines = mesh.getBorderSegment((Point) nextPoint.value);
         mesh.addLine(new Line(nextPoint.id, lines.get(0).getIdPointA()));
         for (Line line : lines) {
             mesh.addLine(new Line(nextPoint.id, line.getIdPointB()));
@@ -152,48 +152,6 @@ public class Triangulation {
                     line.getIdPointA(),
                     line.getIdPointB()));
         }
-    }
-
-    private List<Line> getBorderLinesForNewConvex(Point nextPoint) throws Exception {
-        List<Line> borderLine = Mesh.createLoop(mesh.getBorderLine());
-
-        Point[] pointsOfLine = new Point[borderLine.size() + 1];
-        pointsOfLine[0] = mesh.getPoints(borderLine.get(0).getIdPointA());
-        for (int i = 0; i < borderLine.size(); i++) {
-            pointsOfLine[i + 1] = mesh.getPoints(borderLine.get(i).getIdPointB());
-        }
-        pointsOfLine[borderLine.size()] = pointsOfLine[0];
-
-        Point[] pointsMiddleOfLine = new Point[borderLine.size()];
-        for (int i = 0; i < pointsMiddleOfLine.length; i++) {
-            pointsMiddleOfLine[i] = Point.middlePoint(pointsOfLine[i], pointsOfLine[i + 1]);
-        }
-
-        List<Integer> indexLinesDelete = new ArrayList<>();
-        for (int i = 0; i < borderLine.size(); i++) {
-            for (int j = 0; j < borderLine.size(); j++) {
-                if (i != j) {
-                    GeometryLineLine.IntersectState state = GeometryLineLine.stateLineLine(
-                            nextPoint,
-                            pointsMiddleOfLine[i],
-                            pointsOfLine[j],
-                            pointsOfLine[j + 1]);
-                    if (state == GeometryLineLine.IntersectState.INTERSECT ||
-                            state == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE ||
-                            state == GeometryLineLine.IntersectState.LINE_IN_LINE) {
-                        indexLinesDelete.add(i);
-                        j = borderLine.size();
-                    }
-                }
-            }
-
-        }
-
-        for (int i = indexLinesDelete.size() - 1; i >= 0; i--) {
-            borderLine.remove((int) indexLinesDelete.get(i));
-        }
-
-        return Mesh.createSequence(borderLine);
     }
 
     public Mesh getMesh() {

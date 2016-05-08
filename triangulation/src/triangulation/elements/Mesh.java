@@ -1,17 +1,18 @@
 package triangulation.elements;
 
+import triangulation.border.BorderLine;
 import triangulation.elements.Collections.IDable;
 import triangulation.geometry.GeometryPointLine;
 import triangulation.geometry.GeometryPointTriangle;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Mesh {
     private final IDable<Point> points = new IDable<>();
     private final IDable<Line> lines = new IDable<>();
     private final IDable<Triangle> triangles = new IDable<>();
+
+    private final BorderLine borderLine = new BorderLine(this);
 
     public void addPoint(List<Point> point) {
         points.add(point);
@@ -78,17 +79,6 @@ public class Mesh {
         return points;
     }
 
-    public List<Line> getBorderLine() throws Exception {
-        List<Line> borderLines = new ArrayList<>();
-        for (IDable<Line>.Element<Line> line : lines) {
-            if (getTrianglesByLine(line.value).length == 1) {
-                borderLines.add(line.value);
-            }
-        }
-        if (borderLines.size() == 0)
-            throw new Exception("Border don`t found any lines");
-        return borderLines;
-    }
 
     public int sizePoints() {
         return points.size();
@@ -102,55 +92,7 @@ public class Mesh {
         return triangles.size();
     }
 
-    public static List<Line> createLoop(List<Line> listLines) throws Exception {
-        List<Line> loop = createSequence(listLines);
-        if (loop.get(0).getIdPointA() != loop.get(loop.size() - 1).getIdPointB())
-            throw new Exception("Not correct loop ={"
-                    + loop.get(0).getIdPointA()
-                    + " ; "
-                    + loop.get(loop.size() - 1).getIdPointB()
-                    + " } ");
-        return loop;
-    }
-
-    public static List<Line> createSequence(List<Line> listLines) {
-        if (listLines.size() == 1)
-            return listLines;
-        int idBeforeLine = listLines.get(0).getIdPointB();
-        int position = 1;
-        boolean changes = true;
-        while (changes) {
-            changes = false;
-            for (int i = position; i < listLines.size(); i++) {
-                if (idBeforeLine == listLines.get(i).getIdPointA()) {
-                    if (position != i)
-                        Collections.swap(listLines, position, i);
-                    position++;
-                    idBeforeLine = listLines.get(position - 1).getIdPointB();
-                    changes = true;
-                } else if (idBeforeLine == listLines.get(i).getIdPointB()) {
-                    listLines.get(i).swapPoints();
-                    if (position != i)
-                        Collections.swap(listLines, position, i);
-                    position++;
-                    idBeforeLine = listLines.get(position - 1).getIdPointB();
-                    changes = true;
-                }
-            }
-        }
-        if (position != listLines.size()) {
-            if (listLines.get(0).getIdPointA() == listLines.get(position).getIdPointA())
-                listLines.get(position).swapPoints();
-            List<Line> out = new ArrayList<>(listLines.size());
-            out.addAll(listLines.subList(position, listLines.size()));
-            out.addAll(listLines.subList(0, position));
-            listLines.clear();
-            return createSequence(out);
-        }
-        return listLines;
-    }
-
-    public IDable.Element getPointOnLine(IDable<Point>.Element<Point> nextPoint) {
+    public IDable<Line>.Element<Line> getPointOnLine(IDable<Point>.Element<Point> nextPoint) {
         if (lines == null)
             return null;
         if (lines.isEmpty())
@@ -226,5 +168,9 @@ public class Mesh {
         }
 
         return builder.toString();
+    }
+
+    public List<Line> getBorderSegment(Point point) {
+        return borderLine.getBorderSegment(point);
     }
 }

@@ -1,4 +1,4 @@
-package triangulation;
+package triangulation.border;
 
 import triangulation.elements.Point;
 

@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/triangulation/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/triangulation/geometry/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/triangulation/elements/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/triangulation/border/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/jar" />
       <excludeFolder url="file://$MODULE_DIR$/other" />
       <excludeFolder url="file://$MODULE_DIR$/src/core" />

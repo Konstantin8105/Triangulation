@@ -1,6 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
-import triangulation.BorderBox;
+import triangulation.border.BorderBox;
 import triangulation.elements.Point;
 
 public class BorderBoxTest {

@@ -1,7 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
-    <entry_points version="2.0" />
+    <entry_points version="2.0">
+      <entry_point TYPE="class" FQNAME="ExampleTest" />
+      <entry_point TYPE="class" FQNAME="SequenceTest" />
+      <entry_point TYPE="class" FQNAME="TriangulationTest" />
+      <entry_point TYPE="method" FQNAME="ExampleTest void simpleExample()" />
+      <entry_point TYPE="method" FQNAME="SequenceTest void test9()" />
+      <entry_point TYPE="method" FQNAME="SequenceTest void test8()" />
+      <entry_point TYPE="method" FQNAME="SequenceTest void test7()" />
+      <entry_point TYPE="method" FQNAME="SequenceTest void test6()" />
+      <entry_point TYPE="method" FQNAME="SequenceTest void test5()" />
+      <entry_point TYPE="method" FQNAME="SequenceTest void test4()" />
+      <entry_point TYPE="method" FQNAME="SequenceTest void test3()" />
+      <entry_point TYPE="method" FQNAME="SequenceTest void test2()" />
+      <entry_point TYPE="method" FQNAME="SequenceTest void test1()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void triangleSmall4()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void triangleSmall3()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void triangleSmall2()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void triangleSmall1()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testTriangulationRegular2()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testTriangulationRegular()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters3pointsWith2On1line()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters4pointsWith3On1line()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters5pointsWith4On1line()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters6pointsWith5On1line()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom14()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom13()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom12()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom11()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom10()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom9()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom8()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom7()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom6()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom5()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom4()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom3()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom2()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testRandom1()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testManyPointsOnOneLine()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testSpiral()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters5points()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters4points2()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters4points()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters7pointsWith6On1line()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters3pointsOnOneLine3()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters3pointsOnOneLine2()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters3pointsOnOneLine1()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters3points()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGettersWithStatistic()" />
+      <entry_point TYPE="method" FQNAME="TriangulationTest void testGetters2points()" />
+    </entry_points>
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/temp" />
