@@ -23,7 +23,8 @@ public class Mesh {
         // TODO: 5/7/16
     }
 
-    public int addLine(Line line) {
+    public int addLine(Line line) throws Exception {
+        borderLine.addLine(line);
         return lines.add(line);
     }
 
@@ -44,6 +45,7 @@ public class Mesh {
     }
 
     public void deleteLine(int idLine) {
+        borderLine.removeLine(lines.getById(idLine).value);
         lines.remove(idLine);
     }
 
@@ -170,7 +172,7 @@ public class Mesh {
         return builder.toString();
     }
 
-    public List<Line> getBorderSegment(Point point) {
-        return borderLine.getBorderSegment(point);
+    public List<Line> getBorderSegment(Point nextPoint) throws Exception {
+        return borderLine.getBorderSegment(nextPoint);
     }
 }

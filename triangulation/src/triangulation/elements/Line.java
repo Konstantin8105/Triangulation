@@ -11,6 +11,11 @@ public class Line {
         this.idPointB = idPointB;
     }
 
+    public Line(Line line) {
+        this.idPointA = line.idPointA;
+        this.idPointB = line.idPointB;
+    }
+
     public int getIdPointA() {
         return idPointA;
     }

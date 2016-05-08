@@ -1,100 +1,122 @@
 package triangulation.border;
 
-import triangulation.elements.Collections.IDable;
 import triangulation.elements.Line;
 import triangulation.elements.Mesh;
 import triangulation.elements.Point;
-import triangulation.geometry.GeometryLineLine;
+import triangulation.geometry.Geometry;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class BorderLine {
     Mesh mesh;
+    List<LineWithPoints> loop = new ArrayList<>();
+    List<Line> addedLine = new ArrayList<>();
+    List<Line> removedLine = new ArrayList<>();
 
     public BorderLine(Mesh mesh) {
         this.mesh = mesh;
     }
 
-    public List<Line> getBorderSegment(Point point) {
-
+    public void addLine(Line line) {
+        addedLine.add(line);
     }
 
+    public void removeLine(Line line) {
+        removedLine.add(line);
+    }
+
+    public List<Line> getBorderSegment(Point nextPoint) throws Exception {
+        createBorderLoop();
+        loop = (List<LineWithPoints>) loopization(loop);
+        addPointsInLoop();
+
+        int positionNearNextPointInLoopArray = getPositionOfPointNearNextPoint(nextPoint);
+
+        List<Line> borderSegment = new ArrayList<>(loop.size());
+
+        loop.(positionNearNextPointInLoopArray);
+        // от текущей позиции до хоть полного круга
+        // от начальной позиции до текущей позиции
+        // нет ли пересечений
+        // нет перечесечений - запоминаем - идем дальше
+        // есть пересечение - останавливаемся
+
+        // то же самое в обратном направлениие
 
 
+//        while (){
+//            for (int j = 0; j < loop.size(); j++) {
+//                if (i != j) {
+//                    GeometryLineLine.IntersectState state = GeometryLineLine.stateLineLine(
+//                            nextPoint,
+//                            pointsMiddleOfLine[i],
+//                            pointsOfLine[j],
+//                            pointsOfLine[j + 1]);
+//                    if (state == GeometryLineLine.IntersectState.INTERSECT ||
+//                            state == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE ||
+//                            state == GeometryLineLine.IntersectState.LINE_IN_LINE) {
+//                        borderSegment.add(loop.get(i));
+//                        j = loop.size();
+//                    }
+//                }
+//            }
+//        }
+//
+//        for (int i = indexLinesDelete.size() - 1; i >= 0; i--) {
+//            borderLine.remove((int) indexLinesDelete.get(i));
+//        }
+//
+//        return Mesh.createSequence(borderLine);
+        return null;
+    }
 
+    private int getPositionOfPointNearNextPoint(Point nextPoint) {
+        int position = 0;
 
+        double[] distance = new double[loop.size()];
+        for (int i = 0; i < distance.length; i++) {
+            distance[i] = Geometry.distancePoints(nextPoint, loop.get(i).pointA);
+        }
 
-
-
-
-
-
-
-
-
-
-
-    public List<Line> getBorderLine() throws Exception {
-        List<Line> borderLines = new ArrayList<>();
-        for (IDable<Line>.Element<Line> line : lines) {
-            if (getTrianglesByLine(line.value).length == 1) {
-                borderLines.add(line.value);
+        double minimalDistance = distance[0];
+        for (int i = 1; i < distance.length; i++) {
+            if (minimalDistance > distance[i]) {
+                minimalDistance = distance[i];
+                position = i;
             }
         }
-        if (borderLines.size() == 0)
+        return position;
+    }
+
+    private void addPointsInLoop() {
+        for (LineWithPoints line : loop) {
+            if (line.isPointNull()) {
+                line.pointA = mesh.getPoints(line.getIdPointA());
+                line.pointB = mesh.getPoints(line.getIdPointB());
+                line.pointMiddle = Point.middlePoint(line.pointA, line.pointB);
+            }
+        }
+    }
+
+    private void createBorderLoop() throws Exception {
+        loop.removeAll(removedLine);
+        addedLine.removeAll(removedLine);
+        removedLine.clear();
+        loop.addAll((Collection<? extends LineWithPoints>) addedLine);
+        addedLine.clear();
+
+        Iterator<LineWithPoints> iterator = loop.iterator();
+        while (iterator.hasNext()) {
+            if (mesh.getTrianglesByLine(iterator.next()).length > 1) {
+                iterator.remove();
+            }
+        }
+        if (loop.size() == 0)
             throw new Exception("Border don`t found any lines");
-        return borderLines;
     }
 
-    private List<Line> getBorderLinesForNewConvex(Point nextPoint) throws Exception {
-        List<Line> borderLine = Mesh.createLoop(mesh.getBorderLine());
-
-        Point[] pointsOfLine = new Point[borderLine.size() + 1];
-        pointsOfLine[0] = mesh.getPoints(borderLine.get(0).getIdPointA());
-        for (int i = 0; i < borderLine.size(); i++) {
-            pointsOfLine[i + 1] = mesh.getPoints(borderLine.get(i).getIdPointB());
-        }
-        pointsOfLine[borderLine.size()] = pointsOfLine[0];
-
-        Point[] pointsMiddleOfLine = new Point[borderLine.size()];
-        for (int i = 0; i < pointsMiddleOfLine.length; i++) {
-            pointsMiddleOfLine[i] = Point.middlePoint(pointsOfLine[i], pointsOfLine[i + 1]);
-        }
-
-
-
-        List<Integer> indexLinesDelete = new ArrayList<>();
-        for (int i = 0; i < borderLine.size(); i++) {
-            for (int j = 0; j < borderLine.size(); j++) {
-                if (i != j) {
-                    GeometryLineLine.IntersectState state = GeometryLineLine.stateLineLine(
-                            nextPoint,
-                            pointsMiddleOfLine[i],
-                            pointsOfLine[j],
-                            pointsOfLine[j + 1]);
-                    if (state == GeometryLineLine.IntersectState.INTERSECT ||
-                            state == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE ||
-                            state == GeometryLineLine.IntersectState.LINE_IN_LINE) {
-                        indexLinesDelete.add(i);
-                        j = borderLine.size();
-                    }
-                }
-            }
-
-        }
-
-        for (int i = indexLinesDelete.size() - 1; i >= 0; i--) {
-            borderLine.remove((int) indexLinesDelete.get(i));
-        }
-
-        return Mesh.createSequence(borderLine);
-    }
-
-
-    public static List<Line> createLoop(List<Line> listLines) throws Exception {
-        List<Line> loop = createSequence(listLines);
+    private List<? extends Line> loopization(List<? extends Line> inputLines) throws Exception {
+        List<? extends Line> loop = createSequence(inputLines);
         if (loop.get(0).getIdPointA() != loop.get(loop.size() - 1).getIdPointB())
             throw new Exception("Not correct loop ={"
                     + loop.get(0).getIdPointA()
@@ -104,7 +126,7 @@ public class BorderLine {
         return loop;
     }
 
-    public static List<Line> createSequence(List<Line> listLines) {
+    public static List<? extends Line> createSequence(List<? extends Line> listLines) {
         if (listLines.size() == 1)
             return listLines;
         int idBeforeLine = listLines.get(0).getIdPointB();
@@ -139,5 +161,23 @@ public class BorderLine {
             return createSequence(out);
         }
         return listLines;
+    }
+
+    private class LineWithPoints extends Line {
+        public Point pointA;
+        public Point pointB;
+        public Point pointMiddle;
+
+        public LineWithPoints(int idPointA, int idPointB) throws Exception {
+            super(idPointA, idPointB);
+        }
+
+        public LineWithPoints(Line line) {
+            super(line);
+        }
+
+        public boolean isPointNull() {
+            return pointA == null || pointB == null || pointMiddle == null;
+        }
     }
 }
