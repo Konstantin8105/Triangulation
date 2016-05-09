@@ -33,9 +33,8 @@ public class BorderLine {
 
         int positionNearNextPointInLoopArray = getPositionOfPointNearNextPoint(nextPoint);
 
-        List<Line> borderSegment = new ArrayList<>(loop.size());
+        List<Line> borderSegment = new ArrayList<>(loop);
 
-        loop.(positionNearNextPointInLoopArray);
         // от текущей позиции до хоть полного круга
         // от начальной позиции до текущей позиции
         // нет ли пересечений
@@ -46,19 +45,23 @@ public class BorderLine {
 
         // сначало реализовать последовательный алгоритм, а после можно и галопирование попоробовать
 
+        // для надежности можно оставить простой надежный алгоритм
 
-        while (){
+
+        List<Integer> indexLinesDelete = new ArrayList<>(loop.size());
+        for (int i = 0; i < loop.size(); i++) {
             for (int j = 0; j < loop.size(); j++) {
                 if (i != j) {
                     GeometryLineLine.IntersectState state = GeometryLineLine.stateLineLine(
                             nextPoint,
-                            pointsMiddleOfLine[i],
-                            pointsOfLine[j],
-                            pointsOfLine[j + 1]);
+                            loop.get(i).pointMiddle,
+                            loop.get(j).pointA,
+                            loop.get(j).pointB
+                    );
                     if (state == GeometryLineLine.IntersectState.INTERSECT ||
                             state == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE ||
                             state == GeometryLineLine.IntersectState.LINE_IN_LINE) {
-                        borderSegment.add(loop.get(i));
+                        indexLinesDelete.add(i);
                         j = loop.size();
                     }
                 }
@@ -66,11 +69,10 @@ public class BorderLine {
         }
 
         for (int i = indexLinesDelete.size() - 1; i >= 0; i--) {
-            borderLine.remove((int) indexLinesDelete.get(i));
+            borderSegment.remove((int) indexLinesDelete.get(i));
         }
 
-        return Mesh.createSequence(borderLine);
-        return null;
+        return (List<Line>) createSequence(borderSegment);
     }
 
     private int getPositionOfPointNearNextPoint(Point nextPoint) {
@@ -105,7 +107,9 @@ public class BorderLine {
         loop.removeAll(removedLine);
         addedLine.removeAll(removedLine);
         removedLine.clear();
-        loop.addAll((Collection<? extends LineWithPoints>) addedLine);
+        for (int i = 0; i < addedLine.size(); i++) {
+            loop.add(new LineWithPoints(addedLine.get(i)));
+        }
         addedLine.clear();
 
         Iterator<LineWithPoints> iterator = loop.iterator();
