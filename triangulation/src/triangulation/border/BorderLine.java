@@ -38,7 +38,7 @@ public class BorderLine {
         loop = (List<LineWithPoints>) Sequence.loopization(loop);
         addPointsInLoop();
 
-        if (loop.size() < MINIMAL_AMOUNT_LOOP) {
+        if (loop.size() <= MINIMAL_AMOUNT_LOOP) {
             List<Line> borderSegment = new ArrayList<>(loop);
             List<Integer> indexLinesDelete = new ArrayList<>(loop.size());
             for (int i = 0; i < loop.size(); i++) {
@@ -63,22 +63,136 @@ public class BorderLine {
         }
 
         List<Segment> segments = SeparateLoopToSegment.create(loop);
-        List<Line> borderSegment = createBorderSegment(segments);
+        List<Line> borderSegment = createBorderSegment(nextPoint, segments);
         return (List<Line>) Sequence.createSequence(borderSegment);
 
     }
 
-    private List<Line> createBorderSegment(List<Segment> segments) {
-        // TODO: 5/10/16
-        return null;
+    private List<Line> createBorderSegment(Point nextPoint, List<Segment> segments) throws Exception {
+        List<Line> borderSegment = new ArrayList<>();
+        for (int i = 0; i < segments.size(); i++) {
+            if (segments.get(i).haveBothSegments()) {
+                checkTriangle(nextPoint, segments.get(i));
+            } else {
+                checkTriangle(nextPoint, segments.get(i), segments.get(normalizePositionOfList(i + 1, segments)));
+            }
+        }
+        for (int i = 0; i < segments.size(); i++) {
+            for (int j = 0; j < 2; j++) {
+                if (!segments.get(i).getIntersect()[j] && segments.get(i).getSegment()[j].size() > 0) {
+                    for (int k = 0; k < segments.get(i).getSegment()[j].size(); k++) {
+                        borderSegment.add(segments.get(i).getSegment()[j].get(k));
+                    }
+                }
+            }
+        }
+        return borderSegment;
     }
 
-    private int normalizePositionOfLoop(int position) {
-        if (0 <= position && position <= loop.size() - 1)
+    private void checkTriangle(Point nextPoint, Segment segment, Segment fictiveSegment) throws Exception {
+        LineWithPoints line[] = new LineWithPoints[3];
+        if (segment.getSegment()[0].size() == 1) {
+            line[0] = segment.getSegment()[0].get(0);
+        } else {
+            int size = segment.getSegment()[0].size();
+            line[0] = new LineWithPoints(
+                    segment.getSegment()[0].get(0).getIdPointA(),
+                    segment.getSegment()[0].get(size - 1).getIdPointB()
+            );
+            line[0].setPoints(
+                    segment.getSegment()[0].get(0).getPointA(),
+                    segment.getSegment()[0].get(size - 1).getPointB()
+            );
+        }
+
+        line[1] = fictiveSegment.getSegment()[0].get(0);
+
+        // fictive line
+        line[2] = new LineWithPoints(
+                line[1].getIdPointB(),
+                line[0].getIdPointA()
+        );
+        line[2].setPoints(
+                line[1].getPointB(),
+                line[0].getPointA()
+        );
+
+        boolean intersect[] = new boolean[]{false, false, false};
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (i != j) {
+                    if (isIntersect(
+                            nextPoint,
+                            line[i].getPointMiddle(),
+                            line[j].getPointA(),
+                            line[j].getPointB())
+                            ) {
+                        intersect[i] = true;
+                    }
+                }
+            }
+        }
+
+        segment.getIntersect()[0] = intersect[0];
+    }
+
+    private void checkTriangle(Point nextPoint, Segment segment) throws Exception {
+        LineWithPoints line[] = new LineWithPoints[3];
+        for (int i = 0; i < 2; i++) {
+            if (segment.getSegment()[i].size() == 1) {
+                line[i] = segment.getSegment()[i].get(0);
+            } else {
+                int size = segment.getSegment()[i].size();
+                line[i] = new LineWithPoints(
+                        segment.getSegment()[i].get(0).getIdPointA(),
+                        segment.getSegment()[i].get(size - 1).getIdPointB()
+                );
+                line[i].setPoints(
+                        segment.getSegment()[i].get(0).getPointA(),
+                        segment.getSegment()[i].get(size - 1).getPointB()
+                );
+            }
+        }
+
+        // fictive line
+        line[2] = new LineWithPoints(
+                line[1].getIdPointB(),
+                line[0].getIdPointA()
+        );
+        line[2].setPoints(
+                line[1].getPointB(),
+                line[0].getPointA()
+        );
+
+        boolean intersect[] = new boolean[]{false, false, false};
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (i != j) {
+                    if (isIntersect(
+                            nextPoint,
+                            line[i].getPointMiddle(),
+                            line[j].getPointA(),
+                            line[j].getPointB())
+                            ) {
+                        intersect[i] = true;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < 2; i++) {
+            segment.getIntersect()[i] = intersect[i];
+        }
+    }
+
+    private int normalizePositionOfList(int position, List<?> list) {
+        if (0 <= position && position <= list.size() - 1)
             return position;
         if (position < 0)
-            return normalizePositionOfLoop(loop.size() - position);
-        return normalizePositionOfLoop(position - loop.size());
+            return normalizePositionOfList(list.size() - position, list);
+        return normalizePositionOfList(position - list.size(), list);
     }
 
     private boolean isIntersect(Point nextPoint, Point middle, Point pointA, Point pointB) {
