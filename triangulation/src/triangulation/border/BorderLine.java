@@ -69,7 +69,8 @@ public class BorderLine {
     }
 
     private List<Line> createBorderSegment(List<Segment> segments) {
-        asd
+        // TODO: 5/10/16
+        return null;
     }
 
     private int normalizePositionOfLoop(int position) {
