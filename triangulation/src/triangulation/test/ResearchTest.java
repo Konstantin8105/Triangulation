@@ -13,7 +13,7 @@ public class ResearchTest {
     private static Random random = new Random();
 
     public static void main(String[] args) throws Exception {
-        int[] amountPoints = new int[]{3, 5, 10, 20, 50, 100, 200, 500, 1000};
+        int[] amountPoints = new int[]{3, 5, 10, 20, 50, 100, 200, 500, 1000};//
         for (int i = 0; i < TYPE_TEST.values().length; i++) {
             System.out.println("TYPE OF TEST: " + TYPE_TEST.values()[i].toString());
             for (int amountPoint : amountPoints) {
@@ -23,7 +23,7 @@ public class ResearchTest {
     }
 
     private static void test(int size, TYPE_TEST type_test) throws Exception {
-        int amountTest = 10;
+        int amountTest = 2;
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageTime = 0;

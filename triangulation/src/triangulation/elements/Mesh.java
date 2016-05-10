@@ -54,6 +54,7 @@ public class Mesh {
     }
 
     public IDable.Element[] getTrianglesByLine(Line line) throws Exception {
+        //TODO next need optimization
         IDable.Element[] tri = new IDable.Element[2];
         int presentPosition = 0;
 

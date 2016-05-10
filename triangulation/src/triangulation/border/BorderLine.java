@@ -10,6 +10,7 @@ import triangulation.elements.Point;
 import triangulation.geometry.GeometryLineLine;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class BorderLine {
         loop = (List<LineWithPoints>) Sequence.loopization(loop);
         addPointsInLoop();
 
+
         if (loop.size() <= MINIMAL_AMOUNT_LOOP) {
             List<Line> borderSegment = new ArrayList<>(loop);
             List<Integer> indexLinesDelete = new ArrayList<>(loop.size());
@@ -64,6 +66,8 @@ public class BorderLine {
 
         List<Segment> segments = SeparateLoopToSegment.create(loop);
         List<Line> borderSegment = createBorderSegment(nextPoint, segments);
+
+
         return (List<Line>) Sequence.createSequence(borderSegment);
 
     }
@@ -208,26 +212,6 @@ public class BorderLine {
         return false;
     }
 
-/*
-    private int getPositionOfLineNearNextPoint(Point nextPoint) {
-        int position = 0;
-
-        double[] distance = new double[loop.size()];
-        for (int i = 0; i < distance.length; i++) {
-            distance[i] = Geometry.distancePoints(nextPoint, loop.get(i).pointA);
-        }
-
-        double minimalDistance = distance[0];
-        for (int i = 1; i < distance.length; i++) {
-            if (minimalDistance > distance[i]) {
-                minimalDistance = distance[i];
-                position = i;
-            }
-        }
-
-        return position;
-    }*/
-
     private void addPointsInLoop() {
         for (LineWithPoints line : loop) {
             if (line.isPointNull()) {
@@ -255,5 +239,6 @@ public class BorderLine {
         }
         if (loop.size() == 0)
             throw new Exception("Border don`t found any lines");
+
     }
 }

@@ -97,7 +97,7 @@ public class Triangulation {
         IDable.Element[] triangles = mesh.getTrianglesByLine((Line) line.value);
         if (triangles.length > 2 || triangles.length < 1) {
             StringBuilder str = new StringBuilder();
-            for(IDable.Element triangle: triangles) {
+            for (IDable.Element triangle : triangles) {
                 str.append("ID").append(triangle.id);
                 str.append(" : ");
                 str.append(triangle.value);

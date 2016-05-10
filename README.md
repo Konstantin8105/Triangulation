@@ -71,8 +71,6 @@ Present algorithm complexity in worst case - O(n^2), average - O(N).
 
 // TODO: Dynamic caching of line and triangles maps for change algorithm complexity in worst case to O(N*LOG(N))
 
-// TODO: Optimization border line founding
-
 ![CIRCLE](https://github.com/Konstantin8105/Triangulation/blob/master/triangulation/other/CIRCLE.png)
 
 ![RANDOM](https://github.com/Konstantin8105/Triangulation/blob/master/triangulation/other/RANDOM.png)
