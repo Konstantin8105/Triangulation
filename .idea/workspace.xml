@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/other/Performance.ods" afterPath="$PROJECT_DIR$/triangulation/other/Performance.ods" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/test/ResearchTest.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/test/ResearchTest.java" />
     </list>
     <manually-removed-from-ignored>
       <directory path="$PROJECT_DIR$/out/" />
@@ -41,8 +39,8 @@
       <file leaf-file-name="BorderLine.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="133" column="13" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
+            <state relative-caret-position="345">
+              <caret line="37" column="29" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#616#617#0" expanded="true" />
@@ -385,7 +383,7 @@
       <recent name="$PROJECT_DIR$/triangulation/src" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TriangulationTest.testGetters6pointsWith5On1line">
+  <component name="RunManager" selected="Application.ResearchTest">
     <configuration default="false" name="ResearchTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="ResearchTest" />
@@ -729,10 +727,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.TriangulationTest.testGetters6pointsWith5On1line" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.TriangulationTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.TriangulationTest.testGetters4pointsWith3On1line" />
-        <item index="3" class="java.lang.String" itemvalue="Application.ResearchTest" />
+        <item index="0" class="java.lang.String" itemvalue="Application.ResearchTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.TriangulationTest.testGetters6pointsWith5On1line" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.TriangulationTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.TriangulationTest.testGetters4pointsWith3On1line" />
         <item index="4" class="java.lang.String" itemvalue="Application.ResearchViewTest" />
       </list>
     </recent_temporary>
@@ -753,13 +751,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
-    </task>
-    <task id="LOCAL-00014" summary="update&#10;">
-      <created>1462307573962</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1462307573962</updated>
     </task>
     <task id="LOCAL-00015" summary="update&#10;">
       <created>1462310281190</created>
@@ -1097,7 +1088,14 @@
       <option name="project" value="LOCAL" />
       <updated>1462792885134</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="prepare for release&#10;">
+      <created>1462906464238</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1462906464252</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1153,7 +1151,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36090225" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.357295" sideWeight="0.5976395" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.357295" sideWeight="0.5976395" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1162,7 +1160,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29925454" sideWeight="0.49570817" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29925454" sideWeight="0.49570817" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1201,30 +1199,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java</url>
-          <line>195</line>
+          <line>196</line>
           <properties />
           <option name="timeStamp" value="100" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java</url>
-          <line>107</line>
-          <properties />
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java</url>
-          <line>108</line>
-          <properties />
-          <option name="timeStamp" value="102" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java</url>
-          <line>122</line>
-          <properties />
-          <option name="timeStamp" value="103" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="104" />
+      <option name="time" value="105" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1598,8 +1578,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="133" column="13" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
+        <state relative-caret-position="345">
+          <caret line="37" column="29" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#616#617#0" expanded="true" />

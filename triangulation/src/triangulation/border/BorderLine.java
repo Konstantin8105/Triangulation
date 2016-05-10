@@ -31,7 +31,6 @@ public class BorderLine {
         loop = (List<LineWithPoints>) loopization(loop);
         addPointsInLoop();
 
-        int positionNearNextPointInLoopArray = getPositionOfLineNearNextPoint(nextPoint);
 
 
         // от текущей позиции до хоть полного круга
@@ -47,8 +46,9 @@ public class BorderLine {
         // для надежности можно оставить простой надежный алгоритм
 
 
-/*
 
+
+        List<Line> borderSegment = new ArrayList<>(loop);
         List<Integer> indexLinesDelete = new ArrayList<>(loop.size());
         for (int i = 0; i < loop.size(); i++) {
             for (int j = 0; j < loop.size(); j++) {
@@ -63,79 +63,80 @@ public class BorderLine {
         for (int i = indexLinesDelete.size() - 1; i >= 0; i--) {
             borderSegment.remove((int) indexLinesDelete.get(i));
         }
-*/
 
-        int positionIntersectStart = 0;
-        int positionIntersectFinish = 0;
-        for (int i = 0; i < loop.size(); i++) {
-            for (int j = i - 1; j >= 0; j--) {
-                if (i != j) {
-                    int positionI = normalizePositionOfLoop(positionNearNextPointInLoopArray + i);
-                    int positionJ = normalizePositionOfLoop(positionNearNextPointInLoopArray + j);
-                    if (isIntersect(
-                            nextPoint,
-                            loop.get(positionI).pointMiddle,
-                            loop.get(positionJ).pointA,
-                            loop.get(positionJ).pointB)
-                            ) {
-                        positionIntersectStart = i;
-                        break;
-                    }
-                }
-            }
-        }
+//        int positionNearNextPointInLoopArray = getPositionOfLineNearNextPoint(nextPoint);
+//
+//        int positionIntersectStart = 0;
+//        int positionIntersectFinish = 0;
+//        for (int i = 0; i < loop.size(); i++) {
+//            for (int j = i - 1; j >= 0; j--) {
+//                if (i != j) {
+//                    int positionI = normalizePositionOfLoop(positionNearNextPointInLoopArray + i);
+//                    int positionJ = normalizePositionOfLoop(positionNearNextPointInLoopArray + j);
+//                    if (isIntersect(
+//                            nextPoint,
+//                            loop.get(positionI).pointMiddle,
+//                            loop.get(positionJ).pointA,
+//                            loop.get(positionJ).pointB)
+//                            ) {
+//                        positionIntersectStart = i;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//
+//        for (int i = loop.size() - 1; i >= 0; i--) {
+//            for (int j = i + 1; j < loop.size() - 1; j++) {
+//                if (i != j) {
+//                    int positionI = normalizePositionOfLoop(positionNearNextPointInLoopArray - i);
+//                    int positionJ = normalizePositionOfLoop(positionNearNextPointInLoopArray - j);
+//                    if (isIntersect(
+//                            nextPoint,
+//                            loop.get(positionI).pointMiddle,
+//                            loop.get(positionJ).pointA,
+//                            loop.get(positionJ).pointB)
+//                            ) {
+//                        positionIntersectFinish = i;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
 
-        for (int i = loop.size() - 1; i >= 0; i--) {
-            for (int j = i + 1; j < loop.size() - 1; j++) {
-                if (i != j) {
-                    int positionI = normalizePositionOfLoop(positionNearNextPointInLoopArray - i);
-                    int positionJ = normalizePositionOfLoop(positionNearNextPointInLoopArray - j);
-                    if (isIntersect(
-                            nextPoint,
-                            loop.get(positionI).pointMiddle,
-                            loop.get(positionJ).pointA,
-                            loop.get(positionJ).pointB)
-                            ) {
-                        positionIntersectFinish = i;
-                        break;
-                    }
-                }
-            }
-        }
-
-
-        List<Line> borderSegment;
-        if (positionIntersectStart != positionNearNextPointInLoopArray && positionNearNextPointInLoopArray != positionIntersectFinish) {
-            borderSegment = new ArrayList<>(loop.size());
-
-            for (int i = 0; i < loop.size(); i++) {
-                int position = normalizePositionOfLoop(positionNearNextPointInLoopArray + i);
-                if (position < positionIntersectStart)
-                    borderSegment.add(loop.get(position));
-            }
-
-            for (int i = 0; i < loop.size(); i++) {
-                int position = normalizePositionOfLoop(positionNearNextPointInLoopArray - i);
-                if (position > positionIntersectFinish)
-                    borderSegment.add(loop.get(position));
-            }
-        } else {
-            borderSegment = new ArrayList<>(loop);
-            List<Integer> indexLinesDelete = new ArrayList<>(loop.size());
-            for (int i = 0; i < loop.size(); i++) {
-                for (int j = 0; j < loop.size(); j++) {
-                    if (i != j) {
-                        if (isIntersect(nextPoint, loop.get(i).pointMiddle, loop.get(j).pointA, loop.get(j).pointB)) {
-                            indexLinesDelete.add(i);
-                            j = loop.size();
-                        }
-                    }
-                }
-            }
-            for (int i = indexLinesDelete.size() - 1; i >= 0; i--) {
-                borderSegment.remove((int) indexLinesDelete.get(i));
-            }
-        }
+//
+//        List<Line> borderSegment;
+//        if (positionIntersectStart != positionNearNextPointInLoopArray && positionNearNextPointInLoopArray != positionIntersectFinish) {
+//            borderSegment = new ArrayList<>(loop.size());
+//
+//            for (int i = 0; i < loop.size(); i++) {
+//                int position = normalizePositionOfLoop(positionNearNextPointInLoopArray + i);
+//                if (position < positionIntersectStart)
+//                    borderSegment.add(loop.get(position));
+//            }
+//
+//            for (int i = 0; i < loop.size(); i++) {
+//                int position = normalizePositionOfLoop(positionNearNextPointInLoopArray - i);
+//                if (position > positionIntersectFinish)
+//                    borderSegment.add(loop.get(position));
+//            }
+//        } else {
+//            borderSegment = new ArrayList<>(loop);
+//            List<Integer> indexLinesDelete = new ArrayList<>(loop.size());
+//            for (int i = 0; i < loop.size(); i++) {
+//                for (int j = 0; j < loop.size(); j++) {
+//                    if (i != j) {
+//                        if (isIntersect(nextPoint, loop.get(i).pointMiddle, loop.get(j).pointA, loop.get(j).pointB)) {
+//                            indexLinesDelete.add(i);
+//                            j = loop.size();
+//                        }
+//                    }
+//                }
+//            }
+//            for (int i = indexLinesDelete.size() - 1; i >= 0; i--) {
+//                borderSegment.remove((int) indexLinesDelete.get(i));
+//            }
+//        }
 
 
         return (List<Line>) createSequence(borderSegment);
