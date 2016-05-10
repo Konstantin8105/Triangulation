@@ -1,4 +1,4 @@
-package triangulation.border;
+package triangulation.border.elements;
 
 import triangulation.elements.Line;
 

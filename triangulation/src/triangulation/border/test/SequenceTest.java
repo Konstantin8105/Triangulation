@@ -1,5 +1,5 @@
 import org.junit.Test;
-import triangulation.border.Sequence;
+import triangulation.border.elements.Sequence;
 import triangulation.elements.Line;
 
 import java.util.ArrayList;

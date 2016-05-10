@@ -1,6 +1,9 @@
 package triangulation.border;
 
 import triangulation.border.elements.LineWithPoints;
+import triangulation.border.elements.Segment;
+import triangulation.border.elements.SeparateLoopToSegment;
+import triangulation.border.elements.Sequence;
 import triangulation.elements.Line;
 import triangulation.elements.Mesh;
 import triangulation.elements.Point;
@@ -59,10 +62,14 @@ public class BorderLine {
             return (List<Line>) Sequence.createSequence(borderSegment);
         }
 
+        List<Segment> segments = SeparateLoopToSegment.create(loop);
+        List<Line> borderSegment = createBorderSegment(segments);
+        return (List<Line>) Sequence.createSequence(borderSegment);
 
+    }
 
-        return null;
-
+    private List<Line> createBorderSegment(List<Segment> segments) {
+        asd
     }
 
     private int normalizePositionOfLoop(int position) {
