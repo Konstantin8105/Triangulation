@@ -226,6 +226,7 @@ public class BorderLine {
         loop.removeAll(removedLine);
         addedLine.removeAll(removedLine);
         removedLine.clear();
+        // TODO: 5/11/16 need optimization
         for (int i = 0; i < addedLine.size(); i++) {
             loop.add(new LineWithPoints(addedLine.get(i)));
         }
