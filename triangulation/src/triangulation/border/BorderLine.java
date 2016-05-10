@@ -16,7 +16,7 @@ public class BorderLine {
     List<Line> addedLine = new ArrayList<>();
     List<Line> removedLine = new ArrayList<>();
 
-    int MINIMAL_AMOUNT_LOOP = 80;
+    int MINIMAL_AMOUNT_LOOP = 3;
 
     public BorderLine(Mesh mesh) {
         this.mesh = mesh;
