@@ -1,5 +1,5 @@
 import org.junit.Test;
-import triangulation.border.BorderLine;
+import triangulation.border.Sequence;
 import triangulation.elements.Line;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class SequenceTest {
         lines.add(new Line(3, 2));
         lines.add(new Line(2, 1));
         print("Before", lines);
-        List<Line> out = (List<Line>) BorderLine.createSequence(lines);
+        List<Line> out = (List<Line>) Sequence.createSequence(lines);
         print("After ", out);
         assertTrue(check(out));
     }
@@ -30,7 +30,7 @@ public class SequenceTest {
         lines.add(new Line(2, 1));
         lines.add(new Line(2, 0));
         print("Before", lines);
-        List<Line> out = (List<Line>) BorderLine.createSequence(lines);
+        List<Line> out = (List<Line>) Sequence.createSequence(lines);
         print("After ", out);
         assertTrue(check(out));
     }
@@ -42,7 +42,7 @@ public class SequenceTest {
         lines.add(new Line(2, 5));
         lines.add(new Line(2, 0));
         print("Before", lines);
-        List<Line> out = (List<Line>) BorderLine.createSequence(lines);
+        List<Line> out = (List<Line>) Sequence.createSequence(lines);
         print("After ", out);
         assertTrue(check(out));
     }
@@ -54,7 +54,7 @@ public class SequenceTest {
         lines.add(new Line(2, 5));
         lines.add(new Line(2, 0));
         print("Before", lines);
-        List<Line> out = (List<Line>) BorderLine.createSequence(lines);
+        List<Line> out = (List<Line>) Sequence.createSequence(lines);
         print("After ", out);
         assertTrue(check(out));
     }
@@ -66,7 +66,7 @@ public class SequenceTest {
         lines.add(new Line(2, 0));
         lines.add(new Line(2, 5));
         print("Before", lines);
-        List<Line> out = (List<Line>) BorderLine.createSequence(lines);
+        List<Line> out = (List<Line>) Sequence.createSequence(lines);
         print("After ", out);
         assertTrue(check(out));
     }
@@ -80,7 +80,7 @@ public class SequenceTest {
         lines.add(new Line(5, 2));
         lines.add(new Line(2, 1));
         print("Before", lines);
-        List<Line> out = (List<Line>) BorderLine.createSequence(lines);
+        List<Line> out = (List<Line>) Sequence.createSequence(lines);
         print("After ", out);
         assertTrue(check(out));
     }
@@ -91,7 +91,7 @@ public class SequenceTest {
         lines.add(new Line(174, 175));
         lines.add(new Line(191, 174));
         print("Before", lines);
-        List<Line> out = (List<Line>) BorderLine.createSequence(lines);
+        List<Line> out = (List<Line>) Sequence.createSequence(lines);
         print("After ", out);
         assertTrue(check(out));
     }
@@ -102,7 +102,7 @@ public class SequenceTest {
         lines.add(new Line(174, 175));
         lines.add(new Line(174, 191));
         print("Before", lines);
-        List<Line> out = (List<Line>) BorderLine.createSequence(lines);
+        List<Line> out = (List<Line>) Sequence.createSequence(lines);
         print("After ", out);
         assertTrue(check(out));
     }
@@ -114,7 +114,7 @@ public class SequenceTest {
         lines.add(new Line(175, 150));
         lines.add(new Line(174, 191));
         print("Before", lines);
-        List<Line> out = (List<Line>) BorderLine.createSequence(lines);
+        List<Line> out = (List<Line>) Sequence.createSequence(lines);
         print("After ", out);
         assertTrue(check(out));
     }
