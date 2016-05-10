@@ -13,7 +13,7 @@ public class ResearchTest {
     private static Random random = new Random();
 
     public static void main(String[] args) throws Exception {
-        int[] amountPoints = new int[]{3,5,10,20,50,100,200,500,1000};
+        int[] amountPoints = new int[]{3, 5, 10, 20, 50, 100, 200, 500, 1000};
         for (int i = 0; i < TYPE_TEST.values().length; i++) {
             System.out.println("TYPE OF TEST: " + TYPE_TEST.values()[i].toString());
             for (int amountPoint : amountPoints) {
@@ -23,7 +23,7 @@ public class ResearchTest {
     }
 
     private static void test(int size, TYPE_TEST type_test) throws Exception {
-        int amountTest = 2;
+        int amountTest = 10;
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageTime = 0;
@@ -74,6 +74,11 @@ public class ResearchTest {
             coordinates[j] = new Point(300 * Math.sin(2 * 3.1415 / size * j) + 300, 300 * Math.cos(2 * 3.1415 / size * j) + 300);
         }
         coordinates[coordinates.length - 1] = new Point(300, 300);
+//        coordinates[0] = new Point(-1, -1);
+//        coordinates[1] = new Point(601, -1);
+//        coordinates[2] = new Point(-1, 601);
+//        if (size > 3)
+//            coordinates[3] = new Point(601, 601);
         return Arrays.asList(coordinates);
     }
 }
