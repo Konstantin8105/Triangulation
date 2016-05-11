@@ -1,22 +1,32 @@
 package triangulation.elements;
 
+import triangulation.border.BorderBox;
 import triangulation.border.BorderLine;
 import triangulation.elements.Collections.IDable;
 import triangulation.geometry.GeometryPointLine;
 import triangulation.geometry.GeometryPointTriangle;
+import triangulation.grid.Grid;
 
 import java.util.List;
+import java.util.Set;
 
 public class Mesh {
     private final IDable<Point> points = new IDable<>();
     private final IDable<Line> lines = new IDable<>();
     private final IDable<Triangle> triangles = new IDable<>();
+    Grid lineGrid;
 
     private final BorderLine borderLine = new BorderLine(this);
 
-    public void addPoint(List<Point> point) {
-        points.add(point);
+    public void addPoint(List<Point> points) {
+        this.points.add(points);
         deleteSamePoints();
+
+        BorderBox box = new BorderBox();
+        for (Point point : points) {
+            box.addPoint(point);
+        }
+        lineGrid = new Grid(box, points.size());
     }
 
     private void deleteSamePoints() {
@@ -101,16 +111,29 @@ public class Mesh {
         if (lines.isEmpty())
             return null;
 
-        for (IDable<Line>.Element<Line> line : lines) {
-            Point pointA = this.points.getById(line.value.getIdPointA()).value;
-            Point pointB = this.points.getById(line.value.getIdPointB()).value;
+        //TODO next need optimization
+//        for (IDable<Line>.Element<Line> line : lines) {
+//            Point pointA = this.points.getById(line.value.getIdPointA()).value;
+//            Point pointB = this.points.getById(line.value.getIdPointB()).value;
+//            if (GeometryPointLine.statePointOnLine(nextPoint.value.getX(), nextPoint.value.getY(),
+//                    pointA, pointB)
+//                    == GeometryPointLine.PointLineState.POINT_ON_LINE) {
+//                return line;
+//            }
+//        }
+//
+//        return null;
+
+        Set<Integer> idLines = lineGrid.get(nextPoint.value);
+        for (Integer idLine: idLines) {
+            Point pointA = this.points.getById(lines.getById(idLine).value.getIdPointA()).value;
+            Point pointB = this.points.getById(lines.getById(idLine).value.getIdPointB()).value;
             if (GeometryPointLine.statePointOnLine(nextPoint.value.getX(), nextPoint.value.getY(),
                     pointA, pointB)
                     == GeometryPointLine.PointLineState.POINT_ON_LINE) {
-                return line;
+                return lines.getById(idLine);
             }
         }
-
         return null;
     }
 
@@ -120,6 +143,7 @@ public class Mesh {
         if (triangles.isEmpty())
             return null;
 
+        //TODO next need optimization
         for (IDable<Triangle>.Element<Triangle> triangle : triangles) {
             Point[] points = getPointsByTriangle(triangle.value);
             if (GeometryPointTriangle.isPointInTriangle(nextPoint.value, points) ==

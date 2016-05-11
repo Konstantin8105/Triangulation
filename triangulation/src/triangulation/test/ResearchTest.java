@@ -7,7 +7,9 @@ public class ResearchTest {
 
     enum TYPE_TEST {
         RANDOM,
-        CIRCLE
+        CIRCLE,
+        LINE_IN_LINE,
+        IN_TRIANGLE
     }
 
     private static Random random = new Random();
@@ -23,7 +25,7 @@ public class ResearchTest {
     }
 
     private static void test(int size, TYPE_TEST type_test) throws Exception {
-        int amountTest = 2;
+        int amountTest = 10;
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageTime = 0;
@@ -35,6 +37,12 @@ public class ResearchTest {
                 break;
             case CIRCLE:
                 mav = getCirclePoints(size);
+                break;
+            case LINE_IN_LINE:
+                mav = getLineOnLine(size);
+                break;
+            case IN_TRIANGLE:
+                mav = getInTriangles(size);
                 break;
         }
 
@@ -81,4 +89,26 @@ public class ResearchTest {
 //            coordinates[3] = new Point(601, 601);
         return Arrays.asList(coordinates);
     }
+
+    public static List<Point> getLineOnLine(int size) {
+        Point[] coordinates = new Point[1+size];
+        coordinates[0] = new Point(1,0);
+        for (int j = 1; j < coordinates.length; j++) {
+            coordinates[j] = new Point(j,j);
+        }
+        return Arrays.asList(coordinates);
+    }
+
+    public static List<Point> getInTriangles(int size) {
+        Point[] coordinates = new Point[4+size];
+        coordinates[0] = new Point(0,0);
+        coordinates[1] = new Point(1,0);
+        coordinates[2] = new Point(0,1);
+        coordinates[3] = new Point(1,1);
+        for (int j = 4; j < coordinates.length; j++) {
+            coordinates[j] = new Point(0.1+0.8*(double)j/(double)size,0.5);
+        }
+        return Arrays.asList(coordinates);
+    }
+
 }
