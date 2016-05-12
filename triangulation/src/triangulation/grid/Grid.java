@@ -3,10 +3,7 @@ package triangulation.grid;
 import triangulation.border.BorderBox;
 import triangulation.elements.Point;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Grid {
     private List<Integer> map[];
@@ -30,20 +27,23 @@ public class Grid {
     }
 
     public void add(BorderBox box, int id) {
-        Set<Integer> positions = convert(box);
+        Integer[] positions = convert(box);
         for (Integer position : positions) {
             map[position].add(id);
         }
     }
 
-    public Set<Integer> get(Point point) {
+    public Integer[] get(Point point) {
         int position = convert(point);
-        return new HashSet<>(map[position]);
+        Integer[] out = new Integer[map[position].size()];
+        out = map[position].toArray(out);
+        return out;
     }
 
-    public void remove(int idLine) {
-        for (int i = 0; i < map.length; i++) {
-            map[i].remove((Integer) idLine);
+    public void remove(BorderBox box, int id) {
+        Integer[] positions = convert(box);
+        for (Integer position : positions) {
+            map[position].remove((Integer) id);
         }
     }
 
@@ -53,15 +53,20 @@ public class Grid {
         return positionX + size * positionY;
     }
 
-    private Set<Integer> convert(BorderBox inputBox) {
-        Set<Integer> positions = new HashSet<>();
+    static long time = 0;
+
+    private Integer[] convert(BorderBox inputBox) {
         int positionX_min = (int) ((inputBox.getX_min() - box.getX_min()) / dx);
         int positionY_min = (int) ((inputBox.getY_min() - box.getY_min()) / dy);
         int positionX_max = (int) Math.min((inputBox.getX_max() - box.getX_min()) / dx, size - 1);
         int positionY_max = (int) Math.min((inputBox.getY_max() - box.getY_min()) / dy, size - 1);
+
+        Integer[] positions = new Integer[(positionX_max - positionX_min + 1) * (positionY_max - positionY_min + 1)];
+        int k = 0;
         for (int i = positionX_min; i <= positionX_max; i++) {
             for (int j = positionY_min; j <= positionY_max; j++) {
-                positions.add(i + size * j);
+                positions[k] = i + size * j;
+                k++;
             }
         }
         return positions;

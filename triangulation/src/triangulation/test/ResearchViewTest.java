@@ -12,6 +12,14 @@ public class ResearchViewTest {
             Triangulation triangulation = new Triangulation(ResearchTest.getCirclePoints(AMOUNT_POINTS));
             MeshView meshView = new MeshView(triangulation.getMesh());
         }
+        {
+            Triangulation triangulation = new Triangulation(ResearchTest.getLineOnLine(AMOUNT_POINTS));
+            MeshView meshView = new MeshView(triangulation.getMesh());
+        }
+        {
+            Triangulation triangulation = new Triangulation(ResearchTest.getInTriangles(AMOUNT_POINTS));
+            MeshView meshView = new MeshView(triangulation.getMesh());
+        }
     }
 
 
