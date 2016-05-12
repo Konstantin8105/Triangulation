@@ -41,6 +41,12 @@ public class Grid {
         return new HashSet<>(map[position]);
     }
 
+    public void remove(int idLine) {
+        for (int i = 0; i < map.length; i++) {
+            map[i].remove((Integer) idLine);
+        }
+    }
+
     private int convert(Point point) {
         int positionX = (int) Math.min((point.getX() - box.getX_min()) / dx, size - 1);
         int positionY = (int) Math.min((point.getY() - box.getY_min()) / dy, size - 1);
@@ -55,10 +61,7 @@ public class Grid {
         int positionY_max = (int) Math.min((inputBox.getY_max() - box.getY_min()) / dy, size - 1);
         for (int i = positionX_min; i <= positionX_max; i++) {
             for (int j = positionY_min; j <= positionY_max; j++) {
-                int position = i + size * j;
-                for (int k = 0; k < map[position].size(); k++) {
-                    positions.add(map[position].get(k));
-                }
+                positions.add(i + size * j);
             }
         }
         return positions;

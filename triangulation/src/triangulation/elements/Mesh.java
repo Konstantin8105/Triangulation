@@ -35,7 +35,14 @@ public class Mesh {
 
     public int addLine(Line line) throws Exception {
         borderLine.addLine(line);
-        return lines.add(line);
+        int id = lines.add(line);
+
+        BorderBox box = new BorderBox();
+        box.addPoint(points.getById(line.getIdPointA()).value);
+        box.addPoint(points.getById(line.getIdPointB()).value);
+        lineGrid.add(box,id);
+
+        return id;
     }
 
     public int addTriangle(Triangle triangle) {
@@ -57,6 +64,7 @@ public class Mesh {
     public void deleteLine(int idLine) {
         borderLine.removeLine(lines.getById(idLine).value);
         lines.remove(idLine);
+        lineGrid.remove(idLine);
     }
 
     public void deleteTriangle(int idTriangle) {
