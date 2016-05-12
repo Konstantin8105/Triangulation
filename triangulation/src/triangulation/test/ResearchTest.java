@@ -15,7 +15,11 @@ public class ResearchTest {
     private static Random random = new Random();
 
     public static void main(String[] args) throws Exception {
-        int[] amountPoints = new int[]{3, 5, 10, 20, 50, 100, 200, 500, 1000};//
+        int[] amountPoints = new int[]{
+                3, 5,
+                10, 20, 50,
+                100, 200, 500,
+                1000};//, 2000
         for (int i = 0; i < TYPE_TEST.values().length; i++) {
             System.out.println("TYPE OF TEST: " + TYPE_TEST.values()[i].toString());
             for (int amountPoint : amountPoints) {
@@ -25,7 +29,7 @@ public class ResearchTest {
     }
 
     private static void test(int size, TYPE_TEST type_test) throws Exception {
-        int amountTest = 20;
+        int amountTest = 10;
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageTime = 0;
@@ -68,7 +72,7 @@ public class ResearchTest {
     }
 
 
-    public static List<Point> getRandomPoints(int size) {
+    public static List<Point> getRandomPoints(final int size) {
         Point[] coordinates = new Point[size];
         for (int j = 0; j < coordinates.length; j++) {
             coordinates[j] = new Point((random.nextFloat()) * 600, (random.nextFloat()) * 600);
@@ -76,7 +80,7 @@ public class ResearchTest {
         return Arrays.asList(coordinates);
     }
 
-    public static List<Point> getCirclePoints(int size) {
+    public static List<Point> getCirclePoints(final int size) {
         Point[] coordinates = new Point[size];
         for (int j = 0; j < size - 1; j++) {
             coordinates[j] = new Point(300 * Math.sin(2 * 3.1415 / size * j) + 300, 300 * Math.cos(2 * 3.1415 / size * j) + 300);
@@ -85,7 +89,7 @@ public class ResearchTest {
         return Arrays.asList(coordinates);
     }
 
-    public static List<Point> getLineOnLine(int size) {
+    public static List<Point> getLineOnLine(final int size) {
         Point[] coordinates = new Point[3+size];
         coordinates[0] = new Point(000,000);
         coordinates[1] = new Point(600,0);
@@ -96,7 +100,7 @@ public class ResearchTest {
         return Arrays.asList(coordinates);
     }
 
-    public static List<Point> getInTriangles(int size) {
+    public static List<Point> getInTriangles(final int size) {
         Point[] coordinates = new Point[4+size];
         coordinates[0] = new Point(000,000);
         coordinates[1] = new Point(600,000);
