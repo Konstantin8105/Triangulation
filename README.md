@@ -47,29 +47,28 @@ Result:
 Performance for special test:
 
     TYPE OF TEST: RANDOM
-    Amount points:      3 point. Time is         3.50 ms. Triangles is      1 triangles.
-    Amount points:      5 point. Time is         1.50 ms. Triangles is      4 triangles.
-    Amount points:     10 point. Time is         4.50 ms. Triangles is     14 triangles.
-    Amount points:     20 point. Time is         7.00 ms. Triangles is     32 triangles.
-    Amount points:     50 point. Time is        24.50 ms. Triangles is     87 triangles.
-    Amount points:    100 point. Time is        22.50 ms. Triangles is    184 triangles.
-    Amount points:    200 point. Time is        46.50 ms. Triangles is    382 triangles.
-    Amount points:    500 point. Time is       271.00 ms. Triangles is    976 triangles.
-    Amount points:   1000 point. Time is       531.00 ms. Triangles is   1978 triangles.
+    Amount points:      3 point. Time is         2.00 ms. Triangles is      1 triangles.
+    Amount points:      5 point. Time is         1.20 ms. Triangles is      4 triangles.
+    Amount points:     10 point. Time is         3.30 ms. Triangles is     13 triangles.
+    Amount points:     20 point. Time is         4.10 ms. Triangles is     32 triangles.
+    Amount points:     50 point. Time is         7.20 ms. Triangles is     87 triangles.
+    Amount points:    100 point. Time is         9.00 ms. Triangles is    187 triangles.
+    Amount points:    200 point. Time is        10.00 ms. Triangles is    383 triangles.
+    Amount points:    500 point. Time is        50.80 ms. Triangles is    982 triangles.
+    Amount points:   1000 point. Time is       104.20 ms. Triangles is   1979 triangles.
     TYPE OF TEST: CIRCLE
-    Amount points:      3 point. Time is         0.00 ms. Triangles is      1 triangles.
-    Amount points:      5 point. Time is         0.50 ms. Triangles is      4 triangles.
-    Amount points:     10 point. Time is         0.50 ms. Triangles is      9 triangles.
-    Amount points:     20 point. Time is         2.00 ms. Triangles is     19 triangles.
-    Amount points:     50 point. Time is         5.50 ms. Triangles is     49 triangles.
-    Amount points:    100 point. Time is        14.50 ms. Triangles is     99 triangles.
-    Amount points:    200 point. Time is        63.50 ms. Triangles is    199 triangles.
-    Amount points:    500 point. Time is       636.00 ms. Triangles is    499 triangles.
-    Amount points:   1000 point. Time is      4515.50 ms. Triangles is    999 triangles.
+    Amount points:      3 point. Time is         0.10 ms. Triangles is      1 triangles.
+    Amount points:      5 point. Time is         0.20 ms. Triangles is      4 triangles.
+    Amount points:     10 point. Time is         0.40 ms. Triangles is      9 triangles.
+    Amount points:     20 point. Time is         0.50 ms. Triangles is     19 triangles.
+    Amount points:     50 point. Time is         2.50 ms. Triangles is     49 triangles.
+    Amount points:    100 point. Time is         4.90 ms. Triangles is     99 triangles.
+    Amount points:    200 point. Time is        20.90 ms. Triangles is    199 triangles.
+    Amount points:    500 point. Time is       240.80 ms. Triangles is    499 triangles.
+    Amount points:   1000 point. Time is      1508.10 ms. Triangles is    999 triangles.
+
 
 Present algorithm complexity in worst case - O(n^2), average - O(N).
-
-// TODO: Dynamic caching of line and triangles maps for change algorithm complexity in worst case to O(N*LOG(N))
 
 ![CIRCLE](https://github.com/Konstantin8105/Triangulation/blob/master/triangulation/other/CIRCLE.png)
 
