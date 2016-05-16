@@ -5,6 +5,11 @@ import java.util.Map;
 
 public class Counter {
     Map<String, Integer> map = new HashMap<>();
+    String name;
+
+    public Counter(String name) {
+        this.name = name;
+    }
 
     public void add(String str) {
         if (map.get(str) == null)
@@ -14,7 +19,7 @@ public class Counter {
 
     @Override
     public String toString() {
-        return "Counter{" +
+        return "Counter{" + name +
                 "map=" + map +
                 '}';
     }

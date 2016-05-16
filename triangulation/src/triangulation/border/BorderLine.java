@@ -1,5 +1,7 @@
 package triangulation.border;
 
+import com.sun.xml.internal.bind.v2.TODO;
+import counter.Counter;
 import triangulation.border.elements.LineWithPoints;
 import triangulation.border.elements.Segment;
 import triangulation.border.elements.SeparateLoopToSegment;
@@ -12,6 +14,7 @@ import triangulation.geometry.GeometryLineLine;
 import java.util.*;
 
 public class BorderLine {
+    Counter counter = new Counter("BorderLine");
     Mesh mesh;
     List<LineWithPoints> loop = new ArrayList<>();
     List<Line> addedLine = new ArrayList<>();
@@ -32,6 +35,7 @@ public class BorderLine {
     }
 
     public List<Line> getBorderSegment(Point nextPoint) throws Exception {
+        counter.add("getBorderSegment");
         createBorderLoop();
         loop = (List<LineWithPoints>) Sequence.loopization(loop);
         addPointsInLoop();
@@ -61,6 +65,9 @@ public class BorderLine {
             return (List<Line>) Sequence.createSequence(borderSegment);
         }
 
+        //TODO PROBLEM IS HERE
+        //TODO MEGA SUPER OPTIMIZE
+        //TODO TRY BINARY ALGORITHM
         List<Segment> segments = SeparateLoopToSegment.create(loop);
         List<Line> borderSegment = createBorderSegment(nextPoint, segments);
 
@@ -70,6 +77,7 @@ public class BorderLine {
     }
 
     private List<Line> createBorderSegment(Point nextPoint, List<Segment> segments) throws Exception {
+        counter.add("createBorderSegment");
         List<Line> borderSegment = new ArrayList<>();
         for (int i = 0; i < segments.size(); i++) {
             if (segments.get(i).haveBothSegments()) {
@@ -91,6 +99,7 @@ public class BorderLine {
     }
 
     private void checkTriangle(Point nextPoint, Segment segment, Segment fictiveSegment) throws Exception {
+        counter.add("checkTriangle1");
         LineWithPoints line[] = new LineWithPoints[3];
         if (segment.getSegment()[0].size() == 1) {
             line[0] = segment.getSegment()[0].get(0);
@@ -139,6 +148,7 @@ public class BorderLine {
     }
 
     private void checkTriangle(Point nextPoint, Segment segment) throws Exception {
+        counter.add("checkTriangle2");
         LineWithPoints line[] = new LineWithPoints[3];
         for (int i = 0; i < 2; i++) {
             if (segment.getSegment()[i].size() == 1) {
@@ -189,6 +199,7 @@ public class BorderLine {
     }
 
     private int normalizePositionOfList(int position, List<?> list) {
+        counter.add("normalizePositionOfList");
         if (0 <= position && position <= list.size() - 1)
             return position;
         if (position < 0)
@@ -197,6 +208,7 @@ public class BorderLine {
     }
 
     private boolean isIntersect(Point nextPoint, Point middle, Point pointA, Point pointB) {
+        counter.add("isIntersect");
         GeometryLineLine.IntersectState state = GeometryLineLine.stateLineLine(
                 nextPoint, middle,
                 pointA, pointB
@@ -210,6 +222,7 @@ public class BorderLine {
     }
 
     private void addPointsInLoop() {
+        counter.add("addPointsInLoop");
         for (LineWithPoints line : loop) {
             if (line.isPointNull()) {
                 line.setPoints(
@@ -220,6 +233,7 @@ public class BorderLine {
     }
 
     private void createBorderLoop() throws Exception {
+        counter.add("createBorderLoop");
         loop.removeAll(removedLine);
         addedLine.removeAll(removedLine);
         removedLine.clear();
@@ -238,5 +252,9 @@ public class BorderLine {
         if (loop.size() == 0)
             throw new Exception("Border don`t found any lines");
 
+    }
+
+    public Counter getCounter() {
+        return counter;
     }
 }

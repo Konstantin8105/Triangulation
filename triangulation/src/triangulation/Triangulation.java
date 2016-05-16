@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Triangulation {
     // TODO: 5/16/16 delete counters
-    private Counter counter = new Counter();
+    private Counter counter = new Counter("Triangulation");
     private Mesh mesh = new Mesh();
     private BorderBox bBox = new BorderBox();
 

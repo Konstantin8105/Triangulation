@@ -15,7 +15,7 @@ public class Mesh {
     private final IDable<Triangle> triangles = new IDable<>();
     Grid lineGrid;
     Grid triangleGrid;
-    private Counter counter = new Counter();
+    private Counter counter = new Counter("Mesh");
 
     private final BorderLine borderLine = new BorderLine(this);
 
@@ -109,7 +109,9 @@ public class Mesh {
                 (box.getX_min() + box.getX_max()) / 2,
                 (box.getY_min() + box.getY_max()) / 2
         );
-        Integer[] idTriangles = triangleGrid.get(point);
+
+
+        List<Integer> idTriangles = triangleGrid.get(point);
 
         IDable.Element[] tri = new IDable.Element[2];
         int presentPosition = 0;
@@ -157,7 +159,7 @@ public class Mesh {
 
     public IDable<?>.Element<?> pointInRegion(IDable<Point>.Element<Point> nextPoint) {
         counter.add("pointInRegion");
-        Integer[] idTriangles = triangleGrid.get(nextPoint.value);
+        List<Integer> idTriangles = triangleGrid.get(nextPoint.value);
         GeometryPointTriangle.PointTriangleState gpt = null;
         Line line = null;
         for (Integer id : idTriangles) {
@@ -182,7 +184,7 @@ public class Mesh {
                         gpt == GeometryPointTriangle.PointTriangleState.POINT_ON_LINE_1 ||
                         gpt == GeometryPointTriangle.PointTriangleState.POINT_ON_LINE_2
                 ) {
-            Integer[] idLines = lineGrid.get(nextPoint.value);
+            List<Integer> idLines = lineGrid.get(nextPoint.value);
             for (Integer idLine : idLines) {
                 IDable<Line>.Element<Line> lineById = lines.getById(idLine);
                 if (lineById.value.equals(line)) {
@@ -241,6 +243,9 @@ public class Mesh {
     }
 
     public Counter getCounter() {
+        System.out.println(lineGrid.getCounter());
+        System.out.println(triangleGrid.getCounter());
+        System.out.println(borderLine.getCounter());
         return counter;
     }
 }
