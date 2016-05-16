@@ -17,6 +17,13 @@ public class Counter {
         map.put(str, map.get(str) + 1);
     }
 
+    public void add(String str , int value) {
+        if (map.get(str) == null)
+            map.put(str, 0);
+        if(map.get(str) < value)
+            map.put(str, value);
+    }
+
     @Override
     public String toString() {
         return "Counter{" + name +

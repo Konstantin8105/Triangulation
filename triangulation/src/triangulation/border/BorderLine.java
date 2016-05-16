@@ -40,6 +40,7 @@ public class BorderLine {
         loop = (List<LineWithPoints>) Sequence.loopization(loop);
         addPointsInLoop();
 
+        counter.add("Loop #",loop.size());
 
         if (loop.size() <= MINIMAL_AMOUNT_LOOP) {
             List<Line> borderSegment = new ArrayList<>(loop);
