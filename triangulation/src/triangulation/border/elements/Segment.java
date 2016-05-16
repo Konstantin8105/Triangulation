@@ -30,7 +30,7 @@ public class Segment {
 
         Segment segment1 = (Segment) o;
 
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        //TODO Probably incorrect - comparing Object[] arrays with Arrays.equals
         return Arrays.equals(segment, segment1.segment);
 
     }
