@@ -52,6 +52,15 @@ public class MeshView extends JFrame {
                             (int) line.p[1].getY()
                             , 3, 3);
                 }
+                g.setColor(Color.BLACK);
+                for (IDable<Point>.Element<Point> point : mesh.getPoints()) {
+                    g.drawString(
+                            point.id + "",
+                            (int) point.value.getX(),
+                            (int) point.value.getY() + 20
+                    );
+                }
+
             }
         };
         setContentPane(panel);

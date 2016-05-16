@@ -65,7 +65,7 @@ Performance for special test:
     Amount points:    100 point. Time is         4.90 ms. Triangles is     99 triangles.
     Amount points:    200 point. Time is        20.90 ms. Triangles is    199 triangles.
     Amount points:    500 point. Time is       240.80 ms. Triangles is    499 triangles.
-    Amount points:   1000 point. Time is      1508.10 ms. Triangles is    999 triangles.
+    Amount points:   1000 point. Time is      1508.10 ms. Triangles is    999 triangles.__
 
 
 Present algorithm complexity in worst case - O(n^2), average - O(N).

@@ -44,6 +44,7 @@ public class GeometryPointTriangleTest {
                 GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE);
     }
 
+
     @Test
     public void testPointInTriangle4() throws Exception {
         Point nextPoint = new Point(1, 1);
@@ -54,24 +55,11 @@ public class GeometryPointTriangleTest {
         list[2] = (new Point(2, 0));
 
         Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint, list),
-                GeometryPointTriangle.PointTriangleState.POINT_ON_LINE);
+                GeometryPointTriangle.PointTriangleState.POINT_ON_LINE_0);
     }
 
     @Test
     public void testPointInTriangle5() throws Exception {
-        Point nextPoint = new Point(1, 0);
-
-        Point[] list = new Point[3];
-        list[0] = (new Point(0, 0));
-        list[1] = (new Point(2, 2));
-        list[2] = (new Point(2, 0));
-
-        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint, list),
-                GeometryPointTriangle.PointTriangleState.POINT_ON_LINE);
-    }
-
-    @Test
-    public void testPointInTriangle6() throws Exception {
         Point nextPoint = new Point(2, 1);
 
         Point[] list = new Point[3];
@@ -80,8 +68,22 @@ public class GeometryPointTriangleTest {
         list[2] = (new Point(2, 0));
 
         Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint, list),
-                GeometryPointTriangle.PointTriangleState.POINT_ON_LINE);
+                GeometryPointTriangle.PointTriangleState.POINT_ON_LINE_1);
     }
+
+    @Test
+    public void testPointInTriangle6() throws Exception {
+        Point nextPoint = new Point(1, 0);
+
+        Point[] list = new Point[3];
+        list[0] = (new Point(0, 0));
+        list[1] = (new Point(2, 2));
+        list[2] = (new Point(2, 0));
+
+        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint, list),
+                GeometryPointTriangle.PointTriangleState.POINT_ON_LINE_2);
+    }
+
 
     @Test
     public void testPointInTriangle7() throws Exception {

@@ -3,7 +3,8 @@ package triangulation.grid;
 import triangulation.border.BorderBox;
 import triangulation.elements.Point;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Grid {
     private List<Integer> map[];
@@ -22,7 +23,7 @@ public class Grid {
         }
     }
 
-    private int calculateSize(int sizePoint) {
+    private final int calculateSize(int sizePoint) {
         return (int) Math.max(1, Math.sqrt(sizePoint));
     }
 
@@ -33,7 +34,7 @@ public class Grid {
         }
     }
 
-    public Integer[] get(Point point) {
+    public final Integer[] get(Point point) {
         int position = convert(point);
         Integer[] out = new Integer[map[position].size()];
         out = map[position].toArray(out);
@@ -53,9 +54,7 @@ public class Grid {
         return positionX + size * positionY;
     }
 
-    static long time = 0;
-
-    private Integer[] convert(BorderBox inputBox) {
+    private final Integer[] convert(BorderBox inputBox) {
         int positionX_min = (int) ((inputBox.getX_min() - box.getX_min()) / dx);
         int positionY_min = (int) ((inputBox.getY_min() - box.getY_min()) / dy);
         int positionX_max = (int) Math.min((inputBox.getX_max() - box.getX_min()) / dx, size - 1);

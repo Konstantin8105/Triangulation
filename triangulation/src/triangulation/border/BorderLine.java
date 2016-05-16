@@ -9,10 +9,7 @@ import triangulation.elements.Mesh;
 import triangulation.elements.Point;
 import triangulation.geometry.GeometryLineLine;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class BorderLine {
     Mesh mesh;
@@ -226,7 +223,7 @@ public class BorderLine {
         loop.removeAll(removedLine);
         addedLine.removeAll(removedLine);
         removedLine.clear();
-        // TODO: 5/11/16 need optimization
+        ((ArrayList)loop).ensureCapacity(loop.size() + addedLine.size());
         for (int i = 0; i < addedLine.size(); i++) {
             loop.add(new LineWithPoints(addedLine.get(i)));
         }
