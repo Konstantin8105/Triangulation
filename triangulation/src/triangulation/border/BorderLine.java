@@ -44,12 +44,12 @@ public class BorderLine {
 
         if (loop.size() <= MINIMAL_AMOUNT_LOOP) {
             return (List<Line>) Sequence.createSequence(
-                    BorderSegmentWorst.segmentation(nextPoint, loop)
+                    (new BorderSegmentWorst()).segmentation(nextPoint, loop)
             );
         }
 
         return (List<Line>) Sequence.createSequence(
-                BorderSegmentPair.segmentation(nextPoint, loop)
+                (new BorderSegmentPair()).segmentation(nextPoint, loop)
         );
     }
 

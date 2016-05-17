@@ -7,10 +7,9 @@ import triangulation.geometry.GeometryLineLine;
 
 import java.util.List;
 
-public class BorderSegment {
-    public static List<Line> segmentation(final Point nextPoint,final List<LineWithPoints> loop) throws Exception{
-        return null;
-    }
+public abstract class BorderSegment {
+
+    public abstract List<Line> segmentation(final Point nextPoint,final List<LineWithPoints> loop) throws Exception;
 
     protected static boolean isIntersect(Point nextPoint, Point middle, Point pointA, Point pointB) {
         GeometryLineLine.IntersectState state = GeometryLineLine.stateLineLine(

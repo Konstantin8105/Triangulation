@@ -11,11 +11,8 @@ import java.util.List;
 
 public class BorderSegmentPair extends BorderSegment {
 
-    public static List<Line> segmentation(final Point nextPoint,final List<LineWithPoints> loop) throws Exception {
-
-        //TODO PROBLEM IS HERE
-        //TODO MEGA SUPER OPTIMIZE
-        //TODO TRY BINARY ALGORITHM
+    @Override
+    public List<Line> segmentation(final Point nextPoint,final List<LineWithPoints> loop) throws Exception {
         List<Segment> segments = SeparateLoopToSegment.create(loop);
         return createBorderSegment(nextPoint, segments);
     }
