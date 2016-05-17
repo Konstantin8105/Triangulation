@@ -1,4 +1,4 @@
-package triangulation.border.elements;
+package triangulation.border.borderSegment.elements;
 
 import java.util.ArrayList;
 import java.util.Arrays;

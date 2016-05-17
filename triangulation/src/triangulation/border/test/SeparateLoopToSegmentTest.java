@@ -1,7 +1,7 @@
 import org.junit.Test;
-import triangulation.border.elements.LineWithPoints;
-import triangulation.border.elements.Segment;
-import triangulation.border.elements.SeparateLoopToSegment;
+import triangulation.border.borderSegment.elements.LineWithPoints;
+import triangulation.border.borderSegment.elements.Segment;
+import triangulation.border.borderSegment.elements.SeparateLoopToSegment;
 import triangulation.elements.Point;
 
 import java.util.ArrayList;
