@@ -1,6 +1,5 @@
 package triangulation.border;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import counter.Counter;
 import triangulation.border.elements.LineWithPoints;
 import triangulation.border.elements.Segment;
@@ -11,7 +10,9 @@ import triangulation.elements.Mesh;
 import triangulation.elements.Point;
 import triangulation.geometry.GeometryLineLine;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class BorderLine {
     Counter counter = new Counter("BorderLine");
