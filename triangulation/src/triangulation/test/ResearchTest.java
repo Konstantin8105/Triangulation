@@ -16,9 +16,9 @@ public class ResearchTest {
 
     public static void main(String[] args) throws Exception {
         int[] amountPoints = new int[]{
-                //3, 5,
-                //10, 20, 50,
-                //100, 200, 500,
+                3, 5,
+                10, 20, 50,
+                100, 200, 500,
                 1000};//, 2000
         for (int i = 0; i < TYPE_TEST.values().length; i++) {
             System.out.println("TYPE OF TEST: " + TYPE_TEST.values()[i].toString());
@@ -29,7 +29,7 @@ public class ResearchTest {
     }
 
     private static void test(int size, TYPE_TEST type_test) throws Exception {
-        int amountTest =  1;//10;//
+        int amountTest = 20;//10;//1;//
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageTime = 0;
@@ -90,24 +90,27 @@ public class ResearchTest {
     }
 
     public static List<Point> getLineOnLine(final int size) {
-        Point[] coordinates = new Point[3+size];
-        coordinates[0] = new Point(000,000);
-        coordinates[1] = new Point(600,0);
-        coordinates[2] = new Point(600,0);
+        Point[] coordinates = new Point[3 + size];
+        coordinates[0] = new Point(0, 0);
+        coordinates[1] = new Point(600, 0);
+        coordinates[2] = new Point(600, 600);
         for (int j = 3; j < coordinates.length; j++) {
-            coordinates[j] = new Point(j+1,j+1);
+            coordinates[j] = new Point(
+                    0.8D * j / coordinates.length * 600D,
+                    0.8D * j / coordinates.length * 600D
+            );
         }
         return Arrays.asList(coordinates);
     }
 
     public static List<Point> getInTriangles(final int size) {
-        Point[] coordinates = new Point[4+size];
-        coordinates[0] = new Point(000,000);
-        coordinates[1] = new Point(600,000);
-        coordinates[2] = new Point(000,600);
-        coordinates[3] = new Point(600,600);
+        Point[] coordinates = new Point[4 + size];
+        coordinates[0] = new Point(0, 0);
+        coordinates[1] = new Point(600, 0);
+        coordinates[2] = new Point(0, 600);
+        coordinates[3] = new Point(600, 600);
         for (int j = 4; j < coordinates.length; j++) {
-            coordinates[j] = new Point(0.1+600*0.8*(double)j/(double)size,300);
+            coordinates[j] = new Point(0.1 + 600 * 0.8 * (double) j / (double) size, 300);
         }
         return Arrays.asList(coordinates);
     }

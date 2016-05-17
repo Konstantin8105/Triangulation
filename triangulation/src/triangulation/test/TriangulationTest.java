@@ -549,9 +549,9 @@ public class TriangulationTest {
         Triangulation triangulation = new Triangulation(coordinates);
         assertTrue(triangulation.getMesh().sizeTriangles() > 0);
 
-        System.out.println("Point=" + triangulation.getMesh().sizePoints());
-        System.out.println("Line=" + triangulation.getMesh().sizeLines());
-        System.out.println("Triangle=" + triangulation.getMesh().sizeTriangles());
+//        System.out.println("Point=" + triangulation.getMesh().sizePoints());
+//        System.out.println("Line=" + triangulation.getMesh().sizeLines());
+//        System.out.println("Triangle=" + triangulation.getMesh().sizeTriangles());
     }
 
 
@@ -582,9 +582,9 @@ public class TriangulationTest {
                     new Point(shortDistance, 0.5D)
             };
             Triangulation triangulation = new Triangulation(Arrays.asList(points));
-            System.out.println(
-                    "shortDistance = " + String.format("%.3e",shortDistance)
-                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+//            System.out.println(
+//                    "shortDistance = " + String.format("%.3e",shortDistance)
+//                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
             Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
         }
     }
@@ -600,9 +600,9 @@ public class TriangulationTest {
                     new Point(1.0D, 0.5D*height)
             };
             Triangulation triangulation = new Triangulation(Arrays.asList(points));
-            System.out.println(
-                    "height = " + String.format("%.3e",height)
-                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+//            System.out.println(
+//                    "height = " + String.format("%.3e",height)
+//                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
             Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
         }
     }
@@ -618,9 +618,9 @@ public class TriangulationTest {
                     new Point(0.5D*width+1.0D, 0.5D*width)
             };
             Triangulation triangulation = new Triangulation(Arrays.asList(points));
-            System.out.println(
-                    "height = " + String.format("%.3e",width)
-                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+//            System.out.println(
+//                    "height = " + String.format("%.3e",width)
+//                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
             Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
         }
     }
@@ -636,9 +636,9 @@ public class TriangulationTest {
                     new Point(0.5D*width+1.0D, 0.5D*width)
             };
             Triangulation triangulation = new Triangulation(Arrays.asList(points));
-            System.out.println(
-                    "height = " + String.format("%.3e",width)
-                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+//            System.out.println(
+//                    "height = " + String.format("%.3e",width)
+//                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
             Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
         }
     }

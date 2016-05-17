@@ -11,7 +11,7 @@ public class RandomTest {
 
     public static void main(String[] args) throws Exception {
         List<Point> list = new ArrayList<>();
-        for (int i = 0; i < 2000; i++) {
+        for (int i = 0; i < 20000; i++) {
             for (int j = 0; j < 6; j++) {
                 list.add(new Point((random.nextFloat()) * 5d, (random.nextFloat()) * 5d));
             }

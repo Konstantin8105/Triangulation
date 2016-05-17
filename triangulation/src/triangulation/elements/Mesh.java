@@ -1,6 +1,5 @@
 package triangulation.elements;
 
-import counter.Counter;
 import triangulation.border.BorderBox;
 import triangulation.border.BorderLine;
 import triangulation.elements.Collections.IDable;
@@ -15,12 +14,12 @@ public class Mesh {
     private final IDable<Triangle> triangles = new IDable<>();
     Grid lineGrid;
     Grid triangleGrid;
-    private Counter counter = new Counter("Mesh");
+//    private Counter counter = new Counter("Mesh");
 
     private final BorderLine borderLine = new BorderLine(this);
 
     public void addPoint(List<Point> points) {
-        counter.add("addPoint");
+        //counter.add("addPoint");
         this.points.add(points);
         deleteSamePoints();
 
@@ -37,7 +36,7 @@ public class Mesh {
     }
 
     public int addLine(Line line, boolean mayBeBorder) throws Exception {
-        counter.add("addLine");
+        //counter.add("addLine");
         if (mayBeBorder) {
             borderLine.addLine(line);
         }
@@ -49,7 +48,7 @@ public class Mesh {
     }
 
     private BorderBox getBoxLine(Line line) {
-        counter.add("getBoxLine");
+        //counter.add("getBoxLine");
         BorderBox box = new BorderBox();
         box.addPoint(points.getById(line.getIdPointA()).value);
         box.addPoint(points.getById(line.getIdPointB()).value);
@@ -57,7 +56,7 @@ public class Mesh {
     }
 
     public int addTriangle(Triangle triangle) {
-        counter.add("addTriangle");
+        //counter.add("addTriangle");
         int id = triangles.add(triangle);
 
         triangleGrid.add(getBoxTriangle(triangle), id);
@@ -67,7 +66,7 @@ public class Mesh {
 
     private BorderBox getBoxTriangle(Triangle triangle) {
         // TODO: 5/16/16 optimize
-        counter.add("getBoxTriangle");
+        //counter.add("getBoxTriangle");
         BorderBox box = new BorderBox();
         box.addPoint(points.getById(triangle.getIdPoint1()).value);
         box.addPoint(points.getById(triangle.getIdPoint2()).value);
@@ -88,20 +87,20 @@ public class Mesh {
     }
 
     public void deleteLine(int idLine) {
-        counter.add("deleteLine");
+        //counter.add("deleteLine");
         borderLine.removeLine(lines.getById(idLine).value);
         lineGrid.remove(getBoxLine(lines.getById(idLine).value), idLine);
         lines.remove(idLine);
     }
 
     public void deleteTriangle(int idTriangle) {
-        counter.add("deleteTriangle");
+        //counter.add("deleteTriangle");
         triangleGrid.remove(getBoxTriangle(triangles.getById(idTriangle).value), idTriangle);
         triangles.remove(idTriangle);
     }
 
     public IDable.Element[] getTrianglesByLine(Line line) throws Exception {
-        counter.add("getTrianglesByLine");
+        //counter.add("getTrianglesByLine");
         // TODO: 5/16/16 super optimize
 
         BorderBox box = getBoxLine(line);
@@ -134,7 +133,7 @@ public class Mesh {
     }
 
     private Point[] getPointsByTriangle(Triangle triangle) {
-        counter.add("getPointsByTriangle");
+        //counter.add("getPointsByTriangle");
         // TODO: 5/16/16 super optimize
         // TODO: 5/16/16  optimize
         Point[] points = new Point[3];
@@ -158,7 +157,7 @@ public class Mesh {
     }
 
     public IDable<?>.Element<?> pointInRegion(IDable<Point>.Element<Point> nextPoint) {
-        counter.add("pointInRegion");
+        //counter.add("pointInRegion");
         List<Integer> idTriangles = triangleGrid.get(nextPoint.value);
         GeometryPointTriangle.PointTriangleState gpt = null;
         Line line = null;
@@ -238,14 +237,14 @@ public class Mesh {
     }
 
     public List<Line> getBorderSegment(Point nextPoint) throws Exception {
-        counter.add("getBorderSegment");
+        //counter.add("getBorderSegment");
         return borderLine.getBorderSegment(nextPoint);
     }
 
-    public Counter getCounter() {
-        System.out.println(lineGrid.getCounter());
-        System.out.println(triangleGrid.getCounter());
-        System.out.println(borderLine.getCounter());
-        return counter;
-    }
+//    public Counter getCounter() {
+//        System.out.println(lineGrid.getCounter());
+//        System.out.println(triangleGrid.getCounter());
+//        System.out.println(borderLine.getCounter());
+//        return counter;
+//    }
 }

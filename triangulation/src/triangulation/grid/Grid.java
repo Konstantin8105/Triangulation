@@ -1,22 +1,20 @@
 package triangulation.grid;
 
-import counter.Counter;
 import triangulation.border.BorderBox;
-import triangulation.elements.Line;
 import triangulation.elements.Point;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Grid {
-    Counter counter = new Counter("Grid");
+//    Counter counter = new Counter("Grid");
     private List<Integer> map[];
     double dx, dy;
     int size;
     BorderBox box;
 
     public Grid(BorderBox box, int sizePoint) {
-        counter.add("Grid");
+        //counter.add("Grid");
         this.box = box;
         size = calculateSize(sizePoint);
         dx = (box.getX_max() - box.getX_min()) / (double) size;
@@ -32,7 +30,7 @@ public class Grid {
     }
 
     public void add(final BorderBox box, final int id) {
-        counter.add("add");
+        //counter.add("add");
         Integer[] positions = convert(box);
         for (Integer position : positions) {
             map[position].add(id);
@@ -40,13 +38,13 @@ public class Grid {
     }
 
     public final List<Integer> get(final Point point) {
-        counter.add("get");
+        //counter.add("get");
         int position = convert(point);
         return map[position];
     }
 
     public void remove(final BorderBox box,final int id) {
-        counter.add("remove");
+        //counter.add("remove");
         Integer[] positions = convert(box);
         for (Integer position : positions) {
             map[position].remove((Integer) id);
@@ -54,14 +52,14 @@ public class Grid {
     }
 
     private int convert(final Point point) {
-        counter.add("convert1");
+        //counter.add("convert1");
         int positionX = (int) Math.min((point.getX() - box.getX_min()) / dx, size - 1);
         int positionY = (int) Math.min((point.getY() - box.getY_min()) / dy, size - 1);
         return positionX + size * positionY;
     }
 
     private final Integer[] convert(final BorderBox inputBox) {
-        counter.add("convert2");
+        //counter.add("convert2");
         int positionX_min = (int) ((inputBox.getX_min() - box.getX_min()) / dx);
         int positionY_min = (int) ((inputBox.getY_min() - box.getY_min()) / dy);
         int positionX_max = (int) Math.min((inputBox.getX_max() - box.getX_min()) / dx, size - 1);
@@ -77,8 +75,8 @@ public class Grid {
         }
         return positions;
     }
-
-    public Counter getCounter() {
-        return counter;
-    }
+//
+//    public Counter getCounter() {
+//        return counter;
+//    }
 }
