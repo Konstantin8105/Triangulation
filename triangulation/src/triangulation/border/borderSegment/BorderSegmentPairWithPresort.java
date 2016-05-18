@@ -5,6 +5,7 @@ import triangulation.border.BorderBox;
 import triangulation.border.borderSegment.elements.LineWithPoints;
 import triangulation.elements.Line;
 import triangulation.elements.Point;
+import triangulation.geometry.Geometry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +21,30 @@ public class BorderSegmentPairWithPresort extends BorderSegmentPair {
     @NotNull
     private List<LineWithPoints> fastRemoveSegment(final Point nextPoint, final List<LineWithPoints> loop) {
         // find point near point on loop
-        Point pointNear = findNearPoint(nextPoint, loop);
+        //Point pointNear = findNearPoint(nextPoint, loop);
         Point pointCenter = centerOfLoop(loop);
         BorderBox bBox = getBorderBox(loop);
-        // line perpendicular line (pointNear, pointCenter) in point pointCenter on BorderBox
+        // line perpendicular line (nextPoint, pointCenter) in point pointCenter on BorderBox
+        LineWithPoints perpendicularLine = getPerpendicularLine(bBox,nextPoint,pointCenter);
 
 
         List<LineWithPoints> segment = new ArrayList<>();
 
 
         return null;
+    }
+
+    private LineWithPoints getPerpendicularLine(BorderBox bBox, Point pointA, Point pointB) {
+        LineWithPoints perLine = null;
+        try {
+            perLine = new LineWithPoints(-1,1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Y = a*X + b
+        double [] parameterLine = Geometry.line(pointA,pointB);
+        sdfsd
+
     }
 
     private BorderBox getBorderBox(List<LineWithPoints> loop) {

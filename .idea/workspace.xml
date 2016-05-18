@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPair.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPair.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/test/SeparateLoopToSegmentTest.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/test/SeparateLoopToSegmentTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/triangulation.iml" afterPath="$PROJECT_DIR$/triangulation/triangulation.iml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentConvex.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPairWithPresort.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPairWithPresort.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPairWithPresort.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/Geometry.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/Geometry.java" />
     </list>
     <manually-removed-from-ignored>
       <directory path="$PROJECT_DIR$/out/" />
@@ -43,11 +40,21 @@
       <file leaf-file-name="BorderSegmentPairWithPresort.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPairWithPresort.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+            <state relative-caret-position="516">
+              <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Geometry.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/geometry/Geometry.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="805">
+              <caret line="107" column="16" selection-start-line="107" selection-start-column="16" selection-end-line="107" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -95,7 +102,6 @@
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/elements/BorderLine.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/BorderLine.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/border/test/BorderBoxTest.java" />
-        <option value="$PROJECT_DIR$/triangulation/src/triangulation/geometry/Geometry.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/elements/Line.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/border/Sequence.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/border/test/SequenceTest.java" />
@@ -123,6 +129,7 @@
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentConvex.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPair.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java" />
+        <option value="$PROJECT_DIR$/triangulation/src/triangulation/geometry/Geometry.java" />
         <option value="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPairWithPresort.java" />
       </list>
     </option>
@@ -249,6 +256,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Triangulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="triangulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="triangulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="geometry" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -748,13 +777,6 @@
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
     </task>
-    <task id="LOCAL-00035" summary="prepare for release&#10;">
-      <created>1462605230890</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1462605230890</updated>
-    </task>
     <task id="LOCAL-00036" summary="prepare for release&#10;">
       <created>1462605346386</created>
       <option name="number" value="00036" />
@@ -1091,7 +1113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1463512507090</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="add modification of BorderSegmentPair">
+      <created>1463570638762</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1463570638763</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1147,7 +1176,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36051503" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.5095986" sideWeight="0.5976395" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.5095986" sideWeight="0.5976395" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1187,7 +1216,8 @@
     <MESSAGE value="add counter for every class" />
     <MESSAGE value="create BorderSegment" />
     <MESSAGE value="create BorderSegmentConvex" />
-    <option name="LAST_COMMIT_MESSAGE" value="create BorderSegmentConvex" />
+    <MESSAGE value="add modification of BorderSegmentPair" />
+    <option name="LAST_COMMIT_MESSAGE" value="add modification of BorderSegmentPair" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1247,13 +1277,6 @@
     </entry>
     <entry file="jar:///usr/lib/jvm/openjdk-8/src.zip!/java/util/Collection.java" />
     <entry file="jar:///usr/lib/jvm/openjdk-8/src.zip!/java/util/Collections.java" />
-    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/elements/LineWithPoints.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/core/old/GridIndex.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1180">
@@ -1341,13 +1364,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/geometry/Geometry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="710">
-          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/elements/Point.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -1366,14 +1382,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="32" column="63" selection-start-line="32" selection-start-column="63" selection-end-line="32" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/elements/Line.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="41" column="19" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1502,6 +1510,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1544,10 +1555,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/elements/Line.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/elements/LineWithPoints.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/geometry/Geometry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="805">
+          <caret line="107" column="16" selection-start-line="107" selection-start-column="16" selection-end-line="107" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPairWithPresort.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+        <state relative-caret-position="516">
+          <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
