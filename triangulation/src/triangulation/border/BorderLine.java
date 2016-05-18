@@ -98,7 +98,7 @@ public class BorderLine {
             }
         } else {
             // TODO: 5/19/16
-            //System.err.println(addedLine);
+            System.err.println(addedLine);
             //[Line{idPointA=2, idPointB=1}, Line{idPointA=1, idPointB=0}, Line{idPointA=0, idPointB=2}]
         }
 

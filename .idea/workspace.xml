@@ -3,20 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/Triangulation.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/Triangulation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegment.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPair.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPair.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPairWithPresort.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPairWithPresort.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentWorst.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentWorst.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/elements/LineWithPoints.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/elements/LineWithPoints.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/elements/Segment.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/elements/Segment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/elements/Sequence.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/elements/Sequence.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/test/SequenceTest.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/border/test/SequenceTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/elements/Line.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/elements/Line.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/elements/Mesh.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/elements/Mesh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/Geometry.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/Geometry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/test/TriangulationTest.java" afterPath="$PROJECT_DIR$/triangulation/src/triangulation/test/TriangulationTest.java" />
     </list>
     <manually-removed-from-ignored>
       <directory path="$PROJECT_DIR$/out/" />
@@ -48,7 +35,18 @@
     <favorites_list name="Triangulation" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="BorderLine.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-475">
+              <caret line="43" column="12" selection-start-line="43" selection-start-column="12" selection-end-line="49" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -509,7 +507,7 @@
       </FILE-GROUP>
     </UpdatedFiles>
   </component>
-  <component name="RunManager" selected="Application.ResearchTest">
+  <component name="RunManager" selected="Application.RandomTest">
     <configuration default="false" name="TriangulationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="triangulation" />
@@ -571,6 +569,21 @@
       </option>
       <envs />
       <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="RandomTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="RandomTest" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="triangulation" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -828,18 +841,20 @@
       <envs />
       <method />
     </configuration>
-    <list size="5">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.ResearchTest" />
       <item index="1" class="java.lang.String" itemvalue="JAR Application.unlicense.jar" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.TriangulationTest" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.SequenceTest.test10" />
       <item index="4" class="java.lang.String" itemvalue="JUnit.TriangulationTest.testRandom16" />
+      <item index="5" class="java.lang.String" itemvalue="Application.RandomTest" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.TriangulationTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.TriangulationTest.testRandom16" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.SequenceTest.test10" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Application.RandomTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.TriangulationTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.TriangulationTest.testRandom16" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.SequenceTest.test10" />
       </list>
     </recent_temporary>
   </component>
@@ -859,13 +874,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
-    </task>
-    <task id="LOCAL-00036" summary="prepare for release&#10;">
-      <created>1462605346386</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1462605346386</updated>
     </task>
     <task id="LOCAL-00037" summary="prepare for release&#10;">
       <created>1462622353680</created>
@@ -1203,7 +1211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1463513572610</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="optimize BorderLine">
+      <created>1463607535781</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1463607535782</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1259,11 +1274,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36051503" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48509052" sideWeight="0.5976395" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41853034" sideWeight="0.5976395" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2886266" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15388711" sideWeight="0.57832617" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15388711" sideWeight="0.57832617" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32725322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15388711" sideWeight="0.42167383" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1299,7 +1314,8 @@
     <MESSAGE value="add counter for every class" />
     <MESSAGE value="create BorderSegment" />
     <MESSAGE value="create BorderSegmentConvex" />
-    <option name="LAST_COMMIT_MESSAGE" value="create BorderSegmentConvex" />
+    <MESSAGE value="optimize BorderLine" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimize BorderLine" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1687,14 +1703,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="100" column="14" selection-start-line="100" selection-start-column="14" selection-end-line="100" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
@@ -1703,6 +1711,14 @@
             <folding />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-475">
+          <caret line="43" column="12" selection-start-line="43" selection-start-column="12" selection-end-line="49" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
