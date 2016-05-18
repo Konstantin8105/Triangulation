@@ -10,8 +10,8 @@ import java.util.List;
 public class BorderSegmentWorst extends BorderSegment {
 
     @Override
-    public List<Line> segmentation(final Point nextPoint,final List<LineWithPoints> loop) {
-        List<Line> borderSegment = new ArrayList<>(loop);
+    public List<LineWithPoints> segmentation(final Point nextPoint,final List<LineWithPoints> loop) {
+        List<LineWithPoints> borderSegment = new ArrayList<>(loop);
         List<Integer> indexLinesDelete = new ArrayList<>(loop.size());
         for (int i = 0; i < loop.size(); i++) {
             for (int j = 0; j < loop.size(); j++) {

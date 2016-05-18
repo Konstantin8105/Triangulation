@@ -12,13 +12,18 @@ import java.util.List;
 public class BorderSegmentPair extends BorderSegment {
 
     @Override
-    public List<Line> segmentation(final Point nextPoint,final List<LineWithPoints> loop) throws Exception {
+    public List<LineWithPoints> segmentation(final Point nextPoint,final List<LineWithPoints> loop) throws Exception {
+//        System.err.println("segmentation loop = " + loop);
         List<Segment> segments = SeparateLoopToSegment.create(loop);
+//        System.err.println("after segmentation loop = " + loop);
+//        System.err.println("after segmentation segments = " + segments);
         return createBorderSegment(nextPoint, segments);
     }
 
-    protected static List<Line> createBorderSegment(Point nextPoint, List<Segment> segments) throws Exception {
-        List<Line> borderSegment = new ArrayList<>();
+    protected static List<LineWithPoints> createBorderSegment(Point nextPoint, List<Segment> segments) throws Exception {
+
+//        System.err.println("IN createBorderSegment segments = " + segments);
+        List<LineWithPoints> borderSegment = new ArrayList<>();
         for (int i = 0; i < segments.size(); i++) {
             if (segments.get(i).haveBothSegments()) {
                 checkTriangle(nextPoint, segments.get(i));
@@ -35,6 +40,7 @@ public class BorderSegmentPair extends BorderSegment {
                 }
             }
         }
+//        System.err.println("OUT createBorderSegment segments = " + borderSegment);
         return borderSegment;
     }
 

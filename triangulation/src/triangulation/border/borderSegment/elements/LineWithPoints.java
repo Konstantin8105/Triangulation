@@ -37,4 +37,14 @@ public class LineWithPoints extends Line {
     public Point getPointMiddle() {
         return pointMiddle;
     }
+
+    @Override
+    public String toString() {
+        return "LineWithPoints{" +
+                "pointA=" + pointA +
+                ", pointB=" + pointB +
+                ", pointMiddle=" + pointMiddle +
+                ", other = "+super.toString() +
+                '}';
+    }
 }

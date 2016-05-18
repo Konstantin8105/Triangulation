@@ -7,6 +7,7 @@ import triangulation.geometry.GeometryPointTriangle;
 import triangulation.grid.Grid;
 
 import java.util.List;
+import java.util.Set;
 
 public class Mesh {
     private final IDable<Point> points = new IDable<>();

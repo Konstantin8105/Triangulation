@@ -475,6 +475,44 @@ public class TriangulationTest {
         assertTrue(triangulation.getMesh().sizeTriangles() > 0);
     }
 
+
+    @Test
+    public void testRandom15() throws Exception {
+        String[] sd =
+                {
+                        "+4.07175630","+2.75479794",
+                        "+2.49386877","+1.78084821",
+                        "+1.77609503","+3.89831454",
+                        "+1.26394361","+4.70015585",
+                        "+0.96141100","+2.89390683",
+                        "+3.14880669","+0.15805602"
+                };
+        Point[] coordinates = new Point[sd.length / 2];
+        for (int i = 0; i < coordinates.length; i++) {
+            coordinates[i] = new Point(Float.parseFloat(sd[i * 2]), Float.parseFloat(sd[i * 2 + 1]));
+        }
+        Triangulation triangulation = new Triangulation(Arrays.asList(coordinates));
+        assertTrue(triangulation.getMesh().sizeTriangles() > 0);
+    }
+    @Test
+    public void testRandom16() throws Exception {
+        String[] sd =
+                {
+                        "+0.58440030","+4.04493093",
+                        "+2.18379974","+2.20603019",
+                        "+2.98257530","+3.00027132",
+                        "+3.77792090","+3.01150024",
+                        "+2.25563675","+4.67153043",
+                        "+0.57463855","+3.81438643",
+                };
+        Point[] coordinates = new Point[sd.length / 2];
+        for (int i = 0; i < coordinates.length; i++) {
+            coordinates[i] = new Point(Float.parseFloat(sd[i * 2]), Float.parseFloat(sd[i * 2 + 1]));
+        }
+        Triangulation triangulation = new Triangulation(Arrays.asList(coordinates));
+        assertTrue(triangulation.getMesh().sizeTriangles() > 0);
+    }
+
     @Test
     public void testGetters6pointsWith5On1line() throws Exception {
         Point[] coordinates = new Point[6];

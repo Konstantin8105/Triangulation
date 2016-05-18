@@ -41,8 +41,9 @@ public class Line {
     @Override
     public boolean equals(Object o) {
         Line line = (Line) o;
-        return (idPointA == line.idPointA && idPointB == line.idPointB) ||
-                (idPointB == line.idPointA && idPointA == line.idPointB);
+        if(idPointA == line.idPointA && idPointB == line.idPointB)
+            return true;
+        return  (idPointB == line.idPointA && idPointA == line.idPointB);
 
     }
 

@@ -102,9 +102,4 @@ public class Geometry {
     public static double distancePoints(Point point1, Point point2) {
         return Math.sqrt(Math.pow(point1.getX() - point2.getX(), 2.0D) + Math.pow(point1.getY() - point2.getY(), 2.0D));
     }
-
-    public static double[] line(Point point1, Point point2){
-        // result a,b ==> from ==> Y=a*X+b
-        tdsfsd s
-    }
 }

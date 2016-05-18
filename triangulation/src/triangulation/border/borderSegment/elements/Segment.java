@@ -42,4 +42,12 @@ public class Segment {
     public boolean[] getIntersect() {
         return intersect;
     }
+
+    @Override
+    public String toString() {
+        return "Segment{" +
+                "segment=" + Arrays.toString(segment) +
+                ", intersect=" + Arrays.toString(intersect) +
+                '}';
+    }
 }

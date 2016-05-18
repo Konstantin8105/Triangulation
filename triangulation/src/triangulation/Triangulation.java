@@ -92,9 +92,9 @@ public class Triangulation {
 
     private void addSimpleTriangle(List<IDable.Element> point) throws Exception {
         //counter.add("addSimpleTriangle");
-        mesh.addLine(new Line(point.get(0).id, point.get(1).id), NOT_BORDER);
-        mesh.addLine(new Line(point.get(1).id, point.get(2).id), NOT_BORDER);
-        mesh.addLine(new Line(point.get(2).id, point.get(0).id), NOT_BORDER);
+        mesh.addLine(new Line(point.get(0).id, point.get(1).id), MAY_BE_BORDER);
+        mesh.addLine(new Line(point.get(1).id, point.get(2).id), MAY_BE_BORDER);
+        mesh.addLine(new Line(point.get(2).id, point.get(0).id), MAY_BE_BORDER);
         mesh.addTriangle(new Triangle(
                 point.get(0).id,
                 point.get(1).id,

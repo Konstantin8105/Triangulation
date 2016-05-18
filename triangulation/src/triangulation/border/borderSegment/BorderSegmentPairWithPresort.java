@@ -13,11 +13,12 @@ import java.util.List;
 public class BorderSegmentPairWithPresort extends BorderSegmentPair {
 
     @Override
-    public List<Line> segmentation(final Point nextPoint, final List<LineWithPoints> loop) throws Exception {
-        List<LineWithPoints> segment = fastRemoveSegment(nextPoint, loop);
-        return super.segmentation(nextPoint, segment);
+    public List<LineWithPoints> segmentation(final Point nextPoint, final List<LineWithPoints> loop) throws Exception {
+        return null;
+//        List<LineWithPoints> segment = fastRemoveSegment(nextPoint, loop);
+//        return super.segmentation(nextPoint, segment);
     }
-
+/*
     @NotNull
     private List<LineWithPoints> fastRemoveSegment(final Point nextPoint, final List<LineWithPoints> loop) {
         // find point near point on loop
@@ -80,5 +81,5 @@ public class BorderSegmentPairWithPresort extends BorderSegmentPair {
     private double distance(Point pointA, Point pointB) {
         return Math.sqrt(Math.pow(pointA.getX() - pointB.getX(), 2.0D)
                 + Math.pow(pointA.getY() - pointB.getY(), 2.0D));
-    }
+    }*/
 }

@@ -132,4 +132,36 @@ public class SequenceTest {
         return true;
     }
 
+    //Line{idPointA=1, idPointB=0}, Line{idPointA=0, idPointB=2}, Line{idPointA=3, idPointB=1}, Line{idPointA=3, idPointB=2}
+
+    @Test
+    public void test10() throws Exception {
+        List<Line> lines = new ArrayList<>();
+        lines.add(new Line(1, 0));
+        lines.add(new Line(0, 2));
+        lines.add(new Line(3, 1));
+        lines.add(new Line(3, 2));
+        print("Before", lines);
+        List<Line> out = (List<Line>) Sequence.createSequence(lines);
+        print("After ", out);
+        assertTrue(check(out));
+    }
+
+//IN createSequence inputLines = [Line{idPointA=1, idPointB=0}, Line{idPointA=0, idPointB=2}, Line{idPointA=3, idPointB=1}, Line{idPointA=3, idPointB=2}]
+//OUT createSequence inputLines = [Line{idPointA=1, idPointB=0}, Line{idPointA=0, idPointB=2}, Line{idPointA=2, idPointB=3}, Line{idPointA=3, idPointB=1}]
+
+    @Test
+    public void test11() throws Exception {
+        List<Line> lines = new ArrayList<>();
+        lines.add(new Line(1, 0));
+        lines.add(new Line(0, 2));
+        lines.add(new Line(3, 1));
+        lines.add(new Line(3, 2));
+        print("Before", lines);
+        List<Line> out = (List<Line>) Sequence.createSequence(lines);
+        print("After ", out);
+        assertTrue(check(out));
+    }
+
+
 }
