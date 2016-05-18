@@ -17,7 +17,7 @@ public class BorderSegmentPair extends BorderSegment {
         return createBorderSegment(nextPoint, segments);
     }
 
-    private static List<Line> createBorderSegment(Point nextPoint, List<Segment> segments) throws Exception {
+    protected static List<Line> createBorderSegment(Point nextPoint, List<Segment> segments) throws Exception {
         List<Line> borderSegment = new ArrayList<>();
         for (int i = 0; i < segments.size(); i++) {
             if (segments.get(i).haveBothSegments()) {

@@ -1,8 +1,7 @@
 package triangulation.border;
 
 import counter.Counter;
-import triangulation.border.borderSegment.BorderSegmentConvex;
-import triangulation.border.borderSegment.BorderSegmentPair;
+import triangulation.border.borderSegment.BorderSegmentPairWithPresort;
 import triangulation.border.borderSegment.BorderSegmentWorst;
 import triangulation.border.borderSegment.elements.LineWithPoints;
 import triangulation.border.borderSegment.elements.Sequence;
@@ -50,8 +49,7 @@ public class BorderLine {
         }
 
         return (List<Line>) Sequence.createSequence(
-                (new BorderSegmentConvex()).segmentation(nextPoint, loop)
-//                (new BorderSegmentPair()).segmentation(nextPoint, loop)
+                (new BorderSegmentPairWithPresort()).segmentation(nextPoint, loop)
         );
     }
 
