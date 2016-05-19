@@ -45,6 +45,7 @@ public class Grid {
 
     public void remove(final BorderBox box,final int id) {
         //counter.add("remove");
+        // TODO: 19.05.2016 optimize - don`t delete every time
         Integer[] positions = convert(box);
         for (Integer position : positions) {
             map[position].remove((Integer) id);
