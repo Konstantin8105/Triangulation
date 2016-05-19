@@ -19,7 +19,9 @@ public class ResearchTest {
                 3, 5,
                 10, 20, 50,
                 100, 200, 500,
-                1000};//, 2000
+                1000//, 2000, 5000
+//                100000
+        };
         for (int i = 0; i < TYPE_TEST.values().length; i++) {
             System.out.println("TYPE OF TEST: " + TYPE_TEST.values()[i].toString());
             for (int amountPoint : amountPoints) {
@@ -29,7 +31,7 @@ public class ResearchTest {
     }
 
     private static void test(int size, TYPE_TEST type_test) throws Exception {
-        int amountTest = 20;//10;//1;//500;//
+        int amountTest = 10;//1;//500;//20;//
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageTime = 0;
