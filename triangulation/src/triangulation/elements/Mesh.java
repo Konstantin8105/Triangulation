@@ -118,6 +118,9 @@ public class Mesh {
 
         for (Integer id : idTriangles) {
             IDable<Triangle>.Element<Triangle> triangle = triangles.getById(id);
+            if(triangle == null) {
+                continue;
+            }
             Line[] lines = triangle.value.getLines();
             for (Line singleLine : lines) {
                 if (line.equals(singleLine)) {
@@ -164,6 +167,9 @@ public class Mesh {
         Line line = null;
         for (Integer id : idTriangles) {
             IDable<Triangle>.Element<Triangle> triangle = triangles.getById(id);
+            if(triangle == null) {
+                continue;
+            }
             Point[] points = getPointsByTriangle(triangle.value);
             gpt = GeometryPointTriangle.isPointInTriangle(nextPoint.value, points);
             if (gpt == GeometryPointTriangle.PointTriangleState.POINT_INSIDE) {
@@ -187,6 +193,9 @@ public class Mesh {
             List<Integer> idLines = lineGrid.get(nextPoint.value);
             for (Integer idLine : idLines) {
                 IDable<Line>.Element<Line> lineById = lines.getById(idLine);
+                if(lineById == null) {
+                    continue;
+                }
                 if (lineById.value.equals(line)) {
                     return lineById;
                 }

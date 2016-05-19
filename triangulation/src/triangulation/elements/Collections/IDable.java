@@ -59,11 +59,15 @@ public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
 
     public void remove(int id) {
         int index = convertIDtoINDEX(id);
+        //todo check on ounside of index
         list.remove(index);
     }
 
     public Element<T> getById(int id) {
-        return list.get(convertIDtoINDEX(id));
+        int index = convertIDtoINDEX(id);
+        if(index < 0)
+            return null;
+        return list.get(index);
     }
 
     @Override
