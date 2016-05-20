@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/other/Performance.ods" afterPath="$PROJECT_DIR$/triangulation/other/Performance.ods" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <manually-removed-from-ignored>
@@ -788,13 +787,6 @@
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
     </task>
-    <task id="LOCAL-00044" summary="prepare for release&#10;">
-      <created>1462631591091</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1462631591091</updated>
-    </task>
     <task id="LOCAL-00045" summary="prepare for release&#10;">
       <created>1462632062900</created>
       <option name="number" value="00045" />
@@ -1131,7 +1123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1463733155319</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="optimize Grid">
+      <created>1463733214132</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1463733214132</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TestHistory">
