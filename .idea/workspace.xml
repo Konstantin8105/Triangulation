@@ -1,77 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/junit_junit_4_12.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/Statistic.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/TestMesh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/border/BorderBoxTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/border/SeparateLoopToSegmentTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/border/SequenceTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/geometry/GeometryLineLineTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/geometry/GeometryPointLineTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/geometry/GeometryPointTriangleTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/geometry/GeometryTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/triangulation/ExampleTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/triangulation/RandomTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/triangulation/ResearchTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/triangulation/ResearchViewTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/triangulation/TriangulationTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/unlicenseTest/DelaunayTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/test/java/unlicenseTest/GeometriesTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/Main.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/MeshView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/core/old/AdvanceMesh.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/core/old/BorderLineConvexRegion.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/core/old/GridIndex.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/core/old/Statistic.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/core/old/TestMesh.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/counter/Counter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/crosssection/Area.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/crosssection/AreaTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/crosssection/AreaTest2.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/Triangulation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/BorderBox.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/BorderLine.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPair.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentPairWithPresort.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/BorderSegmentWorst.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/elements/LineWithPoints.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/elements/Segment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/elements/SeparateLoopToSegment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/borderSegment/elements/Sequence.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/test/BorderBoxTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/test/SeparateLoopToSegmentTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/border/test/SequenceTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/elements/Collections/IDable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/elements/Line.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/elements/Mesh.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/elements/Point.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/elements/Triangle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/Geometry.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/GeometryCoordinate.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/GeometryLineLine.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/GeometryPointLine.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/GeometryPointTriangle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/Precisions.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/test/GeometryLineLineTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/test/GeometryPointLineTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/test/GeometryPointTriangleTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/geometry/test/GeometryTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/grid/Grid.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/test/ExampleTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/test/RandomTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/test/ResearchTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/test/ResearchViewTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/triangulation/test/TriangulationTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/unlicenseTest/DelaunayTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/unlicenseTest/GeometriesTest.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="add maven in project">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/Main.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/MeshView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/counter/Counter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/crosssection/Area.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/crosssection/AreaTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/crosssection/AreaTest2.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/Triangulation.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/BorderBox.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/BorderLine.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/BorderSegment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/BorderSegmentPair.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/BorderSegmentPairWithPresort.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/BorderSegmentWorst.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/elements/LineWithPoints.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/elements/Segment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/elements/SeparateLoopToSegment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/elements/Sequence.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/elements/Collections/IDable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/elements/Line.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/elements/Mesh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/elements/Point.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/elements/Triangle.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/geometry/Geometry.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/geometry/GeometryCoordinate.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/geometry/GeometryLineLine.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/geometry/GeometryPointLine.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/geometry/GeometryPointTriangle.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/geometry/Precisions.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/grid/Grid.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/triangulation.iml" afterPath="$PROJECT_DIR$/triangulation/triangulation.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/triangulation/target/" />
     <manually-removed-from-ignored>
@@ -862,13 +824,6 @@
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
     </task>
-    <task id="LOCAL-00047" summary="prepare for release&#10;">
-      <created>1462632183020</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1462632183020</updated>
-    </task>
     <task id="LOCAL-00048" summary="prepare for release&#10;">
       <created>1462634752419</created>
       <option name="number" value="00048" />
@@ -1205,7 +1160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1463771578830</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="add maven in project">
+      <created>1463773334934</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1463773334934</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1303,7 +1265,8 @@
     <MESSAGE value="create BorderSegmentConvex" />
     <MESSAGE value="optimize BorderLine" />
     <MESSAGE value="optimize Grid" />
-    <option name="LAST_COMMIT_MESSAGE" value="optimize Grid" />
+    <MESSAGE value="add maven in project" />
+    <option name="LAST_COMMIT_MESSAGE" value="add maven in project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1417,6 +1380,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="10" column="21" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1440,6 +1404,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
