@@ -59,7 +59,7 @@ public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
 
     public void remove(int id) {
         int index = convertIDtoINDEX(id);
-        //todo check on ounside of index
+        //todo check on outside of index
         list.remove(index);
     }
 
