@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="org.openjdk.jmh:jmh-java-benchmark-archetype:1.12" type="repository">
+    <properties maven-id="org.openjdk.jmh:jmh-java-benchmark-archetype:1.12" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-java-benchmark-archetype/1.12/jmh-java-benchmark-archetype-1.12.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
