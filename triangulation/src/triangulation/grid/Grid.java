@@ -26,7 +26,8 @@ public class Grid {
     }
 
     private final int calculateSize(int sizePoint) {
-        return (int) Math.max(1, Math.sqrt(sizePoint));
+//        return (int) Math.max(1, Math.sqrt(sizePoint));
+        return (int) Math.max(1, 0.8 * Math.pow(sizePoint, 3D / 8D));
     }
 
     public void add(final BorderBox box, final int id) {
@@ -44,8 +45,13 @@ public class Grid {
         return map[position];
     }
 
+    public int getPosition(final Point point) {
+        return convert(point);
+    }
+
     private int counter = 0;
-    private int MAX_COUNTER_FOR_START_DELETE = 100;
+    private int MAX_COUNTER_FOR_START_DELETE = 200;
+
 
     private class RemoveBox {
         public BorderBox box;
@@ -60,18 +66,11 @@ public class Grid {
     private List<RemoveBox> removeBoxes = new ArrayList<>();
 
     public void remove(final BorderBox box, final int id) {
-        //counter.add("remove");
-        // TODO: 19.05.2016 optimize - don`t delete every time
-//        Integer[] positions = convert(box);
-//        for (Integer position : positions) {
-//            map[position].remove((Integer) id);
-//        }
         removeBoxes.add(new RemoveBox(box, id));
         counter++;
         if (counter >= MAX_COUNTER_FOR_START_DELETE) {
             counter = 0;
             for (RemoveBox removeBox : removeBoxes) {
-                // TODO: 19.05.2016 optimize by sorting
                 Integer[] positions = convert(removeBox.box);
                 for (Integer position : positions) {
                     map[position].remove((Integer) removeBox.id);

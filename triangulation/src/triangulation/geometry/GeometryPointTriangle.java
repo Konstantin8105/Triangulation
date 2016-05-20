@@ -19,9 +19,14 @@ public class GeometryPointTriangle {
         if (!GeometryCoordinate.isPointInRectangle(p, tri))
             return PointTriangleState.POINT_OUTSIDE;
 
-        for (triangulation.elements.Point aTri : tri) {
-            if (p.equals(aTri))
-                return PointTriangleState.POINT_ON_CORNER;
+        Point vector1 = new Point(tri[1].getX() - tri[0].getX(), tri[1].getY() - tri[0].getY());
+        Point vector2 = new Point(tri[2].getX() - tri[0].getX(), tri[2].getY() - tri[0].getY());
+        double det = vector1.getX() * vector2.getY() - vector2.getX() * vector1.getY();
+        Point tmp = new Point(p.getX() - tri[0].getX(), p.getY() - tri[0].getY());
+        double lambda = (tmp.getX() * vector2.getY() - vector2.getX() * tmp.getY()) / det;
+        double mue = (vector1.getX() * tmp.getY() - tmp.getX() * vector1.getY()) / det;
+        if (lambda > 0 && mue > 0 && (lambda + mue) <= 1) {
+            return PointTriangleState.POINT_INSIDE;
         }
 
         if (GeometryPointLine.statePointOnLine(p, tri[0], tri[1]) == GeometryPointLine.PointLineState.POINT_ON_LINE) {
@@ -34,6 +39,11 @@ public class GeometryPointTriangle {
             return PointTriangleState.POINT_ON_LINE_2;
         }
 
+        for (triangulation.elements.Point aTri : tri) {
+            if (p.equals(aTri))
+                return PointTriangleState.POINT_ON_CORNER;
+        }
+/*
         GeometryLineLine.IntersectState noIS = GeometryLineLine.IntersectState.NOT_INTERSECT;
         if (GeometryLineLine.stateLineLine(p, tri[0], tri[1], tri[2]) == noIS &&
                 GeometryLineLine.stateLineLine(p, tri[1], tri[2], tri[0]) == noIS &&
@@ -77,7 +87,7 @@ public class GeometryPointTriangle {
             }
 
 
-        }
+        }*/
 
         return PointTriangleState.POINT_OUTSIDE;
 

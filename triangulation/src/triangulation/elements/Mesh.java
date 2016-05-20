@@ -111,6 +111,7 @@ public class Mesh {
         );
 
 
+        int positionInTriangleGrid = triangleGrid.getPosition(point);
         List<Integer> idTriangles = triangleGrid.get(point);
 
         IDable.Element[] tri = new IDable.Element[2];
@@ -138,8 +139,6 @@ public class Mesh {
 
     private Point[] getPointsByTriangle(Triangle triangle) {
         //counter.add("getPointsByTriangle");
-        // TODO: 5/16/16 super optimize
-        // TODO: 5/16/16  optimize
         Point[] points = new Point[3];
         for (int i = 0; i < triangle.getPointsId().size(); i++) {
             points[i] = this.points.getById(triangle.getPointsId().get(i)).value;
