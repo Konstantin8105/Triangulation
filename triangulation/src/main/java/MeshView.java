@@ -1,3 +1,4 @@
+import research.ResearchTest;
 import triangulation.Triangulation;
 import triangulation.elements.Collections.IDable;
 import triangulation.elements.Line;
@@ -72,15 +73,22 @@ public class MeshView extends JFrame {
     }
 
     public static void main(String[] args) throws Exception {
-        triangulation.elements.Point[] coordinates = new triangulation.elements.Point[]{
-                new triangulation.elements.Point(000.0f, 000.0f),
-                new triangulation.elements.Point(100.0f, 000.0f),
-                new triangulation.elements.Point(100.0f, 100.0f),
-                new triangulation.elements.Point(100.0f, 400.0f)
-        };
-
-        Triangulation triangulation = new Triangulation(Arrays.asList(coordinates));
-
-        MeshView view = new MeshView(triangulation.getMesh());
+        int AMOUNT_POINTS = 200;
+        {
+            Triangulation triangulation = new Triangulation(ResearchTest.getRandomPoints(AMOUNT_POINTS));
+            MeshView meshView = new MeshView(triangulation.getMesh());
+        }
+        {
+            Triangulation triangulation = new Triangulation(ResearchTest.getCirclePoints(AMOUNT_POINTS));
+            MeshView meshView = new MeshView(triangulation.getMesh());
+        }
+        {
+            Triangulation triangulation = new Triangulation(ResearchTest.getLineOnLine(AMOUNT_POINTS));
+            MeshView meshView = new MeshView(triangulation.getMesh());
+        }
+        {
+            Triangulation triangulation = new Triangulation(ResearchTest.getInTriangles(AMOUNT_POINTS));
+            MeshView meshView = new MeshView(triangulation.getMesh());
+        }
     }
 }

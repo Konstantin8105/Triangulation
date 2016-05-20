@@ -25,7 +25,7 @@ public class GeometryPointTriangle {
         Point tmp = new Point(p.getX() - tri[0].getX(), p.getY() - tri[0].getY());
         double lambda = (tmp.getX() * vector2.getY() - vector2.getX() * tmp.getY()) / det;
         double mue = (vector1.getX() * tmp.getY() - tmp.getX() * vector1.getY()) / det;
-        if (lambda > 0 && mue > 0 && (lambda + mue) <= 1) {
+        if (lambda > 0 && mue > 0 && (lambda + mue) < 1) {
             return PointTriangleState.POINT_INSIDE;
         }
 

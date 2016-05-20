@@ -99,4 +99,48 @@ public class GeometryPointTriangleTest {
         Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint, list),
                 GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE);
     }
+
+
+    @Test
+    public void testPointInTriangle8() throws Exception {
+        Point nextPoint = new Point(-0.1, -0.1);
+
+        Point[] list = new Point[3];
+        list[0] = (new Point(0, 0));
+        list[1] = (new Point(2, 2));
+        list[2] = (new Point(2, 0));
+
+        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint, list),
+                GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE);
+    }
+
+
+    @Test
+    public void testPointInTriangle9() throws Exception {
+        Point nextPoint = new Point(2.1, -0.1);
+
+        Point[] list = new Point[3];
+        list[0] = (new Point(0, 0));
+        list[1] = (new Point(2, 2));
+        list[2] = (new Point(2, 0));
+
+        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint, list),
+                GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE);
+    }
+
+
+    @Test
+    public void testPointInTriangle10() throws Exception {
+        Point nextPoint = new Point(2.1, 2.1);
+
+        Point[] list = new Point[3];
+        list[0] = (new Point(0, 0));
+        list[1] = (new Point(2, 2));
+        list[2] = (new Point(2, 0));
+
+        Assert.assertEquals(GeometryPointTriangle.isPointInTriangle(nextPoint, list),
+                GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE);
+    }
+
+
 }

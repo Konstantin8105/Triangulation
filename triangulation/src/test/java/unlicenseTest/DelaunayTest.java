@@ -7,13 +7,14 @@ package unlicenseTest;
 
 import org.junit.Assert;
 import org.junit.Test;
-import un.api.collection.Sequence;
-import un.impl.geometry.Point;
-import un.impl.geometry.triangulate.Delaunay;
+//import un.api.collection.Sequence;
+//import un.impl.geometry.Point;
+//import un.impl.geometry.triangulate.Delaunay;
 
 import java.util.Random;
 
 public class DelaunayTest {
+/*
 
     @Test
     public void singleTest2() {
@@ -119,6 +120,7 @@ public class DelaunayTest {
             Assert.assertTrue(delaunay.computeTriangles().getSize() == 2);
         }
     }
+*/
 
 }
 
