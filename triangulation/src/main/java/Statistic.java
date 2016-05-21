@@ -1,5 +1,3 @@
-
-
 public class Statistic {
     // TODO: 2/14/16 Add algoritm
 //    RamMesh dataMesh;

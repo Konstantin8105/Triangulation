@@ -13,13 +13,14 @@ import java.util.concurrent.TimeUnit;
 @Fork(value = 2)
 @Warmup(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 10, time = 2, timeUnit = TimeUnit.SECONDS)
-@Timeout(time = 10, timeUnit = TimeUnit.MILLISECONDS)
+@Timeout(time = 50, timeUnit = TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)//.Thread)
 public class TriangulationBenchmark {
     @Param({
             "3", "5",
-            "100"//, "200", "500",
-            //"1000"//, "2000", "5000"
+            "10", "20", "50"//,
+//            "100", "200", "500",
+//            "1000", "2000", "5000"
     })
     int size;
 
