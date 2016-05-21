@@ -121,10 +121,14 @@ public class SequenceTest {
         assertTrue(check(out));
     }
 
+    final private boolean PRINTABLE = false;
+
     private void print(String str, List<Line> lines) {
-        System.out.println(str);
-        for(Line line:lines){
-            System.out.println(line);
+        if (PRINTABLE) {
+            System.out.println(str);
+            for (Line line : lines) {
+                System.out.println(line);
+            }
         }
     }
 

@@ -92,6 +92,34 @@ Performance for special test:
     Amount points:   2000 point. Time is       947.10 ms. Triangles is   4002 triangles.
 
 
+    # Run complete. Total time: 00:20:18
+
+    Benchmark                                 (size)        (test)  Mode  Cnt   Score    Error  Units
+    TriangulationBenchmark.triangulationMesh       3        Random  avgt   20   0.001 ±  0.001  ms/op
+    TriangulationBenchmark.triangulationMesh       3        Circle  avgt   20   0.001 ±  0.001  ms/op
+    TriangulationBenchmark.triangulationMesh       3  Line_in_line  avgt   20   0.006 ±  0.001  ms/op
+    TriangulationBenchmark.triangulationMesh       3   In_triangle  avgt   20   0.013 ±  0.001  ms/op
+
+    TriangulationBenchmark.triangulationMesh       5        Random  avgt   20   0.004 ±  0.001  ms/op
+    TriangulationBenchmark.triangulationMesh       5        Circle  avgt   20   0.004 ±  0.001  ms/op
+    TriangulationBenchmark.triangulationMesh       5  Line_in_line  avgt   20   0.011 ±  0.001  ms/op
+    TriangulationBenchmark.triangulationMesh       5   In_triangle  avgt   20   0.019 ±  0.001  ms/op
+
+    TriangulationBenchmark.triangulationMesh     100        Random  avgt   20   1.303 ±  0.056  ms/op
+    TriangulationBenchmark.triangulationMesh     100        Circle  avgt   20   2.403 ±  0.094  ms/op
+    TriangulationBenchmark.triangulationMesh     100  Line_in_line  avgt   20   1.220 ±  0.038  ms/op
+    TriangulationBenchmark.triangulationMesh     100   In_triangle  avgt   20   2.210 ±  0.151  ms/op
+
+    TriangulationBenchmark.triangulationMesh     200        Random  avgt   20   3.474 ±  0.345  ms/op
+    TriangulationBenchmark.triangulationMesh     200        Circle  avgt   20  10.144 ±  0.553  ms/op
+    TriangulationBenchmark.triangulationMesh     200  Line_in_line  avgt   20   6.059 ±  0.224  ms/op
+    TriangulationBenchmark.triangulationMesh     200   In_triangle  avgt   20   8.057 ±  0.323  ms/op
+
+    TriangulationBenchmark.triangulationMesh     500        Random  avgt   20  12.430 ±  0.642  ms/op
+    TriangulationBenchmark.triangulationMesh     500        Circle  avgt   20  97.872 ± 11.548  ms/op
+    TriangulationBenchmark.triangulationMesh     500  Line_in_line  avgt   20  20.037 ±  2.350  ms/op
+    TriangulationBenchmark.triangulationMesh     500   In_triangle  avgt   20  50.085 ±  2.244  ms/op
+
 
 
 Present algorithm complexity in worst case - O(n^2), average - O(N).

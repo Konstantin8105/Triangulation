@@ -13,6 +13,8 @@ import static org.junit.Assert.assertTrue;
 
 public class TriangulationTest {
 
+    final private boolean PRINTABLE = false;
+
     @Test
     public void testGetters2points() throws Exception {
         Point[] coordinates = new Point[2];
@@ -169,7 +171,7 @@ public class TriangulationTest {
             float radius = 50f;
             float angle = 2f * 3.1415926f * ((float) (i)) / ((float) (coordinates.length + 1));
             coordinates[i + 1] = new Point(radius * (float) Math.sin(angle), radius * (float) Math.cos(angle));
-            System.out.println("i = " + coordinates[i + 1]);
+            if (PRINTABLE) System.out.println("i = " + coordinates[i + 1]);
         }
 
         Triangulation triangulation = new Triangulation(Arrays.asList(coordinates));
@@ -589,9 +591,11 @@ public class TriangulationTest {
         Triangulation triangulation = new Triangulation(coordinates);
         assertTrue(triangulation.getMesh().sizeTriangles() > 0);
 
-//        System.out.println("Point=" + triangulation.getMesh().sizePoints());
-//        System.out.println("Line=" + triangulation.getMesh().sizeLines());
-//        System.out.println("Triangle=" + triangulation.getMesh().sizeTriangles());
+        if (PRINTABLE) {
+            System.out.println("Point=" + triangulation.getMesh().sizePoints());
+            System.out.println("Line=" + triangulation.getMesh().sizeLines());
+            System.out.println("Triangle=" + triangulation.getMesh().sizeTriangles());
+        }
     }
 
 
@@ -622,9 +626,11 @@ public class TriangulationTest {
                     new Point(shortDistance, 0.5D)
             };
             Triangulation triangulation = new Triangulation(Arrays.asList(points));
-//            System.out.println(
-//                    "shortDistance = " + String.format("%.3e",shortDistance)
-//                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+            if (PRINTABLE) {
+                System.out.println(
+                        "shortDistance = " + String.format("%.3e", shortDistance)
+                                + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+            }
             Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
         }
     }
@@ -640,9 +646,11 @@ public class TriangulationTest {
                     new Point(1.0D, 0.5D * height)
             };
             Triangulation triangulation = new Triangulation(Arrays.asList(points));
-//            System.out.println(
-//                    "height = " + String.format("%.3e",height)
-//                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+            if (PRINTABLE) {
+                System.out.println(
+                        "height = " + String.format("%.3e", height)
+                                + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+            }
             Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
         }
     }
@@ -658,9 +666,11 @@ public class TriangulationTest {
                     new Point(0.5D * width + 1.0D, 0.5D * width)
             };
             Triangulation triangulation = new Triangulation(Arrays.asList(points));
-//            System.out.println(
-//                    "height = " + String.format("%.3e",width)
-//                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+            if (PRINTABLE) {
+                System.out.println(
+                        "height = " + String.format("%.3e", width)
+                                + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+            }
             Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
         }
     }
@@ -676,9 +686,11 @@ public class TriangulationTest {
                     new Point(0.5D * width + 1.0D, 0.5D * width)
             };
             Triangulation triangulation = new Triangulation(Arrays.asList(points));
-//            System.out.println(
-//                    "height = " + String.format("%.3e",width)
-//                            + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+            if (PRINTABLE) {
+                System.out.println(
+                        "height = " + String.format("%.3e", width)
+                                + ": Size of triangles = " + triangulation.getMesh().sizeTriangles());
+            }
             Assert.assertTrue(triangulation.getMesh().sizeTriangles() == 1);
         }
     }

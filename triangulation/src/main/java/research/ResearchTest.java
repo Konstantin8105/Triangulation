@@ -3,7 +3,10 @@ package research;
 import triangulation.Triangulation;
 import triangulation.elements.Point;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class ResearchTest {
 
@@ -21,7 +24,7 @@ public class ResearchTest {
                 3, 5,
                 10, 20, 50,
                 100, 200, 500,
-                1000, 2000,// 5000
+                1000, 2000//, 5000
 //                100000
         };
         for (int i = 0; i < TYPE_TEST.values().length; i++) {
@@ -55,9 +58,9 @@ public class ResearchTest {
         }
 
         for (int i = 0; i < amountTest; i++) {
-            start[i] = (new Date()).getTime();
+            start[i] = System.currentTimeMillis();//(new Date()).getTime();
             Triangulation triangulation = new Triangulation(mav);
-            finish[i] = (new Date()).getTime();
+            finish[i] = System.currentTimeMillis();//(new Date()).getTime();
             sizeTriangles = triangulation.getMesh().sizeTriangles();
         }
         for (int i = 0; i < amountTest; i++) {
@@ -79,7 +82,10 @@ public class ResearchTest {
     public static List<Point> getRandomPoints(final int size) {
         Point[] coordinates = new Point[size];
         for (int j = 0; j < coordinates.length; j++) {
-            coordinates[j] = new Point((random.nextFloat()) * 600, (random.nextFloat()) * 600);
+            coordinates[j] = new Point(
+                    (random.nextFloat()) * 600,
+                    (random.nextFloat()) * 600
+            );
         }
         return Arrays.asList(coordinates);
     }
@@ -87,7 +93,10 @@ public class ResearchTest {
     public static List<Point> getCirclePoints(final int size) {
         Point[] coordinates = new Point[size];
         for (int j = 0; j < size - 1; j++) {
-            coordinates[j] = new Point(300 * Math.sin(2 * 3.1415 / size * j) + 300, 300 * Math.cos(2 * 3.1415 / size * j) + 300);
+            coordinates[j] = new Point(
+                    300 * Math.sin(2 * 3.1415 / size * j) + 300,
+                    300 * Math.cos(2 * 3.1415 / size * j) + 300
+            );
         }
         coordinates[coordinates.length - 1] = new Point(300, 300);
         return Arrays.asList(coordinates);
@@ -114,7 +123,10 @@ public class ResearchTest {
         coordinates[2] = new Point(0, 600);
         coordinates[3] = new Point(600, 600);
         for (int j = 4; j < coordinates.length; j++) {
-            coordinates[j] = new Point(0.1 + 600 * 0.8 * (double) j / (double) size, 300);
+            coordinates[j] = new Point(
+                    0.1 + 600 * 0.8 * (double) j / (double) size,
+                    300
+            );
         }
         return Arrays.asList(coordinates);
     }

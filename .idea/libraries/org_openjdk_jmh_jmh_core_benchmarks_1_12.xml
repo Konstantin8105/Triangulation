@@ -9,6 +9,8 @@
       <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-generator-annprocess/1.12/jmh-generator-annprocess-1.12.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/jmh-core-1.12-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
