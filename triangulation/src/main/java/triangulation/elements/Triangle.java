@@ -8,14 +8,18 @@ public class Triangle {
     private int idPoint2;
     private int idPoint3;
     private Line[] lines = new Line[3];
+    private int[] pointAntogonists = new int[3];
 
     public Triangle(int idPoint1, int idPoint2, int idPoint3) throws Exception {
         this.idPoint1 = idPoint1;
         this.idPoint2 = idPoint2;
         this.idPoint3 = idPoint3;
         lines[0] = new Line(this.idPoint1, this.idPoint2);
+        pointAntogonists[0] = this.idPoint3;
         lines[1] = new Line(this.idPoint2, this.idPoint3);
+        pointAntogonists[1] = this.idPoint1;
         lines[2] = new Line(this.idPoint3, this.idPoint1);
+        pointAntogonists[2] = this.idPoint2;
     }
 
     public int getIdPoint1() {
@@ -66,5 +70,9 @@ public class Triangle {
 
     public Line[] getLines() {
         return lines;
+    }
+
+    public int[] getPointAntagonists(){
+        return pointAntogonists;
     }
 }

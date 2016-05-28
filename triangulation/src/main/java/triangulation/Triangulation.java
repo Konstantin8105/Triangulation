@@ -14,7 +14,7 @@ import java.util.List;
 public class Triangulation {
     // TODO: 5/16/16 delete counters
 //    private Counter counter = new Counter("Triangulation");
-    private Mesh mesh = new Mesh();
+    protected Mesh mesh = new Mesh();
     private BorderBox bBox = new BorderBox();
 
     public Triangulation(List<Point> points) throws Exception {
@@ -139,7 +139,7 @@ public class Triangulation {
         mesh.deleteLine(line.id);
     }
 
-    private void addNextPointInTriangle(IDable.Element nextPoint, IDable.Element triangle) throws Exception {
+    protected void addNextPointInTriangle(IDable<Point>.Element<Point> nextPoint, IDable<Triangle>.Element<Triangle> triangle) throws Exception {
         //counter.add("addNextPointInTriangle");
         Triangle oldTriangle = (Triangle) triangle.value;
         mesh.addLine(new Line(nextPoint.id, oldTriangle.getIdPoint1()), NOT_BORDER);
