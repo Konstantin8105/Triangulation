@@ -23,7 +23,7 @@ public class TriangulationDelaunay extends Triangulation {
             for (int j = 0; j < triangles.length; j++) {
 
             }
-            outTriangles[i] =
+            //outTriangles[i] =
         }
         int[] idPointAntagonists = triangle.value.getPointAntagonists();
         for (int i = 0; i < lines.length; i++) {
