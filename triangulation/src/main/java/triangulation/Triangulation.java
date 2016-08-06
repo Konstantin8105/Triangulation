@@ -25,13 +25,13 @@ public class Triangulation {
         }
     }
 
-    boolean MAY_BE_BORDER = true;
-    boolean NOT_BORDER = true;
+    private final boolean MAY_BE_BORDER = true;
+    private final boolean NOT_BORDER = true;
 
     private List<IDable.Element> lastPoints = new ArrayList<>();
     private boolean isNeedLastPointsSaving = true;
 
-    private void addNextPoint(IDable<Point>.Element<Point> nextPoint) throws Exception {
+    protected void addNextPoint(IDable<Point>.Element<Point> nextPoint) throws Exception {
         //counter.add("addNextPoint");
         if (isNeedLastPointsSaving) {
             lastPoints.add(nextPoint);

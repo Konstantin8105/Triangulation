@@ -225,4 +225,36 @@ public class GeometryTest {
         assertTrue(Geometry.is3pointsCollinear(0f, 0f, 1f, 1f, -1f, -1f));
         assertTrue(Geometry.is3pointsCollinear(0f, 0f, 0f, 1f, 0f, -1f));
     }
+
+
+
+    @Test
+    public void testDet1() throws Exception {
+        double a[][] = {
+                {1,2,1},
+                {2,1,3},
+                {3,45,6}
+        };
+        assertTrue(Geometry.det(a) == -48);
+    }
+
+    @Test
+    public void testDet2() throws Exception {
+        double a[][] = {
+                {112,212,112},
+                {122,112,321},
+                {312,4125,126}
+        };
+        assertTrue(Geometry.det(a) == -76297824);
+    }
+
+    @Test
+    public void testDet3() throws Exception {
+        double a[][] = {
+                {112,1,1},
+                {1,112,1},
+                {1,1,126}
+        };
+        assertTrue(Geometry.det(a) == 1580196);
+    }
 }

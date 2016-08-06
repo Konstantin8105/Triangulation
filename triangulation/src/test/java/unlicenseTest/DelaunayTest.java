@@ -5,13 +5,9 @@ package unlicenseTest;
 // Created by: Izyumov Konstantin
 //------------------------------------
 
-import org.junit.Assert;
-import org.junit.Test;
 //import un.api.collection.Sequence;
 //import un.impl.geometry.Point;
 //import un.impl.geometry.triangulate.Delaunay;
-
-import java.util.Random;
 
 public class DelaunayTest {
 /*
@@ -85,7 +81,6 @@ public class DelaunayTest {
     // Output: shortDistance = 0.001: Size of triangles = 0 ;
     // Size can not be zero
     //------------------------------------
-    //TODO: Add more precision for triangulation
     @Test
     public void triangleSmall1() {
         double shortDistance = 1.0D;
@@ -105,7 +100,6 @@ public class DelaunayTest {
     // Output: shortDistance = 0.001: Size of triangles = 0 ;
     // Size can not be zero
     //------------------------------------
-    //TODO: Add more precision for triangulation
     @Test
     public void triangleSmall2() {
         double shortDistance = 1.0D;

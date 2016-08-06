@@ -54,6 +54,6 @@ public class Point {
     }
 
     public static Point middlePoint(Point pointA, Point pointB) {
-        return new Point((pointA.x+pointB.x)/2d,(pointA.y+pointB.y)/2d);
+        return new Point((pointA.x + pointB.x) / 2d, (pointA.y + pointB.y) / 2d);
     }
 }

@@ -102,4 +102,57 @@ public class Geometry {
     public static double distancePoints(Point point1, Point point2) {
         return Math.sqrt(Math.pow(point1.getX() - point2.getX(), 2.0D) + Math.pow(point1.getY() - point2.getY(), 2.0D));
     }
+
+
+    public static double det(double a[][]) {
+        double det = a[0][0] * a[1][1] * a[2][2] + a[1][0] * a[2][1] * a[0][2] + a[0][1]*a[1][2]*a[2][0]
+                - a[0][2]*a[1][1]*a[2][0] - a[0][1]*a[1][0]*a[2][2] - a[1][2]*a[2][1]*a[0][0];
+        return det;
+    }
+
+
+    public static boolean isPointInCircle(Point[] circlePoints, Point point) {
+        double x1 = circlePoints[0].getX();
+        double y1 = circlePoints[0].getY();
+        double z1 = x1 * x1 + y1 * y1;
+
+        double x2 = circlePoints[1].getX();
+        double y2 = circlePoints[1].getY();
+        double z2 = x2 * x2 + y2 * y2;
+
+        double x3 = circlePoints[2].getX();
+        double y3 = circlePoints[2].getY();
+        double z3 = x3 * x3 + y3 * y3;
+
+        double a = det(new double[][]{
+                {x1,y1,1},
+                {x2,y2,1},
+                {x3,y3,1}
+        });
+
+        double b = det(new double[][]{
+                {z1,y1,1},
+                {z2,y2,1},
+                {z3,y3,1}
+        });
+
+        double c = det(new double[][]{
+                {z1,x1,1},
+                {z2,x2,1},
+                {z3,x3,1}
+        });
+
+        double d = det(new double[][]{
+                {z1,x1,y1},
+                {z2,x2,y2},
+                {z3,x3,y3}
+        });
+
+        double x0 = point.getX();
+        double y0 = point.getY();
+        double z0 = x0*x0+y0*y0;
+
+        return Math.signum(a)*(a*z0-b*x0+c*y0-d)>=0;
+    }
+
 }

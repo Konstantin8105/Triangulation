@@ -6,13 +6,14 @@ import triangulation.elements.Collections.IDable;
 import triangulation.geometry.GeometryPointTriangle;
 import triangulation.grid.Grid;
 
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 public class Mesh {
     private final IDable<Point> points = new IDable<>();
     private final IDable<Line> lines = new IDable<>();
     private final IDable<Triangle> triangles = new IDable<>();
+
     Grid lineGrid;
     Grid triangleGrid;
 //    private Counter counter = new Counter("Mesh");
@@ -87,6 +88,17 @@ public class Mesh {
         return triangles;
     }
 
+    public void deleteLine(Line line) {
+        Iterator<IDable<Line>.Element<Line>> iterator = lines.iterator();
+        while (iterator.hasNext()){
+            IDable<Line>.Element<Line> element = iterator.next();
+            if(element.value.equals(line)){
+                deleteLine(element.id);
+                break;
+            }
+        }
+    }
+
     public void deleteLine(int idLine) {
         //counter.add("deleteLine");
         borderLine.removeLine(lines.getById(idLine).value);
@@ -119,6 +131,7 @@ public class Mesh {
 
         for (Integer id : idTriangles) {
             IDable<Triangle>.Element<Triangle> triangle = triangles.getById(id);
+            // TriangleGrid can have removed triangles
             if(triangle == null) {
                 continue;
             }
@@ -249,6 +262,7 @@ public class Mesh {
         //counter.add("getBorderSegment");
         return borderLine.getBorderSegment(nextPoint);
     }
+
 
 //    public Counter getCounter() {
 //        System.out.println(lineGrid.getCounter());
