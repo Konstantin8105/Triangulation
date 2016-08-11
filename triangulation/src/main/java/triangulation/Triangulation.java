@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Triangulation {
-    // TODO: 5/16/16 delete counters
-//    private Counter counter = new Counter("Triangulation");
     protected Mesh mesh = new Mesh();
     private BorderBox bBox = new BorderBox();
 
@@ -32,7 +30,6 @@ public class Triangulation {
     private boolean isNeedLastPointsSaving = true;
 
     protected void addNextPoint(IDable<Point>.Element<Point> nextPoint) throws Exception {
-        //counter.add("addNextPoint");
         if (isNeedLastPointsSaving) {
             lastPoints.add(nextPoint);
             if (lastPoints.size() < 3) {
@@ -68,7 +65,6 @@ public class Triangulation {
     }
 
     private void addNextPointWithoutBorder() throws Exception {
-        //counter.add("addNextPointWithoutBorder");
         List<Point> points = new ArrayList<>();
         for (IDable.Element lastPoint : lastPoints) {
             points.add((Point) lastPoint.value);
@@ -91,7 +87,6 @@ public class Triangulation {
     }
 
     private void addSimpleTriangle(List<IDable.Element> point) throws Exception {
-        //counter.add("addSimpleTriangle");
         mesh.addLine(new Line(point.get(0).id, point.get(1).id), MAY_BE_BORDER);
         mesh.addLine(new Line(point.get(1).id, point.get(2).id), MAY_BE_BORDER);
         mesh.addLine(new Line(point.get(2).id, point.get(0).id), MAY_BE_BORDER);
@@ -102,7 +97,6 @@ public class Triangulation {
     }
 
     private void addNextPointOnLine(IDable.Element nextPoint, IDable.Element line) throws Exception {
-        //counter.add("addNextPointOnLine");
 
         IDable.Element[] triangles = mesh.getTrianglesByLine((Line) line.value);
         if (triangles.length > 2 || triangles.length < 1) {
@@ -140,7 +134,6 @@ public class Triangulation {
     }
 
     protected void addNextPointInTriangle(IDable<Point>.Element<Point> nextPoint, IDable<Triangle>.Element<Triangle> triangle) throws Exception {
-        //counter.add("addNextPointInTriangle");
         Triangle oldTriangle = (Triangle) triangle.value;
         mesh.addLine(new Line(nextPoint.id, oldTriangle.getIdPoint1()), NOT_BORDER);
         mesh.addLine(new Line(nextPoint.id, oldTriangle.getIdPoint2()), NOT_BORDER);
@@ -154,7 +147,6 @@ public class Triangulation {
     }
 
     private void addNextPointOutside(IDable.Element nextPoint) throws Exception {
-        //counter.add("addNextPointOutside");
         List<Line> lines = mesh.getBorderSegment((Point) nextPoint.value);
         mesh.addLine(new Line(nextPoint.id, lines.get(0).getIdPointA()), MAY_BE_BORDER);
         for (int i = 0; i < lines.size(); i++) {

@@ -7,14 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Grid {
-    //    Counter counter = new Counter("Grid");
     private List<Integer> map[];
     double dx, dy;
     int size;
     BorderBox box;
 
     public Grid(BorderBox box, int sizePoint) {
-        //counter.add("Grid");
         this.box = box;
         size = calculateSize(sizePoint);
         dx = (box.getX_max() - box.getX_min()) / (double) size;
@@ -26,12 +24,10 @@ public class Grid {
     }
 
     private final int calculateSize(int sizePoint) {
-//        return (int) Math.max(1, Math.sqrt(sizePoint));
         return (int) Math.max(1, 0.8 * Math.pow(sizePoint, 3D / 8D));
     }
 
     public void add(final BorderBox box, final int id) {
-        //counter.add("add");
         Integer[] positions = convert(box);
         for (Integer position : positions) {
             map[position].add(id);
@@ -39,8 +35,6 @@ public class Grid {
     }
 
     public final List<Integer> get(final Point point) {
-        //counter.add("get");
-        // TODO: 19.05.2016 optimize - don`t delete every time
         int position = convert(point);
         return map[position];
     }
@@ -81,14 +75,12 @@ public class Grid {
     }
 
     private int convert(final Point point) {
-        //counter.add("convert1");
         int positionX = (int) Math.min((point.getX() - box.getX_min()) / dx, size - 1);
         int positionY = (int) Math.min((point.getY() - box.getY_min()) / dy, size - 1);
         return positionX + size * positionY;
     }
 
     private final Integer[] convert(final BorderBox inputBox) {
-        //counter.add("convert2");
         int positionX_min = (int) ((inputBox.getX_min() - box.getX_min()) / dx);
         int positionY_min = (int) ((inputBox.getY_min() - box.getY_min()) / dy);
         int positionX_max = (int) Math.min((inputBox.getX_max() - box.getX_min()) / dx, size - 1);
@@ -104,8 +96,4 @@ public class Grid {
         }
         return positions;
     }
-//
-//    public Counter getCounter() {
-//        return counter;
-//    }
 }

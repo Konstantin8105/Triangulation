@@ -16,12 +16,10 @@ public class Mesh {
 
     Grid lineGrid;
     Grid triangleGrid;
-//    private Counter counter = new Counter("Mesh");
 
     private final BorderLine borderLine = new BorderLine(this);
 
     public void addPoint(List<Point> points) {
-        //counter.add("addPoint");
         this.points.add(points);
         deleteSamePoints();
 
@@ -34,11 +32,10 @@ public class Mesh {
     }
 
     private void deleteSamePoints() {
-        // TODO: 5/7/16
+        points.removeSame();
     }
 
     public int addLine(Line line, boolean mayBeBorder) throws Exception {
-        //counter.add("addLine");
         if (mayBeBorder) {
             borderLine.addLine(line);
         }
@@ -50,7 +47,6 @@ public class Mesh {
     }
 
     private BorderBox getBoxLine(Line line) {
-        //counter.add("getBoxLine");
         BorderBox box = new BorderBox();
         box.addPoint(points.getById(line.getIdPointA()).value);
         box.addPoint(points.getById(line.getIdPointB()).value);
@@ -58,7 +54,6 @@ public class Mesh {
     }
 
     public int addTriangle(Triangle triangle) {
-        //counter.add("addTriangle");
         int id = triangles.add(triangle);
 
         triangleGrid.add(getBoxTriangle(triangle), id);
@@ -67,8 +62,6 @@ public class Mesh {
     }
 
     private BorderBox getBoxTriangle(Triangle triangle) {
-        // TODO: 5/16/16 optimize
-        //counter.add("getBoxTriangle");
         BorderBox box = new BorderBox();
         box.addPoint(points.getById(triangle.getIdPoint1()).value);
         box.addPoint(points.getById(triangle.getIdPoint2()).value);
@@ -100,21 +93,17 @@ public class Mesh {
     }
 
     public void deleteLine(int idLine) {
-        //counter.add("deleteLine");
         borderLine.removeLine(lines.getById(idLine).value);
         lineGrid.remove(getBoxLine(lines.getById(idLine).value), idLine);
         lines.remove(idLine);
     }
 
     public void deleteTriangle(int idTriangle) {
-        //counter.add("deleteTriangle");
         triangleGrid.remove(getBoxTriangle(triangles.getById(idTriangle).value), idTriangle);
         triangles.remove(idTriangle);
     }
 
     public IDable.Element[] getTrianglesByLine(Line line) throws Exception {
-        //counter.add("getTrianglesByLine");
-        // TODO: 5/16/16 super optimize
 
         BorderBox box = getBoxLine(line);
         Point point = new Point(
@@ -151,7 +140,6 @@ public class Mesh {
     }
 
     private Point[] getPointsByTriangle(Triangle triangle) {
-        //counter.add("getPointsByTriangle");
         Point[] points = new Point[3];
         for (int i = 0; i < triangle.getPointsId().size(); i++) {
             points[i] = this.points.getById(triangle.getPointsId().get(i)).value;
@@ -173,7 +161,6 @@ public class Mesh {
     }
 
     public IDable<?>.Element<?> pointInRegion(IDable<Point>.Element<Point> nextPoint) {
-        //counter.add("pointInRegion");
         List<Integer> idTriangles = triangleGrid.get(nextPoint.value);
         GeometryPointTriangle.PointTriangleState gpt = null;
         Line line = null;
@@ -259,15 +246,7 @@ public class Mesh {
     }
 
     public List<Line> getBorderSegment(Point nextPoint) throws Exception {
-        //counter.add("getBorderSegment");
         return borderLine.getBorderSegment(nextPoint);
     }
 
-
-//    public Counter getCounter() {
-//        System.out.println(lineGrid.getCounter());
-//        System.out.println(triangleGrid.getCounter());
-//        System.out.println(borderLine.getCounter());
-//        return counter;
-//    }
 }

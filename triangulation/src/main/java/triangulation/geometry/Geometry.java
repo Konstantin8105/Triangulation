@@ -152,7 +152,7 @@ public class Geometry {
         double y0 = point.getY();
         double z0 = x0*x0+y0*y0;
 
-        return Math.signum(a)*(a*z0-b*x0+c*y0-d)>=0;
+        return Math.signum(a)*(a*z0-b*x0+c*y0-d)<0;
     }
 
 }

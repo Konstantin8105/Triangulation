@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class BorderLine {
-    //    Counter counter = new Counter("BorderLine");
     Mesh mesh;
     List<LineWithPoints> loop = new ArrayList<>();
     List<Line> addedLine = new ArrayList<>();
@@ -34,31 +33,21 @@ public class BorderLine {
     }
 
     public List<Line> getBorderSegment(Point nextPoint) throws Exception {
-//        counter.add("getBorderSegment");
         createBorderLoop();
         loop = (List<LineWithPoints>) Sequence.loopization(loop);
         addPointsInLoop();
-
-//        counter.add("Loop #", loop.size());
-
         if (loop.size() <= MINIMAL_AMOUNT_LOOP) {
             List<LineWithPoints> segment = (new BorderSegmentWorst()).segmentation(nextPoint, loop);
-//            System.err.println("segment1 -->" + segment);
-            return (List<Line>) Sequence.createSequence(
-                    segment
-            );
+            return (List<Line>) Sequence.createSequence(segment);
         }
 
         List<LineWithPoints> segment = (new BorderSegmentPair()).segmentation(nextPoint, loop);
-//        System.out.println(String.format("%.3f",(double)segment.size()/(double)loop.size()) + "="+ segment.size()+ "/" + loop.size());
-//        System.err.println("segment2 -->" + segment);
         return (List<Line>) Sequence.createSequence(
                 segment
         );
     }
 
     private void addPointsInLoop() {
-//        counter.add("addPointsInLoop");
         for (LineWithPoints line : loop) {
             if (line.isPointNull()) {
                 line.setPoints(
@@ -77,7 +66,8 @@ public class BorderLine {
 
         boolean fullChecking = true;
         if (addedLine.size() == 2) {
-            if (addedLine.get(0).getIdPointA() == addedLine.get(1).getIdPointA() && addedLine.get(0).getIdPointB() != addedLine.get(1).getIdPointB()) {
+            if (addedLine.get(0).getIdPointA() == addedLine.get(1).getIdPointA()
+                    && addedLine.get(0).getIdPointB() != addedLine.get(1).getIdPointB()) {
                 Line newLine = new Line(
                         addedLine.get(0).getIdPointB(),
                         addedLine.get(1).getIdPointB()
@@ -97,9 +87,7 @@ public class BorderLine {
                 }
             }
         } else {
-            // TODO: 5/19/16
-            //System.err.println(addedLine);
-            //[Line{idPointA=2, idPointB=1}, Line{idPointA=1, idPointB=0}, Line{idPointA=0, idPointB=2}]
+            // only on start, when we have only 3 points
         }
 
         if (fullChecking)
@@ -123,7 +111,4 @@ public class BorderLine {
             }
         }
     }
-//    public Counter getCounter() {
-//        return counter;
-//    }
 }

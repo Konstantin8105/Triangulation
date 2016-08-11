@@ -257,4 +257,49 @@ public class GeometryTest {
         };
         assertTrue(Geometry.det(a) == 1580196);
     }
+
+
+    @Test
+    public void triangleInCircle1() throws Exception {
+        Point[] points = new Point[]{
+                new Point(1.0D, 0.0D),
+                new Point(0.0D, 1.0D),
+                new Point(-1.0D, 0.0D)
+        };
+        Point point = new Point(0.0D,0.0D);
+        Assert.assertTrue(Geometry.isPointInCircle(points,point));
+    }
+
+    @Test
+    public void triangleInCircleSmallDistance1() throws Exception {
+        double longDistance = 1.0D;
+        for (int i = 0; i < 30; i++) {
+            longDistance /= 10;
+            Point[] points = new Point[]{
+                    new Point(1.0D, 0.0D),
+                    new Point(0.0D, 1.0D),
+                    new Point(-1.0D, 0.0D)
+            };
+            Point point = new Point(0.0D,1.+longDistance);
+            System.out.println("longDistance = " + String.format("%.1e",longDistance) + " : "+ Geometry.isPointInCircle(points,point));
+            Assert.assertFalse(Geometry.isPointInCircle(points,point));
+        }
+    }
+
+
+    @Test
+    public void triangleInCircleSmallDistance2() throws Exception {
+        double longDistance = 1.0D;
+        for (int i = 0; i < 30; i++) {
+            longDistance /= 10;
+            Point[] points = new Point[]{
+                    new Point(1.0D, 0.0D),
+                    new Point(0.0D, 1.0D),
+                    new Point(-1.0D, 0.0D)
+            };
+            Point point = new Point(0.0D,1.-longDistance);
+            System.out.println("longDistance = " + String.format("%.1e",longDistance) + " : "+ Geometry.isPointInCircle(points,point));
+            Assert.assertTrue(Geometry.isPointInCircle(points,point));
+        }
+    }
 }
