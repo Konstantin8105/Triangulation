@@ -85,15 +85,15 @@ public class MeshView extends JFrame {
             MeshView meshViewDelaunay = new MeshView(triangulationDelaunay.getMesh());
         }
 //        {
-//            Triangulation triangulation = new Triangulation(ResearchTest.getCirclePoints(AMOUNT_POINTS));
+//            TriangulationAdvance triangulation = new TriangulationAdvance(ResearchTest.getCirclePoints(AMOUNT_POINTS));
 //            MeshView meshView = new MeshView(triangulation.getMesh());
 //        }
 //        {
-//            Triangulation triangulation = new Triangulation(ResearchTest.getLineOnLine(AMOUNT_POINTS));
+//            TriangulationAdvance triangulation = new TriangulationAdvance(ResearchTest.getLineOnLine(AMOUNT_POINTS));
 //            MeshView meshView = new MeshView(triangulation.getMesh());
 //        }
 //        {
-//            Triangulation triangulation = new Triangulation(ResearchTest.getInTriangles(AMOUNT_POINTS));
+//            TriangulationAdvance triangulation = new TriangulationAdvance(ResearchTest.getInTriangles(AMOUNT_POINTS));
 //            MeshView meshView = new MeshView(triangulation.getMesh());
 //        }
     }

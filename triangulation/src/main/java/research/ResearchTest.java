@@ -1,7 +1,10 @@
 package research;
 
+import org.junit.Assert;
+import org.junit.Test;
 import triangulation.Triangulation;
 import triangulation.elements.Point;
+import triangulation2.TriangulationAdvance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +14,7 @@ import java.util.Random;
 public class ResearchTest {
 
     enum TYPE_TEST {
-        RANDOM,
+        //   RANDOM,
         CIRCLE,
         LINE_IN_LINE,
         IN_TRIANGLE
@@ -21,11 +24,12 @@ public class ResearchTest {
 
     public static void main(String[] args) throws Exception {
         int[] amountPoints = new int[]{
-                3, 5,
+                3,
+                5,
                 10, 20, 50,
                 100, 200, 500,
-                1000, 2000//, 5000
-//                100000
+                1000, 2000,
+                //5000, 100000
         };
         for (int i = 0; i < TYPE_TEST.values().length; i++) {
             System.out.println("TYPE OF TEST: " + TYPE_TEST.values()[i].toString());
@@ -43,9 +47,9 @@ public class ResearchTest {
         int sizeTriangles = 0;
         List<Point> mav = new ArrayList<>();
         switch (type_test) {
-            case RANDOM:
-                mav = getRandomPoints(size);
-                break;
+//            case RANDOM:
+//                mav = getRandomPoints(size);
+//                break;
             case CIRCLE:
                 mav = getCirclePoints(size);
                 break;
@@ -56,6 +60,8 @@ public class ResearchTest {
                 mav = getInTriangles(size);
                 break;
         }
+
+//        System.out.println(mav);
 
         for (int i = 0; i < amountTest; i++) {
             start[i] = System.currentTimeMillis();//(new Date()).getTime();
@@ -76,6 +82,32 @@ public class ResearchTest {
                 + "Triangles is "
                 + String.format("%6d", sizeTriangles) + " triangles. "
         );
+
+        //Advance
+
+        Point[] points = (Point[]) mav.toArray();
+
+        for (int i = 0; i < amountTest; i++) {
+            start[i] = System.currentTimeMillis();//(new Date()).getTime();
+            TriangulationAdvance triangulation = new TriangulationAdvance(points);
+            finish[i] = System.currentTimeMillis();//(new Date()).getTime();
+            sizeTriangles = triangulation.getTriangulation().size();
+        }
+        for (int i = 0; i < amountTest; i++) {
+            float time = (float) (finish[i] - start[i]);
+            averageTime += time;
+        }
+
+        averageTime /= amountTest;
+        System.out.println("Amount points: " + String.format("%6d", size)
+                + " point. "
+                + "Time is "
+                + String.format("%12.2f", averageTime) + " ms. "
+                + "Triangles is "
+                + String.format("%6d", sizeTriangles) + " triangles. "
+        );
+
+        System.out.println("==");
     }
 
 
@@ -83,8 +115,9 @@ public class ResearchTest {
         Point[] coordinates = new Point[size];
         for (int j = 0; j < coordinates.length; j++) {
             coordinates[j] = new Point(
-                    (random.nextFloat()) * 600,
-                    (random.nextFloat()) * 600
+//                    (random.nextFloat()) * 600,
+//                    (random.nextFloat()) * 600
+                    random.nextInt(50), random.nextInt(50)
             );
         }
         return Arrays.asList(coordinates);
@@ -131,4 +164,16 @@ public class ResearchTest {
         return Arrays.asList(coordinates);
     }
 
+    @Test
+    public void test() {
+        Point[] points = new Point[]{
+                new Point(34, 42),
+                new Point(33, 45),
+                new Point(37, 26),
+                new Point(2, 35),
+                new Point(37, 38),
+        };
+        TriangulationAdvance triangulationAdvance = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulationAdvance.getTriangulation().size() > 0);
+    }
 }

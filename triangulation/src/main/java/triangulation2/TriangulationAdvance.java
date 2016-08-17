@@ -3,6 +3,7 @@ package triangulation2;
 import triangulation.border.BorderBox;
 import triangulation.elements.Point;
 import triangulation.elements.Triangle;
+import triangulation.geometry.GeometryLineLine;
 import triangulation.geometry.GeometryPointTriangle;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Triangulation
+ * TriangulationAdvance
  * for step - triangulation convexHull: "Divide and Conquer"
  * Performance for worst-case: O(N*log(N))
  * for step - triangulation with restrictions: "Simple interactive method"
@@ -23,10 +24,10 @@ import java.util.List;
  * @author Izyumov Konstantin
  * @see book "Algoritm building and analyse triangulation", A.B.Skvorcov.
  */
-public class Triangulation {
+public class TriangulationAdvance {
 
     //
-    // Triangulation data structure  "Nodes, ribs и triangles"
+    // TriangulationAdvance data structure  "Nodes, ribs и triangles"
     //
     // Array of nodes - type: Point
     List<Point> nodes = new ArrayList<>();
@@ -61,17 +62,19 @@ public class Triangulation {
 
 
     // constructor for create convexHull region at the base on points
-    public Triangulation(Point[] points) {
+    public TriangulationAdvance(Point[] points) {
         createFakeTriangles(points);
         for (int i = 0; i < points.length; i++) {
             addNextPoint(points[i]);
-            delaunayChecking();
+            //delaunayChecking();
         }
-        removeFakeTriangles();
+        //cutByRegion(convexHull(points));
+        //removeFakeTriangles();
     }
 
     private void createFakeTriangles(Point[] points) {
         // create Fake region
+        //TODO: remove that because O(n^2)
         BorderBox borderBox = new BorderBox();
         for (int i = 0; i < points.length; i++) {
             borderBox.addPoint(points[i]);
@@ -108,6 +111,7 @@ public class Triangulation {
 
     private void addNextPoint(Point nextPoint) {
         // ignore same points
+        //TODO: remove O(n^2)
         for (int j = 0; j < nodes.size(); j++) {
             if (nextPoint.equals(nodes.get(j)))
                 return;
@@ -130,32 +134,36 @@ public class Triangulation {
         }
     }
 
+    Point centerOfPoints(Point[] points) {
+        double x = 0.0D, y = 0.0D;
+        for (int i = 0; i < points.length; i++) {
+            x += points[i].getX();
+            y += points[i].getY();
+        }
+        return new Point(x / points.length, y / points.length);
+    }
+
     GeometryPointTriangle.PointTriangleState movingByConvexHull(Point point) {
+
         Point[] trianglePoint = new Point[]{
                 (Point) nodes.get(beginTriangle.iNodes[0]),
                 (Point) nodes.get(beginTriangle.iNodes[1]),
                 (Point) nodes.get(beginTriangle.iNodes[2])
         };
         GeometryPointTriangle.PointTriangleState state = GeometryPointTriangle.isPointInTriangle(point, trianglePoint);
-        if (state == GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE) {
-
-            Point triangleCenter = new Point(0, 0);
-            for (int i = 0; i < 3; i++) {
-                triangleCenter.setX(triangleCenter.getX() + trianglePoint[i].getX());
-                triangleCenter.setY(triangleCenter.getY() + trianglePoint[i].getY());
-            }
-            triangleCenter.setX(triangleCenter.getX() / 3.);
-            triangleCenter.setY(triangleCenter.getY() / 3.);
-
+        if (state == GeometryPointTriangle.PointTriangleState.POINT_INSIDE) {
+            return state;
+        } else {
+            Point triangleCenter = centerOfPoints(trianglePoint);
             int ribPosition = -1;
             for (int i = 0; i < 3; i++) {
-                int last = (i == 0) ? 2 : i - 1;
-                int next = i;
-                Point ribPoint1 = (Point) nodes.get(beginTriangle.iNodes[last]);
-                Point ribPoint2 = (Point) nodes.get(beginTriangle.iNodes[next]);
-                Intersects.IntersectState intersectState = Intersects.stateLineLine(ribPoint1, ribPoint2, triangleCenter, point);
-                if (intersectState == Intersects.IntersectState.INTERSECT ||
-                        intersectState == Intersects.IntersectState.INTERSECT_POINT_ON_LINE) {
+                int last = i;
+                int next = (i + 1 < 3) ? i + 1 : i + 1 - 3;
+                Point ribPoint1 = trianglePoint[last];
+                Point ribPoint2 = trianglePoint[next];
+                GeometryLineLine.IntersectState intersectState = GeometryLineLine.stateLineLine(ribPoint1, ribPoint2, triangleCenter, point);
+                if (intersectState == GeometryLineLine.IntersectState.INTERSECT ||
+                        intersectState == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE) {
                     ribPosition = i;
                     break;
                 }
@@ -420,6 +428,7 @@ public class Triangulation {
     //
     //
     /////////////////
+    /*
     public static class Contour {
         Sequence lines;
         boolean isHole;
@@ -500,5 +509,5 @@ public class Triangulation {
         }
         return false;
     }
-
+*/
 }
