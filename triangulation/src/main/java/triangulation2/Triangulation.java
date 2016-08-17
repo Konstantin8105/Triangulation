@@ -2,6 +2,7 @@ package triangulation2;
 
 import triangulation.border.BorderBox;
 import triangulation.elements.Point;
+import triangulation.elements.Triangle;
 import triangulation.geometry.GeometryPointTriangle;
 
 import java.util.ArrayList;
@@ -14,6 +15,10 @@ import java.util.List;
  * Performance for worst-case: O(N*log(N))
  * for step - triangulation with restrictions: "Simple interactive method"
  * Performance for worst-case: O(N^2)
+ * Philosophy of triangulation:
+ * 1. Add 4 "fake" point - for guarantee all othe point in "fake" region
+ * 2. Triangulation and delaunay checking
+ * 3. Cut triangulation by convexHull region or external region
  *
  * @author Izyumov Konstantin
  * @see book "Algoritm building and analyse triangulation", A.B.Skvorcov.
@@ -25,6 +30,8 @@ public class Triangulation {
     //
     // Array of nodes - type: Point
     List<Point> nodes = new ArrayList<>();
+    // Array of fake nodes
+    List<Point> fakeNodes = new ArrayList<>();
     // Begin triangle - type: Triangle
     Triangle beginTriangle = new Triangle();
 
@@ -55,34 +62,55 @@ public class Triangulation {
 
     // constructor for create convexHull region at the base on points
     public Triangulation(Point[] points) {
+        createFakeTriangles(points);
         for (int i = 0; i < points.length; i++) {
             addNextPoint(points[i]);
+            delaunayChecking();
         }
+        removeFakeTriangles();
     }
 
-    // boundingBox for simplification of finding outside point
-    BorderBox boundingBox = new BorderBox();
+    private void createFakeTriangles(Point[] points) {
+        // create Fake region
+        BorderBox borderBox = new BorderBox();
+        for (int i = 0; i < points.length; i++) {
+            borderBox.addPoint(points[i]);
+        }
+        borderBox.scale(2.0, borderBox.getCenter());
+        //add fake points
+        double factor = 0.1D;
+        nodes.add(new Point(borderBox.getX_min() * (1.0D - factor), borderBox.getY_min() * (1.0D - factor)));
+        nodes.add(new Point(borderBox.getX_min(), borderBox.getY_max()));
+        nodes.add(new Point(borderBox.getX_max() * (1.0D + factor), borderBox.getY_max() * (1.0D + factor)));
+        nodes.add(new Point(borderBox.getX_max(), borderBox.getY_min()));
+        int indexPointStart = nodes.size() - 4;
+        for (int i = 0; i < 4; i++) {
+            fakeNodes.add(nodes.get(indexPointStart + i));
+        }
 
-    // saving points at the begin of triangulation
-    private List<Point> lastPoints = new ArrayList<>();
-    private boolean isNeedLastPointsSaving = true;
+        Triangle triangles[] = new Triangle[2];
+
+        triangles[0] = new Triangle();
+        triangles[1] = new Triangle();
+
+
+        int commonRib = getIdRib();
+        triangles[0].iNodes = new int[]{indexPointStart, indexPointStart + 1, indexPointStart + 2};
+        triangles[0].iRibs = new int[]{getIdRib(), getIdRib(), commonRib};
+        triangles[0].triangles = new Triangle[]{null, null, triangles[1]};
+
+        triangles[1].iNodes = new int[]{indexPointStart + 2, indexPointStart + 3, indexPointStart};
+        triangles[1].iRibs = new int[]{getIdRib(), getIdRib(), commonRib};
+        triangles[1].triangles = new Triangle[]{null, null, triangles[0]};
+
+        beginTriangle = triangles[0];
+    }
 
     private void addNextPoint(Point nextPoint) {
         // ignore same points
         for (int j = 0; j < nodes.size(); j++) {
             if (nextPoint.equals(nodes.get(j)))
-                continue;
-        }
-
-        if (isNeedLastPointsSaving) {
-            lastPoints.add(nextPoint);
-            if (lastPoints.size() < 3) {
-                boundingBox.addPoint(nextPoint);
                 return;
-            }
-            addNextPointWithoutBorder();
-            boundingBox.addPoint(nextPoint);
-            return;
         }
 
         GeometryPointTriangle.PointTriangleState state = movingByConvexHull(nextPoint);
@@ -99,11 +127,7 @@ public class Triangulation {
             case POINT_ON_LINE_2:
                 addNextPointOnLine(nextPoint, 2);
                 break;
-            case POINT_OUTSIDE:
-                addNextPointOutside(nextPoint);
-                break;
         }
-        boundingBox.addPoint(nextPoint);
     }
 
     GeometryPointTriangle.PointTriangleState movingByConvexHull(Point point) {
@@ -148,39 +172,6 @@ public class Triangulation {
         return state;
     }
 
-    private void addNextPointWithoutBorder() {
-        if (Geometry.isOnLine(lastPoints)) {
-            return;
-        }
-        isNeedLastPointsSaving = false;
-
-        nodes.add(lastPoints.get(0));
-        nodes.add(lastPoints.get(1));
-        nodes.add(lastPoints.get(2));
-        int pointIndexEndPoint = nodes.size() - 1;
-
-        beginTriangle.iNodes = new int[]{
-                pointIndexEndPoint - 2,
-                pointIndexEndPoint - 1,
-                pointIndexEndPoint
-        };
-        beginTriangle.triangles = new Triangle[]{
-                null,
-                null,
-                null
-        };
-
-        beginTriangle.iRibs = new int[]{
-                getIdRib(),
-                getIdRib(),
-                getIdRib()
-        };
-
-        for (int i = 3; i < lastPoints.size(); i++) {
-            addNextPoint((Point) lastPoints.get(i));
-        }
-    }
-
     protected void addNextPointInTriangle(Point nextPoint) {
         nodes.add(nextPoint);
         int pointIndex = nodes.size() - 1;
@@ -189,46 +180,19 @@ public class Triangulation {
         int rib2 = getIdRib();
 
         Triangle triangle0 = new Triangle();
-        triangle0.iNodes = new int[]{
-                beginTriangle.iNodes[0],
-                beginTriangle.iNodes[1],
-                pointIndex
-        };
-        triangle0.iRibs = new int[]{
-                beginTriangle.iRibs[0],
-                rib1,
-                rib0
-        };
+        triangle0.iNodes = new int[]{beginTriangle.iNodes[0], beginTriangle.iNodes[1], pointIndex};
+        triangle0.iRibs = new int[]{beginTriangle.iRibs[0], rib1, rib0};
 
         Triangle triangle1 = new Triangle();
-        triangle1.iNodes = new int[]{
-                beginTriangle.iNodes[1],
-                beginTriangle.iNodes[2],
-                pointIndex
-        };
-        triangle1.iRibs = new int[]{
-                beginTriangle.iRibs[1],
-                rib2,
-                rib1
-        };
+        triangle1.iNodes = new int[]{beginTriangle.iNodes[1], beginTriangle.iNodes[2], pointIndex};
+        triangle1.iRibs = new int[]{beginTriangle.iRibs[1], rib2, rib1};
 
         Triangle triangle2 = new Triangle();
-        triangle2.iNodes = new int[]{
-                beginTriangle.iNodes[2],
-                beginTriangle.iNodes[0],
-                pointIndex
-        };
-        triangle2.iRibs = new int[]{
-                beginTriangle.iRibs[2],
-                rib0,
-                rib2
-        };
+        triangle2.iNodes = new int[]{beginTriangle.iNodes[2], beginTriangle.iNodes[0], pointIndex};
+        triangle2.iRibs = new int[]{beginTriangle.iRibs[2], rib0, rib2};
 
-        triangle0.triangles = new Triangle[]{
-                beginTriangle.triangles[0],
-                triangle1,
-                triangle2
-        };
+        triangle0.triangles = new Triangle[]{beginTriangle.triangles[0], triangle1, triangle2};
+
         if (beginTriangle.triangles[0] != null) {
             for (int i = 0; i < 3; i++) {
                 if (beginTriangle.triangles[0].triangles[i] == beginTriangle) {
@@ -238,10 +202,7 @@ public class Triangulation {
             }
         }
 
-        triangle1.triangles = new Triangle[]{
-                beginTriangle.triangles[1],
-                triangle2,
-                triangle0
+        triangle1.triangles = new Triangle[]{beginTriangle.triangles[1], triangle2, triangle0
         };
         if (beginTriangle.triangles[1] != null) {
             for (int i = 0; i < 3; i++) {
@@ -252,11 +213,7 @@ public class Triangulation {
             }
         }
 
-        triangle2.triangles = new Triangle[]{
-                beginTriangle.triangles[2],
-                triangle0,
-                triangle1
-        };
+        triangle2.triangles = new Triangle[]{beginTriangle.triangles[2], triangle0, triangle1};
         if (beginTriangle.triangles[2] != null) {
             for (int i = 0; i < 3; i++) {
                 if (beginTriangle.triangles[2].triangles[i] == beginTriangle) {
@@ -406,91 +363,6 @@ public class Triangulation {
         return triangles;
     }
 
-    @Override
-    public String toString() {
-        return "Triangulation{" +
-                "beginTriangle=" + beginTriangle +
-                ", nodes=" + nodes +
-                ", boundingBox=" + boundingBox +
-                ", lastPoints=" + lastPoints +
-                ", isNeedLastPointsSaving=" + isNeedLastPointsSaving +
-                '}';
-    }
-
-    private void addNextPointOutside(Point nextPoint) {
-        List<Triangle> borderSegment = getBorderSegment(nextPoint);
-
-        Triangle[] triangles = new Triangle[borderSegment.size()];
-        for (int i = 0; i < triangles.length; i++) {
-            triangles[i] = new Triangle();
-        }
-
-        int rib_before = getIdRib();
-        int rib_after;
-        nodes.add(nextPoint);
-        int pointIndex = nodes.size() - 1;
-        for (int i = 0; i < triangles.length; i++) {
-            rib_after = getIdRib();
-            triangles[i].triangles = new Triangle[]{
-                    ((Triangle) borderSegment.get(i)).triangles[0],
-                    null,
-                    null
-            };
-            triangles[i].iNodes = new int[]{
-                    ((Triangle) borderSegment.get(i)).iNodes[0],
-                    ((Triangle) borderSegment.get(i)).iNodes[1],
-                    pointIndex
-            };
-            triangles[i].iRibs = new int[]{
-                    ((Triangle) borderSegment.get(i)).iRibs[0],
-                    rib_before,
-                    rib_after
-            };
-            rib_before = rib_after;
-            if (i >= 1 && i <= borderSegment.size() - 2) {
-                triangles[i - 1].triangles[2] = triangles[i];
-            }
-        }
-        beginTriangle = triangles[0];
-    }
-
-    private List<Triangle> getBorderSegment(Point point) {
-        // create list of border
-        List<Triangle> border = getBorder();
-        // looping
-        // create convexHull
-        // looping minus convexHull
-        return null;
-    }
-
-    private List<Triangle> getBorder() {
-        List<Triangle> borders = new ArrayList<>();
-        int indexStartPoint;
-        int finishStartPoint;
-        boolean findBegin = false;
-        for (int i = 0; i < beginTriangle.triangles.length; i++) {
-            if (beginTriangle.triangles[i] == null) {
-                if(!findBegin){
-                    indexStartPoint = beginTriangle.iNodes[i];
-                }
-                // add border in array
-                Triangle borderTriangle = new Triangle();
-                borderTriangle.triangles = new Triangle[]{
-                        beginTriangle.triangles[i]
-                };
-                borderTriangle.iNodes = new int[]{
-                        beginTriangle.iNodes[i],
-                        beginTriangle.iNodes[normalizeSizeBy3(i + 1)]
-                };
-                borderTriangle.iRibs = new int[]{
-                        beginTriangle.iRibs[i]
-                };
-            }
-        }
-        while (true) {
-        }
-        return borders;
-    }
 
     ///////
     //

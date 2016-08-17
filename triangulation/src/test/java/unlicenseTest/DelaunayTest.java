@@ -9,14 +9,22 @@ package unlicenseTest;
 //import un.impl.geometry.Point;
 //import un.impl.geometry.triangulate.Delaunay;
 
+import org.junit.Assert;
+import org.junit.Test;
+import un.api.collection.Sequence;
+import un.impl.geometry.Point;
+import un.impl.geometry.triangulate.Delaunay;
+
+import java.util.Random;
+
 public class DelaunayTest {
-/*
+
 
     @Test
     public void singleTest2() {
         Random random = new Random();
         Delaunay delaunay = new Delaunay();
-        for (int triangles = 0; triangles < 10000; ++triangles) {
+        for (int triangles = 0; triangles < 100000; ++triangles) {
             delaunay.insertPoint(new Point(random.nextDouble(), random.nextDouble()));
         }
         Assert.assertTrue(delaunay.computeTriangles().getSize() > 0);
@@ -114,7 +122,7 @@ public class DelaunayTest {
             Assert.assertTrue(delaunay.computeTriangles().getSize() == 2);
         }
     }
-*/
+
 
 }
 
