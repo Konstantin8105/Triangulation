@@ -1,5 +1,6 @@
 package triangulation;
 
+import imp.iTriangulation;
 import triangulation.border.BorderBox;
 import triangulation.elements.Collections.IDable;
 import triangulation.elements.Line;
@@ -11,7 +12,7 @@ import triangulation.geometry.GeometryCoordinate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Triangulation {
+public class Triangulation implements iTriangulation {
     protected Mesh mesh = new Mesh();
     private BorderBox bBox = new BorderBox();
 
@@ -163,9 +164,15 @@ public class Triangulation {
         }
     }
 
-    public Mesh getMesh() {
-//        System.out.println(counter);
-//        System.out.println(mesh.getCounter());
-        return mesh;
+    @Override
+    public List<Point[]> getTriangles() {
+        List<Point[]> triangles = new ArrayList<>();
+        for (IDable<Triangle>.Element<Triangle> triangle : mesh.getTriangulate()) {
+            Point[] points = new Point[3];
+            for (int i = 0; i < 3; i++) {
+                points[i] = new Point(mesh.getPoints((int) triangle.value.getPointsId().get(i)));
+            }
+        }
+        return triangles;
     }
 }

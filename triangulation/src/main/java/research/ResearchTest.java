@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import triangulation.Triangulation;
 import triangulation.elements.Point;
-import triangulation2.TriangulationAdvance;
+import triangulationAdvance.TriangulationAdvance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +14,7 @@ import java.util.Random;
 public class ResearchTest {
 
     enum TYPE_TEST {
-        //   RANDOM,
+        RANDOM,
         CIRCLE,
         LINE_IN_LINE,
         IN_TRIANGLE
@@ -28,8 +28,11 @@ public class ResearchTest {
                 5,
                 10, 20, 50,
                 100, 200, 500,
-                1000, 2000,
-                //5000, 100000
+//                1000, 2000,
+//                5000,
+//                10000, 20000, 50000,
+//                100000
+
         };
         for (int i = 0; i < TYPE_TEST.values().length; i++) {
             System.out.println("TYPE OF TEST: " + TYPE_TEST.values()[i].toString());
@@ -47,9 +50,9 @@ public class ResearchTest {
         int sizeTriangles = 0;
         List<Point> mav = new ArrayList<>();
         switch (type_test) {
-//            case RANDOM:
-//                mav = getRandomPoints(size);
-//                break;
+            case RANDOM:
+                mav = getRandomPoints(size);
+                break;
             case CIRCLE:
                 mav = getCirclePoints(size);
                 break;
@@ -61,13 +64,13 @@ public class ResearchTest {
                 break;
         }
 
-//        System.out.println(mav);
+        System.out.println(mav);
 
         for (int i = 0; i < amountTest; i++) {
             start[i] = System.currentTimeMillis();//(new Date()).getTime();
             Triangulation triangulation = new Triangulation(mav);
             finish[i] = System.currentTimeMillis();//(new Date()).getTime();
-            sizeTriangles = triangulation.getMesh().sizeTriangles();
+            sizeTriangles = triangulation.getTriangles().size();
         }
         for (int i = 0; i < amountTest; i++) {
             float time = (float) (finish[i] - start[i]);
@@ -91,7 +94,7 @@ public class ResearchTest {
             start[i] = System.currentTimeMillis();//(new Date()).getTime();
             TriangulationAdvance triangulation = new TriangulationAdvance(points);
             finish[i] = System.currentTimeMillis();//(new Date()).getTime();
-            sizeTriangles = triangulation.getTriangulation().size();
+            sizeTriangles = triangulation.getTriangles().size();
         }
         for (int i = 0; i < amountTest; i++) {
             float time = (float) (finish[i] - start[i]);
@@ -174,6 +177,6 @@ public class ResearchTest {
                 new Point(37, 38),
         };
         TriangulationAdvance triangulationAdvance = new TriangulationAdvance(points);
-        Assert.assertTrue(triangulationAdvance.getTriangulation().size() > 0);
+        Assert.assertTrue(triangulationAdvance.getTriangles().size() > 0);
     }
 }

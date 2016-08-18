@@ -19,7 +19,7 @@ public class Examples {
 
         Triangulation triangulation = new Triangulation(Arrays.asList(coordinates));
 
-        MeshView meshView = new MeshView(triangulation.getMesh());
+        MeshView meshView = new MeshView(triangulation.getTriangles());
     }
 
 }

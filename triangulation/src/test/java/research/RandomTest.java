@@ -18,7 +18,7 @@ public class RandomTest {
     public void randomTest() throws Exception {
         List<Point> list = new ArrayList<>();
         for (int i = 0; i < 20000; i++) {
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < 20; j++) {
                 list.add(new Point((random.nextFloat()) * 5d, (random.nextFloat()) * 5d));
             }
             Triangulation triangulation = new Triangulation(list);
@@ -28,9 +28,9 @@ public class RandomTest {
                 for (Point aList : list) {
                     System.out.println(String.format("\"%+5.8f\"", aList.getX()) + "," + String.format("\"%+5.8f\",", aList.getY()));
                 }
-                System.out.println("Amount of triangles = " + triangulation.getMesh().sizeTriangles());
+                System.out.println("Amount of triangles = " + triangulation.getTriangles().size());
             }
-            Assert.assertTrue(triangulation.getMesh().sizeTriangles() > 0);
+            Assert.assertTrue(triangulation.getTriangles().toString(),triangulation.getTriangles().size() > 0);
             list.clear();
         }
     }

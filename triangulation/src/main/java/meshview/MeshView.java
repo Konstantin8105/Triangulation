@@ -1,16 +1,11 @@
 package meshview;
 
 import research.ResearchTest;
-import triangulation.Triangulation;
-import triangulation.elements.Collections.IDable;
-import triangulation.elements.Line;
-import triangulation.elements.Mesh;
 import triangulation.elements.Point;
-import triangulationDelaunay.TriangulationDelaunay;
+import triangulationAdvance.TriangulationAdvance;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MeshView extends JFrame {
@@ -19,15 +14,7 @@ public class MeshView extends JFrame {
         public triangulation.elements.Point p[] = new triangulation.elements.Point[2];
     }
 
-    public MeshView(final Mesh mesh) {
-
-        final List<LineDraw> lines = new ArrayList<>();
-        for (IDable<Line>.Element<Line> line : mesh.getLines()) {
-            LineDraw lineDraw = new LineDraw();
-            lineDraw.p[0] = new triangulation.elements.Point(mesh.getPoints(line.value.getIdPointA()));
-            lineDraw.p[1] = new Point(mesh.getPoints(line.value.getIdPointB()));
-            lines.add(lineDraw);
-        }
+    public MeshView(final List<Point[]> mesh) {
 
         JPanel panel = new JPanel() {
             protected void paintComponent(Graphics g) {
@@ -35,34 +22,45 @@ public class MeshView extends JFrame {
                 Graphics2D g2 = ((Graphics2D) g);
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2.setStroke(new BasicStroke(3));
-                g.setColor(Color.BLUE);
-                for (LineDraw line : lines) {
+                for (int i = 0; i < mesh.size(); i++) {
+                    g.setColor(Color.BLUE);
                     g.drawLine(
-                            (int) line.p[0].getX(),
-                            (int) line.p[0].getY(),
-                            (int) line.p[1].getX(),
-                            (int) line.p[1].getY()
+                            (int) mesh.get(i)[0].getX(),
+                            (int) mesh.get(i)[0].getY(),
+                            (int) mesh.get(i)[1].getX(),
+                            (int) mesh.get(i)[1].getY()
                     );
-                }
-                g.setColor(Color.RED);
-                for (LineDraw line : lines) {
-                    g.drawOval(
-                            (int) line.p[0].getX(),
-                            (int) line.p[0].getY()
-                            , 3, 3);
-                    g.drawOval(
-                            (int) line.p[1].getX(),
-                            (int) line.p[1].getY()
-                            , 3, 3);
-                }
-                g.setColor(Color.BLACK);
-                for (IDable<Point>.Element<Point> point : mesh.getPoints()) {
-                    g.drawString(
-                            point.id + "",
-                            (int) point.value.getX(),
-                            (int) point.value.getY() + 20
+                    g.drawLine(
+                            (int) mesh.get(i)[1].getX(),
+                            (int) mesh.get(i)[1].getY(),
+                            (int) mesh.get(i)[2].getX(),
+                            (int) mesh.get(i)[2].getY()
                     );
+                    g.drawLine(
+                            (int) mesh.get(i)[2].getX(),
+                            (int) mesh.get(i)[2].getY(),
+                            (int) mesh.get(i)[0].getX(),
+                            (int) mesh.get(i)[0].getY()
+                    );
+                    g.setColor(Color.RED);
+                    g.drawOval((int) mesh.get(i)[0].getX(), (int) mesh.get(i)[0].getY(), 3, 3);
+                    g.drawOval((int) mesh.get(i)[0].getX(), (int) mesh.get(i)[1].getY(), 3, 3);
+                    g.drawOval((int) mesh.get(i)[0].getX(), (int) mesh.get(i)[2].getY(), 3, 3);
                 }
+//                for (LineDraw line : lines) {
+//                    g.drawOval(
+//                            (int) line.p[1].getX(),
+//                            (int) line.p[1].getY()
+//                            , 3, 3);
+//                }
+//                g.setColor(Color.BLACK);
+//                for (IDable<Point>.Element<Point> point : mesh.getPoints()) {
+//                    g.drawString(
+//                            point.id + "",
+//                            (int) point.value.getX(),
+//                            (int) point.value.getY() + 20
+//                    );
+//                }
 
             }
         };
@@ -79,21 +77,21 @@ public class MeshView extends JFrame {
 
         {
             List<Point> points = ResearchTest.getRandomPoints(AMOUNT_POINTS);
-            Triangulation triangulation = new Triangulation(points);
-            MeshView meshView = new MeshView(triangulation.getMesh());
-            Triangulation triangulationDelaunay = new TriangulationDelaunay(points);
-            MeshView meshViewDelaunay = new MeshView(triangulationDelaunay.getMesh());
+//            Triangulation triangulation = new Triangulation(points);
+//            MeshView meshView = new MeshView(triangulation.getTriangles());
+            TriangulationAdvance triangulationAdvance = new TriangulationAdvance((Point[]) points.toArray());
+            MeshView meshViewDelaunay = new MeshView(triangulationAdvance.getTriangles());
         }
 //        {
-//            TriangulationAdvance triangulation = new TriangulationAdvance(ResearchTest.getCirclePoints(AMOUNT_POINTS));
+//            triangulationAdvance.TriangulationAdvance triangulation = new triangulationAdvance.TriangulationAdvance(ResearchTest.getCirclePoints(AMOUNT_POINTS));
 //            MeshView meshView = new MeshView(triangulation.getMesh());
 //        }
 //        {
-//            TriangulationAdvance triangulation = new TriangulationAdvance(ResearchTest.getLineOnLine(AMOUNT_POINTS));
+//            triangulationAdvance.TriangulationAdvance triangulation = new triangulationAdvance.TriangulationAdvance(ResearchTest.getLineOnLine(AMOUNT_POINTS));
 //            MeshView meshView = new MeshView(triangulation.getMesh());
 //        }
 //        {
-//            TriangulationAdvance triangulation = new TriangulationAdvance(ResearchTest.getInTriangles(AMOUNT_POINTS));
+//            triangulationAdvance.TriangulationAdvance triangulation = new triangulationAdvance.TriangulationAdvance(ResearchTest.getInTriangles(AMOUNT_POINTS));
 //            MeshView meshView = new MeshView(triangulation.getMesh());
 //        }
     }

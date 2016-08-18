@@ -55,7 +55,7 @@ public class TriangulationBenchmark {
     @Benchmark
     public int triangulationMesh() throws Exception {
         Triangulation triangulation = new Triangulation(points);
-        return triangulation.getMesh().sizeTriangles();
+        return triangulation.getTriangles().size();
     }
 
 }

@@ -8,7 +8,7 @@ public class Triangle {
     private int idPoint2;
     private int idPoint3;
     private Line[] lines = new Line[3];
-    private int[] pointAntogonists = new int[3];
+//    private int[] pointAntogonists = new int[3];
 
     public Triangle(
             int idPoint1,
@@ -19,11 +19,11 @@ public class Triangle {
         this.idPoint2 = idPoint2;
         this.idPoint3 = idPoint3;
         lines[0] = new Line(this.idPoint1, this.idPoint2);
-        pointAntogonists[0] = this.idPoint3;
+//        pointAntogonists[0] = this.idPoint3;
         lines[1] = new Line(this.idPoint2, this.idPoint3);
-        pointAntogonists[1] = this.idPoint1;
+//        pointAntogonists[1] = this.idPoint1;
         lines[2] = new Line(this.idPoint3, this.idPoint1);
-        pointAntogonists[2] = this.idPoint2;
+//        pointAntogonists[2] = this.idPoint2;
     }
 
     public int getIdPoint1() {
@@ -75,20 +75,20 @@ public class Triangle {
     public Line[] getLines() {
         return lines;
     }
+//
+//    public int[] getPointAntagonists() {
+//        return pointAntogonists;
+//    }
 
-    public int[] getPointAntagonists() {
-        return pointAntogonists;
-    }
-
-    public int getPointAntogonist(Line line) {
-        if((line.getIdPointA() == idPoint1 && line.getIdPointB() == idPoint2)
-                ||(line.getIdPointA() == idPoint2 && line.getIdPointB() == idPoint1)){
-            return idPoint3;
-        }
-        if((line.getIdPointA() == idPoint2 && line.getIdPointB() == idPoint3)
-                ||(line.getIdPointA() == idPoint3 && line.getIdPointB() == idPoint2)){
-            return idPoint1;
-        }
-        return idPoint2;
-    }
+//    public int getPointAntogonist(Line line) {
+//        if((line.getIdPointA() == idPoint1 && line.getIdPointB() == idPoint2)
+//                ||(line.getIdPointA() == idPoint2 && line.getIdPointB() == idPoint1)){
+//            return idPoint3;
+//        }
+//        if((line.getIdPointA() == idPoint2 && line.getIdPointB() == idPoint3)
+//                ||(line.getIdPointA() == idPoint3 && line.getIdPointB() == idPoint2)){
+//            return idPoint1;
+//        }
+//        return idPoint2;
+//    }
 }

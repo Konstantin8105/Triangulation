@@ -1,8 +1,8 @@
-package triangulation2;
+package triangulationAdvance;
 
+import imp.iTriangulation;
 import triangulation.border.BorderBox;
 import triangulation.elements.Point;
-import triangulation.elements.Triangle;
 import triangulation.geometry.GeometryLineLine;
 import triangulation.geometry.GeometryPointTriangle;
 
@@ -11,23 +11,23 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * TriangulationAdvance
+ * triangulationAdvance.TriangulationAdvance
  * for step - triangulation convexHull: "Divide and Conquer"
  * Performance for worst-case: O(N*log(N))
  * for step - triangulation with restrictions: "Simple interactive method"
  * Performance for worst-case: O(N^2)
  * Philosophy of triangulation:
  * 1. Add 4 "fake" point - for guarantee all othe point in "fake" region
- * 2. Triangulation and delaunay checking
+ * 2. triangulation.Triangulation and delaunay checking
  * 3. Cut triangulation by convexHull region or external region
  *
  * @author Izyumov Konstantin
  * @see book "Algoritm building and analyse triangulation", A.B.Skvorcov.
  */
-public class TriangulationAdvance {
+public class TriangulationAdvance implements iTriangulation {
 
     //
-    // TriangulationAdvance data structure  "Nodes, ribs и triangles"
+    // triangulationAdvance.TriangulationAdvance data structure  "Nodes, ribs и triangles"
     //
     // Array of nodes - type: Point
     List<Point> nodes = new ArrayList<>();
@@ -35,6 +35,7 @@ public class TriangulationAdvance {
     List<Point> fakeNodes = new ArrayList<>();
     // Begin triangle - type: Triangle
     Triangle beginTriangle = new Triangle();
+
 
     // Triangle data structure
     private static class Triangle {
@@ -365,12 +366,20 @@ public class TriangulationAdvance {
         }
     }
 
-    public List<Triangle> getTriangulation() {
+    @Override
+    public List<Point[]> getTriangles() {
         List<Triangle> triangles = new ArrayList<>();
         getTriangleWays(beginTriangle, triangles);
-        return triangles;
+        List<Point[]> trianglesPoints = new ArrayList<>();
+        for (Triangle tri:triangles) {
+            Point[] points = new Point[]{
+                    nodes.get(tri.iNodes[0]),
+                    nodes.get(tri.iNodes[1]),
+                    nodes.get(tri.iNodes[2]),
+            };
+        }
+        return trianglesPoints;
     }
-
 
     ///////
     //
