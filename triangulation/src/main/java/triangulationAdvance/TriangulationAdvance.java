@@ -1,12 +1,7 @@
 package triangulationAdvance;
 
 import imp.iTriangulation;
-import triangulation.border.BorderBox;
 import triangulation.elements.Point;
-import triangulation.geometry.Geometry;
-import triangulation.geometry.GeometryLineLine;
-import triangulation.geometry.GeometryPointTriangle;
-import un.impl.geometry.Geometries;
 
 import java.util.*;
 
@@ -459,11 +454,11 @@ public class TriangulationAdvance implements iTriangulation {
         if (!isGoodDelaunay(triangle0, 0)) {
             flipTriangles(triangle0, 0);
         }
-        if(!isGoodDelaunay(triangle1,0)){
-            flipTriangles(triangle1,0);
+        if (!isGoodDelaunay(triangle1, 0)) {
+            flipTriangles(triangle1, 0);
         }
-        if(!isGoodDelaunay(triangle2,0)){
-            flipTriangles(triangle2,0);
+        if (!isGoodDelaunay(triangle2, 0)) {
+            flipTriangles(triangle2, 0);
         }
     }
 
@@ -751,4 +746,154 @@ public class TriangulationAdvance implements iTriangulation {
         return false;
     }
 */
+
+    /**
+     * Create rectangle for future check point outside rectangle.
+     * Dimension: 2D
+     *
+     * @author Izyumov Konstantin
+     * @since 05/04/2016
+     */
+    public class BorderBox {
+        private double x_min;
+        private double x_max;
+        private double y_min;
+        private double y_max;
+
+        /**
+         * Box change the size by X or Y and input point will be inside in rectangle or on border of rectangle
+         *
+         * @param point input data
+         * @throws NullPointerException - if input point is null
+         * @see Point
+         */
+        public void addPoint(Point point) throws NullPointerException {
+            if (point == null)
+                throw new NullPointerException("Point is null in BorderBox");
+            if (!haveFirstPoint) {
+                x_min = x_max = point.getX();
+                y_min = y_max = point.getY();
+                haveFirstPoint = true;
+            } else {
+                x_min = Math.min(x_min, point.getX());
+                x_max = Math.max(x_max, point.getX());
+                y_min = Math.min(y_min, point.getY());
+                y_max = Math.max(y_max, point.getY());
+            }
+        }
+
+        /**
+         * Checking input point - is inside Box?
+         *
+         * @param point input data
+         * @return true - if point inside or on border of the box, and false - if point outside the box or you don`t add any points.
+         * @throws NullPointerException - if input point is null or don`t add any point in box
+         * @see Point
+         */
+        public boolean isInBox(Point point) throws NullPointerException {
+            if (point == null)
+                throw new NullPointerException("Point is null in BorderBox");
+            if (!haveFirstPoint)
+                throw new NullPointerException("You don`t input the point");
+            if (x_min <= point.getX() && point.getX() <= x_max)
+                if (y_min <= point.getY() && point.getY() <= y_max)
+                    return true;
+            return false;
+        }
+
+        public double getX_min() {
+            return x_min;
+        }
+
+        public double getX_max() {
+            return x_max;
+        }
+
+        public double getY_min() {
+            return y_min;
+        }
+
+        public double getY_max() {
+            return y_max;
+        }
+
+        public Point getCenter() {
+            return new Point(
+                    (x_min + x_max) / 2.0,
+                    (y_min + y_max) / 2.0
+            );
+        }
+
+        public void scale(double scaleFactor, Point center) {
+            x_min = center.getX() - (center.getX() - x_min) * scaleFactor;
+            x_max = center.getX() + (x_max - center.getX()) * scaleFactor;
+            y_min = center.getY() - (center.getY() - y_min) * scaleFactor;
+            y_max = center.getY() + (y_max - center.getY()) * scaleFactor;
+        }
+    }
+
+
+    public static Point[] convexHull(Point[] inputPoints) {
+        if (inputPoints.length < 2)
+            return inputPoints;
+
+        Set<Point> uniquePoints = new HashSet<>();
+        for (int i = 0; i < inputPoints.length; i++) {
+            uniquePoints.add(inputPoints[i]);
+        }
+
+
+        List<Point> arrayUnique = new ArrayList<>(uniquePoints);
+        Collections.sort(arrayUnique, new Comparator<Point>() {
+            @Override
+            public int compare(Point first, Point second) {
+                if (((Point) first).getX() == ((Point) second).getX()){
+                    if (((Point) first).getY() > ((Point) second).getY())
+                        return 1;
+                    if (((Point) first).getY() < ((Point) second).getY())
+                        return -1;
+                    return 0;
+                }
+                if (((Point) first).getX() > ((Point) second).getX())
+                    return 1;
+                if (((Point) first).getX() < ((Point) second).getX())
+                    return -1;
+                return 0;
+            }
+        });
+
+        int n = arrayUnique.size();
+        Point[] P = new Point[n];
+        for (int i = 0; i < n; i++) {
+            P[i] = (Point) arrayUnique.get(i);
+        }
+
+        Point[] H = new Point[2 * n];
+
+        int k = 0;
+        // Build lower hull
+        for (int i = 0; i < n; ++i) {
+            while (k >= 2 && isCounterClockwise(H[k - 2], H[k - 1], P[i])) {
+                k--;
+            }
+            H[k++] = P[i];
+        }
+
+        // Build upper hull
+        for (int i = n - 2, t = k + 1; i >= 0; i--) {
+            while (k >= t && isCounterClockwise(H[k - 2], H[k - 1], P[i])) {
+                k--;
+            }
+            H[k++] = P[i];
+        }
+        if (k > 1) {
+            H = (Point[]) Arrays.copyOfRange(H, 0, k - 1); // remove non-hull vertices after k; remove k - 1 which is a duplicate
+        }
+        return H;
+    }
+
+
+    public static boolean isCounterClockwise(Point a, Point b, Point c) {
+        return (b.getX() - a.getX()) * (c.getY() - a.getY()) - (c.getX() - a.getX()) * (b.getY() - a.getY()) > 0.0D;
+    }
 }
