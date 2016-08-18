@@ -27,7 +27,7 @@ public class Sequence {
     public static List<? extends Line> createSequence(final List<? extends Line> listLines) {
         if (listLines.size() == 1)
             return listLines;
-       System.err.println("\nIN createSequence inputLines = "+listLines);
+       //System.err.println("\nIN createSequence inputLines = "+listLines);
         int idBeforeLine = listLines.get(0).getIdPointB();
         int position = 1;
         boolean changes = true;

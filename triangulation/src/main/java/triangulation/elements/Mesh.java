@@ -6,7 +6,6 @@ import triangulation.elements.Collections.IDable;
 import triangulation.geometry.GeometryPointTriangle;
 import triangulation.grid.Grid;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class Mesh {
@@ -32,7 +31,7 @@ public class Mesh {
     }
 
     private void deleteSamePoints() {
-        points.removeSame();
+//        points.removeSame();
     }
 
     public int addLine(Line line, boolean mayBeBorder) throws Exception {
@@ -81,16 +80,16 @@ public class Mesh {
         return triangles;
     }
 
-    public void deleteLine(Line line) {
-        Iterator<IDable<Line>.Element<Line>> iterator = lines.iterator();
-        while (iterator.hasNext()){
-            IDable<Line>.Element<Line> element = iterator.next();
-            if(element.value.equals(line)){
-                deleteLine(element.id);
-                break;
-            }
-        }
-    }
+//    public void deleteLine(Line line) {
+//        Iterator<IDable<Line>.Element<Line>> iterator = lines.iterator();
+//        while (iterator.hasNext()){
+//            IDable<Line>.Element<Line> element = iterator.next();
+//            if(element.value.equals(line)){
+//                deleteLine(element.id);
+//                break;
+//            }
+//        }
+//    }
 
     public void deleteLine(int idLine) {
         borderLine.removeLine(lines.getById(idLine).value);

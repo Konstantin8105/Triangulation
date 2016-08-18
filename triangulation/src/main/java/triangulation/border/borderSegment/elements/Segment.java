@@ -32,13 +32,6 @@ public class Segment {
     }
 
     @Override
-    public String toString() {
-        return "Segment{" +
-                "segment=" + Arrays.toString(segment) +
-                ", intersect=" + Arrays.toString(intersect) +
-                '}';
-    }
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -48,5 +41,13 @@ public class Segment {
         //TODO Probably incorrect - comparing Object[] arrays with Arrays.equals
         return Arrays.equals(segment, segment1.segment);
 
+    }
+
+    @Override
+    public String toString() {
+        return "Segment{" +
+                "segment=" + Arrays.toString(segment) +
+                ", intersect=" + Arrays.toString(intersect) +
+                '}';
     }
 }
