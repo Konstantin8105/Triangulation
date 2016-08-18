@@ -38,4 +38,15 @@ public class Segment {
                 ", intersect=" + Arrays.toString(intersect) +
                 '}';
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Segment segment1 = (Segment) o;
+
+        //TODO Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(segment, segment1.segment);
+
+    }
 }

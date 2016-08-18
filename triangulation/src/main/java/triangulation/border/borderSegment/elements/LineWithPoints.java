@@ -47,13 +47,13 @@ public class LineWithPoints extends Line {
                 ", other = "+super.toString() +
                 '}';
     }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (pointA != null ? pointA.hashCode() : 0);
-        result = 31 * result + (pointB != null ? pointB.hashCode() : 0);
-        result = 31 * result + (pointMiddle != null ? pointMiddle.hashCode() : 0);
-        return result;
-    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = super.hashCode();
+//        result = 31 * result + (pointA != null ? pointA.hashCode() : 0);
+//        result = 31 * result + (pointB != null ? pointB.hashCode() : 0);
+//        result = 31 * result + (pointMiddle != null ? pointMiddle.hashCode() : 0);
+//        return result;
+//    }
 }
