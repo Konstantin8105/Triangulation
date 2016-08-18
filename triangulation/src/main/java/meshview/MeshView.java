@@ -1,6 +1,7 @@
 package meshview;
 
 import research.ResearchTest;
+import triangulation.border.BorderBox;
 import triangulation.elements.Point;
 import triangulationAdvance.TriangulationAdvance;
 
@@ -10,11 +11,15 @@ import java.util.List;
 
 public class MeshView extends JFrame {
 
-    class LineDraw {
-        public triangulation.elements.Point p[] = new triangulation.elements.Point[2];
-    }
-
     public MeshView(final List<Point[]> mesh) {
+
+        BorderBox box = new BorderBox();
+        for (int i = 0; i < mesh.size(); i++) {
+            for (int j = 0; j < mesh.get(i).length; j++) {
+                box.addPoint(mesh.get(i)[j]);
+            }
+        }
+
 
         JPanel panel = new JPanel() {
             protected void paintComponent(Graphics g) {
@@ -44,39 +49,24 @@ public class MeshView extends JFrame {
                     );
                     g.setColor(Color.RED);
                     g.drawOval((int) mesh.get(i)[0].getX(), (int) mesh.get(i)[0].getY(), 3, 3);
-                    g.drawOval((int) mesh.get(i)[0].getX(), (int) mesh.get(i)[1].getY(), 3, 3);
-                    g.drawOval((int) mesh.get(i)[0].getX(), (int) mesh.get(i)[2].getY(), 3, 3);
+                    g.drawOval((int) mesh.get(i)[1].getX(), (int) mesh.get(i)[1].getY(), 3, 3);
+                    g.drawOval((int) mesh.get(i)[2].getX(), (int) mesh.get(i)[2].getY(), 3, 3);
                 }
-//                for (LineDraw line : lines) {
-//                    g.drawOval(
-//                            (int) line.p[1].getX(),
-//                            (int) line.p[1].getY()
-//                            , 3, 3);
-//                }
-//                g.setColor(Color.BLACK);
-//                for (IDable<Point>.Element<Point> point : mesh.getPoints()) {
-//                    g.drawString(
-//                            point.id + "",
-//                            (int) point.value.getX(),
-//                            (int) point.value.getY() + 20
-//                    );
-//                }
-
             }
         };
         setContentPane(panel);
 
-        int WINDOWS_SIZE = 700;
+        int WINDOWS_SIZE = 800;
         this.setSize(new Dimension(WINDOWS_SIZE, WINDOWS_SIZE));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
     public static void main(String[] args) throws Exception {
-        int AMOUNT_POINTS = 200;
+        int AMOUNT_POINTS = 10;
 
         {
-            List<Point> points = ResearchTest.getRandomPoints(AMOUNT_POINTS);
+            List<Point> points = ResearchTest.getCirclePoints(AMOUNT_POINTS);
 //            Triangulation triangulation = new Triangulation(points);
 //            MeshView meshView = new MeshView(triangulation.getTriangles());
             TriangulationAdvance triangulationAdvance = new TriangulationAdvance((Point[]) points.toArray());

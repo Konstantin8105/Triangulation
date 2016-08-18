@@ -1,9 +1,9 @@
 package triangulation.geometry;
 
 
+import triangulation.border.BorderBox;
 import triangulation.elements.Point;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class GeometryCoordinate extends Geometry {
@@ -50,21 +50,36 @@ public class GeometryCoordinate extends Geometry {
         return isPointInRectangle(x, y, p1Line.getX(), p1Line.getY(), p2Line.getX(), p2Line.getY());
     }
 
-    static boolean isPointInRectangle(Point point, List<Point> list) {
-        double minX = list.get(0).getX();
-        double maxX = list.get(0).getX();
-        double minY = list.get(0).getY();
-        double maxY = list.get(0).getY();
-        for (Point c : list) {
-            if (minX > c.getX()) minX = c.getX();
-            if (maxX < c.getX()) maxX = c.getX();
-            if (minY > c.getY()) minY = c.getY();
-            if (maxY < c.getY()) maxY = c.getY();
-        }
-        return isPointInRectangle(point.getX(), point.getY(), minX, minY, maxX, maxY);
-    }
+//    static boolean isPointInRectangle(Point point, List<Point> list) {
+//        if(list.get(0).getX() == -12 && list.get(0).getY() == 57) {
+//            System.out.println(point.toString() + list.toString() + "\n");
+//        }
+//        BorderBox borderBox = new BorderBox();
+//        for (int i = 0; i < list.size(); i++) {
+//            borderBox.addPoint(list.get(i));
+//        }
+//        return borderBox.isInBox(point);
+//        double minX = list.get(0).getX();
+//        double maxX = list.get(0).getX();
+//        double minY = list.get(0).getY();
+//        double maxY = list.get(0).getY();
+//        for (Point c : list) {
+//            if (minX > c.getX()) minX = c.getX();
+//            if (maxX < c.getX()) maxX = c.getX();
+//            if (minY > c.getY()) minY = c.getY();
+//            if (maxY < c.getY()) maxY = c.getY();
+//        }
+//        return isPointInRectangle(point.getX(), point.getY(), minX, minY, maxX, maxY);
+//    }
 
     static boolean isPointInRectangle(Point point, Point[] list) {
-        return isPointInRectangle(point, Arrays.asList(list));
+
+        BorderBox borderBox = new BorderBox();
+        for (int i = 0; i < list.length; i++) {
+            borderBox.addPoint(list[i]);
+        }
+        return borderBox.isInBox(point);
+
+//        return isPointInRectangle(point, Arrays.asList(list));
     }
 }

@@ -2,6 +2,8 @@ package triangulation.geometry;
 
 import triangulation.elements.Point;
 
+import java.util.*;
+
 public class Geometry {
 
     public static double normalizeAngle(final double angle) {
@@ -105,8 +107,8 @@ public class Geometry {
 
 
     public static double det(double a[][]) {
-        double det = a[0][0] * a[1][1] * a[2][2] + a[1][0] * a[2][1] * a[0][2] + a[0][1]*a[1][2]*a[2][0]
-                - a[0][2]*a[1][1]*a[2][0] - a[0][1]*a[1][0]*a[2][2] - a[1][2]*a[2][1]*a[0][0];
+        double det = a[0][0] * a[1][1] * a[2][2] + a[1][0] * a[2][1] * a[0][2] + a[0][1] * a[1][2] * a[2][0]
+                - a[0][2] * a[1][1] * a[2][0] - a[0][1] * a[1][0] * a[2][2] - a[1][2] * a[2][1] * a[0][0];
         return det;
     }
 
@@ -125,34 +127,97 @@ public class Geometry {
         double z3 = x3 * x3 + y3 * y3;
 
         double a = det(new double[][]{
-                {x1,y1,1},
-                {x2,y2,1},
-                {x3,y3,1}
+                {x1, y1, 1},
+                {x2, y2, 1},
+                {x3, y3, 1}
         });
 
         double b = det(new double[][]{
-                {z1,y1,1},
-                {z2,y2,1},
-                {z3,y3,1}
+                {z1, y1, 1},
+                {z2, y2, 1},
+                {z3, y3, 1}
         });
 
         double c = det(new double[][]{
-                {z1,x1,1},
-                {z2,x2,1},
-                {z3,x3,1}
+                {z1, x1, 1},
+                {z2, x2, 1},
+                {z3, x3, 1}
         });
 
         double d = det(new double[][]{
-                {z1,x1,y1},
-                {z2,x2,y2},
-                {z3,x3,y3}
+                {z1, x1, y1},
+                {z2, x2, y2},
+                {z3, x3, y3}
         });
 
         double x0 = point.getX();
         double y0 = point.getY();
-        double z0 = x0*x0+y0*y0;
+        double z0 = x0 * x0 + y0 * y0;
 
-        return Math.signum(a)*(a*z0-b*x0+c*y0-d)<0;
+        return Math.signum(a) * (a * z0 - b * x0 + c * y0 - d) < 0;
     }
 
+    public static boolean isCounterClockwise(Point a, Point b, Point c) {
+        return (b.getX() - a.getX()) * (c.getY() - a.getY()) - (c.getX() - a.getX()) * (b.getY() - a.getY()) > 0.0D;
+    }
+
+
+    public static Point[] convexHull(Point[] inputPoints) {
+        if (inputPoints.length < 2)
+            return inputPoints;
+
+        Set<Point> uniquePoints = new HashSet<>();
+        for (int i = 0; i < inputPoints.length; i++) {
+            uniquePoints.add(inputPoints[i]);
+        }
+
+
+        List<Point> arrayUnique = new ArrayList<>(uniquePoints);
+        Collections.sort(arrayUnique, new Comparator<Point>() {
+            @Override
+            public int compare(Point first, Point second) {
+                if (((Point) first).getX() == ((Point) second).getX()){
+                    if (((Point) first).getY() > ((Point) second).getY())
+                        return 1;
+                    if (((Point) first).getY() < ((Point) second).getY())
+                        return -1;
+                    return 0;
+                }
+                if (((Point) first).getX() > ((Point) second).getX())
+                    return 1;
+                if (((Point) first).getX() < ((Point) second).getX())
+                    return -1;
+                return 0;
+            }
+        });
+
+        int n = arrayUnique.size();
+        Point[] P = new Point[n];
+        for (int i = 0; i < n; i++) {
+            P[i] = (Point) arrayUnique.get(i);
+        }
+
+        Point[] H = new Point[2 * n];
+
+        int k = 0;
+        // Build lower hull
+        for (int i = 0; i < n; ++i) {
+            while (k >= 2 && Geometry.isCounterClockwise(H[k - 2], H[k - 1], P[i])) {
+                k--;
+            }
+            H[k++] = P[i];
+        }
+
+        // Build upper hull
+        for (int i = n - 2, t = k + 1; i >= 0; i--) {
+            while (k >= t && Geometry.isCounterClockwise(H[k - 2], H[k - 1], P[i])) {
+                k--;
+            }
+            H[k++] = P[i];
+        }
+        if (k > 1) {
+            H = (Point[]) Arrays.copyOfRange(H, 0, k - 1); // remove non-hull vertices after k; remove k - 1 which is a duplicate
+        }
+        return H;
+    }
 }

@@ -120,7 +120,7 @@ public class ResearchTest {
             coordinates[j] = new Point(
 //                    (random.nextFloat()) * 600,
 //                    (random.nextFloat()) * 600
-                    random.nextInt(50), random.nextInt(50)
+                    150+random.nextInt(300), 150+random.nextInt(300)
             );
         }
         return Arrays.asList(coordinates);
@@ -130,8 +130,8 @@ public class ResearchTest {
         Point[] coordinates = new Point[size];
         for (int j = 0; j < size - 1; j++) {
             coordinates[j] = new Point(
-                    300 * Math.sin(2 * 3.1415 / size * j) + 300,
-                    300 * Math.cos(2 * 3.1415 / size * j) + 300
+                    150 * Math.sin(2 * 3.1415 / size * j) + 300,
+                    150 * Math.cos(2 * 3.1415 / size * j) + 300
             );
         }
         coordinates[coordinates.length - 1] = new Point(300, 300);
@@ -173,8 +173,8 @@ public class ResearchTest {
                 new Point(34, 42),
                 new Point(33, 45),
                 new Point(37, 26),
-                new Point(2, 35),
-                new Point(37, 38),
+//                new Point(2, 35),
+//                new Point(37, 38),
         };
         TriangulationAdvance triangulationAdvance = new TriangulationAdvance(points);
         Assert.assertTrue(triangulationAdvance.getTriangles().size() > 0);

@@ -134,7 +134,7 @@ public class Triangulation implements iTriangulation {
         mesh.deleteLine(line.id);
     }
 
-    protected void addNextPointInTriangle(IDable<Point>.Element<Point> nextPoint, IDable<Triangle>.Element<Triangle> triangle) throws Exception {
+    protected void addNextPointInTriangle(IDable.Element nextPoint, IDable.Element triangle) throws Exception {
         Triangle oldTriangle = (Triangle) triangle.value;
         mesh.addLine(new Line(nextPoint.id, oldTriangle.getIdPoint1()), NOT_BORDER);
         mesh.addLine(new Line(nextPoint.id, oldTriangle.getIdPoint2()), NOT_BORDER);
