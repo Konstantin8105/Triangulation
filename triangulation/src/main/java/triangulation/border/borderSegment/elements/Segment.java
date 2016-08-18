@@ -23,14 +23,6 @@ public class Segment {
         return segment;
     }
 
-    public boolean haveBothSegments() {
-        return segment[0].size() > 0 && segment[1].size() > 0;
-    }
-
-    public boolean[] getIntersect() {
-        return intersect;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,6 +33,14 @@ public class Segment {
         //TODO Probably incorrect - comparing Object[] arrays with Arrays.equals
         return Arrays.equals(segment, segment1.segment);
 
+    }
+
+    public boolean haveBothSegments() {
+        return segment[0].size() > 0 && segment[1].size() > 0;
+    }
+
+    public boolean[] getIntersect() {
+        return intersect;
     }
 
     @Override
