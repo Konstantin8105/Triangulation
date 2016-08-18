@@ -156,7 +156,7 @@ public class TriangulationAdvance implements iTriangulation {
         List<Triangle> triangles = new ArrayList<>();
         getTriangleWays(beginTriangle, triangles);
         for (Triangle triangle : triangles) {
-            if(!triangle.mark)
+            if (!triangle.mark)
                 return false;
         }
         return true;
@@ -209,22 +209,21 @@ public class TriangulationAdvance implements iTriangulation {
         for (int i = 0; i < pointIndex.length; i++) {
             points[i] = nodes.get(pointIndex[i]);
         }
-        if(Geometry.convexHull(points).length != 4)
+        if (Geometry.convexHull(points).length != 4)
             return null;
 
-        System.out.println("RIB:");
-        for (int i = 0; i < 4; i++) {
-            System.out.println(ribs[i]);
-        }
-        System.out.println("pointIndex:");
-        for (int i = 0; i < 4; i++) {
-            System.out.println(pointIndex[i]);
-        }
-        System.out.println("outsideTriangles:");
-        for (int i = 0; i < 4; i++) {
-            System.out.println(outsideTriangles[i]);
-        }
-
+//        System.out.println("RIB:");
+//        for (int i = 0; i < 4; i++) {
+//            System.out.println(ribs[i]);
+//        }
+//        System.out.println("pointIndex:");
+//        for (int i = 0; i < 4; i++) {
+//            System.out.println(pointIndex[i]);
+//        }
+//        System.out.println("outsideTriangles:");
+//        for (int i = 0; i < 4; i++) {
+//            System.out.println(outsideTriangles[i]);
+//        }
 
 
         commonRib = getIdRib();
@@ -262,6 +261,20 @@ public class TriangulationAdvance implements iTriangulation {
                 ribs[0],
                 commonRib
         };
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                Triangle tri = triangles[i].triangles[j];
+                int rib = triangles[i].iRibs[i];
+                if (tri != null) {
+                    for (int k = 0; k < 3; k++) {
+                        if (tri.iRibs[k] == rib) {
+                            tri.triangles[k] = triangles[i];
+                        }
+                    }
+                }
+            }
+        }
 
         beginTriangle = triangles[0];
 
@@ -443,15 +456,15 @@ public class TriangulationAdvance implements iTriangulation {
         }
 
         beginTriangle = triangle0;
-//        if(!isGoodDelaunay(triangle0,0)){
-//            flipTriangles(triangle0,0);
-//        }
+        if (!isGoodDelaunay(triangle0, 0)) {
+            flipTriangles(triangle0, 0);
+        }
         if(!isGoodDelaunay(triangle1,0)){
             flipTriangles(triangle1,0);
         }
-//        if(!isGoodDelaunay(triangle2,0)){
-//            flipTriangles(triangle2,0);
-//        }
+        if(!isGoodDelaunay(triangle2,0)){
+            flipTriangles(triangle2,0);
+        }
     }
 
 

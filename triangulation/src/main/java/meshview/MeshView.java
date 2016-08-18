@@ -26,7 +26,7 @@ public class MeshView extends JFrame {
                 super.paintComponent(g);
                 Graphics2D g2 = ((Graphics2D) g);
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setStroke(new BasicStroke(3));
+                g2.setStroke(new BasicStroke(1));
                 for (int i = 0; i < mesh.size(); i++) {
                     g.setColor(Color.BLUE);
                     g.drawLine(
