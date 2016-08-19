@@ -72,18 +72,4 @@ public class BorderBox {
     public double getY_max() {
         return y_max;
     }
-
-    public Point getCenter() {
-        return new Point(
-                (x_min + x_max) / 2.0,
-                (y_min + y_max) / 2.0
-        );
-    }
-
-    public void scale(double scaleFactor, Point center) {
-        x_min = center.getX() - (center.getX() - x_min) * scaleFactor;
-        x_max = center.getX() + (x_max - center.getX()) * scaleFactor;
-        y_min = center.getY() - (center.getY() - y_min) * scaleFactor;
-        y_max = center.getY() + (y_max - center.getY()) * scaleFactor;
-    }
 }

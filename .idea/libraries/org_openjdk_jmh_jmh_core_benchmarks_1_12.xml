@@ -17,10 +17,16 @@
       <root url="jar://$MAVEN_REPOSITORY$/net/sf/jopt-simple/jopt-simple/4.6/jopt-simple-4.6.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-math3/3.2/commons-math3-3.2.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-generator-annprocess/1.12/jmh-generator-annprocess-1.12.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-core-benchmarks/1.12/jmh-core-benchmarks-1.12.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-core/1.12/jmh-core-1.12.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/net/sf/jopt-simple/jopt-simple/4.6/jopt-simple-4.6.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-math3/3.2/commons-math3-3.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-generator-annprocess/1.12/jmh-generator-annprocess-1.12.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.ideaLibSources/jmh-core-1.12-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-core-benchmarks/1.12/jmh-core-benchmarks-1.12-sources.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-core-benchmarks/1.12/jmh-core-benchmarks-1.12-sources.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-core-benchmarks/1.12/jmh-core-benchmarks-1.12-sources.jar!/" />
     </SOURCES>

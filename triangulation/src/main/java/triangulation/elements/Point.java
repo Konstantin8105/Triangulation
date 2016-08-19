@@ -16,14 +16,6 @@ public class Point {
         this.y = that.y;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
     public double getX() {
         return x;
     }
@@ -62,6 +54,6 @@ public class Point {
     }
 
     public static Point middlePoint(Point pointA, Point pointB) {
-        return new Point((pointA.x + pointB.x) / 2d, (pointA.y + pointB.y) / 2d);
+        return new Point((pointA.x+pointB.x)/2d,(pointA.y+pointB.y)/2d);
     }
 }

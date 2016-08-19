@@ -1,7 +1,5 @@
 package research;
 
-import org.junit.Assert;
-import org.junit.Test;
 import triangulation.Triangulation;
 import triangulation.elements.Point;
 import triangulationAdvance.TriangulationAdvance;
@@ -113,14 +111,13 @@ public class ResearchTest {
         System.out.println("==");
     }
 
+    final private static int SIZE = 600;
 
     public static List<Point> getRandomPoints(final int size) {
         Point[] coordinates = new Point[size];
         for (int j = 0; j < coordinates.length; j++) {
             coordinates[j] = new Point(
-//                    (random.nextFloat()) * 600,
-//                    (random.nextFloat()) * 600
-                    150+random.nextInt(300), 150+random.nextInt(300)
+                    random.nextInt(SIZE), random.nextInt(SIZE)
             );
         }
         return Arrays.asList(coordinates);
@@ -130,23 +127,23 @@ public class ResearchTest {
         Point[] coordinates = new Point[size];
         for (int j = 0; j < size - 1; j++) {
             coordinates[j] = new Point(
-                    150 * Math.sin(2 * 3.1415 / size * j) + 300,
-                    150 * Math.cos(2 * 3.1415 / size * j) + 300
+                    SIZE/2. * Math.sin(2. * Math.PI / size * j) + SIZE/2,
+                    SIZE/2. * Math.cos(2. * Math.PI / size * j) + SIZE/2
             );
         }
-        coordinates[coordinates.length - 1] = new Point(300, 300);
+        coordinates[coordinates.length - 1] = new Point(SIZE/2, SIZE/2);
         return Arrays.asList(coordinates);
     }
 
     public static List<Point> getLineOnLine(final int size) {
         Point[] coordinates = new Point[3 + size];
         coordinates[0] = new Point(0, 0);
-        coordinates[1] = new Point(600, 0);
-        coordinates[2] = new Point(600, 600);
+        coordinates[1] = new Point(SIZE, 0);
+        coordinates[2] = new Point(SIZE, SIZE);
         for (int j = 3; j < coordinates.length; j++) {
             coordinates[j] = new Point(
-                    0.8D * j / coordinates.length * 600D,
-                    0.8D * j / coordinates.length * 600D
+                    100 + (SIZE-200) * j / coordinates.length,
+                    100 + (SIZE-200) * j / coordinates.length
             );
         }
         return Arrays.asList(coordinates);
@@ -155,28 +152,14 @@ public class ResearchTest {
     public static List<Point> getInTriangles(final int size) {
         Point[] coordinates = new Point[4 + size];
         coordinates[0] = new Point(0, 0);
-        coordinates[1] = new Point(600, 0);
-        coordinates[2] = new Point(0, 600);
-        coordinates[3] = new Point(600, 600);
+        coordinates[1] = new Point(SIZE, 0);
+        coordinates[2] = new Point(0, SIZE);
+        coordinates[3] = new Point(SIZE, SIZE);
         for (int j = 4; j < coordinates.length; j++) {
             coordinates[j] = new Point(
-                    0.1 + 600 * 0.8 * (double) j / (double) size,
-                    300
+                    100 + (SIZE-200) * j / coordinates.length, SIZE/2
             );
         }
         return Arrays.asList(coordinates);
-    }
-
-    @Test
-    public void test() {
-        Point[] points = new Point[]{
-                new Point(34, 42),
-                new Point(33, 45),
-                new Point(37, 26),
-//                new Point(2, 35),
-//                new Point(37, 38),
-        };
-        TriangulationAdvance triangulationAdvance = new TriangulationAdvance(points);
-        Assert.assertTrue(triangulationAdvance.getTriangles().size() > 0);
     }
 }

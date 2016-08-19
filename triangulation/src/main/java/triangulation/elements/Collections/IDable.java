@@ -4,18 +4,6 @@ import java.util.*;
 
 public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
 
-//    public void removeSame() {
-//        for (int i = 0; i < list.size(); i++) {
-//            for (int j = i+1; j < list.size(); j++) {
-//                if(list.get(i).equals(list.get(j))){
-//                    list.remove(i);
-//                    removeSame();
-//                    break;
-//                }
-//            }
-//        }
-//    }
-
     public class Element<V> {
         final public int id;
         public V value;
@@ -53,7 +41,7 @@ public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
     }
 
     public void add(List<T> list) {
-        this.list.ensureCapacity(this.list.size() + list.size());
+        this.list.ensureCapacity(this.list.size()+list.size());
         for (T aList : list) {
             Element<T> element = new Element<>(getID(), aList);
             this.list.add(element);
@@ -62,9 +50,8 @@ public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
 
     private int convertIDtoINDEX(int id) {
         if (0 <= id && id < list.size()) {
-            if (list.get(id).id == id) {
+            if (list.get(id).id == id)
                 return id;
-            }
         }
         Element search = new Element(id);
         return Collections.binarySearch(list, search, comparatorId);
@@ -72,12 +59,13 @@ public class IDable<T> implements Iterable<IDable<T>.Element<T>> {
 
     public void remove(int id) {
         int index = convertIDtoINDEX(id);
+        //todo check on outside of index
         list.remove(index);
     }
 
     public Element<T> getById(int id) {
         int index = convertIDtoINDEX(id);
-        if (index < 0)
+        if(index < 0)
             return null;
         return list.get(index);
     }

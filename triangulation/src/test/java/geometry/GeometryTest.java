@@ -227,7 +227,7 @@ public class GeometryTest {
     }
 
 
-
+/*
     @Test
     public void testDet1() throws Exception {
         double a[][] = {
@@ -301,5 +301,5 @@ public class GeometryTest {
             System.out.println("longDistance = " + String.format("%.1e",longDistance) + " : "+ Geometry.isPointInCircle(points,point));
             Assert.assertTrue(Geometry.isPointInCircle(points,point));
         }
-    }
+    }*/
 }
