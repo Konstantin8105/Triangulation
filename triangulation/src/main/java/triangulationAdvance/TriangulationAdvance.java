@@ -78,19 +78,18 @@ public class TriangulationAdvance implements iTriangulation {
         createFakeTriangles(points);
 //        check();
         for (int i = 0; i < points.length; i++) {
-//            delaunayChecking();
             addNextPoint(points[i]);
-//            check();
         }
+//        delaunayChecking();
+////        check();
 //        for (int i = 0; i < 1000; i++) {
-//
 //            delaunayChecking();
 //        }
         //cutByRegion(convexHull(points));
         //removeFakeTriangles();
     }
 
-
+//
 //    private boolean check() {
 //        List<Triangle> triangles = new ArrayList<>();
 //        getTriangleWays(beginTriangle, triangles);
@@ -102,7 +101,7 @@ public class TriangulationAdvance implements iTriangulation {
 //        return true;
 //    }
 
-/*
+
     private void delaunayChecking() {
         // un mark all triangles
         List<Triangle> triangles = new ArrayList<>();
@@ -132,40 +131,35 @@ public class TriangulationAdvance implements iTriangulation {
                 if (!isGoodDelaunay(triangle, i)) {
                     if(flipTriangles(triangle, i) != null) {
                         isAllGood = false;
-//                    Triangle[] newTriangles = flipTriangles(triangle, i);
-//                    for (int j = 0; j < newTriangles.length; j++) {
-//                        triangles.add(newTriangles[j]);
-//                    }
                         triangles.set(k, null);
                         nullElements.add(triangle.triangles[i]);
                         i = 3;
-//                    k--;
                     }
                 }
             }
             if (isAllGood) {
                 triangle.mark = true;
             } else {
+                triangle.mark = false;
             }
-            System.out.println("--" + k);
         }
-        System.out.println("\n\n");
         if(!allElementMark()){
-           // delaunayChecking();
+            triangles.clear();
+            delaunayChecking();
         }
     }
-*/
 
 
-//    private boolean allElementMark() {
-//        List<Triangle> triangles = new ArrayList<>();
-//        getTriangleWays(beginTriangle, triangles);
-//        for (Triangle triangle : triangles) {
-//            if (!triangle.mark)
-//                return false;
-//        }
-//        return true;
-//    }
+
+    private boolean allElementMark() {
+        List<Triangle> triangles = new ArrayList<>();
+        getTriangleWays(beginTriangle, triangles);
+        for (Triangle triangle : triangles) {
+            if (!triangle.mark)
+                return false;
+        }
+        return true;
+    }
 
     private Triangle[] flipTriangles(Triangle triangle, int indexTriangle) {
 //
@@ -306,23 +300,25 @@ public class TriangulationAdvance implements iTriangulation {
 //            System.out.println(triangles[j]);
 //        }
 
+        addInverseLinkOnTriangle(triangles);
 
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 3; j++) {
-//                System.out.println("next triangle");
-                Triangle tri = triangles[i].triangles[j];
-                int rib = triangles[i].iRibs[j];
-                if (tri != null) {
-                    for (int k = 0; k < 3; k++) {
-//                        System.out.println("tri.iRibs[k] "+tri.iRibs[k]);
-                        if (tri.iRibs[k] == rib) {
-                            tri.triangles[k] = triangles[i];
-//                            System.out.println("Triangle"+tri.triangles[k]+"  rib"+rib);
-                        }
-                    }
-                }
-            }
-        }
+//        for (int i = 0; i < 2; i++) {
+//            for (int j = 0; j < 3; j++) {
+////                System.out.println("next triangle");
+//                Triangle tri = triangles[i].triangles[j];
+//                int rib = triangles[i].iRibs[j];
+//                if (tri != null) {
+//                    for (int k = 0; k < 3; k++) {
+////                        System.out.println("tri.iRibs[k] "+tri.iRibs[k]);
+//                        if (tri.iRibs[k] == rib) {
+//                            tri.triangles[k] = triangles[i];
+////                            System.out.println("Triangle"+tri.triangles[k]+"  rib"+rib);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
 
         beginTriangle = triangles[0];
 
@@ -381,7 +377,7 @@ public class TriangulationAdvance implements iTriangulation {
 
         for (int i = 0; i < 2; i++) {
             if (isCounterClockwise(triangles[i])) {
-                System.out.println("triangle[" + i + "] .... FAIL isCounterClockwise");
+                triangles[i].changeClockwise();
             }
         }
 
@@ -457,8 +453,9 @@ public class TriangulationAdvance implements iTriangulation {
                 }
             }
 
-            System.out.println("ribPosition = "+ribPosition);
+            System.out.println("ribPosition = " + ribPosition);
             System.out.println(beginTriangle);
+            System.out.println("trianglePoint:"+trianglePoint.toString());
             System.out.println(beginTriangle.triangles.length);
             for (int i = 0; i < beginTriangle.triangles.length; i++) {
                 System.out.println(beginTriangle.triangles[i]);
@@ -483,69 +480,53 @@ public class TriangulationAdvance implements iTriangulation {
         int rib1 = getIdRib();
         int rib2 = getIdRib();
 
-        Triangle triangle0 = new Triangle();
-        triangle0.iNodes = new int[]{beginTriangle.iNodes[0], beginTriangle.iNodes[1], pointIndex};
-        triangle0.iRibs = new int[]{beginTriangle.iRibs[0], rib1, rib0};
+        Triangle[] triangles = new Triangle[3];
+        for (int i = 0; i < 3; i++) {
+            triangles[i] = new Triangle();
+        }
 
-        Triangle triangle1 = new Triangle();
-        triangle1.iNodes = new int[]{beginTriangle.iNodes[1], beginTriangle.iNodes[2], pointIndex};
-        triangle1.iRibs = new int[]{beginTriangle.iRibs[1], rib2, rib1};
+        triangles[0].iNodes = new int[]{beginTriangle.iNodes[0], beginTriangle.iNodes[1], pointIndex};
+        triangles[0].iRibs = new int[]{beginTriangle.iRibs[0], rib1, rib0};
 
-        Triangle triangle2 = new Triangle();
-        triangle2.iNodes = new int[]{beginTriangle.iNodes[2], beginTriangle.iNodes[0], pointIndex};
-        triangle2.iRibs = new int[]{beginTriangle.iRibs[2], rib0, rib2};
+        triangles[1].iNodes = new int[]{beginTriangle.iNodes[1], beginTriangle.iNodes[2], pointIndex};
+        triangles[1].iRibs = new int[]{beginTriangle.iRibs[1], rib2, rib1};
 
-        triangle0.triangles = new Triangle[]{beginTriangle.triangles[0], triangle1, triangle2};
-        if (beginTriangle.triangles[0] != null) {
-            for (int i = 0; i < 3; i++) {
-                if (beginTriangle.triangles[0].triangles[i] == beginTriangle) {
-                    beginTriangle.triangles[0].triangles[i] = triangle0;
-                    break;
-                }
+        triangles[2].iNodes = new int[]{beginTriangle.iNodes[2], beginTriangle.iNodes[0], pointIndex};
+        triangles[2].iRibs = new int[]{beginTriangle.iRibs[2], rib0, rib2};
+
+        triangles[0].triangles = new Triangle[]{beginTriangle.triangles[0], triangles[1], triangles[2]};
+        triangles[1].triangles = new Triangle[]{beginTriangle.triangles[1], triangles[2], triangles[0]};
+        triangles[2].triangles = new Triangle[]{beginTriangle.triangles[2], triangles[0], triangles[1]};
+
+        addInverseLinkOnTriangle(triangles);
+
+        for (int i = 0; i < 3; i++) {
+            if (isCounterClockwise(triangles[i])) {
+                triangles[i].changeClockwise();
             }
         }
 
-        triangle1.triangles = new Triangle[]{beginTriangle.triangles[1], triangle2, triangle0
-        };
-        if (beginTriangle.triangles[1] != null) {
-            for (int i = 0; i < 3; i++) {
-                if (beginTriangle.triangles[1].triangles[i] == beginTriangle) {
-                    beginTriangle.triangles[1].triangles[i] = triangle1;
-                    break;
-                }
+        beginTriangle = triangles[0];
+        for (int i = 0; i < 3; i++) {
+            if (!isGoodDelaunay(triangles[i], 0)) {
+                flipTriangles(triangles[i], 0);
             }
         }
+    }
 
-        triangle2.triangles = new Triangle[]{beginTriangle.triangles[2], triangle0, triangle1};
-        if (beginTriangle.triangles[2] != null) {
-            for (int i = 0; i < 3; i++) {
-                if (beginTriangle.triangles[2].triangles[i] == beginTriangle) {
-                    beginTriangle.triangles[2].triangles[i] = triangle2;
-                    break;
+    private void addInverseLinkOnTriangle(Triangle[] triangles) {
+        for (int i = 0; i < triangles.length; i++) {
+            for (int j = 0; j < 3; j++) {
+                Triangle externalTriangle = triangles[i].triangles[j];
+                int commonRib = triangles[i].iRibs[j];
+                if (externalTriangle != null) {
+                    for (int k = 0; k < 3; k++) {
+                        if (externalTriangle.iRibs[k] == commonRib) {
+                            externalTriangle.triangles[k] = triangles[i];
+                        }
+                    }
                 }
             }
-        }
-
-        if (isCounterClockwise(triangle0)) {
-            System.out.println("triangle0 .... FAIL isCounterClockwise");
-        }
-        if (isCounterClockwise(triangle1)) {
-            System.out.println("triangle1 .... FAIL isCounterClockwise");
-        }
-        if (isCounterClockwise(triangle2)) {
-            System.out.println("triangle2 .... FAIL isCounterClockwise");
-        }
-
-
-        beginTriangle = triangle0;
-        if (!isGoodDelaunay(triangle0, 0)) {
-            flipTriangles(triangle0, 0);
-        }
-        if (!isGoodDelaunay(triangle1, 0)) {
-            flipTriangles(triangle1, 0);
-        }
-        if (!isGoodDelaunay(triangle2, 0)) {
-            flipTriangles(triangle2, 0);
         }
     }
 
@@ -610,8 +591,7 @@ public class TriangulationAdvance implements iTriangulation {
                 triangles[0]
         };
 
-
-        //todo Обратную зависимость добавить для треугольников
+        addInverseLinkOnTriangle(new Triangle[]{triangles[0], triangles[1]});
 
         if (beginTriangle.triangles[indexLineInTriangle] == null) {
             beginTriangle = triangles[0];
@@ -664,9 +644,12 @@ public class TriangulationAdvance implements iTriangulation {
                 beginTriangle.triangles[normalizeSizeBy3(indexLineInTriangle - 1)]
         };
 
+
+        addInverseLinkOnTriangle(triangles);
+
         for (int i = 0; i < 4; i++) {
             if (isCounterClockwise(triangles[i])) {
-                System.out.println("triangle[" + i + "] .... FAIL isCounterClockwise");
+                triangles[i].changeClockwise();
             }
         }
     }

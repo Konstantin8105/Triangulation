@@ -72,4 +72,11 @@ public class BorderBox {
     public double getY_max() {
         return y_max;
     }
+
+    public Point getCenter() {
+        return new Point(
+                (x_max+x_min)/2.,
+                (y_max+y_min)/2.
+        );
+    }
 }

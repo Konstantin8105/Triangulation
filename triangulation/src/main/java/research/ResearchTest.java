@@ -2,7 +2,6 @@ package research;
 
 import triangulation.Triangulation;
 import triangulation.elements.Point;
-import triangulationAdvance.TriangulationAdvance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,7 +61,7 @@ public class ResearchTest {
                 break;
         }
 
-        System.out.println(mav);
+//        System.out.println(mav);
 
         for (int i = 0; i < amountTest; i++) {
             start[i] = System.currentTimeMillis();//(new Date()).getTime();
@@ -86,29 +85,29 @@ public class ResearchTest {
 
         //Advance
 
-        Point[] points = (Point[]) mav.toArray();
-
-        for (int i = 0; i < amountTest; i++) {
-            start[i] = System.currentTimeMillis();//(new Date()).getTime();
-            TriangulationAdvance triangulation = new TriangulationAdvance(points);
-            finish[i] = System.currentTimeMillis();//(new Date()).getTime();
-            sizeTriangles = triangulation.getTriangles().size();
-        }
-        for (int i = 0; i < amountTest; i++) {
-            float time = (float) (finish[i] - start[i]);
-            averageTime += time;
-        }
-
-        averageTime /= amountTest;
-        System.out.println("Amount points: " + String.format("%6d", size)
-                + " point. "
-                + "Time is "
-                + String.format("%12.2f", averageTime) + " ms. "
-                + "Triangles is "
-                + String.format("%6d", sizeTriangles) + " triangles. "
-        );
-
-        System.out.println("==");
+//        Point[] points = (Point[]) mav.toArray();
+//
+//        for (int i = 0; i < amountTest; i++) {
+//            start[i] = System.currentTimeMillis();//(new Date()).getTime();
+//            TriangulationAdvance triangulation = new TriangulationAdvance(points);
+//            finish[i] = System.currentTimeMillis();//(new Date()).getTime();
+//            sizeTriangles = triangulation.getTriangles().size();
+//        }
+//        for (int i = 0; i < amountTest; i++) {
+//            float time = (float) (finish[i] - start[i]);
+//            averageTime += time;
+//        }
+//
+//        averageTime /= amountTest;
+//        System.out.println("Amount points: " + String.format("%6d", size)
+//                + " point. "
+//                + "Time is "
+//                + String.format("%12.2f", averageTime) + " ms. "
+//                + "Triangles is "
+//                + String.format("%6d", sizeTriangles) + " triangles. "
+//        );
+//
+//        System.out.println("==");
     }
 
     final private static int SIZE = 600;
