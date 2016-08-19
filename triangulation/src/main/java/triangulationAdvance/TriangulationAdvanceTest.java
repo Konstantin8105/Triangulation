@@ -14,7 +14,7 @@ public class TriangulationAdvanceTest {
 
     @Test
     public void randomTestAdvance() throws Exception {
-        for (int i = 0; i < 20000; i++) {
+        for (int i = 0; i < 2000; i++) {
             Point points[] = new Point[AMOUNT_POINTS];
             for (int j = 0; j < points.length; j++) {
                 points[j] = new Point(random.nextInt(50), random.nextInt(50));
@@ -42,7 +42,7 @@ public class TriangulationAdvanceTest {
                 new Point(39, 0),
                 new Point(0, 1),
                 new Point(10, 7),
-                new Point(19, 45),
+                new Point(19, 45)
         };
 
         TriangulationAdvance triangulation = new TriangulationAdvance(points);
@@ -56,7 +56,7 @@ public class TriangulationAdvanceTest {
                 new Point(20, 40),
                 new Point(40, 16),
                 new Point(24, 29),
-                new Point(33, 34),
+                new Point(33, 34)
         };
         TriangulationAdvance triangulation = new TriangulationAdvance(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
@@ -69,7 +69,7 @@ public class TriangulationAdvanceTest {
                 new Point(25, 25),
                 new Point(37, 4),
                 new Point(29, 22),
-                new Point(35, 36),
+                new Point(35, 36)
         };
         TriangulationAdvance triangulation = new TriangulationAdvance(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
@@ -82,9 +82,103 @@ public class TriangulationAdvanceTest {
                 new Point(11, 35),
                 new Point(44, 46),
                 new Point(4, 42),
-                new Point(20, 11),
+                new Point(20, 11)
         };
         TriangulationAdvance triangulation = new TriangulationAdvance(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
+
+    @Test
+    public void simpleTest5() throws Exception {
+        Point[] points = new Point[]{
+                new Point(31, 24),
+                new Point(0, 0),
+                new Point(33, 4),
+                new Point(28, 36),
+                new Point(43, 23)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
+    public void simpleTest6() throws Exception {
+        Point[] points = new Point[]{
+                new Point(11, 24),
+                new Point(16, 16),
+                new Point(1, 1),
+                new Point(44, 44),
+                new Point(8, 21)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
+    public void simpleTest7() throws Exception {
+        Point[] points = new Point[]{
+                new Point(24, 0),
+                new Point(22, 9),
+                new Point(19, 44),
+                new Point(1, 12),
+                new Point(6, 3)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
+    public void simpleTest8() throws Exception {
+        Point[] points = new Point[]{
+                new Point(0, 34),
+                new Point(10, 48),
+                new Point(48, 46),
+                new Point(0, 46),
+                new Point(11, 32)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
+    public void simpleTest9() throws Exception {
+        Point[] points = new Point[]{
+                new Point(34, 13),
+                new Point(37, 45),
+                new Point(23, 49),
+                new Point(24, 16)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
+    public void simpleTest10() throws Exception {
+        Point[] points = new Point[]{
+                new Point(-18.45, -18.45),
+                new Point(-20.5, 72.05),
+                new Point(65.5, -20.5),
+                new Point(11, 24),
+                new Point(16, 16),
+                new Point(1, 1),
+                new Point(44, 44),
+                new Point(8, 21),
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
+    public void simpleTest11() throws Exception {
+        Point[] points = new Point[]{
+                new Point(20, 6),
+                new Point(6, 11),
+                new Point(24, 7),
+                new Point(22, 9),
+                new Point(9, 22)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
 }

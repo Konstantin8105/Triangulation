@@ -1,7 +1,5 @@
 package triangulation.elements;
 
-import triangulation.geometry.Precisions;
-
 public class Point {
     private double x;
     private double y;
@@ -45,9 +43,9 @@ public class Point {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Point that = (Point) o;
-        if (Math.abs(that.x - x) > Precisions.epsilon())
-            return false;
-        return Math.abs(that.y - y) <= Precisions.epsilon();
+        //if (Math.abs(that.x - x) > Precisions.epsilon())
+        //    return false;
+        return x == that.x && y == that.y; //Math.abs(that.y - y) <= Precisions.epsilon();
     }
 
     @Override
@@ -62,6 +60,6 @@ public class Point {
     }
 
     public static Point middlePoint(Point pointA, Point pointB) {
-        return new Point((pointA.x+pointB.x)/2d,(pointA.y+pointB.y)/2d);
+        return new Point((pointA.x + pointB.x) / 2d, (pointA.y + pointB.y) / 2d);
     }
 }
