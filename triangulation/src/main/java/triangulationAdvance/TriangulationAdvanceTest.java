@@ -2,19 +2,20 @@ package triangulationAdvance;
 
 import org.junit.Assert;
 import org.junit.Test;
+import research.ResearchTest;
 import triangulation.elements.Point;
 
 import java.util.Random;
 
 public class TriangulationAdvanceTest {
 
-    final private boolean PRINTABLE = true;
+    final private boolean PRINTABLE = false;
     final private int AMOUNT_POINTS = 5;
     private static Random random = new Random();
 
     @Test
     public void randomTestAdvance() throws Exception {
-        for (int i = 0; i < 2000; i++) {
+        for (int i = 0; i < 20000; i++) {
             Point points[] = new Point[AMOUNT_POINTS];
             for (int j = 0; j < points.length; j++) {
                 points[j] = new Point(random.nextInt(50), random.nextInt(50));
@@ -177,6 +178,33 @@ public class TriangulationAdvanceTest {
                 new Point(22, 9),
                 new Point(9, 22)
         };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
+    public void simpleTest12() throws Exception {
+        Point[] points = new Point[]{
+                new Point(1, 37),
+                new Point(31, 20),
+                new Point(31, 24),
+                new Point(31, 5),
+                new Point(14, 16)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
+    public void simpleCircle() throws Exception {
+        Point[] points = (Point[]) ResearchTest.getCirclePoints(10).toArray();
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
+    public void simpleInTriangle() throws Exception {
+        Point[] points = (Point[]) ResearchTest.getInTriangles(10).toArray();
         TriangulationAdvance triangulation = new TriangulationAdvance(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }

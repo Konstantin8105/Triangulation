@@ -1,5 +1,6 @@
 package triangulationAdvance;
 
+import counter.Counter;
 import imp.iTriangulation;
 import triangulation.elements.Point;
 
@@ -21,6 +22,10 @@ import java.util.*;
  *         book "Algoritm building and analyse triangulation", A.B.Skvorcov.
  */
 public class TriangulationAdvance implements iTriangulation {
+
+
+    static boolean PRINTABLE = false;
+    private static Counter counter = new Counter("Analyze");
 
     //
     // triangulationAdvance.TriangulationAdvance data structure  "Nodes, ribs и triangles"
@@ -45,6 +50,7 @@ public class TriangulationAdvance implements iTriangulation {
         boolean mark;
 
         void changeClockwise() {
+            if (PRINTABLE)System.out.println("Triangle::changeClockwise");
             int temp;
             temp = iNodes[0];
             iNodes[0] = iNodes[1];
@@ -55,6 +61,21 @@ public class TriangulationAdvance implements iTriangulation {
             Triangle tri = triangles[1];
             triangles[1] = triangles[2];
             triangles[2] = tri;
+            addInverseLinkOnTriangle(new Triangle[]{this});
+
+            if (PRINTABLE)
+                for (int i = 0; i < 3; i++) {
+                    if (triangles[i] != null) {
+                        if (triangles[i].triangles[0] == this ||
+                                triangles[i].triangles[1] == this ||
+                                triangles[i].triangles[2] == this) {
+                            System.out.println("FAIL Triangle::changeClockwise\"" + this);
+                            for (int j = 0; j < 3; j++) {
+                                System.out.println(triangles[i].triangles[j]);
+                            }
+                        }
+                    }
+                }
         }
     }
 
@@ -75,36 +96,62 @@ public class TriangulationAdvance implements iTriangulation {
 
     // constructor for create convexHull region at the base on points
     public TriangulationAdvance(Point[] points) {
+        counter.clear();
         // TODO: 18.08.2016 fake points must be moved
         createFakeTriangles(points);
-        System.out.println("check fake");
-        check();
+        if (PRINTABLE) System.out.println("check fake");
+        if (PRINTABLE) check();
         for (int i = 0; i < points.length; i++) {
-            System.out.println("\n\n\n\n\n=================================================================");
-            System.out.println("add point - " + points[i]);
+            if (PRINTABLE)
+                System.out.println("\n\n\n\n\n=================================================================");
+            if (PRINTABLE) System.out.println("add point - " + points[i]);
             addNextPoint(points[i]);
 
+//        delaunayChecking();
+            //if (PRINTABLE)
             check();
 
         }
-        delaunayChecking();
-//        for (int i = 0; i < 1000; i++) {
+//        delaunayChecking();
+//        for (int i = 0; i < 100; i++) {
 //            delaunayChecking();
 //        }
         //cutByRegion(convexHull(points));
         //removeFakeTriangles();
+        if (PRINTABLE) {
+            outTriangles();
+        }
+        System.out.println(counter.toString());
+    }
+
+    private void outTriangles() {
+        System.out.println("\n\n\nPOINTS:");
+        for (int i = 0; i < nodes.size(); i++) {
+            System.out.println("i:" + i + " " + nodes.get(i).toString());
+        }
+        List<Triangle> triangles = new ArrayList<>();
+        getTriangleWays(beginTriangle, triangles);
+        for (int i = 0; i < triangles.size(); i++) {
+            System.out.println("\n\n\n NEXT TRIANGLE: " + i);
+            for (int j = 0; j < 3; j++) {
+                System.out.println(nodes.get(triangles.get(i).iNodes[j]));
+            }
+        }
     }
 
 
+    private int amountTriangle = -1;
+
     private void check() {
-        System.out.println("== CHECK ==");
+        if (PRINTABLE) System.out.println("\n\n\n\n\n\n\n\n\n\n== CHECK ==");
         boolean isPrint = false;
         List<Triangle> triangles = new ArrayList<>();
         getTriangleWays(beginTriangle, triangles);
-        for (Triangle triangle : triangles) {
+        for (int p = 0; p < triangles.size(); p++) {
+            Triangle triangle = triangles.get(p);
             if (isCounterClockwise(triangle)) {
                 isPrint = true;
-                System.out.println("\n\n\n\n\n\n\ncheck() ---> triangle .... FAIL isCounterClockwise");
+                System.out.println("check() ---> triangle .... FAIL isCounterClockwise");
             }
             for (int i = 0; i < 3; i++) {
                 if (triangle.triangles[i] != null) {
@@ -124,7 +171,7 @@ public class TriangulationAdvance implements iTriangulation {
                     }
                     if (!found) {
                         isPrint = true;
-                        System.out.println("\n\n\n\n\n\n\ncheck() ---> triangle .... FAIL not found");
+                        System.out.println("check() ---> triangle .... FAIL not found");
                     }
                 }
             }
@@ -134,19 +181,50 @@ public class TriangulationAdvance implements iTriangulation {
                     nodes.get(triangle.iNodes[1]),
                     nodes.get(triangle.iNodes[2])
             };
+            if (Geometry.is3pointsCollinear(points[0], points[1], points[2])) {
+                isPrint = true;
+                System.out.println("=====================");
+                for (int i = 0; i < 3; i++) {
+                    System.out.println(points[i]);
+                }
+                System.out.println("check() ---> triangle .... FAIL three points on one line");
+            }
             if (area_3point(points) < Precisions.epsilon()) {
                 isPrint = true;
                 System.out.println("=====================");
                 for (int i = 0; i < 3; i++) {
                     System.out.println(points[i]);
                 }
-                System.out.println("\n\n\n\n\n\n\ncheck() ---> triangle .... FAIL area is small");
-
+                System.out.println("check() ---> triangle .... FAIL area is small");
             }
+
+            for (int pp = p + 1; pp < triangles.size(); pp++) {
+                //check triangle in triangle
+                for (int i = 0; i < 3; i++) {
+                    Point p1 = nodes.get(triangle.iNodes[i]);
+                    Point p2 = nodes.get(triangle.iNodes[normalizeSizeBy3(i + 1)]);
+                    for (int j = 0; j < 3; j++) {
+                        Point p3 = nodes.get(triangles.get(pp).iNodes[j]);
+                        if (GeometryPointLine.statePointOnLine(p3, p1, p2) == GeometryPointLine.PointLineState.POINT_ON_LINE) {
+                            isPrint = true;
+                            System.out.println("check() ---> triangle .... FAIL triangle in triangle");
+                        }
+                    }
+                }
+            }
+
+        }
+        if (amountTriangle <= triangles.size()) {
+            amountTriangle = triangles.size();
+        } else {
+            System.out.println("Before :" + amountTriangle);
+            System.out.println("After  :" + triangles.size());
+            System.out.println("check() ---> triangle .... FAIL amount triangles");
+            isPrint = true;
         }
         if (isPrint) {
             for (int i = 0; i < nodes.size(); i++) {
-                System.out.println(nodes.get(i));
+                System.out.println(i + ":" + nodes.get(i));
             }
         }
     }
@@ -224,30 +302,34 @@ public class TriangulationAdvance implements iTriangulation {
 
     private Triangle[] flipTriangles(Triangle triangle, int indexTriangle) {
 
+        if (PRINTABLE)
+        {
 
-        System.out.println("flipTriangles");
+            System.out.println("flipTriangles");
+        }
 
 
-//        System.out.println("\n\n\n\nFLIP TRIANGLES");
-//        System.out.println("Triangle :" + triangle);
-//        System.out.println("Index    :" + indexTriangle);
-//        for (int i = 0; i < 3; i++) {
-//            System.out.println("Point : ==>" + triangle.iNodes[i] + "==>" + nodes.get(triangle.iNodes[i]));
-//        }
-//        for (int i = 0; i < 3; i++) {
-//            System.out.println("Rib : ==>" + triangle.iRibs[i]);
-//        }
-//        System.out.println(triangle);
-//
-//        System.out.println("Triangle :" + triangle.triangles[indexTriangle]);
-//        for (int i = 0; i < 3; i++) {
-//            System.out.println("Point : ==>" + triangle.triangles[indexTriangle].iNodes[i] + "==>" + nodes.get(triangle.triangles[indexTriangle].iNodes[i]));
-//        }
-//        for (int i = 0; i < 3; i++) {
-//            System.out.println("Rib : ==>" + triangle.triangles[indexTriangle].iRibs[i]);
-//        }
-//        System.out.println(triangle.triangles[indexTriangle]);
+        if (PRINTABLE) {
+            System.out.println("\n\n\n\nFLIP TRIANGLES");
+            System.out.println("Triangle :" + triangle);
+            System.out.println("Index    :" + indexTriangle);
+            for (int i = 0; i < 3; i++) {
+                System.out.println("Point : ==>" + triangle.iNodes[i] + "==>" + nodes.get(triangle.iNodes[i]));
+            }
+            for (int i = 0; i < 3; i++) {
+                System.out.println("Rib : ==>" + triangle.iRibs[i]);
+            }
+            System.out.println(triangle);
 
+            System.out.println("Triangle :" + triangle.triangles[indexTriangle]);
+            for (int i = 0; i < 3; i++) {
+                System.out.println("Point : ==>" + triangle.triangles[indexTriangle].iNodes[i] + "==>" + nodes.get(triangle.triangles[indexTriangle].iNodes[i]));
+            }
+            for (int i = 0; i < 3; i++) {
+                System.out.println("Rib : ==>" + triangle.triangles[indexTriangle].iRibs[i]);
+            }
+            System.out.println(triangle.triangles[indexTriangle]);
+        }
 
         Triangle[] triangles = new Triangle[2];
         for (int i = 0; i < triangles.length; i++) {
@@ -296,16 +378,10 @@ public class TriangulationAdvance implements iTriangulation {
         for (int i = 0; i < pointIndex.length; i++) {
             points[i] = nodes.get(pointIndex[i]);
         }
-        if (Geometry.is3pointsCollinear(
-                nodes.get(pointIndex[1]).getX(), nodes.get(pointIndex[1]).getY(),
-                nodes.get(pointIndex[2]).getX(), nodes.get(pointIndex[2]).getY(),
-                nodes.get(pointIndex[3]).getX(), nodes.get(pointIndex[3]).getY())) {
+        if (Geometry.is3pointsCollinear(nodes.get(pointIndex[1]), nodes.get(pointIndex[2]), nodes.get(pointIndex[3]))) {
             return null;
         }
-        if (Geometry.is3pointsCollinear(
-                nodes.get(pointIndex[3]).getX(), nodes.get(pointIndex[3]).getY(),
-                nodes.get(pointIndex[0]).getX(), nodes.get(pointIndex[0]).getY(),
-                nodes.get(pointIndex[1]).getX(), nodes.get(pointIndex[1]).getY())) {
+        if (Geometry.is3pointsCollinear(nodes.get(pointIndex[3]), nodes.get(pointIndex[0]), nodes.get(pointIndex[1]))) {
             return null;
         }
         if (Geometry.convexHull(points).length != 4) {
@@ -398,6 +474,8 @@ public class TriangulationAdvance implements iTriangulation {
 //        }
 
 
+        beginTriangle.triangles[indexTriangle] = null;
+        beginTriangle = null;
         beginTriangle = triangles[0];
 
         return triangles;
@@ -426,7 +504,8 @@ public class TriangulationAdvance implements iTriangulation {
         for (int i = 0; i < points.length; i++) {
             borderBox.addPoint(points[i]);
         }
-        borderBox.scale(2.0, borderBox.getCenter());
+        double scaleFactor = 3.0D;
+        borderBox.scale(scaleFactor, borderBox.getCenter());
         //add fake points
         double factor = 0.1D;
         nodes.add(new Point(borderBox.getX_min() * (1.0D - factor), borderBox.getY_min() * (1.0D - factor)));
@@ -466,8 +545,10 @@ public class TriangulationAdvance implements iTriangulation {
         // ignore same points
         //TODO: remove O(n^2)
         for (int j = 0; j < nodes.size(); j++) {
-            if (nextPoint.equals(nodes.get(j)))
+            if (nextPoint.equals(nodes.get(j))) {
+                if (PRINTABLE) System.out.println("\nXXXXXXXX\n SAME POINT \n" + nextPoint);
                 return;
+            }
         }
 
         GeometryPointTriangle.PointTriangleState state = movingByConvexHull(nextPoint);
@@ -496,9 +577,16 @@ public class TriangulationAdvance implements iTriangulation {
         return new Point(x / points.length, y / points.length);
     }
 
-    private static Random random = new Random();
+//    private static Random random = new Random();
 
     private GeometryPointTriangle.PointTriangleState movingByConvexHull(Point point) {
+
+        counter.add("movingByConvexHull");
+
+        if (PRINTABLE) {
+            System.out.println("===");
+            System.out.println("Find point = " + point.toString());
+        }
 
         Point[] trianglePoint = new Point[]{
                 nodes.get(beginTriangle.iNodes[0]),
@@ -506,50 +594,72 @@ public class TriangulationAdvance implements iTriangulation {
                 nodes.get(beginTriangle.iNodes[2])
         };
 
-        System.out.println("Triangle points");
-        for (int i = 0; i < 3; i++) {
-            System.out.println(trianglePoint[i]);
+        if (PRINTABLE) {
+            System.out.println("\n\n\n\nAnalyze next triangle");
+            System.out.println("Triangle points");
+            for (int i = 0; i < 3; i++) {
+                System.out.println(trianglePoint[i]);
+            }
         }
 
         TriangulationAdvance.GeometryPointTriangle.PointTriangleState
-                state = GeometryPointTriangle.isPointInTriangle(point, trianglePoint);
+                state = GeometryPointTriangle.statePointInTriangle(point, trianglePoint);
 
+        if (PRINTABLE) System.out.println("out of movingByConvexHull :" + state);
+
+//        switch (state) {
+//            case POINT_INSIDE:
+//            case POINT_ON_LINE_0:
+//            case POINT_ON_LINE_1:
+//            case POINT_ON_LINE_2:
+//                return state;
+//            case POINT_OUTSIDE_LINE_0:
+//                counter.add("move OUTSIDE_LINE");
+//                beginTriangle = beginTriangle.triangles[0];
+//                return movingByConvexHull(point);
+//            case POINT_OUTSIDE_LINE_1:
+//                counter.add("move OUTSIDE_LINE");
+//                beginTriangle = beginTriangle.triangles[1];
+//                return movingByConvexHull(point);
+//            case POINT_OUTSIDE_LINE_2:
+//                counter.add("move OUTSIDE_LINE");
+//                beginTriangle = beginTriangle.triangles[2];
+//                return movingByConvexHull(point);
+//        }
         if (state != TriangulationAdvance.GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE) {
-            System.out.println("out of movingByConvexHull :" + state);
             return state;
         } else {
             Point triangleCenter = centerOfPoints(trianglePoint);
             int ribPosition = -1;
 
+            counter.add("move OUTSIDE");
 
-            System.out.println("===");
-            System.out.println("Find point = " + point.toString());
-
-
-            boolean invertDirection = random.nextBoolean();
+//            boolean invertDirection = random.nextBoolean();
             for (int i = 0; i < 3; i++) {
                 int last = i;
-                int next = (i + 1 < 3) ? i + 1 : i + 1 - 3;
-                int position = i;
-                if (invertDirection) {
-                    int p = 2 - i;
-                    last = p;
-                    next = (p + 1 < 3) ? p + 1 : p + 1 - 3;
-                    position = p;
-                }
+                int next = normalizeSizeBy3(i + 1);//i + 1 < 3) ? i + 1 : i + 1 - 3;
+//                int position = i;
+//                if (invertDirection) {
+//                    int p = 2 - i;
+//                    last = p;
+//                    next = (p + 1 < 3) ? p + 1 : p + 1 - 3;
+//                    position = p;
+//                }
                 Point ribPoint1 = trianglePoint[last];
                 Point ribPoint2 = trianglePoint[next];
 
-                System.out.println("Line 1 - " + ribPoint1.toString() + ":" + ribPoint2.toString());
-                System.out.println("Line 2 - " + triangleCenter.toString() + ":" + point.toString());
+                if (PRINTABLE) {
+                    System.out.println("Line 1 - " + ribPoint1.toString() + ":" + ribPoint2.toString());
+                    System.out.println("Line 2 - " + triangleCenter.toString() + ":" + point.toString());
+                }
 
                 GeometryLineLine.IntersectState intersectState = GeometryLineLine.stateLineLine(ribPoint1, ribPoint2, triangleCenter, point);
 
-                System.out.println(intersectState);
+                if (PRINTABLE) System.out.println(intersectState);
 
                 if (intersectState == GeometryLineLine.IntersectState.INTERSECT ||
                         intersectState == GeometryLineLine.IntersectState.INTERSECT_POINT_ON_LINE) {
-                    ribPosition = position;
+                    ribPosition = last;
                     break;
                 }
             }
@@ -559,18 +669,20 @@ public class TriangulationAdvance implements iTriangulation {
 //                ribPosition = random.nextInt(3);
 //            }
 
-            System.out.println("ribPosition = " + ribPosition);
-            System.out.println("beginTriangle.iRibs[ribPosition] = " + beginTriangle.iRibs[ribPosition]);
-            System.out.println("beginTriangle.iRibs[ribPosition] coord = " + nodes.get(beginTriangle.iNodes[ribPosition]));
-            System.out.println("beginTriangle.iRibs[ribPosition] coord = " + nodes.get(beginTriangle.iNodes[normalizeSizeBy3(ribPosition + 1)]));
-            System.out.println("trianglePoint:" + trianglePoint.toString());
-            for (int i = 0; i < 3; i++) {
-                System.out.println(i + ":" + trianglePoint[i]);
-            }
-            System.out.println(beginTriangle);
-            System.out.println(beginTriangle.triangles.length);
-            for (int i = 0; i < beginTriangle.triangles.length; i++) {
-                System.out.println(beginTriangle.triangles[i]);
+            if (PRINTABLE) {
+                System.out.println("ribPosition = " + ribPosition);
+                System.out.println("beginTriangle.iRibs[ribPosition] = " + beginTriangle.iRibs[ribPosition]);
+                System.out.println("beginTriangle.iRibs[ribPosition] coord = " + nodes.get(beginTriangle.iNodes[ribPosition]));
+                System.out.println("beginTriangle.iRibs[ribPosition] coord = " + nodes.get(beginTriangle.iNodes[normalizeSizeBy3(ribPosition + 1)]));
+                System.out.println("trianglePoint:" + trianglePoint.toString());
+                for (int i = 0; i < 3; i++) {
+                    System.out.println(i + ":" + trianglePoint[i]);
+                }
+                System.out.println(beginTriangle);
+                System.out.println(beginTriangle.triangles.length);
+                for (int i = 0; i < beginTriangle.triangles.length; i++) {
+                    System.out.println(beginTriangle.triangles[i]);
+                }
             }
 
 
@@ -588,13 +700,18 @@ public class TriangulationAdvance implements iTriangulation {
     private void addNextPointInTriangle(Point nextPoint) {
 
 
-        System.out.println("addNextPointInTriangle");
-        System.out.println("input point = "+nextPoint);
-        System.out.println("Points of triangle");
-        for (int i = 0; i < 3; i++) {
-            System.out.println(nodes.get(beginTriangle.iNodes[i]));
+        if (PRINTABLE)
+        {
+            System.out.println("addNextPointInTriangle");
         }
 
+        if (PRINTABLE) {
+            System.out.println("input point = " + nextPoint);
+            System.out.println("Points of triangle");
+            for (int i = 0; i < 3; i++) {
+                System.out.println(nodes.get(beginTriangle.iNodes[i]));
+            }
+        }
 
 
         nodes.add(nextPoint);
@@ -621,7 +738,6 @@ public class TriangulationAdvance implements iTriangulation {
         triangles[1].triangles = new Triangle[]{beginTriangle.triangles[1], triangles[2], triangles[0]};
         triangles[2].triangles = new Triangle[]{beginTriangle.triangles[2], triangles[0], triangles[1]};
 
-        addInverseLinkOnTriangle(triangles);
 
         for (int i = 0; i < 3; i++) {
             if (isCounterClockwise(triangles[i])) {
@@ -629,9 +745,22 @@ public class TriangulationAdvance implements iTriangulation {
             }
         }
 
-        check();
+        addInverseLinkOnTriangle(triangles);
 
+
+        if (PRINTABLE) {
+            System.out.println("After addNextPointInTriangle triangles");
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    System.out.println(nodes.get(triangles[i].iNodes[j]));
+                }
+                System.out.println("+");
+            }
+        }
+
+        beginTriangle = null;
         beginTriangle = triangles[0];
+
         for (int i = 0; i < 3; i++) {
             if (!isGoodDelaunay(triangles[i], 0)) {
                 flipTriangles(triangles[i], 0);
@@ -639,7 +768,7 @@ public class TriangulationAdvance implements iTriangulation {
         }
     }
 
-    private void addInverseLinkOnTriangle(Triangle[] triangles) {
+    private static void addInverseLinkOnTriangle(Triangle[] triangles) {
         for (int i = 0; i < triangles.length; i++) {
             for (int j = 0; j < 3; j++) {
                 Triangle externalTriangle = triangles[i].triangles[j];
@@ -656,7 +785,7 @@ public class TriangulationAdvance implements iTriangulation {
     }
 
 
-    private int normalizeSizeBy3(int index) {
+    private static int normalizeSizeBy3(int index) {
         if (0 <= index && index < 3) {
             return index;
         }
@@ -668,8 +797,28 @@ public class TriangulationAdvance implements iTriangulation {
     private void addNextPointOnLine(Point nextPoint, int indexLineInTriangle) {
 
 
+        if (PRINTABLE)
         System.out.println("addNextPointOnLine");
 
+        if (PRINTABLE)
+        {
+            System.out.println("input point = " + nextPoint);
+            System.out.println("Points of triangle");
+            for (int i = 0; i < 3; i++) {
+                System.out.println(nodes.get(beginTriangle.iNodes[i]));
+            }
+            System.out.println("Points of second triangle");
+            for (int i = 0; i < 3; i++) {
+                System.out.println(nodes.get(beginTriangle.triangles[indexLineInTriangle].iNodes[i]));
+            }
+        }
+//
+//        if (isCounterClockwise(beginTriangle)) {
+//            beginTriangle.changeClockwise();
+//        }
+//        if (isCounterClockwise(beginTriangle.triangles[indexLineInTriangle])) {
+//            beginTriangle.triangles[indexLineInTriangle].changeClockwise();
+//        }
 
         nodes.add(nextPoint);
         int pointIndex = nodes.size() - 1;
@@ -720,15 +869,19 @@ public class TriangulationAdvance implements iTriangulation {
                 triangles[0]
         };
 
+//        System.out.println("1");
 
         if (beginTriangle.triangles[indexLineInTriangle] == null) {
+            beginTriangle = null;
             addInverseLinkOnTriangle(new Triangle[]{triangles[0], triangles[1]});
             beginTriangle = triangles[0];
             return;
         }
 
         int ribConnectId = beginTriangle.iRibs[indexLineInTriangle];
-        beginTriangle = beginTriangle.triangles[indexLineInTriangle];
+        Triangle nextTriangle = beginTriangle.triangles[indexLineInTriangle];
+        beginTriangle = null;
+        beginTriangle = nextTriangle;
         for (int i = 0; i < 3; i++) {
             if (beginTriangle.iRibs[i] == ribConnectId) {
                 indexLineInTriangle = i;
@@ -773,17 +926,35 @@ public class TriangulationAdvance implements iTriangulation {
                 beginTriangle.triangles[normalizeSizeBy3(indexLineInTriangle - 1)]
         };
 
+//        System.out.println("2");
 
-        addInverseLinkOnTriangle(triangles);
+        beginTriangle = null;
+        beginTriangle = triangles[0];
+
 
         for (int i = 0; i < 4; i++) {
             if (isCounterClockwise(triangles[i])) {
                 triangles[i].changeClockwise();
             }
         }
+
+        addInverseLinkOnTriangle(triangles);
+
+        if (PRINTABLE)
+        {
+            System.out.println("\n\n\nAfter addNextPointOnLine");
+            for (int i = 0; i < triangles.length; i++) {
+                System.out.println("New triangle " + i);
+                for (int j = 0; j < 3; j++) {
+                    System.out.println(nodes.get(triangles[i].iNodes[j]));
+                }
+            }
+        }
     }
 
     private void getTriangleWays(Triangle triangle, List<Triangle> triangles) {
+        if (triangle == null)
+            return;
         triangles.add(triangle);
         for (int i = 0; i < triangle.triangles.length; i++) {
             if (triangle.triangles[i] != null) {
@@ -1051,26 +1222,33 @@ public class TriangulationAdvance implements iTriangulation {
             POINT_ON_LINE_2,
             POINT_ON_CORNER,
             POINT_INSIDE,
-            POINT_OUTSIDE
+            POINT_OUTSIDE/*,
+            POINT_OUTSIDE_LINE_0,
+            POINT_OUTSIDE_LINE_1,
+            POINT_OUTSIDE_LINE_2,*/
         }
 
-        static GeometryPointTriangle.PointTriangleState isPointInTriangle(Point p, Point[] tri) {
+        static GeometryPointTriangle.PointTriangleState statePointInTriangle(Point p, Point[] tri) {
+
+            counter.add("PointInTriangle");
+
 
             if (!GeometryCoordinate.isPointInRectangle(p, tri))
                 return PointTriangleState.POINT_OUTSIDE;
 
 
             // TODO: 19.08.2016 high-precition
-            Point vector1 = new Point(tri[1].getX() - tri[0].getX(), tri[1].getY() - tri[0].getY());
-            Point vector2 = new Point(tri[2].getX() - tri[0].getX(), tri[2].getY() - tri[0].getY());
-            double det = vector1.getX() * vector2.getY() - vector2.getX() * vector1.getY();
-            Point tmp = new Point(p.getX() - tri[0].getX(), p.getY() - tri[0].getY());
-            double lambda = (tmp.getX() * vector2.getY() - vector2.getX() * tmp.getY()) / det;
-            double mue = (vector1.getX() * tmp.getY() - tmp.getX() * vector1.getY()) / det;
-            if (lambda > 0 && mue > 0 && (lambda + mue) < 1) {
-                return PointTriangleState.POINT_INSIDE;
-            }
+//            Point vector1 = new Point(tri[1].getX() - tri[0].getX(), tri[1].getY() - tri[0].getY());
+//            Point vector2 = new Point(tri[2].getX() - tri[0].getX(), tri[2].getY() - tri[0].getY());
+//            double det = vector1.getX() * vector2.getY() - vector2.getX() * vector1.getY();
+//            Point tmp = new Point(p.getX() - tri[0].getX(), p.getY() - tri[0].getY());
+//            double lambda = (tmp.getX() * vector2.getY() - vector2.getX() * tmp.getY()) / det;
+//            double mue = (vector1.getX() * tmp.getY() - tmp.getX() * vector1.getY()) / det;
+//            if (lambda > 0 && mue > 0 && (lambda + mue) < 1) {
+//                return PointTriangleState.POINT_INSIDE;
+//            }
 
+            /*
             if (GeometryPointLine.statePointOnLine(p, tri[0], tri[1]) == GeometryPointLine.PointLineState.POINT_ON_LINE) {
                 return GeometryPointTriangle.PointTriangleState.POINT_ON_LINE_0;
             }
@@ -1086,7 +1264,61 @@ public class TriangulationAdvance implements iTriangulation {
                     return GeometryPointTriangle.PointTriangleState.POINT_ON_CORNER;
             }
 
+            int[] sign = new int[3];
+            for (int i = 0; i < 3; i++) {
+                BigDecimal result = Geometry.pointOnLine(tri[i], tri[normalizeSizeBy3(i + 1)], p);
+                sign[i] = result.compareTo(BigDecimal.valueOf(Precisions.epsilon()));
+                if (PRINTABLE) System.out.println("SIGN \"" + sign[i] + "\" :" + result.toString());
+            }
+
+            if (sign[0] == sign[1] && sign[1] == sign[2] && sign[0] != 0) {
+                return PointTriangleState.POINT_INSIDE;
+            }
+
+
             return GeometryPointTriangle.PointTriangleState.POINT_OUTSIDE;
+            */
+
+            for (triangulation.elements.Point aTri : tri) {
+                if (p.equals(aTri))
+                    return PointTriangleState.POINT_ON_CORNER;
+            }
+
+            BigDecimal line1 = Geometry.pointOnLine(tri[0], p, tri[1]);
+            if (Geometry.is3pointsCollinear(line1)) {
+                if (GeometryCoordinate.isPointInRectangle(p, new Point[]{tri[0], tri[1]}))
+                    return PointTriangleState.POINT_ON_LINE_0;
+            }
+//            if (!Geometry.isCounterClockwise(line1)) {
+//                return PointTriangleState.POINT_OUTSIDE;//_LINE_0;
+//            }
+
+            BigDecimal line2 = Geometry.pointOnLine(tri[1], p, tri[2]);
+            if (Geometry.is3pointsCollinear(line2))
+                if (GeometryCoordinate.isPointInRectangle(p, new Point[]{tri[1], tri[2]}))
+                    return PointTriangleState.POINT_ON_LINE_1;
+//            if (!Geometry.isCounterClockwise(line2)) {
+//                return PointTriangleState.POINT_OUTSIDE;//_LINE_1;
+//            }
+
+            BigDecimal line3 = Geometry.pointOnLine(tri[2], p, tri[0]);
+            if (Geometry.is3pointsCollinear(line3))
+                if (GeometryCoordinate.isPointInRectangle(p, new Point[]{tri[2], tri[0]}))
+                    return PointTriangleState.POINT_ON_LINE_2;
+//            if (!Geometry.isCounterClockwise(line3)) {
+//                return PointTriangleState.POINT_OUTSIDE;//_LINE_2;
+//            }
+
+            int[] sign = new int[]{
+                    line1.compareTo(Precisions.bigEpsilon()),
+                    line2.compareTo(Precisions.bigEpsilon()),
+                    line3.compareTo(Precisions.bigEpsilon())
+            };
+            if (sign[0] == sign[1] && sign[1] == sign[2] && sign[0] != 0) {
+                return PointTriangleState.POINT_INSIDE;
+            }
+
+            return PointTriangleState.POINT_OUTSIDE;
 
         }
     }
@@ -1137,9 +1369,15 @@ public class TriangulationAdvance implements iTriangulation {
 
 
         static boolean isPointInRectangle(Point point, Point[] list) {
+
+            counter.add("isPointInRectangle");
+
             BorderBox borderBox = new BorderBox();
             for (int i = 0; i < list.length; i++) {
                 borderBox.addPoint(list[i]);
+                if (i > 2 && borderBox.isInBoxWithBorder(point)) {
+                    return true;
+                }
             }
             return borderBox.isInBoxWithBorder(point);
         }
@@ -1158,6 +1396,8 @@ public class TriangulationAdvance implements iTriangulation {
 
         static GeometryLineLine.IntersectState stateLineLine(Point p1Line1, Point p2Line1,
                                                              Point p1Line2, Point p2Line2) {
+
+            counter.add("LineLine");
 
             int[] state = {
                     GeometryPointLine.statePointOnLine(p1Line1, p1Line2, p2Line2).ordinal(),
@@ -1265,14 +1505,14 @@ public class TriangulationAdvance implements iTriangulation {
                                                                  Point p1Line,
                                                                  Point p2Line) {
 
+            counter.add("PointOnLine");
+
             if (p1Line.equals(point))
                 return GeometryPointLine.PointLineState.POINT_ON_CORNER;
             if (p2Line.equals(point))
                 return GeometryPointLine.PointLineState.POINT_ON_CORNER;
 
-            if (!GeometryCoordinate.is3pointsCollinear(point.getX(), point.getY(),
-                    p1Line.getX(), p1Line.getY(),
-                    p2Line.getX(), p2Line.getY()))
+            if (!GeometryCoordinate.is3pointsCollinear(point, p1Line, p2Line))
                 return GeometryPointLine.PointLineState.POINT_OUTSIDE_LINE;
 
             if (!GeometryCoordinate.isPointInRectangle(point, new Point[]{p1Line, p2Line}))
@@ -1380,17 +1620,16 @@ public class TriangulationAdvance implements iTriangulation {
 //            return isPointBetween2Border(y, Line1Y, Line2Y);
 //        }
 
-        static BigDecimal pointOnLine(
-                double x1, double y1,
-                double x2, double y2,
-                double x3, double y3) {
+        static BigDecimal pointOnLine(Point p1, Point p2, Point p3) {
 
-            BigDecimal bdX1 = new BigDecimal(x1);
-            BigDecimal bdX2 = new BigDecimal(x2);
-            BigDecimal bdX3 = new BigDecimal(x3);
-            BigDecimal bdY1 = new BigDecimal(y1);
-            BigDecimal bdY2 = new BigDecimal(y2);
-            BigDecimal bdY3 = new BigDecimal(y3);
+            counter.add("BigDecimal");
+
+            BigDecimal bdX1 = new BigDecimal(p1.getX());
+            BigDecimal bdX2 = new BigDecimal(p2.getX());
+            BigDecimal bdX3 = new BigDecimal(p3.getX());
+            BigDecimal bdY1 = new BigDecimal(p1.getY());
+            BigDecimal bdY2 = new BigDecimal(p2.getY());
+            BigDecimal bdY3 = new BigDecimal(p3.getY());
             BigDecimal dX21 = bdX2.add(bdX1.negate());
             BigDecimal dY21 = bdY2.add(bdY1.negate());
             BigDecimal dX32 = bdX3.add(bdX2.negate());
@@ -1400,15 +1639,25 @@ public class TriangulationAdvance implements iTriangulation {
             BigDecimal right = dY32.multiply(dX21).negate();
 
             BigDecimal result = left.add(right);
+
+
+//            BigDecimal result = BigDecimal.valueOf(
+//                    (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) - (p3.getY() - p2.getY()) * (p2.getX() - p1.getX())
+//            );
+
 //            System.out.println(result.toString());
             return result;
         }
 
-        static boolean is3pointsCollinear(
-                double x1, double y1,
-                double x2, double y2,
-                double x3, double y3
-        ) {
+        static boolean is3pointsCollinear(BigDecimal result) {
+            return result.abs().compareTo(Precisions.bigEpsilon()) < 0;
+        }
+
+        static boolean is3pointsCollinear(Point p1, Point p2, Point p3) {
+
+            counter.add("is3pointsCollinear");
+
+            return is3pointsCollinear(pointOnLine(p1, p2, p3));
 //            if (Math.abs(x1 - x2) < Precisions.epsilon() && Math.abs(x3 - x2) < Precisions.epsilon()) {
 //                return true;
 //            }
@@ -1423,15 +1672,16 @@ public class TriangulationAdvance implements iTriangulation {
 //                result = true;
 //            return result;
 
-            BigDecimal result = pointOnLine(x1, y1, x2, y2, x3, y3).abs();
-
-//            if(factor < 1e-6){
-//                System.out.println("good");
+//            BigDecimal result = pointOnLine(p1, p2, p3).abs();
+//
+////            if(factor < 1e-6){
+////                System.out.println("good");
+////            }
+//            //if(PRINTABLE)System.out.println("is3pointsCollinear:"+result.toString());
+//            if (result.compareTo(BigDecimal.valueOf(Precisions.epsilon())) < 0) {
+//                return true;
 //            }
-            if (result.compareTo(BigDecimal.valueOf(Precisions.epsilon())) < 0) {
-                return true;
-            }
-            return false;
+//            return false;
         }
 
 //        public static double distancePoints(Point point1, Point point2) {
@@ -1447,6 +1697,9 @@ public class TriangulationAdvance implements iTriangulation {
 
 
         static boolean isPointInCircle(Point[] circlePoints, Point point) {
+
+            counter.add("isPointInCircle");
+
             double x1 = circlePoints[0].getX();
             double y1 = circlePoints[0].getY();
             double z1 = x1 * x1 + y1 * y1;
@@ -1490,13 +1743,23 @@ public class TriangulationAdvance implements iTriangulation {
             return Math.signum(a) * (a * z0 - b * x0 + c * y0 - d) < 0;
         }
 
+        static boolean isCounterClockwise(BigDecimal result) {
+            return result.compareTo(BigDecimal.ZERO) > 0;
+        }
+
         static boolean isCounterClockwise(Point a, Point b, Point c) {
-            BigDecimal result = pointOnLine(a.getX(), a.getY(), b.getX(), b.getY(), c.getX(), c.getY());
-            return result.compareTo(BigDecimal.ZERO) > Precisions.epsilon();
+
+            counter.add("isCounterClockwise");
+
+            BigDecimal result = pointOnLine(a, b, c);
+            return isCounterClockwise(result);
         }
 
 
         static Point[] convexHull(Point[] inputPoints) {
+
+            counter.add("convexHull");
+
             if (inputPoints.length < 2)
                 return inputPoints;
 
@@ -1567,8 +1830,16 @@ public class TriangulationAdvance implements iTriangulation {
     }
 
     private static class Precisions {
+
+        private static double epsilon = 1.0E-9;
+        private static BigDecimal bigEpsilon = BigDecimal.valueOf(epsilon);
+
         static double epsilon() {
-            return 1.0E-9;
+            return epsilon;
+        }
+
+        static BigDecimal bigEpsilon() {
+            return bigEpsilon;
         }
     }
 }
