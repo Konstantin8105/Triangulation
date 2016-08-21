@@ -337,6 +337,91 @@ public class TriangulationAdvance implements iTriangulation {
             System.out.println(triangle.triangles[indexTriangle]);
         }
 
+        int pointNewTriangle = triangle.iNodes[normalizeSizeBy3(indexTriangle + 2)];
+        int commonRib = triangle.iRibs[indexTriangle];
+        Triangle[] baseTriangles = new Triangle[]{
+                triangle,
+                triangle.triangles[indexTriangle]
+        };
+
+        // checking
+        if (PRINTABLE) {
+            System.out.println("pointNewTriangle = " + pointNewTriangle + "\n\n");
+            System.out.println("CommonRib = " + commonRib + "\n\n");
+            boolean[] isOk = new boolean[]{false, false};
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 3; j++) {
+                    System.out.println("i:" + i + " j:" + j + " -- " + (baseTriangles[i].iRibs[j] == commonRib));
+                    if (baseTriangles[i].iRibs[j] == commonRib) {
+                        isOk[i] = true;
+                    }
+                }
+            }
+            System.out.println(isOk[0]);
+            System.out.println(isOk[1]);
+        }
+
+        // global region
+        List<Triangle> region = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            Triangle internalTriangle = baseTriangles[i];
+            int indexCommonRib = -1;
+            for (int j = 0; j < 3; j++) {
+                if (commonRib == internalTriangle.iRibs[j]) {
+                    indexCommonRib = j;
+                }
+            }
+            Triangle t1 = new Triangle();
+            t1.iRibs = new int[]{
+                    internalTriangle.iRibs[normalizeSizeBy3(indexCommonRib + 1)]
+            };
+            t1.iNodes = new int[]{
+                    internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib + 1)],
+                    internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib + 2)]
+            };
+            t1.triangles = new Triangle[]{
+                    internalTriangle.triangles[normalizeSizeBy3(i + 1)]
+            };
+            region.add(t1);
+            Triangle t2 = new Triangle();
+            t2.iRibs = new int[]{
+                    internalTriangle.iRibs[normalizeSizeBy3(indexCommonRib + 2)]
+            };
+            t2.iNodes = new int[]{
+                    internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib + 2)],
+                    internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib + 3)]
+            };
+            t2.triangles = new Triangle[]{
+                    internalTriangle.triangles[normalizeSizeBy3(i + 2)]
+            };
+            region.add(t2);
+        }
+
+        if (PRINTABLE) {
+            for (int i = 0; i < region.size(); i++) {
+                System.out.println("\n\nRegion " + i);
+                System.out.println("triangles:");
+                for (int j = 0; j < region.get(i).triangles.length; j++) {
+                    System.out.println(region.get(i).triangles[j]);
+                }
+                System.out.println("ribs:");
+                for (int j = 0; j < region.get(i).iRibs.length; j++) {
+                    System.out.println(region.get(i).iRibs[j]);
+                }
+                System.out.println("nodes:");
+                for (int j = 0; j < region.get(i).iNodes.length; j++) {
+                    System.out.println(region.get(i).iNodes[j]);
+                }
+            }
+        }
+
+
+        //todo continue here
+
+        return null;
+
+        /*
+
         Triangle[] triangles = new Triangle[2];
         for (int i = 0; i < triangles.length; i++) {
             triangles[i] = new Triangle();
@@ -491,6 +576,7 @@ public class TriangulationAdvance implements iTriangulation {
         beginTriangle = triangles[0];
 
         return triangles;
+        */
     }
 
     private boolean isGoodDelaunay(Triangle triangle, int indexTriangle) {
@@ -578,7 +664,7 @@ public class TriangulationAdvance implements iTriangulation {
                 addNextPointOnLine(nextPoint, 2);
                 break;
             default:
-                if(PRINTABLE)System.out.println("FAIL ... "+state);
+                if (PRINTABLE) System.out.println("FAIL ... " + state);
                 System.out.println("Блять .....");
         }
     }
@@ -609,8 +695,7 @@ public class TriangulationAdvance implements iTriangulation {
                 nodes.get(beginTriangle.iNodes[2])
         };
 
-        if (PRINTABLE)
-        {
+        if (PRINTABLE) {
             System.out.println("\n\n\n\nAnalyze next triangle");
             System.out.println("Triangle points");
             for (int i = 0; i < 3; i++) {
@@ -686,8 +771,7 @@ public class TriangulationAdvance implements iTriangulation {
 //                ribPosition = random.nextInt(3);
 //            }
 
-            if (PRINTABLE)
-            {
+            if (PRINTABLE) {
                 System.out.println("triangleCenter = " + triangleCenter);
                 System.out.println("ribPosition = " + ribPosition);
                 System.out.println("beginTriangle.iRibs[ribPosition] = " + beginTriangle.iRibs[ribPosition]);
@@ -765,7 +849,7 @@ public class TriangulationAdvance implements iTriangulation {
 
 //        beginTriangle = null;
 
-        if(PRINTABLE){
+        if (PRINTABLE) {
             System.out.println("beginTriangle");
             for (int i = 0; i < 3; i++) {
                 System.out.println(nodes.get(beginTriangle.iNodes[i]));
@@ -795,11 +879,11 @@ public class TriangulationAdvance implements iTriangulation {
 
 
         /// TODO FUCK THIS SHIT
-//        for (int i = 0; i < 3; i++) {
-//            if (!isGoodDelaunay(triangles[i], 0)) {
-//                flipTriangles(triangles[i], 0);
-//            }
-//        }
+        for (int i = 0; i < 3; i++) {
+            if (!isGoodDelaunay(triangles[i], 0)) {
+                flipTriangles(triangles[i], 0);
+            }
+        }
     }
 
     private void addInverseLinkOnTriangle(Triangle[] triangles) {
@@ -977,7 +1061,7 @@ public class TriangulationAdvance implements iTriangulation {
 //        }
 
 
-        if(PRINTABLE){
+        if (PRINTABLE) {
             System.out.println("beginTriangle");
             for (int i = 0; i < 3; i++) {
                 System.out.println(nodes.get(beginTriangle.iNodes[i]));
