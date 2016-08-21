@@ -102,6 +102,8 @@ public class TriangulationAdvance implements iTriangulation {
             }
         }
 
+        // TODO: 8/22/16 add sorting by points for minimaze finding points
+
 //        counter.clear();
         // TODO: 18.08.2016 fake points must be moved
         createFakeTriangles(points);
