@@ -418,6 +418,13 @@ public class TriangulationAdvance implements iTriangulation {
 
         //todo continue here
 
+        //loopization
+        //check - new triangle is not on 1 line
+        //separate on 2 triangles
+        //inverte link on triangle
+        //move beginTriangle
+        //add null in old triangles
+
         return null;
 
         /*
