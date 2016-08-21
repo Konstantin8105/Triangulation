@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class TriangulationAdvanceTest {
 
-    final private boolean PRINTABLE = false;
+    final private boolean PRINTABLE = true;
     final private int AMOUNT_POINTS = 5;
     private static Random random = new Random();
 
@@ -196,8 +196,21 @@ public class TriangulationAdvanceTest {
     }
 
     @Test
+    public void simpleTest13() throws Exception {
+        Point[] points = new Point[]{
+                new Point(36, 8),
+                new Point(47, 43),
+                new Point(36, 37),
+                new Point(27, 17),
+                new Point(35, 26)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
     public void simpleCircle() throws Exception {
-        Point[] points = (Point[]) ResearchTest.getCirclePoints(10).toArray();
+        Point[] points = (Point[]) ResearchTest.getCirclePoints(6).toArray();
         TriangulationAdvance triangulation = new TriangulationAdvance(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
