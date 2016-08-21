@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java" />
     </list>
     <manually-removed-from-ignored>
@@ -46,20 +45,20 @@
       <file leaf-file-name="TriangulationAdvance.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-100">
-              <caret line="1936" column="37" selection-start-line="1936" selection-start-column="37" selection-end-line="1936" selection-end-column="37" />
+            <state relative-caret-position="536">
+              <caret line="130" column="84" selection-start-line="130" selection-start-column="84" selection-end-line="130" selection-end-column="84" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3053#3054#0" expanded="true" />
                 <element signature="e#3091#3092#0" expanded="true" />
-                <element signature="e#70379#70380#0" expanded="true" />
-                <element signature="e#70447#70448#0" expanded="true" />
-                <element signature="e#71283#71963#0" expanded="true" />
-                <element signature="e#71962#71963#0" expanded="true" />
-                <element signature="e#73188#73189#0" expanded="true" />
-                <element signature="e#73226#73227#0" expanded="true" />
-                <element signature="e#73268#73269#0" expanded="true" />
-                <element signature="e#73309#73310#0" expanded="true" />
+                <element signature="e#70464#70465#0" expanded="true" />
+                <element signature="e#70532#70533#0" expanded="true" />
+                <element signature="e#71368#72048#0" expanded="true" />
+                <element signature="e#72047#72048#0" expanded="true" />
+                <element signature="e#73273#73274#0" expanded="true" />
+                <element signature="e#73311#73312#0" expanded="true" />
+                <element signature="e#73353#73354#0" expanded="true" />
+                <element signature="e#73394#73395#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -964,13 +963,6 @@
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
     </task>
-    <task id="LOCAL-00062" summary="prepare for release&#10;">
-      <created>1462792885133</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1462792885134</updated>
-    </task>
     <task id="LOCAL-00063" summary="prepare for release&#10;">
       <created>1462906464238</created>
       <option name="number" value="00063" />
@@ -1307,7 +1299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1471812969789</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="repair flipTriangle">
+      <created>1471813296288</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1471813296288</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1356,7 +1355,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32674298" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32674298" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18587747" sideWeight="0.5846731" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1367,9 +1366,9 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2886266" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24062166" sideWeight="0.48595214" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24062166" sideWeight="0.48377126" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32606438" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24062166" sideWeight="0.51404786" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24062166" sideWeight="0.51622874" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896176" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1749,20 +1748,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-100">
-          <caret line="1936" column="37" selection-start-line="1936" selection-start-column="37" selection-end-line="1936" selection-end-column="37" />
+        <state relative-caret-position="536">
+          <caret line="130" column="84" selection-start-line="130" selection-start-column="84" selection-end-line="130" selection-end-column="84" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3053#3054#0" expanded="true" />
             <element signature="e#3091#3092#0" expanded="true" />
-            <element signature="e#70379#70380#0" expanded="true" />
-            <element signature="e#70447#70448#0" expanded="true" />
-            <element signature="e#71283#71963#0" expanded="true" />
-            <element signature="e#71962#71963#0" expanded="true" />
-            <element signature="e#73188#73189#0" expanded="true" />
-            <element signature="e#73226#73227#0" expanded="true" />
-            <element signature="e#73268#73269#0" expanded="true" />
-            <element signature="e#73309#73310#0" expanded="true" />
+            <element signature="e#70464#70465#0" expanded="true" />
+            <element signature="e#70532#70533#0" expanded="true" />
+            <element signature="e#71368#72048#0" expanded="true" />
+            <element signature="e#72047#72048#0" expanded="true" />
+            <element signature="e#73273#73274#0" expanded="true" />
+            <element signature="e#73311#73312#0" expanded="true" />
+            <element signature="e#73353#73354#0" expanded="true" />
+            <element signature="e#73394#73395#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -128,6 +128,7 @@ public class TriangulationAdvance implements iTriangulation {
             outTriangles();
         }
 //        System.out.println(counter.toString());
+        // TODO: 8/22/16 remove fake triangles or use convexHull like first element
     }
 
     private void outTriangles() {
