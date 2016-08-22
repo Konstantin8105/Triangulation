@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="repair flipTriangle">
+    <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java" />
     </list>
@@ -46,20 +46,20 @@
       <file leaf-file-name="TriangulationAdvance.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="104" column="74" selection-start-line="104" selection-start-column="74" selection-end-line="104" selection-end-column="74" />
+            <state relative-caret-position="402">
+              <caret line="424" column="32" selection-start-line="424" selection-start-column="32" selection-end-line="424" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3053#3054#0" expanded="true" />
                 <element signature="e#3091#3092#0" expanded="true" />
-                <element signature="e#70539#70540#0" expanded="true" />
-                <element signature="e#70607#70608#0" expanded="true" />
-                <element signature="e#71443#72123#0" expanded="true" />
-                <element signature="e#72122#72123#0" expanded="true" />
-                <element signature="e#73348#73349#0" expanded="true" />
-                <element signature="e#73386#73387#0" expanded="true" />
-                <element signature="e#73428#73429#0" expanded="true" />
-                <element signature="e#73469#73470#0" expanded="true" />
+                <element signature="e#70572#70573#0" expanded="true" />
+                <element signature="e#70640#70641#0" expanded="true" />
+                <element signature="e#71476#72156#0" expanded="true" />
+                <element signature="e#72155#72156#0" expanded="true" />
+                <element signature="e#73381#73382#0" expanded="true" />
+                <element signature="e#73419#73420#0" expanded="true" />
+                <element signature="e#73461#73462#0" expanded="true" />
+                <element signature="e#73502#73503#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -964,13 +964,6 @@
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
     </task>
-    <task id="LOCAL-00064" summary="prepare for release&#10;">
-      <created>1462906650417</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1462906650417</updated>
-    </task>
     <task id="LOCAL-00065" summary="prepare for release&#10;">
       <created>1462907849980</created>
       <option name="number" value="00065" />
@@ -1307,7 +1300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1471813414644</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="repair flipTriangle">
+      <created>1471813618098</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1471813618098</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1353,7 +1353,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="768" width="1919" height="1080" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32606438" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1363,7 +1363,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.317757" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32636657" sideWeight="0.6188993" order="9" side_tool="true" content_ui="tabs" x="819" y="1044" width="283" height="508" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32636657" sideWeight="0.6188993" order="9" side_tool="true" content_ui="tabs" x="819" y="1044" width="283" height="508" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2886266" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1749,20 +1749,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="104" column="74" selection-start-line="104" selection-start-column="74" selection-end-line="104" selection-end-column="74" />
+        <state relative-caret-position="402">
+          <caret line="424" column="32" selection-start-line="424" selection-start-column="32" selection-end-line="424" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3053#3054#0" expanded="true" />
             <element signature="e#3091#3092#0" expanded="true" />
-            <element signature="e#70539#70540#0" expanded="true" />
-            <element signature="e#70607#70608#0" expanded="true" />
-            <element signature="e#71443#72123#0" expanded="true" />
-            <element signature="e#72122#72123#0" expanded="true" />
-            <element signature="e#73348#73349#0" expanded="true" />
-            <element signature="e#73386#73387#0" expanded="true" />
-            <element signature="e#73428#73429#0" expanded="true" />
-            <element signature="e#73469#73470#0" expanded="true" />
+            <element signature="e#70572#70573#0" expanded="true" />
+            <element signature="e#70640#70641#0" expanded="true" />
+            <element signature="e#71476#72156#0" expanded="true" />
+            <element signature="e#72155#72156#0" expanded="true" />
+            <element signature="e#73381#73382#0" expanded="true" />
+            <element signature="e#73419#73420#0" expanded="true" />
+            <element signature="e#73461#73462#0" expanded="true" />
+            <element signature="e#73502#73503#0" expanded="true" />
           </folding>
         </state>
       </provider>

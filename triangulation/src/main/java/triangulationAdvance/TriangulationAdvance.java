@@ -422,6 +422,7 @@ public class TriangulationAdvance implements iTriangulation {
         //todo continue here
 
         //loopization
+        //convexHull of 4 points
         //check - new triangle is not on 1 line
         //separate on 2 triangles
         //inverte link on triangle
