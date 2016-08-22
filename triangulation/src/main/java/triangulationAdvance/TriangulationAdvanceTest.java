@@ -9,13 +9,13 @@ import java.util.Random;
 
 public class TriangulationAdvanceTest {
 
-    final private boolean PRINTABLE = false;
+    final private boolean PRINTABLE = true;
     final private int AMOUNT_POINTS = 5;
     private static Random random = new Random();
 
     @Test
     public void randomTestAdvance() {
-        for (int i = 0; i < 20000; i++) {
+        for (int i = 0; i < 200000; i++) {
             Point points[] = new Point[AMOUNT_POINTS];
             for (int j = 0; j < points.length; j++) {
                 points[j] = new Point(random.nextInt(50), random.nextInt(50));
@@ -266,6 +266,19 @@ public class TriangulationAdvanceTest {
                 new Point(12, 35),
                 new Point(8, 33),
                 new Point(32, 37)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
+    public void simpleTest19() {
+        Point[] points = new Point[]{
+                new Point(33, 16),
+                new Point(9, 24),
+                new Point(23, 37),
+                new Point(18, 2),
+                new Point(26, 28)
         };
         TriangulationAdvance triangulation = new TriangulationAdvance(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
