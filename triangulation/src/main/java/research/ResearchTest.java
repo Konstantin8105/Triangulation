@@ -21,13 +21,14 @@ public class ResearchTest {
 
     public static void main(String[] args) throws Exception {
         int[] amountPoints = new int[]{
-                3,
-                5,
-                10, 20,
-                50,
-                100, 200,
+//                3,
+//                5,
+//                10, 20,
+//                50,
+//                100, 200,
                 500,
-//                1000, 2000,
+//                1000,
+//                2000,
 //                5000,
 //                10000, 20000, 50000,
 ////                100000
@@ -42,7 +43,7 @@ public class ResearchTest {
     }
 
     private static void test(int size, TYPE_TEST type_test) throws Exception {
-        int amountTest = 10;//1;//500;//
+        int amountTest = 2;//10;//1;//500;//
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageTime = 0;
@@ -125,8 +126,8 @@ public class ResearchTest {
     }
 
     public static List<Point> getCirclePoints(final int size) {
-        Point[] coordinates = new Point[size+1];
-        for (int j = 0; j < size ; j++) {
+        Point[] coordinates = new Point[size + 1];
+        for (int j = 0; j < size; j++) {
             coordinates[j] = new Point(
                     SIZE / 2. * Math.sin(2. * Math.PI / size * j) + SIZE / 2,
                     SIZE / 2. * Math.cos(2. * Math.PI / size * j) + SIZE / 2
