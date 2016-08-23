@@ -1,6 +1,7 @@
 package counter;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class Counter {
@@ -24,11 +25,15 @@ public class Counter {
             map.put(str, value);
     }
 
+
     @Override
     public String toString() {
-        return "Counter{" + name +
-                "map=" + map +
-                '}';
+        String msg = new String();
+        Set<String> keys = map.keySet();
+        for(String key: keys){
+            msg += key + ":" + map.get(key) + "\n";
+        }
+        return msg;
     }
 
     public void clear() {

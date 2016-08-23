@@ -12,9 +12,9 @@ public class ResearchTest {
 
     public enum TYPE_TEST {
         RANDOM,
-        CIRCLE,
-        LINE_IN_LINE,
-        IN_TRIANGLE
+//        CIRCLE,
+//        LINE_IN_LINE,
+//        IN_TRIANGLE
     }
 
     private static Random random = new Random();
@@ -26,9 +26,9 @@ public class ResearchTest {
 //                10, 20,
 //                50,
 //                100, 200,
-//                500,
+                500,
 //                1000,
-                2000,
+//                2000,
 //                5000,
 //                10000, 20000, 50000,
 ////                100000
@@ -43,7 +43,7 @@ public class ResearchTest {
     }
 
     private static void test(int size, TYPE_TEST type_test) throws Exception {
-        int amountTest = 20;//10;//1;//500;//
+        int amountTest = 1;//20;//10;//1;//500;//
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageTime = 0;
@@ -53,15 +53,15 @@ public class ResearchTest {
             case RANDOM:
                 mav = getRandomPoints(size);
                 break;
-            case CIRCLE:
-                mav = getCirclePoints(size);
-                break;
-            case LINE_IN_LINE:
-                mav = getLineOnLine(size);
-                break;
-            case IN_TRIANGLE:
-                mav = getInTriangles(size);
-                break;
+//            case CIRCLE:
+//                mav = getCirclePoints(size);
+//                break;
+//            case LINE_IN_LINE:
+//                mav = getLineOnLine(size);
+//                break;
+//            case IN_TRIANGLE:
+//                mav = getInTriangles(size);
+//                break;
         }
 
 //        System.out.println(mav);
