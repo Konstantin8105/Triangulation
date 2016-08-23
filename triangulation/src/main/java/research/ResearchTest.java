@@ -26,9 +26,9 @@ public class ResearchTest {
 //                10, 20,
 //                50,
 //                100, 200,
-                500,
+//                500,
 //                1000,
-//                2000,
+                2000,
 //                5000,
 //                10000, 20000, 50000,
 ////                100000
@@ -43,7 +43,7 @@ public class ResearchTest {
     }
 
     private static void test(int size, TYPE_TEST type_test) throws Exception {
-        int amountTest = 2;//10;//1;//500;//
+        int amountTest = 20;//10;//1;//500;//
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageTime = 0;
