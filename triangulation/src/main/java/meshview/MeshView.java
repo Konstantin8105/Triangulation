@@ -10,7 +10,7 @@ import java.util.List;
 public class MeshView extends JFrame {
 
     final int WINDOWS_SIZE = 800;
-    final private boolean nodeText = true;
+    final private boolean TEXT_SHOW = true;
 
 
     public MeshView(final List<Point[]> mesh) {
@@ -42,7 +42,7 @@ public class MeshView extends JFrame {
                                 WINDOWS_SIZE / 2 + (mesh.get(i)[j].getY() - box.getCenter().getY()) * scale
                         );
                     }
-                    if (nodeText) {
+                    if (TEXT_SHOW) {
                         g.setColor(Color.RED);
                         for (int j = 0; j < 3; j++) {
                             g.drawString(
@@ -82,7 +82,7 @@ public class MeshView extends JFrame {
                             (position[0].getX() + position[1].getX() + position[2].getX()) / 3,
                             (position[0].getY() + position[1].getY() + position[2].getY()) / 3
                     );
-                    if (nodeText) {
+                    if (TEXT_SHOW) {
                         g.drawString(
                                 i + "",
                                 (int) center.getX(),

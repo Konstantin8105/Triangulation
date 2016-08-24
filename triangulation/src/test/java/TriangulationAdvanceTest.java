@@ -10,7 +10,7 @@ public class TriangulationAdvanceTest {
 
     final private boolean PRINTABLE = false;
     final private int AMOUNT_POINTS = 5;
-    private static Random random = new Random();
+    final private static Random random = new Random();
 
     @Test
     public void randomTestAdvance() {

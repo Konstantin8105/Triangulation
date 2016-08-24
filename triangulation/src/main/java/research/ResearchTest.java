@@ -17,7 +17,7 @@ public class ResearchTest {
         IN_TRIANGLE
     }
 
-    private static Random random = new Random();
+    final private static Random random = new Random();
 
     public static void main(String[] args) throws Exception {
         int[] amountPoints = new int[]{

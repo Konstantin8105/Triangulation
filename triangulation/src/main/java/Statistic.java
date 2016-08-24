@@ -1,5 +1,5 @@
 public class Statistic {
-    // TODO: 2/14/16 Add algoritm
+    // TODO: 2/14/16 Add algorithm
 //    RamMesh dataMesh;
 //    int amount_points;RamMesh dataMesh
 

@@ -5,10 +5,9 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class Counter {
-    private Map<String, Integer> map = new TreeMap<>();
+    final private Map<String, Integer> map = new TreeMap<>();
     private String name;
     private long timeMoment = System.currentTimeMillis();
-
 
     public Counter(String name) {
         this.name = name;
@@ -40,7 +39,7 @@ public class Counter {
 
     @Override
     public String toString() {
-        String msg = new String();
+        String msg = name + "\n";
         Set<String> keys = map.keySet();
         for (String key : keys) {
             msg += key + ":" + map.get(key) + "\n";
