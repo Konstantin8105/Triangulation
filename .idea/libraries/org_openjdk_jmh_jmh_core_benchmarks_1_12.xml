@@ -40,7 +40,6 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.ideaLibSources/jmh-core-1.12-sources.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-core-benchmarks/1.12/jmh-core-benchmarks-1.12-sources.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-core-benchmarks/1.12/jmh-core-benchmarks-1.12-sources.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jmh/jmh-core-benchmarks/1.12/jmh-core-benchmarks-1.12-sources.jar!/" />
