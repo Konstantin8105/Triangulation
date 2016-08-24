@@ -212,9 +212,6 @@ public class TriangulationAdvance {
         for (int i = 0; i < baseTriangles.length; i++) {
             baseTriangles[i] = null;
         }
-
-        // TODO: 8/23/16 continue checking
-
         return triangles;
     }
 
@@ -296,6 +293,12 @@ public class TriangulationAdvance {
         }
     }
 
+    /**
+     * Found next triangle
+     * Performance - O(n) in worst case and O(sqrt(n)) is average case.
+     * @param point
+     * @return
+     */
     private GeometryPointTriangle.PointTriangleState movingByConvexHull(Point point) {
         while (true) {
             if (Geometry.isAtRightOf(nodes.get(beginTriangle.iNodes[0]), nodes.get(beginTriangle.iNodes[1]), point)) {
@@ -361,7 +364,6 @@ public class TriangulationAdvance {
         beginTriangle = triangles[0];
         addInverseLinkOnTriangle(triangles);
 
-        // TODO: 8/23/16 continue checking
         for (int i = 0; i < 3; i++) {
             if (!isGoodDelaunay(triangles[i], 0)) {
                 flipTriangles(triangles[i], 0);
@@ -458,7 +460,6 @@ public class TriangulationAdvance {
         if (beginTriangle.triangles[indexLineInTriangle] == null) {
             addInverseLinkOnTriangle(new Triangle[]{triangles[0], triangles[1]});
             beginTriangle = triangles[0];
-            // TODO: 8/23/16 continue checking
             if (!isGoodDelaunay(triangles[0], 2)) {
                 flipTriangles(triangles[0], 2);
             }
@@ -530,13 +531,20 @@ public class TriangulationAdvance {
         if (!isGoodDelaunay(triangles[3], 2)) {
             flipTriangles(triangles[3], 2);
         }
-        // TODO: 8/23/16 continue checking
     }
 
+    /**
+     * Found all triangles
+     * Performance - O(n^2)
+     * @param triangle
+     * @param triangles
+     */
     private void getTriangleWays(Triangle triangle, List<Triangle> triangles) {
         if (triangle == null)
             return;
         triangles.add(triangle);
+        int position = 0;
+        Triangle[] addTriangle = new Triangle[]{null, null, null};
         for (int i = 0; i < triangle.triangles.length; i++) {
             if (triangle.triangles[i] != null) {
                 boolean isFound = false;
@@ -547,9 +555,13 @@ public class TriangulationAdvance {
                     }
                 }
                 if (!isFound) {
-                    getTriangleWays(triangle.triangles[i], triangles);
+                    addTriangle[position] = triangle.triangles[i];
                 }
             }
+        }
+        for (int i = 0; i < addTriangle.length; i++) {
+            if (addTriangle[i] != null)
+                getTriangleWays(addTriangle[i], triangles);
         }
     }
 
