@@ -2,57 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/BorderBox.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/Precision.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/TestMesh.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/imp/iTriangulation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/Triangulation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/BorderBox.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/BorderLine.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/BorderSegment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/BorderSegmentPair.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/BorderSegmentWorst.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/elements/LineWithPoints.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/elements/Segment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/elements/SeparateLoopToSegment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/borderSegment/elements/Sequence.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/elements/Collections/IDable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/elements/Line.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/elements/Mesh.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/elements/Triangle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/geometry/Geometry.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/geometry/GeometryCoordinate.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/geometry/GeometryLineLine.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/geometry/GeometryPointLine.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/geometry/GeometryPointTriangle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/geometry/Precisions.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/grid/Grid.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationsCompare.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/test/java/border/BorderBoxTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/test/java/border/SeparateLoopToSegmentTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/test/java/border/SequenceTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/test/java/crosssection/AreaTest2.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/test/java/geometry/GeometryLineLineTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/test/java/geometry/GeometryPointLineTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/test/java/geometry/GeometryPointTriangleTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/test/java/geometry/GeometryTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/test/java/research/RandomTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/test/java/triangulation/TriangulationTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/triangulation/src/test/java/unlicenseTest/DelaunayTest.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_benchmarks_1_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_benchmarks_1_12.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/unlicense.xml" afterPath="$PROJECT_DIR$/.idea/libraries/unlicense.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/Examples.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/Examples.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/counter/Counter.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/counter/Counter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/crosssection/Area.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/crosssection/Area.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/meshview/MeshView.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/meshview/MeshView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/research/ResearchTest.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/research/ResearchTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvanceView.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvanceView.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/perfomance/TriangulationBenchmark.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/perfomance/TriangulationAdvanceBenchmark.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/elements/Point.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/Point.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvanceTest.java" afterPath="$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceTest.java" />
     </list>
+    <ignored path="triangulation/target/test-classes/META-INF/CompilerHints" />
+    <ignored path="triangulation/target/classes/META-INF/BenchmarkList" />
+    <ignored path="triangulation/target/classes/META-INF/CompilerHints" />
+    <ignored path="triangulation/target/test-classes/META-INF/BenchmarkList" />
+    <ignored path="triangulation/target/generated-sources/annotations/perfomance/generated/TriangulationAdvanceBenchmark_jmhType_B3.java" />
+    <ignored path="triangulation/target/generated-sources/annotations/perfomance/generated/TriangulationAdvanceBenchmark_jmhType_B1.java" />
+    <ignored path="triangulation/target/generated-sources/annotations/perfomance/generated/TriangulationAdvanceBenchmark_jmhType.java" />
+    <ignored path="triangulation/target/generated-sources/annotations/org/openjdk/jmh/infra/generated/Blackhole_jmhType_B3.java" />
+    <ignored path="triangulation/target/generated-sources/annotations/perfomance/generated/TriangulationAdvanceBenchmark_triangulationMesh_jmhTest.java" />
+    <ignored path="triangulation/target/generated-sources/annotations/perfomance/generated/TriangulationAdvanceBenchmark_jmhType_B2.java" />
+    <ignored path="triangulation/target/generated-sources/annotations/org/openjdk/jmh/infra/generated/Blackhole_jmhType.java" />
+    <ignored path="triangulation/target/generated-sources/annotations/org/openjdk/jmh/infra/generated/Blackhole_jmhType_B1.java" />
+    <ignored path="triangulation/target/generated-sources/annotations/org/openjdk/jmh/infra/generated/Blackhole_jmhType_B2.java" />
     <manually-removed-from-ignored>
       <directory path="$PROJECT_DIR$/out/" />
     </manually-removed-from-ignored>
@@ -90,18 +54,7 @@
     <favorites_list name="Triangulation" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ResearchTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/research/ResearchTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="455">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -127,7 +80,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/triangulation/src/triangulation/grid/Grid.java" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulation/grid/Grid.java" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/BorderLine.java" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulation2/Triangulation.java" />
@@ -178,6 +130,7 @@
         <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/Precision.java" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvanceTest.java" />
         <option value="$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceTest.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -346,19 +299,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="triangulationAdvance" />
+              <option name="myItemId" value="other" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -372,45 +313,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="research" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Triangulation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="triangulation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="perfomance" />
+              <option name="myItemId" value="jar" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -492,7 +395,7 @@
       <recent name="triangulation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TriangulationAdvanceTest">
+  <component name="RunManager" selected="Application.ResearchTest (1)">
     <configuration default="false" name="ResearchTest (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -906,8 +809,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceTest" />
-        <item index="1" class="java.lang.String" itemvalue="Application.ResearchTest (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Application.ResearchTest (1)" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceTest" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceTest.toggleTriangle" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceTest.triangleSmall1" />
         <item index="4" class="java.lang.String" itemvalue="Application.Examples" />
@@ -930,13 +833,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
-    </task>
-    <task id="LOCAL-00069" summary="prepare for release&#10;">
-      <created>1462914033342</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1462914033342</updated>
     </task>
     <task id="LOCAL-00070" summary="prepare for release&#10;">
       <created>1462916186427</created>
@@ -1274,7 +1170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1471988496633</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="tests is Ok. prepair for release&#10;code cleaning">
+      <created>1472035777364</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1472035777365</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1329,14 +1232,14 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.30786026" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3155022" sideWeight="0.44022617" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.139738" sideWeight="0.44022617" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.69213974" order="9" side_tool="true" content_ui="tabs" x="819" y="1044" width="283" height="508" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2886266" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26898223" sideWeight="0.61084527" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26898223" sideWeight="0.61378556" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32532752" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26898223" sideWeight="0.3891547" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26898223" sideWeight="0.38621444" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896176" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1380,7 +1283,8 @@
     <MESSAGE value="repair" />
     <MESSAGE value="repair flipTriangle" />
     <MESSAGE value="tests is Ok. prepair for release" />
-    <option name="LAST_COMMIT_MESSAGE" value="tests is Ok. prepair for release" />
+    <MESSAGE value="tests is Ok. prepair for release&#10;code cleaning" />
+    <option name="LAST_COMMIT_MESSAGE" value="tests is Ok. prepair for release&#10;code cleaning" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1393,9 +1297,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_65/src.zip!/java/lang/StringBuilder.java" />
-    <entry file="jar:///usr/lib/jvm/openjdk-8/src.zip!/java/math/BigDecimal.java" />
-    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvanceResearch.java" />
     <entry file="jar:///usr/lib/jvm/openjdk-8/src.zip!/java/util/TreeMap.java" />
     <entry file="jar:///usr/lib/jvm/openjdk-8/src.zip!/java/util/Collections.java" />
     <entry file="jar:///usr/lib/jvm/openjdk-8/src.zip!/java/util/Arrays.java" />
@@ -1755,10 +1656,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/target/generated-sources/annotations/org/openjdk/jmh/infra/generated/Blackhole_jmhType_B1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/other/RANDOM.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="7" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/research/ResearchTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        <state relative-caret-position="442">
+          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
           <folding />
         </state>
       </provider>
