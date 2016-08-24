@@ -296,8 +296,10 @@ public class TriangulationAdvance {
     /**
      * Found next triangle
      * Performance - O(n) in worst case and O(sqrt(n)) is average case.
-     * @param point
-     * @return
+     * @param point - next point
+     * @return GeometryPointTriangle.PointTriangleState
+     * @see Point
+     * @see GeometryPointTriangle.PointTriangleState
      */
     private GeometryPointTriangle.PointTriangleState movingByConvexHull(Point point) {
         while (true) {
@@ -536,15 +538,15 @@ public class TriangulationAdvance {
     /**
      * Found all triangles
      * Performance - O(n^2)
-     * @param triangle
-     * @param triangles
+     * @param triangle - begin triangle
+     * @param triangles - list for adding new triangles
      */
     private void getTriangleWays(Triangle triangle, List<Triangle> triangles) {
         if (triangle == null)
             return;
         triangles.add(triangle);
         int position = 0;
-        Triangle[] addTriangle = new Triangle[]{null, null, null};
+        Triangle[] addTriangles = new Triangle[]{null, null, null};
         for (int i = 0; i < triangle.triangles.length; i++) {
             if (triangle.triangles[i] != null) {
                 boolean isFound = false;
@@ -555,13 +557,13 @@ public class TriangulationAdvance {
                     }
                 }
                 if (!isFound) {
-                    addTriangle[position] = triangle.triangles[i];
+                    addTriangles[position] = triangle.triangles[i];
                 }
             }
         }
-        for (int i = 0; i < addTriangle.length; i++) {
-            if (addTriangle[i] != null)
-                getTriangleWays(addTriangle[i], triangles);
+        for (Triangle addTriangle: addTriangles) {
+            if (addTriangle != null)
+                getTriangleWays(addTriangle, triangles);
         }
     }
 
