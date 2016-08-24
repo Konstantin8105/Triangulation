@@ -232,7 +232,6 @@ public class TriangulationAdvance {
 
     private void createFakeTriangles(Point[] points) {
         // create Fake region
-        //TODO: remove that because O(n^2)
         BorderBox borderBox = new BorderBox();
         for (Point point : points) {
             borderBox.addPoint(point);
@@ -272,7 +271,6 @@ public class TriangulationAdvance {
 
     private void addNextPoint(Point nextPoint) {
         // ignore same points
-        //TODO: remove O(n^2)
         for (Point point : nodes) {
             if (nextPoint.equals(point)) {
                 return;
@@ -372,14 +370,14 @@ public class TriangulationAdvance {
     }
 
     private void addInverseLinkOnTriangle(Triangle[] triangles) {
-        for (int i = 0; i < triangles.length; i++) {
+        for (Triangle triangle : triangles) {
             for (int j = 0; j < 3; j++) {
-                Triangle externalTriangle = triangles[i].triangles[j];
-                int commonRib = triangles[i].iRibs[j];
+                Triangle externalTriangle = triangle.triangles[j];
+                int commonRib = triangle.iRibs[j];
                 if (externalTriangle != null) {
                     for (int k = 0; k < 3; k++) {
                         if (externalTriangle.iRibs[k] == commonRib) {
-                            externalTriangle.triangles[k] = triangles[i];
+                            externalTriangle.triangles[k] = triangle;
                         }
                     }
                 }
@@ -652,25 +650,25 @@ public class TriangulationAdvance {
         private BigDecimal valueBig;
         private final boolean isValueDouble;
 
-        public Value(double valueDouble) {
+        Value(double valueDouble) {
             this.valueDouble = valueDouble;
             isValueDouble = true;
         }
 
-        public Value(BigDecimal valueBig) {
+        Value(BigDecimal valueBig) {
             this.valueBig = valueBig;
             isValueDouble = false;
         }
 
-        public boolean isValueDouble() {
+        boolean isValueDouble() {
             return isValueDouble;
         }
 
-        public BigDecimal getValueBig() {
+        BigDecimal getValueBig() {
             return valueBig;
         }
 
-        public double getValueDouble() {
+        double getValueDouble() {
             return valueDouble;
         }
     }
@@ -727,7 +725,7 @@ public class TriangulationAdvance {
         }
 
 
-        public static boolean isAtRightOf(Point a, Point b, Point c) {
+        static boolean isAtRightOf(Point a, Point b, Point c) {
             return isCounterClockwise(a, b, c);
         }
 
@@ -786,15 +784,9 @@ public class TriangulationAdvance {
             if (inputPoints.length < 2)
                 return inputPoints;
 
-            //todo optimize this
-            Set<Point> uniquePoints = new HashSet<>();
-            for (int i = 0; i < inputPoints.length; i++) {
-                uniquePoints.add(inputPoints[i]);
-            }
+            List<Point> array = Arrays.asList(inputPoints);
 
-            List<Point> arrayUnique = new ArrayList<>(uniquePoints);
-
-            Collections.sort(arrayUnique, new Comparator<Point>() {
+            Collections.sort(array, new Comparator<Point>() {
                 @Override
                 public int compare(Point first, Point second) {
                     if ((first).getX() == (second).getX()) {
@@ -812,10 +804,23 @@ public class TriangulationAdvance {
                 }
             });
 
-            int n = arrayUnique.size();
+            Iterator<Point> iterator = array.iterator();
+            Point last = null;
+            while (iterator.hasNext()) {
+                if (last == null) {
+                    last = iterator.next();
+                } else {
+                    Point present = iterator.next();
+                    if (last.equals(present)) {
+                        iterator.remove();
+                    }
+                }
+            }
+
+            int n = array.size();
             Point[] P = new Point[n];
             for (int i = 0; i < n; i++) {
-                P[i] = arrayUnique.get(i);
+                P[i] = array.get(i);
             }
 
             Point[] H = new Point[2 * n];
@@ -842,7 +847,7 @@ public class TriangulationAdvance {
             return H;
         }
 
-        public static double distanceLineAndPoint(Point lineP1, Point lineP2, Point p) {
+        static double distanceLineAndPoint(Point lineP1, Point lineP2, Point p) {
             double A;
             double B = 1;
             double C;
