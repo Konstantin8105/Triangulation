@@ -17,7 +17,7 @@ import java.util.*;
  * @author Izyumov Konstantin
  *         book "Algoritm building and analyse triangulation", A.B.Skvorcov.
  */
-public class TriangulationAdvance{
+public class TriangulationAdvance {
     //
     // triangulationAdvance.TriangulationAdvance data structure  "Nodes, ribs и triangles"
     //
@@ -72,8 +72,8 @@ public class TriangulationAdvance{
     public TriangulationAdvance(Point[] points) {
         createFakeTriangles(points);
         //createConvexHull(points);
-        for (int i = 0; i < points.length; i++) {
-            addNextPoint(points[i]);
+        for (Point point : points) {
+            addNextPoint(point);
         }
     }
 
@@ -125,9 +125,8 @@ public class TriangulationAdvance{
         //loopization
         boolean isLoop = true;
         for (int i = 0; i < region.size(); i++) {
-            int last = i;
             int next = i + 1 > region.size() - 1 ? 0 : i + 1;
-            if (region.get(last).iNodes[1] != region.get(next).iNodes[0]) {
+            if (region.get(i).iNodes[1] != region.get(next).iNodes[0]) {
                 isLoop = false;
             }
         }
@@ -223,23 +222,20 @@ public class TriangulationAdvance{
         if (triangle.triangles[indexTriangle] == null) {
             return true;
         }
-        if (Geometry.isPointInCircle(
+        return !Geometry.isPointInCircle(
                 new Point[]{
                         nodes.get(triangle.iNodes[0]),
                         nodes.get(triangle.iNodes[1]),
-                        nodes.get(triangle.iNodes[2])
-                },
-                nodes.get(triangle.triangles[indexTriangle].iNodes[normalizeSizeBy3(indexTriangle + 2)])))
-            return false;
-        return true;
+                        nodes.get(triangle.iNodes[2])},
+                nodes.get(triangle.triangles[indexTriangle].iNodes[normalizeSizeBy3(indexTriangle + 2)]));
     }
 
     private void createFakeTriangles(Point[] points) {
         // create Fake region
         //TODO: remove that because O(n^2)
         BorderBox borderBox = new BorderBox();
-        for (int i = 0; i < points.length; i++) {
-            borderBox.addPoint(points[i]);
+        for (Point point : points) {
+            borderBox.addPoint(point);
         }
         double scaleFactor = 3.0D;
         borderBox.scale(scaleFactor, borderBox.getCenter());
@@ -277,8 +273,8 @@ public class TriangulationAdvance{
     private void addNextPoint(Point nextPoint) {
         // ignore same points
         //TODO: remove O(n^2)
-        for (int j = 0; j < nodes.size(); j++) {
-            if (nextPoint.equals(nodes.get(j))) {
+        for (Point point : nodes) {
+            if (nextPoint.equals(point)) {
                 return;
             }
         }
@@ -390,9 +386,9 @@ public class TriangulationAdvance{
             }
         }
         boolean inverseAgain = false;
-        for (int i = 0; i < triangles.length; i++) {
-            if (isCounterClockwise(triangles[i])) {
-                triangles[i].changeClockwise();
+        for (Triangle triangle : triangles) {
+            if (isCounterClockwise(triangle)) {
+                triangle.changeClockwise();
                 inverseAgain = true;
             }
         }
@@ -475,8 +471,7 @@ public class TriangulationAdvance{
         }
 
         int ribConnectId = beginTriangle.iRibs[indexLineInTriangle];
-        Triangle nextTriangle = beginTriangle.triangles[indexLineInTriangle];
-        beginTriangle = nextTriangle;
+        beginTriangle = beginTriangle.triangles[indexLineInTriangle];
         for (int i = 0; i < 3; i++) {
             if (beginTriangle.iRibs[i] == ribConnectId) {
                 indexLineInTriangle = i;
@@ -622,16 +617,6 @@ public class TriangulationAdvance{
             if (!triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line3)) {
                 return PointTriangleState.POINT_OUTSIDE_LINE_2;
             }
-//
-//            int[] sign = new int[]{
-//                    line1.compareTo(BigDecimal.ZERO),//Precisions.bigEpsilon()),
-//                    line2.compareTo(BigDecimal.ZERO),//Precisions.bigEpsilon()),
-//                    line3.compareTo(BigDecimal.ZERO)//Precisions.bigEpsilon())
-//            };
-//            if (sign[0] == sign[1] && sign[1] == sign[2] && sign[0] != 0) {
-//                return PointTriangleState.POINT_INSIDE;
-//            }
-//
 
             boolean[] sign = new boolean[]{
                     triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line1),
@@ -748,11 +733,9 @@ public class TriangulationAdvance{
 
 
         static double det(double a[][]) {
-            double det = a[0][0] * a[1][1] * a[2][2] + a[1][0] * a[2][1] * a[0][2] + a[0][1] * a[1][2] * a[2][0]
+            return a[0][0] * a[1][1] * a[2][2] + a[1][0] * a[2][1] * a[0][2] + a[0][1] * a[1][2] * a[2][0]
                     - a[0][2] * a[1][1] * a[2][0] - a[0][1] * a[1][0] * a[2][2] - a[1][2] * a[2][1] * a[0][0];
-            return det;
         }
-
 
         static boolean isPointInCircle(Point[] circlePoints, Point point) {
             double x1 = circlePoints[0].getX();
@@ -854,7 +837,7 @@ public class TriangulationAdvance{
                 H[k++] = P[i];
             }
             if (k > 1) {
-                H = (Point[]) Arrays.copyOfRange(H, 0, k - 1); // remove non-hull vertices after k; remove k - 1 which is a duplicate
+                H = Arrays.copyOfRange(H, 0, k - 1); // remove non-hull vertices after k; remove k - 1 which is a duplicate
             }
             return H;
         }
