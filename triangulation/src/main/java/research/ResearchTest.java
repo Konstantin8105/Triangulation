@@ -1,6 +1,6 @@
 package research;
 
-import triangulation.elements.Point;
+import triangulationAdvance.Point;
 import triangulationAdvance.TriangulationAdvance;
 
 import java.util.ArrayList;
@@ -12,27 +12,25 @@ public class ResearchTest {
 
     public enum TYPE_TEST {
         RANDOM,
-//        CIRCLE,
-//        LINE_IN_LINE,
-//        IN_TRIANGLE
+        CIRCLE,
+        LINE_IN_LINE,
+        IN_TRIANGLE
     }
 
     private static Random random = new Random();
 
     public static void main(String[] args) throws Exception {
         int[] amountPoints = new int[]{
-//                3,
-//                5,
-//                10, 20,
-//                50,
-//                100, 200,
+                3,
+                5,
+                10,
+                20,
+                50,
+                100,
+                200,
                 500,
-//                1000,
-//                2000,
-//                5000,
-//                10000, 20000, 50000,
-////                100000
-
+                1000,
+                2000
         };
         for (int i = 0; i < TYPE_TEST.values().length; i++) {
             System.out.println("TYPE OF TEST: " + TYPE_TEST.values()[i].toString());
@@ -43,7 +41,7 @@ public class ResearchTest {
     }
 
     private static void test(int size, TYPE_TEST type_test) throws Exception {
-        int amountTest = 1000;//10;//1;//500;//
+        int amountTest = 100;
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageTime = 0;
@@ -53,47 +51,23 @@ public class ResearchTest {
             case RANDOM:
                 mav = getRandomPoints(size);
                 break;
-//            case CIRCLE:
-//                mav = getCirclePoints(size);
-//                break;
-//            case LINE_IN_LINE:
-//                mav = getLineOnLine(size);
-//                break;
-//            case IN_TRIANGLE:
-//                mav = getInTriangles(size);
-//                break;
+            case CIRCLE:
+                mav = getCirclePoints(size);
+                break;
+            case LINE_IN_LINE:
+                mav = getLineOnLine(size);
+                break;
+            case IN_TRIANGLE:
+                mav = getInTriangles(size);
+                break;
         }
-
-//        System.out.println(mav);
-//
-//        for (int i = 0; i < amountTest; i++) {
-//            start[i] = System.currentTimeMillis();//(new Date()).getTime();
-//            Triangulation triangulation = new Triangulation(mav);
-//            finish[i] = System.currentTimeMillis();//(new Date()).getTime();
-//            sizeTriangles = triangulation.getTriangles().size();
-//        }
-//        for (int i = 0; i < amountTest; i++) {
-//            float time = (float) (finish[i] - start[i]);
-//            averageTime += time;
-//        }
-//
-//        averageTime /= amountTest;
-//        System.out.println("Amount points: " + String.format("%6d", size)
-//                + " point. "
-//                + "Time is "
-//                + String.format("%12.2f", averageTime) + " ms. "
-//                + "Triangles is "
-//                + String.format("%6d", sizeTriangles) + " triangles. "
-//        );
-//
-//        //Advance
 
         Point[] points = (Point[]) mav.toArray();
 
         for (int i = 0; i < amountTest; i++) {
-            start[i] = System.currentTimeMillis();//(new Date()).getTime();
+            start[i] = System.currentTimeMillis();
             TriangulationAdvance triangulation = new TriangulationAdvance(points);
-            finish[i] = System.currentTimeMillis();//(new Date()).getTime();
+            finish[i] = System.currentTimeMillis();
             sizeTriangles = triangulation.getTriangles().size();
         }
         for (int i = 0; i < amountTest; i++) {
@@ -109,8 +83,6 @@ public class ResearchTest {
                 + "Triangles is "
                 + String.format("%6d", sizeTriangles) + " triangles. "
         );
-
-        System.out.println("==");
     }
 
     final private static int SIZE = 600;

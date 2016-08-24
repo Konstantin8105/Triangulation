@@ -5,8 +5,10 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class Counter {
-    Map<String, Integer> map = new TreeMap<>();
-    String name;
+    private Map<String, Integer> map = new TreeMap<>();
+    private String name;
+    private long timeMoment = System.currentTimeMillis();
+
 
     public Counter(String name) {
         this.name = name;
@@ -25,10 +27,14 @@ public class Counter {
             map.put(str, value);
     }
 
-    public void addTime(String str, int time) {
-        if (map.get(str) == null)
+    public void addTime(String str) {
+        long presentMoment = System.currentTimeMillis();
+        int time = (int) (presentMoment - timeMoment);
+        timeMoment = presentMoment;
+
+        if (map.get(str) == null) {
             map.put(str, time);
-        else map.put(str, map.get(str) + time);
+        } else map.put(str, map.get(str) + time);
     }
 
 

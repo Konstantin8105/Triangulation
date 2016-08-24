@@ -1,12 +1,7 @@
 <component name="libraryTable">
   <library name="unlicense">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/triangulation/jar/unlicense.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/triangulation/jar/unlicense.jar!/" />
-      <root url="jar://$PROJECT_DIR$/triangulation/jar/unlicense.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

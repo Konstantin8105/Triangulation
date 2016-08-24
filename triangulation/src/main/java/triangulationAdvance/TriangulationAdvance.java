@@ -1,9 +1,5 @@
 package triangulationAdvance;
 
-import counter.Counter;
-import imp.iTriangulation;
-import triangulation.elements.Point;
-
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -21,16 +17,7 @@ import java.util.*;
  * @author Izyumov Konstantin
  *         book "Algoritm building and analyse triangulation", A.B.Skvorcov.
  */
-public class TriangulationAdvance implements iTriangulation {
-
-    private static Counter counter = new Counter("Analyze");
-    private static long timeMoment = System.currentTimeMillis();
-    
-    private static void registration(String str){
-        counter.addTime(str,(int)(System.currentTimeMillis()-timeMoment)); 
-        timeMoment = System.currentTimeMillis();
-    }
-
+public class TriangulationAdvance{
     //
     // triangulationAdvance.TriangulationAdvance data structure  "Nodes, ribs и triangles"
     //
@@ -50,11 +37,9 @@ public class TriangulationAdvance implements iTriangulation {
         Triangle[] triangles;
         // indexes of triangle ribs
         int[] iRibs;
-        // indicator
-        boolean mark;
 
         void changeClockwise() {
-            registration("changeClockwise");
+            //counter.addTime("changeClockwise");
             int temp;
             temp = iNodes[0];
             iNodes[0] = iNodes[1];
@@ -69,8 +54,6 @@ public class TriangulationAdvance implements iTriangulation {
     }
 
     private boolean isCounterClockwise(Triangle triangle) {
-        registration("isCounterClockwise");
-
         return TriangulationAdvance.Geometry.isCounterClockwise(
                 nodes.get(triangle.iNodes[0]),
                 nodes.get(triangle.iNodes[1]),
@@ -87,91 +70,14 @@ public class TriangulationAdvance implements iTriangulation {
 
     // constructor for create convexHull region at the base on points
     public TriangulationAdvance(Point[] points) {
-        // TODO: 18.08.2016 fake points must be moved
-        registration("TriangulationAdvance");
-//        counter.clear();
         createFakeTriangles(points);
+        //createConvexHull(points);
         for (int i = 0; i < points.length; i++) {
             addNextPoint(points[i]);
-
-//        delaunayChecking();
-
         }
-//        delaunayChecking();
-//        for (int i = 0; i < 100; i++) {
-//            delaunayChecking();
-//        }
-        //cutByRegion(convexHull(points));
-        //removeFakeTriangles();
-//        System.out.println(counter.toString());
-        // TODO: 8/22/16 remove fake triangles or use convexHull like first element
-
-        System.out.println(counter.toString());
-    }
-
-    private void delaunayChecking() {
-        registration("delaunayChecking");
-        // un mark all triangles
-        List<Triangle> triangles = new ArrayList<>();
-        getTriangleWays(beginTriangle, triangles);
-        for (Triangle triangle : triangles) {
-            triangle.mark = false;
-        }
-        // Delaunay checking
-        List<Triangle> nullElements = new ArrayList<>();
-        for (int k = 0; k < triangles.size(); k++) {
-            Triangle triangle = triangles.get(k);
-            if (triangle == null)
-                continue;
-            if (triangle.mark == true)
-                continue;
-            boolean isNull = false;
-            for (int i = 0; i < nullElements.size(); i++) {
-                if (nullElements.get(i) == triangle) {
-                    isNull = true;
-                    i = nullElements.size();
-                }
-            }
-            if (isNull)
-                continue;
-            boolean isAllGood = true;
-            for (int i = 0; i < 3; i++) {
-                if (!isGoodDelaunay(triangle, i)) {
-                    if (flipTriangles(triangle, i) != null) {
-                        isAllGood = false;
-                        triangles.set(k, null);
-                        nullElements.add(triangle.triangles[i]);
-                        i = 3;
-                    }
-                }
-            }
-            if (isAllGood) {
-                triangle.mark = true;
-            } else {
-                triangle.mark = false;
-            }
-        }
-//        if (!allElementMark()) {
-//            triangles.clear();
-//            delaunayChecking();
-//        }
-    }
-
-
-    private boolean allElementMark() {
-        registration("allElementMark");
-        List<Triangle> triangles = new ArrayList<>();
-        getTriangleWays(beginTriangle, triangles);
-        for (Triangle triangle : triangles) {
-            if (!triangle.mark)
-                return false;
-        }
-        return true;
     }
 
     private Triangle[] flipTriangles(Triangle triangle, int indexTriangle) {
-
-        registration("flipTriangles");
 
         int pointNewTriangle = triangle.iNodes[normalizeSizeBy3(indexTriangle + 2)];
         int commonRib = triangle.iRibs[indexTriangle];
@@ -314,9 +220,6 @@ public class TriangulationAdvance implements iTriangulation {
     }
 
     private boolean isGoodDelaunay(Triangle triangle, int indexTriangle) {
-
-        registration("isGoodDelaunay");
-
         if (triangle.triangles[indexTriangle] == null) {
             return true;
         }
@@ -332,9 +235,6 @@ public class TriangulationAdvance implements iTriangulation {
     }
 
     private void createFakeTriangles(Point[] points) {
-
-        registration("createFakeTriangles");
-
         // create Fake region
         //TODO: remove that because O(n^2)
         BorderBox borderBox = new BorderBox();
@@ -375,7 +275,6 @@ public class TriangulationAdvance implements iTriangulation {
     }
 
     private void addNextPoint(Point nextPoint) {
-        registration("addNextPoint");
         // ignore same points
         //TODO: remove O(n^2)
         for (int j = 0; j < nodes.size(); j++) {
@@ -398,13 +297,13 @@ public class TriangulationAdvance implements iTriangulation {
             case POINT_ON_LINE_2:
                 addNextPointOnLine(nextPoint, 2);
                 break;
+            default:
+                System.out.println("STRANGE");
         }
     }
 
     private GeometryPointTriangle.PointTriangleState movingByConvexHull(Point point) {
-        registration("movingByConvexHull");
         while (true) {
-            registration("movingByConvexHull:move");
             if (Geometry.isAtRightOf(nodes.get(beginTriangle.iNodes[0]), nodes.get(beginTriangle.iNodes[1]), point)) {
                 beginTriangle = beginTriangle.triangles[0];
             } else {
@@ -441,9 +340,6 @@ public class TriangulationAdvance implements iTriangulation {
     }
 
     private void addNextPointInTriangle(Point nextPoint) {
-
-        registration("addNextPointInTriangle");
-
         nodes.add(nextPoint);
         int pointIndex = nodes.size() - 1;
         int rib0 = getIdRib();
@@ -480,9 +376,6 @@ public class TriangulationAdvance implements iTriangulation {
     }
 
     private void addInverseLinkOnTriangle(Triangle[] triangles) {
-
-        registration("addInverseLinkOnTriangle");
-
         for (int i = 0; i < triangles.length; i++) {
             for (int j = 0; j < 3; j++) {
                 Triangle externalTriangle = triangles[i].triangles[j];
@@ -513,16 +406,12 @@ public class TriangulationAdvance implements iTriangulation {
         if (0 <= index && index < 3) {
             return index;
         }
-        registration("normalizeSizeBy3");
         if (index < 0)
             return normalizeSizeBy3(index + 3);
         return normalizeSizeBy3(index - 3);
     }
 
     private void addNextPointOnLine(Point nextPoint, int indexLineInTriangle) {
-
-        registration("addNextPointOnLine");
-
         nodes.add(nextPoint);
         int pointIndex = nodes.size() - 1;
 
@@ -634,7 +523,6 @@ public class TriangulationAdvance implements iTriangulation {
 
         addInverseLinkOnTriangle(triangles);
 
-//        beginTriangle = null;
         beginTriangle = triangles[0];
 
         if (!isGoodDelaunay(triangles[0], 2)) {
@@ -653,10 +541,6 @@ public class TriangulationAdvance implements iTriangulation {
     }
 
     private void getTriangleWays(Triangle triangle, List<Triangle> triangles) {
-
-        registration("getTriangleWays");
-
-
         if (triangle == null)
             return;
         triangles.add(triangle);
@@ -676,11 +560,7 @@ public class TriangulationAdvance implements iTriangulation {
         }
     }
 
-    @Override
     public List<Point[]> getTriangles() {
-
-        registration("getTriangles");
-
         List<Triangle> triangles = new ArrayList<>();
         getTriangleWays(beginTriangle, triangles);
         List<Point[]> trianglesPoints = new ArrayList<>();
@@ -695,81 +575,6 @@ public class TriangulationAdvance implements iTriangulation {
         return trianglesPoints;
     }
 
-    /**
-     * Create rectangle for future check point outside rectangle.
-     * Dimension: 2D
-     *
-     * @author Izyumov Konstantin
-     * @since 05/04/2016
-     */
-    private static class BorderBox {
-        private double x_min;
-        private double x_max;
-        private double y_min;
-        private double y_max;
-
-        BorderBox() {
-            x_min = Double.MAX_VALUE;
-            x_max = -Double.MAX_VALUE;
-            y_min = Double.MAX_VALUE;
-            y_max = -Double.MAX_VALUE;
-        }
-
-        /**
-         * Box change the size by X or Y and input point will be inside in rectangle or on border of rectangle
-         *
-         * @param point input data
-         * @see Point
-         */
-        void addPoint(Point point) {
-            if (point == null)
-                return;
-            x_min = Math.min(x_min, point.getX());
-            x_max = Math.max(x_max, point.getX());
-            y_min = Math.min(y_min, point.getY());
-            y_max = Math.max(y_max, point.getY());
-        }
-
-        double getX_min() {
-            return x_min;
-        }
-
-        double getX_max() {
-            return x_max;
-        }
-
-        double getY_min() {
-            return y_min;
-        }
-
-        double getY_max() {
-            return y_max;
-        }
-
-        Point getCenter() {
-            registration("BorderBox:getCenter");
-            return new Point(
-                    (x_min + x_max) / 2.0,
-                    (y_min + y_max) / 2.0
-            );
-        }
-
-        void scale(double scaleFactor, Point center) {
-            registration("BorderBox:scale");
-            x_min = center.getX() - (center.getX() - x_min) * scaleFactor;
-            x_max = center.getX() + (x_max - center.getX()) * scaleFactor;
-            y_min = center.getY() - (center.getY() - y_min) * scaleFactor;
-            y_max = center.getY() + (y_max - center.getY()) * scaleFactor;
-        }
-
-        public boolean isInBoxWithBorder(Point point) {
-            registration("BorderBox:isInBoxWithBorder");
-            if (x_min - Precisions.epsilon() <= point.getX() && point.getX() <= x_max + Precisions.epsilon())
-                if (y_min - Precisions.epsilon() <= point.getY() && point.getY() <= y_max + Precisions.epsilon())
-                    return true;
-            return false;
-        }
-    }
 
     private static class GeometryPointTriangle {
 
@@ -786,47 +591,54 @@ public class TriangulationAdvance implements iTriangulation {
         }
 
         static GeometryPointTriangle.PointTriangleState statePointInTriangle(Point p, Point[] tri) {
-
-            registration("statePointInTriangle");
-
-            for (triangulation.elements.Point aTri : tri) {
+            for (Point aTri : tri) {
                 if (p.equals(aTri))
                     return PointTriangleState.POINT_ON_CORNER;
             }
 
-            BigDecimal line1 = Geometry.pointOnLine(tri[0], p, tri[1]);
+            Value line1 = triangulationAdvance.TriangulationAdvance.Geometry.pointOnLine(tri[0], p, tri[1]);
             if (GeometryCoordinate.isPointInRectangle(p, tri[0], tri[1])) {
-                if (Geometry.is3pointsCollinear(line1))
+                if (triangulationAdvance.TriangulationAdvance.Geometry.is3pointsCollinear(line1))
                     return PointTriangleState.POINT_ON_LINE_0;
             }
-            if (!Geometry.isCounterClockwise(line1)) {
+            if (!triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line1)) {
                 return PointTriangleState.POINT_OUTSIDE_LINE_0;
             }
 
-            BigDecimal line2 = Geometry.pointOnLine(tri[1], p, tri[2]);
+            Value line2 = triangulationAdvance.TriangulationAdvance.Geometry.pointOnLine(tri[1], p, tri[2]);
             if (GeometryCoordinate.isPointInRectangle(p, tri[1], tri[2])) {
-                if (Geometry.is3pointsCollinear(line2))
+                if (triangulationAdvance.TriangulationAdvance.Geometry.is3pointsCollinear(line2))
                     return PointTriangleState.POINT_ON_LINE_1;
             }
-            if (!Geometry.isCounterClockwise(line2)) {
+            if (!triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line2)) {
                 return PointTriangleState.POINT_OUTSIDE_LINE_1;
             }
 
-            BigDecimal line3 = Geometry.pointOnLine(tri[2], p, tri[0]);
+            Value line3 = triangulationAdvance.TriangulationAdvance.Geometry.pointOnLine(tri[2], p, tri[0]);
             if (GeometryCoordinate.isPointInRectangle(p, tri[2], tri[0])) {
-                if (Geometry.is3pointsCollinear(line3))
+                if (triangulationAdvance.TriangulationAdvance.Geometry.is3pointsCollinear(line3))
                     return PointTriangleState.POINT_ON_LINE_2;
             }
-            if (!Geometry.isCounterClockwise(line3)) {
+            if (!triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line3)) {
                 return PointTriangleState.POINT_OUTSIDE_LINE_2;
             }
+//
+//            int[] sign = new int[]{
+//                    line1.compareTo(BigDecimal.ZERO),//Precisions.bigEpsilon()),
+//                    line2.compareTo(BigDecimal.ZERO),//Precisions.bigEpsilon()),
+//                    line3.compareTo(BigDecimal.ZERO)//Precisions.bigEpsilon())
+//            };
+//            if (sign[0] == sign[1] && sign[1] == sign[2] && sign[0] != 0) {
+//                return PointTriangleState.POINT_INSIDE;
+//            }
+//
 
-            int[] sign = new int[]{
-                    line1.compareTo(BigDecimal.ZERO),//Precisions.bigEpsilon()),
-                    line2.compareTo(BigDecimal.ZERO),//Precisions.bigEpsilon()),
-                    line3.compareTo(BigDecimal.ZERO)//Precisions.bigEpsilon())
+            boolean[] sign = new boolean[]{
+                    triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line1),
+                    triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line2),
+                    triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line3)
             };
-            if (sign[0] == sign[1] && sign[1] == sign[2] && sign[0] != 0) {
+            if (sign[0] && sign[1] && sign[2]) {
                 return PointTriangleState.POINT_INSIDE;
             }
 
@@ -838,7 +650,7 @@ public class TriangulationAdvance implements iTriangulation {
     private static class GeometryCoordinate extends triangulationAdvance.TriangulationAdvance.Geometry {
 
         static boolean isPointInRectangle(Point point, Point... list) {
-            registration("GeometryCoordinate:isPointInRectangle");
+            //counter.addTime("GeometryCoordinate:isPointInRectangle");
             BorderBox borderBox = new BorderBox();
             for (int i = 0; i < list.length; i++) {
                 borderBox.addPoint(list[i]);
@@ -850,19 +662,43 @@ public class TriangulationAdvance implements iTriangulation {
         }
     }
 
+    private static class Value {
+        private double valueDouble;
+        private BigDecimal valueBig;
+        private boolean isValueDouble;
+
+        public Value(double valueDouble) {
+            this.valueDouble = valueDouble;
+            isValueDouble = true;
+        }
+
+        public Value(BigDecimal valueBig) {
+            this.valueBig = valueBig;
+            isValueDouble = false;
+        }
+
+        public boolean isValueDouble() {
+            return isValueDouble;
+        }
+
+        public BigDecimal getValueBig() {
+            return valueBig;
+        }
+
+        public double getValueDouble() {
+            return valueDouble;
+        }
+    }
+
+
     private static class Geometry {
 
-        static BigDecimal pointOnLine(Point p1, Point p2, Point p3) {
-
-            registration("pointOnLine");
-
-
-            double resultDouble =  (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) -
+        static Value pointOnLine(Point p1, Point p2, Point p3) {
+            double value = (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) -
                     (p3.getY() - p2.getY()) * (p2.getX() - p1.getX());
-            if(Math.abs(resultDouble) > 10){
-                return BigDecimal.valueOf(resultDouble);
+            if (Math.abs(value) > Precision.valueFactor()) {
+                return new Value(value);
             }
-
 
             BigDecimal bdX1 = new BigDecimal(p1.getX());
             BigDecimal bdX2 = new BigDecimal(p2.getX());
@@ -880,22 +716,38 @@ public class TriangulationAdvance implements iTriangulation {
 
             BigDecimal result = left.add(right);
 
-
-            return result;
+            return new Value(result);
         }
 
-        static boolean is3pointsCollinear(BigDecimal result) {
-            registration("is3pointsCollinear:BigDecimal");
-            return result.abs().compareTo(BigDecimal.ZERO) < 0;
+        static boolean is3pointsCollinear(Value result) {
+            if (result.isValueDouble()) {
+                return Math.abs(result.getValueDouble()) < Precision.epsilon();
+            }
+            return result.getValueBig().abs().compareTo(Precision.bigEpsilon()) < 0;
         }
 
         static boolean is3pointsCollinear(Point p1, Point p2, Point p3) {
-            registration("is3pointsCollinear:Point");
             return is3pointsCollinear(pointOnLine(p1, p2, p3));
         }
 
+        static boolean isCounterClockwise(Value result) {
+            if (result.isValueDouble()) {
+                return result.getValueDouble() > Precision.epsilon();
+            }
+            return result.getValueBig().compareTo(BigDecimal.ZERO) > 0;
+        }
+
+        static boolean isCounterClockwise(Point a, Point b, Point c) {
+            return isCounterClockwise(pointOnLine(a, b, c));
+        }
+
+
+        public static boolean isAtRightOf(Point a, Point b, Point c) {
+            return isCounterClockwise(a, b, c);
+        }
+
+
         static double det(double a[][]) {
-            registration("det");
             double det = a[0][0] * a[1][1] * a[2][2] + a[1][0] * a[2][1] * a[0][2] + a[0][1] * a[1][2] * a[2][0]
                     - a[0][2] * a[1][1] * a[2][0] - a[0][1] * a[1][0] * a[2][2] - a[1][2] * a[2][1] * a[0][0];
             return det;
@@ -903,9 +755,6 @@ public class TriangulationAdvance implements iTriangulation {
 
 
         static boolean isPointInCircle(Point[] circlePoints, Point point) {
-
-            registration("isPointInCircle");
-
             double x1 = circlePoints[0].getX();
             double y1 = circlePoints[0].getY();
             double z1 = x1 * x1 + y1 * y1;
@@ -949,20 +798,8 @@ public class TriangulationAdvance implements iTriangulation {
             return Math.signum(a) * (a * z0 - b * x0 + c * y0 - d) < 0;
         }
 
-        static boolean isCounterClockwise(BigDecimal result) {
-            registration("isCounterClockwise:BigDecimal");
-            return result.compareTo(BigDecimal.ZERO) > 0;
-        }
-
-        static boolean isCounterClockwise(Point a, Point b, Point c) {
-            registration("isCounterClockwise:Point");
-            BigDecimal result = pointOnLine(a, b, c);
-            return isCounterClockwise(result);
-        }
-
 
         static Point[] convexHull(Point[] inputPoints) {
-            registration("convexHull:"+inputPoints.length);
             if (inputPoints.length < 2)
                 return inputPoints;
 
@@ -1022,15 +859,7 @@ public class TriangulationAdvance implements iTriangulation {
             return H;
         }
 
-        public static boolean isAtRightOf(Point a, Point b, Point c) {
-            registration("isAtRightOf");
-            return isCounterClockwise(a, b, c);
-        }
-
         public static double distanceLineAndPoint(Point lineP1, Point lineP2, Point p) {
-
-            registration("distanceLineAndPoint");
-
             double A;
             double B = 1;
             double C;
@@ -1049,19 +878,4 @@ public class TriangulationAdvance implements iTriangulation {
         }
     }
 
-    private static class Precisions {
-
-        private static double epsilon = 1.0E-9;
-        private static BigDecimal bigEpsilon = BigDecimal.valueOf(epsilon);
-
-        static double epsilon() {
-            registration("epsilon");
-            return epsilon;
-        }
-
-        static BigDecimal bigEpsilon() {
-            registration("bigEpsilon");
-            return bigEpsilon;
-        }
-    }
 }

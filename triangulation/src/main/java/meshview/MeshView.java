@@ -1,9 +1,7 @@
 package meshview;
 
-import research.ResearchTest;
-import triangulation.Triangulation;
-import triangulation.border.BorderBox;
-import triangulation.elements.Point;
+import triangulationAdvance.BorderBox;
+import triangulationAdvance.Point;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,7 +43,7 @@ public class MeshView extends JFrame {
                         );
                     }
                     if (nodeText) {
-                    g.setColor(Color.RED);
+                        g.setColor(Color.RED);
                         for (int j = 0; j < 3; j++) {
                             g.drawString(
                                     "(" + (int) mesh.get(i)[j].getX() + ";" + (int) mesh.get(i)[j].getY() + ")",
@@ -84,7 +82,7 @@ public class MeshView extends JFrame {
                             (position[0].getX() + position[1].getX() + position[2].getX()) / 3,
                             (position[0].getY() + position[1].getY() + position[2].getY()) / 3
                     );
-                    if(nodeText) {
+                    if (nodeText) {
                         g.drawString(
                                 i + "",
                                 (int) center.getX(),
@@ -99,29 +97,5 @@ public class MeshView extends JFrame {
         this.setSize(new Dimension(WINDOWS_SIZE + 100, WINDOWS_SIZE + 100));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
-    }
-
-    public static void main(String[] args) throws Exception {
-        int AMOUNT_POINTS = 100;
-        {
-            List<Point> points = ResearchTest.getRandomPoints(AMOUNT_POINTS);
-            Triangulation triangulation = new Triangulation(points);
-            MeshView meshView = new MeshView(triangulation.getTriangles());
-        }
-        {
-            List<Point> points = ResearchTest.getCirclePoints(AMOUNT_POINTS);
-            Triangulation triangulation = new Triangulation(points);
-            MeshView meshView = new MeshView(triangulation.getTriangles());
-        }
-        {
-            List<Point> points = ResearchTest.getLineOnLine(AMOUNT_POINTS);
-            Triangulation triangulation = new Triangulation(points);
-            MeshView meshView = new MeshView(triangulation.getTriangles());
-        }
-        {
-            List<Point> points = ResearchTest.getInTriangles(AMOUNT_POINTS);
-            Triangulation triangulation = new Triangulation(points);
-            MeshView meshView = new MeshView(triangulation.getTriangles());
-        }
     }
 }

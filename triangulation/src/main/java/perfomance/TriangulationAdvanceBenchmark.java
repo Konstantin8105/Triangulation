@@ -2,10 +2,9 @@ package perfomance;
 
 import org.openjdk.jmh.annotations.*;
 import research.ResearchTest;
-import triangulation.Triangulation;
-import triangulation.elements.Point;
+import triangulationAdvance.Point;
+import triangulationAdvance.TriangulationAdvance;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.AverageTime)
@@ -15,11 +14,11 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 10, time = 2, timeUnit = TimeUnit.SECONDS)
 @Timeout(time = 50, timeUnit = TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)//.Thread)
-public class TriangulationBenchmark {
+public class TriangulationAdvanceBenchmark {
     @Param({
             "3", "5",
-            "10", "20", "50"//,
-//            "100", "200", "500",
+            "10", "20", "50",
+            "100", "200", "500",
 //            "1000", "2000", "5000"
     })
     int size;
@@ -32,29 +31,29 @@ public class TriangulationBenchmark {
     })
     String test;
 
-    List<Point> points;
+    Point[] points;
 
     @Setup
     public void prepare() {
         switch (test) {
             case "Random":
-                points = ResearchTest.getRandomPoints(size);
+                points = (Point[]) ResearchTest.getRandomPoints(size).toArray();
                 break;
             case "Circle":
-                points = ResearchTest.getCirclePoints(size);
+                points = (Point[]) ResearchTest.getCirclePoints(size).toArray();
                 break;
             case "Line_in_line":
-                points = ResearchTest.getLineOnLine(size);
+                points = (Point[]) ResearchTest.getLineOnLine(size).toArray();
                 break;
             case "In_triangle":
-                points = ResearchTest.getInTriangles(size);
+                points = (Point[]) ResearchTest.getInTriangles(size).toArray();
                 break;
         }
     }
 
     @Benchmark
     public int triangulationMesh() throws Exception {
-        Triangulation triangulation = new Triangulation(points);
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
         return triangulation.getTriangles().size();
     }
 

@@ -1,8 +1,6 @@
 package crosssection;
 
-import triangulation.elements.Collections.IDable;
-import triangulation.elements.Mesh;
-import triangulation.elements.Triangle;
+import triangulationAdvance.Point;
 //import un.impl.geometry.Point;
 
 //import un.api.collection.Sequence;
@@ -18,26 +16,26 @@ public class Area {
 //        }
 //        return area;
 //    }
-
-    public static double area(Mesh mesh) {
-        double area = 0;
-        if (mesh.sizeTriangles() < 1)
-            return -1;
-        for (IDable<Triangle>.Element<Triangle> triangleElement : mesh.getTriangulate()) {
-            Triangle triangle = triangleElement.value;
-            int[] idPoint = new int[]{
-                    triangle.getIdPoint1(),
-                    triangle.getIdPoint2(),
-                    triangle.getIdPoint3()
-            };
-            triangulation.elements.Point[] points = new triangulation.elements.Point[3];
-            for (int j = 0; j < idPoint.length; j++) {
-                points[j] = mesh.getPoints(idPoint[j]);
-            }
-            area += area_3point(points);
-        }
-        return area;
-    }
+//
+//    public static double area(Mesh mesh) {
+//        double area = 0;
+//        if (mesh.sizeTriangles() < 1)
+//            return -1;
+//        for (IDable<Triangle>.Element<Triangle> triangleElement : mesh.getTriangulate()) {
+//            Triangle triangle = triangleElement.value;
+//            int[] idPoint = new int[]{
+//                    triangle.getIdPoint1(),
+//                    triangle.getIdPoint2(),
+//                    triangle.getIdPoint3()
+//            };
+//            Point[] points = new Point[3];
+//            for (int j = 0; j < idPoint.length; j++) {
+//                points[j] = mesh.getPoints(idPoint[j]);
+//            }
+//            area += area_3point(points);
+//        }
+//        return area;
+//    }
 
 //    static private double area_3point(Point[] points) {
 //        //
@@ -62,7 +60,7 @@ public class Area {
 //        return -1;
 //    }
 
-    static private double area_3point(triangulation.elements.Point[] points) {
+    static private double area_3point(Point[] points) {
         //
         // Area of triangle
         // https://en.wikipedia.org/wiki/Triangle#Computing_the_area_of_a_triangle

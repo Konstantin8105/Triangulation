@@ -2,7 +2,6 @@ package triangulationAdvance;
 
 import meshview.MeshView;
 import research.ResearchTest;
-import triangulation.elements.Point;
 
 import java.util.List;
 

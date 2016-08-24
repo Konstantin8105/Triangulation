@@ -1,8 +1,6 @@
 import meshview.MeshView;
-import triangulation.Triangulation;
-import triangulation.elements.Point;
-
-import java.util.Arrays;
+import triangulationAdvance.Point;
+import triangulationAdvance.TriangulationAdvance;
 
 public class Examples {
 
@@ -17,9 +15,8 @@ public class Examples {
         coordinates[5] = new Point(500f, 500f);
         coordinates[6] = new Point(100f, 0f);
 
-        Triangulation triangulation = new Triangulation(Arrays.asList(coordinates));
+        TriangulationAdvance triangulation = new TriangulationAdvance(coordinates);
 
         MeshView meshView = new MeshView(triangulation.getTriangles());
     }
-
 }

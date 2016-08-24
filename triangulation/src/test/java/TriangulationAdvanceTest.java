@@ -1,9 +1,8 @@
-package triangulationAdvance;
-
 import org.junit.Assert;
 import org.junit.Test;
 import research.ResearchTest;
-import triangulation.elements.Point;
+import triangulationAdvance.Point;
+import triangulationAdvance.TriangulationAdvance;
 
 import java.util.Random;
 
@@ -34,7 +33,6 @@ public class TriangulationAdvanceTest {
             Assert.assertTrue(points.toString(), triangulation.getTriangles().size() > 0);
         }
     }
-
 
     @Test
     public void simpleTest1() {
@@ -285,6 +283,19 @@ public class TriangulationAdvanceTest {
     }
 
     @Test
+    public void simpleTest20() {
+        Point[] points = new Point[]{
+                new Point(34, 45),
+                new Point(17, 25),
+                new Point(0, 31),
+                new Point(25, 0),
+                new Point(15, 24)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
     public void simpleCircle() {
         Point[] points = (Point[]) ResearchTest.getCirclePoints(6).toArray();
         TriangulationAdvance triangulation = new TriangulationAdvance(points);
@@ -298,4 +309,21 @@ public class TriangulationAdvanceTest {
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
+    @Test
+    public void toggleTriangle() {
+        double shortDistance = 1.0D;
+        for (int i = 0; i < 30; i++) {
+            shortDistance /= 10;
+            Point[] points = new Point[]{
+                    new Point(0.0D, 0.0D),
+                    new Point(0.0D, 1.0D),
+                    new Point(shortDistance, 0.5D)
+            };
+            TriangulationAdvance triangulationAdvance = new TriangulationAdvance(points);
+
+            String msg = "shortDistance = " + String.format("%.1e", shortDistance)
+                    + ": Size of triangles = " + triangulationAdvance.getTriangles().size();
+            Assert.assertTrue(msg, triangulationAdvance.getTriangles().size() > 0);
+        }
+    }
 }
