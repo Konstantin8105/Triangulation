@@ -10,7 +10,7 @@ import java.util.*;
  * for step - triangulation with restrictions: "Simple interactive method"
  * Performance for worst-case: O(N^2)
  * Philosophy of triangulation:
- * 1. Add 4 "fake" point - for guarantee all othe point in "fake" region
+ * 1. Add 4 "fake" point - for guarantee all other point in "fake" region
  * 2. triangulation.Triangulation and delaunay checking
  * 3. Cut triangulation by convexHull region or external region
  *
@@ -22,11 +22,11 @@ public class TriangulationAdvance{
     // triangulationAdvance.TriangulationAdvance data structure  "Nodes, ribs и triangles"
     //
     // Array of nodes - type: Point
-    List<Point> nodes = new ArrayList<>();
+    private final List<Point> nodes = new ArrayList<>();
     // Array of fake nodes
-    List<Point> fakeNodes = new ArrayList<>();
+    private final List<Point> fakeNodes = new ArrayList<>();
     // Begin triangle - type: Triangle
-    Triangle beginTriangle = new Triangle();
+    private Triangle beginTriangle = new Triangle();
 
 
     // Triangle data structure
@@ -665,7 +665,7 @@ public class TriangulationAdvance{
     private static class Value {
         private double valueDouble;
         private BigDecimal valueBig;
-        private boolean isValueDouble;
+        private final boolean isValueDouble;
 
         public Value(double valueDouble) {
             this.valueDouble = valueDouble;
