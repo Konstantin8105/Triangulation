@@ -136,7 +136,7 @@ Present algorithm complexity in worst case - O(n^2), average - O(N).
                             |                  |                   |                |
     ------------------------+------------------+-------------------+----------------+
                             |                  |                   |                |
-    Triangulation           |    Points ony    |   triangulation   |   DONE         |
+    Triangulation           |    Points ony    |   triangulation   |   TODO         |
                             |                  |                   |                |
     ------------------------+------------------+-------------------+----------------+
                             |                  |                   |                |

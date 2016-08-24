@@ -11,7 +11,7 @@ public class TriangulationAdvanceView {
         int AMOUNT_POINTS = 20;
         {
             List<Point> points = ResearchTest.getRandomPoints(AMOUNT_POINTS);
-            TriangulationAdvance triangulation = new TriangulationAdvance((Point[])points.toArray());
+            TriangulationAdvance triangulation = new TriangulationAdvance((Point[]) points.toArray());
             MeshView meshView = new MeshView(triangulation.getTriangles());
         }
         {

@@ -545,8 +545,6 @@ public class TriangulationAdvance {
         if (triangle == null)
             return;
         triangles.add(triangle);
-        int position = 0;
-        Triangle[] addTriangles = new Triangle[]{null, null, null};
         for (int i = 0; i < triangle.triangles.length; i++) {
             if (triangle.triangles[i] != null) {
                 boolean isFound = false;
@@ -557,13 +555,9 @@ public class TriangulationAdvance {
                     }
                 }
                 if (!isFound) {
-                    addTriangles[position] = triangle.triangles[i];
+                    getTriangleWays(triangle.triangles[i], triangles);
                 }
             }
-        }
-        for (Triangle addTriangle: addTriangles) {
-            if (addTriangle != null)
-                getTriangleWays(addTriangle, triangles);
         }
     }
 
@@ -578,7 +572,6 @@ public class TriangulationAdvance {
             }
             trianglesPoints.add(points);
         }
-
         return trianglesPoints;
     }
 
