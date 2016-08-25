@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class Precision {
 
     private final static double VALUE_TYPE_SEPARATOR = 1.0D;
-    private final static double EPSILON = 1.0E-40;
+    private final static double EPSILON = 1.0E-10;
     private final static BigDecimal bigEpsilon = BigDecimal.valueOf(EPSILON);
 
     public static double epsilon() {

@@ -296,8 +296,44 @@ public class TriangulationAdvanceTest {
     }
 
     @Test
+    public void simpleTest21() {
+        Point[] points = new Point[]{
+                new Point(0, 0),
+                new Point(1, 1),
+                new Point(1, 0)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
+    public void simpleTest22() {
+        Point[] points = new Point[]{
+                new Point(0, 0),
+                new Point(1, 1),
+                new Point(1, 0),
+                new Point(2, 0)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
+    public void simpleTest23() {
+        Point[] points = new Point[]{
+                new Point(0, 0),
+                new Point(1, 1),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(1, 0.5)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
     public void simpleCircle() {
-        Point[] points = (Point[]) ResearchTest.getCirclePoints(6).toArray();
+        Point[] points = (Point[]) ResearchTest.getCirclePoints(4).toArray();
         TriangulationAdvance triangulation = new TriangulationAdvance(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
@@ -310,9 +346,23 @@ public class TriangulationAdvanceTest {
     }
 
     @Test
+    public void simpleInLine() {
+        Point[] points = (Point[]) ResearchTest.getLineOnLine(1).toArray();
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() == 2);
+    }
+
+    @Test
+    public void testBigInputData() {
+        Point[] points = (Point[]) ResearchTest.getRandomPoints(20000).toArray();
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
     public void toggleTriangle() {
         double shortDistance = 1.0D;
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 9; i++) {
             shortDistance /= 10;
             Point[] points = new Point[]{
                     new Point(0.0D, 0.0D),
@@ -325,5 +375,61 @@ public class TriangulationAdvanceTest {
                     + ": Size of triangles = " + triangulationAdvance.getTriangles().size();
             Assert.assertTrue(msg, triangulationAdvance.getTriangles().size() > 0);
         }
+    }
+
+    @Test
+    public void TestIsAtRightOf1T() {
+        Point p1 = new Point(0, 0);
+        Point p2 = new Point(1, 1);
+        Point p3 = new Point(1, 0);
+        Assert.assertTrue(TriangulationAdvance.Geometry.isAtRightOf(p1, p2, p3));
+    }
+
+    @Test
+    public void TestIsAtRightOf2T() {
+        Point p1 = new Point(0, 0);
+        Point p2 = new Point(1, 0);
+        Point p3 = new Point(0.5, -0.5);
+        Assert.assertTrue(TriangulationAdvance.Geometry.isAtRightOf(p1, p2, p3));
+    }
+
+    @Test
+    public void TestIsAtRightOf1F() {
+        Point p1 = new Point(0, 0);
+        Point p2 = new Point(1, 1);
+        Point p3 = new Point(0, 1);
+        Assert.assertFalse(TriangulationAdvance.Geometry.isAtRightOf(p1, p2, p3));
+    }
+
+    @Test
+    public void TestIsCounterClockwise1() {
+        Point p1 = new Point(0, 0);
+        Point p2 = new Point(0.5, 0.5);
+        Point p3 = new Point(1, 0);
+        Assert.assertTrue(TriangulationAdvance.Geometry.isCounterClockwise(p1, p2, p3));
+    }
+
+    @Test
+    public void TestIsCounterClockwise2() {
+        Point p1 = new Point(1, 0);
+        Point p2 = new Point(0.5, 0.5);
+        Point p3 = new Point(0, 0);
+        Assert.assertFalse(TriangulationAdvance.Geometry.isCounterClockwise(p1, p2, p3));
+    }
+
+    @Test
+    public void TestIs3pointsCollinear1() {
+        Point p1 = new Point(0, 0);
+        Point p2 = new Point(0.5, 0.5);
+        Point p3 = new Point(1, 1);
+        Assert.assertTrue(TriangulationAdvance.Geometry.is3pointsCollinear(p1, p2, p3));
+    }
+
+    @Test
+    public void TestIs3pointsCollinear2() {
+        Point p1 = new Point(1, 1);
+        Point p2 = new Point(0.5, 0.5);
+        Point p3 = new Point(0, 0);
+        Assert.assertTrue(TriangulationAdvance.Geometry.is3pointsCollinear(p1, p2, p3));
     }
 }

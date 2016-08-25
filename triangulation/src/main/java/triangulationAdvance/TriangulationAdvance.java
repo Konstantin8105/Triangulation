@@ -26,34 +26,11 @@ public class TriangulationAdvance {
     // Array of fake nodes
     private final List<Point> fakeNodes = new ArrayList<>();
     // Begin triangle - type: Triangle
-    private Triangle beginTriangle = new Triangle();
+    private TriangleStructure beginTriangle = new TriangleStructure();
+    // Linked list of triangles
+    private List<TriangleStructure> triangleStructureList = new LinkedList<>();
 
-
-    // Triangle data structure
-    private static class Triangle {
-        // indexes of triangle points
-        int[] iNodes;
-        // indexes of near triangles
-        Triangle[] triangles;
-        // indexes of triangle ribs
-        int[] iRibs;
-
-        void changeClockwise() {
-            //counter.addTime("changeClockwise");
-            int temp;
-            temp = iNodes[0];
-            iNodes[0] = iNodes[1];
-            iNodes[1] = temp;
-            temp = iRibs[1];
-            iRibs[1] = iRibs[2];
-            iRibs[2] = temp;
-            Triangle tri = triangles[1];
-            triangles[1] = triangles[2];
-            triangles[2] = tri;
-        }
-    }
-
-    private boolean isCounterClockwise(Triangle triangle) {
+    private boolean isCounterClockwise(TriangleStructure triangle) {
         return TriangulationAdvance.Geometry.isCounterClockwise(
                 nodes.get(triangle.iNodes[0]),
                 nodes.get(triangle.iNodes[1]),
@@ -67,36 +44,94 @@ public class TriangulationAdvance {
         return idMaximalRibs++;
     }
 
-
     // constructor for create convexHull region at the base on points
-    public TriangulationAdvance(Point[] points) {
-        createFakeTriangles(points);
-        //createConvexHull(points);
+    public TriangulationAdvance(final Point[] points) {
+        createConvexHullTriangles(createConvexHullWithoutPointInLine(points));
         for (Point point : points) {
             addNextPoint(point);
         }
     }
 
-    private Triangle[] flipTriangles(Triangle triangle, int indexTriangle) {
+    private void createConvexHullTriangles(List<Point> points) {
+        nodes.add(points.get(0));
+        int indexPoint0 = nodes.size() - 1;
+        nodes.add(points.get(1));
+        int indexPoint1 = nodes.size() - 1;
+        int commonRib = getIdRib();
+        TriangleStructure commonTriangle = null;
+
+        for (int i = 2; i < points.size(); i++) {
+            nodes.add(points.get(i));
+            int indexPoint2 = nodes.size() - 1;
+            int rib12 = getIdRib();
+            int rib20 = getIdRib();
+
+            TriangleStructure triangle = new TriangleStructure();
+            triangle.iNodes = new int[]{
+                    indexPoint0, indexPoint1, indexPoint2
+            };
+            triangle.iRibs = new int[]{
+                    commonRib, rib12, rib20
+            };
+            triangle.triangles = new TriangleStructure[]{commonTriangle, null, null};
+
+            if (commonTriangle != null) {
+                commonTriangle.triangles[2] = triangle;
+            }
+
+            indexPoint1 = i;
+            commonRib = rib20;
+            commonTriangle = triangle;
+
+            triangleStructureList.add(triangle);
+        }
+        beginTriangle = commonTriangle;
+    }
+
+    private List<Point> createConvexHullWithoutPointInLine(final Point[] points) {
+        List<Point> convexPoints = new ArrayList<>(Arrays.asList(Geometry.convexHull(points)));
+
+        List<Integer> removesIndex = new ArrayList<>();
+        for (int i = 0; i < convexPoints.size(); i++) {
+            int position0 = i;
+            int position1 = i + 1 >= convexPoints.size() ? i + 1 - convexPoints.size() : i + 1;
+            int position2 = i + 2 >= convexPoints.size() ? i + 2 - convexPoints.size() : i + 2;
+            if (Geometry.is3pointsCollinear(
+                    convexPoints.get(position0),
+                    convexPoints.get(position1),
+                    convexPoints.get(position2))) {
+                removesIndex.add(position1);
+            }
+        }
+
+        Collections.sort(removesIndex);
+        for (int i = removesIndex.size() - 1; i >= 0; i--) {
+            convexPoints.remove((int) removesIndex.get(i));
+        }
+
+        return convexPoints;
+    }
+
+    private TriangleStructure[] flipTriangles(TriangleStructure triangle, int indexTriangle) {
 
         int pointNewTriangle = triangle.iNodes[normalizeSizeBy3(indexTriangle + 2)];
         int commonRib = triangle.iRibs[indexTriangle];
-        Triangle[] baseTriangles = new Triangle[]{
+        TriangleStructure[] baseTriangles = new TriangleStructure[]{
                 triangle,
                 triangle.triangles[indexTriangle]
         };
 
         // global region
-        List<Triangle> region = new ArrayList<>();
+        List<TriangleStructure> region = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
-            Triangle internalTriangle = baseTriangles[i];
+            TriangleStructure internalTriangle = baseTriangles[i];
             int indexCommonRib = -1;
             for (int j = 0; j < 3; j++) {
                 if (commonRib == internalTriangle.iRibs[j]) {
                     indexCommonRib = j;
                 }
             }
-            Triangle t1 = new Triangle();
+            TriangleStructure t1 = new TriangleStructure();
             t1.iRibs = new int[]{
                     internalTriangle.iRibs[normalizeSizeBy3(indexCommonRib + 1)]
             };
@@ -104,11 +139,11 @@ public class TriangulationAdvance {
                     internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib + 1)],
                     internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib + 2)]
             };
-            t1.triangles = new Triangle[]{
+            t1.triangles = new TriangleStructure[]{
                     internalTriangle.triangles[normalizeSizeBy3(indexCommonRib + 1)]
             };
             region.add(t1);
-            Triangle t2 = new Triangle();
+            TriangleStructure t2 = new TriangleStructure();
             t2.iRibs = new int[]{
                     internalTriangle.iRibs[normalizeSizeBy3(indexCommonRib + 2)]
             };
@@ -116,7 +151,7 @@ public class TriangulationAdvance {
                     internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib + 2)],
                     internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib + 3)]
             };
-            t2.triangles = new Triangle[]{
+            t2.triangles = new TriangleStructure[]{
                     internalTriangle.triangles[normalizeSizeBy3(indexCommonRib + 2)]
             };
             region.add(t2);
@@ -165,9 +200,9 @@ public class TriangulationAdvance {
 
         int newCommonRib = getIdRib();
 
-        Triangle[] triangles = new Triangle[2];
+        TriangleStructure[] triangles = new TriangleStructure[2];
         for (int i = 0; i < 2; i++) {
-            triangles[i] = new Triangle();
+            triangles[i] = new TriangleStructure();
         }
 
         triangles[0].iNodes = new int[]{
@@ -180,7 +215,7 @@ public class TriangulationAdvance {
                 region.get(2).iRibs[0],
                 newCommonRib
         };
-        triangles[0].triangles = new Triangle[]{
+        triangles[0].triangles = new TriangleStructure[]{
                 region.get(1).triangles[0],
                 region.get(2).triangles[0],
                 triangles[1]
@@ -196,7 +231,7 @@ public class TriangulationAdvance {
                 region.get(0).iRibs[0],
                 newCommonRib
         };
-        triangles[1].triangles = new Triangle[]{
+        triangles[1].triangles = new TriangleStructure[]{
                 region.get(3).triangles[0],
                 region.get(0).triangles[0],
                 triangles[0]
@@ -205,17 +240,20 @@ public class TriangulationAdvance {
         //inverse link on triangle
         addInverseLinkOnTriangle(triangles);
 
+        triangleStructureList.add(triangles[0]);
+        triangleStructureList.add(triangles[1]);
+
         //move beginTriangle
         beginTriangle = triangles[0];
 
         //add null in old triangles
         for (int i = 0; i < baseTriangles.length; i++) {
-            baseTriangles[i] = null;
+            NullableTriangle(baseTriangles[i]);
         }
         return triangles;
     }
 
-    private boolean isGoodDelaunay(Triangle triangle, int indexTriangle) {
+    private boolean isGoodDelaunay(TriangleStructure triangle, int indexTriangle) {
         if (triangle.triangles[indexTriangle] == null) {
             return true;
         }
@@ -227,54 +265,9 @@ public class TriangulationAdvance {
                 nodes.get(triangle.triangles[indexTriangle].iNodes[normalizeSizeBy3(indexTriangle + 2)]));
     }
 
-    private void createFakeTriangles(Point[] points) {
-        // create Fake region
-        BorderBox borderBox = new BorderBox();
-        for (Point point : points) {
-            borderBox.addPoint(point);
-        }
-        double scaleFactor = 3.0D;
-        borderBox.scale(scaleFactor, borderBox.getCenter());
-        //add fake points
-        double factor = 0.1D;
-        nodes.add(new Point(borderBox.getX_min() * (1.0D - factor), borderBox.getY_min() * (1.0D - factor)));
-        nodes.add(new Point(borderBox.getX_min(), borderBox.getY_max()));
-        nodes.add(new Point(borderBox.getX_max() * (1.0D + factor), borderBox.getY_max() * (1.0D + factor)));
-        nodes.add(new Point(borderBox.getX_max(), borderBox.getY_min()));
-        int indexPointStart = nodes.size() - 4;
-        for (int i = 0; i < 4; i++) {
-            fakeNodes.add(nodes.get(indexPointStart + i));
-        }
-
-        Triangle triangles[] = new Triangle[2];
-
-        triangles[0] = new Triangle();
-        triangles[1] = new Triangle();
-
-
-        int commonRib = getIdRib();
-        triangles[0].iNodes = new int[]{indexPointStart, indexPointStart + 1, indexPointStart + 2};
-        triangles[0].iRibs = new int[]{getIdRib(), getIdRib(), commonRib};
-        triangles[0].triangles = new Triangle[]{null, null, triangles[1]};
-
-        triangles[1].iNodes = new int[]{indexPointStart + 2, indexPointStart + 3, indexPointStart};
-        triangles[1].iRibs = new int[]{getIdRib(), getIdRib(), commonRib};
-        triangles[1].triangles = new Triangle[]{null, null, triangles[0]};
-
-        addInverseLinkOnTriangle(triangles);
-
-        beginTriangle = triangles[0];
-    }
-
     private void addNextPoint(Point nextPoint) {
-        // ignore same points
-        for (Point point : nodes) {
-            if (nextPoint.equals(point)) {
-                return;
-            }
-        }
-
         GeometryPointTriangle.PointTriangleState state = movingByConvexHull(nextPoint);
+
         switch (state) {
             case POINT_INSIDE:
                 addNextPointInTriangle(nextPoint);
@@ -288,6 +281,8 @@ public class TriangulationAdvance {
             case POINT_ON_LINE_2:
                 addNextPointOnLine(nextPoint, 2);
                 break;
+            case POINT_ON_CORNER:
+                break;
             default:
                 System.out.println("STRANGE");
         }
@@ -296,6 +291,7 @@ public class TriangulationAdvance {
     /**
      * Found next triangle
      * Performance - O(n) in worst case and O(sqrt(n)) is average case.
+     *
      * @param point - next point
      * @return GeometryPointTriangle.PointTriangleState
      * @see Point
@@ -335,6 +331,7 @@ public class TriangulationAdvance {
                 nodes.get(beginTriangle.iNodes[1]),
                 nodes.get(beginTriangle.iNodes[2])
         };
+
         return GeometryPointTriangle.statePointInTriangle(point, trianglePoint);
     }
 
@@ -345,9 +342,9 @@ public class TriangulationAdvance {
         int rib1 = getIdRib();
         int rib2 = getIdRib();
 
-        Triangle[] triangles = new Triangle[3];
+        TriangleStructure[] triangles = new TriangleStructure[3];
         for (int i = 0; i < 3; i++) {
-            triangles[i] = new Triangle();
+            triangles[i] = new TriangleStructure();
         }
 
         triangles[0].iNodes = new int[]{beginTriangle.iNodes[0], beginTriangle.iNodes[1], pointIndex};
@@ -359,9 +356,11 @@ public class TriangulationAdvance {
         triangles[2].iNodes = new int[]{beginTriangle.iNodes[2], beginTriangle.iNodes[0], pointIndex};
         triangles[2].iRibs = new int[]{beginTriangle.iRibs[2], rib0, rib2};
 
-        triangles[0].triangles = new Triangle[]{beginTriangle.triangles[0], triangles[1], triangles[2]};
-        triangles[1].triangles = new Triangle[]{beginTriangle.triangles[1], triangles[2], triangles[0]};
-        triangles[2].triangles = new Triangle[]{beginTriangle.triangles[2], triangles[0], triangles[1]};
+        triangles[0].triangles = new TriangleStructure[]{beginTriangle.triangles[0], triangles[1], triangles[2]};
+        triangles[1].triangles = new TriangleStructure[]{beginTriangle.triangles[1], triangles[2], triangles[0]};
+        triangles[2].triangles = new TriangleStructure[]{beginTriangle.triangles[2], triangles[0], triangles[1]};
+
+        NullableTriangle(beginTriangle);
 
         beginTriangle = triangles[0];
         addInverseLinkOnTriangle(triangles);
@@ -370,13 +369,20 @@ public class TriangulationAdvance {
             if (!isGoodDelaunay(triangles[i], 0)) {
                 flipTriangles(triangles[i], 0);
             }
+            triangleStructureList.add(triangles[i]);
         }
     }
 
-    private void addInverseLinkOnTriangle(Triangle[] triangles) {
-        for (Triangle triangle : triangles) {
+    void NullableTriangle(TriangleStructure triangle) {
+        triangle.triangles = null;
+    }
+
+    private void addInverseLinkOnTriangle(TriangleStructure[] triangles) {
+        for (TriangleStructure triangle : triangles) {
+            if (triangle == null)
+                continue;
             for (int j = 0; j < 3; j++) {
-                Triangle externalTriangle = triangle.triangles[j];
+                TriangleStructure externalTriangle = triangle.triangles[j];
                 int commonRib = triangle.iRibs[j];
                 if (externalTriangle != null) {
                     for (int k = 0; k < 3; k++) {
@@ -388,7 +394,7 @@ public class TriangulationAdvance {
             }
         }
         boolean inverseAgain = false;
-        for (Triangle triangle : triangles) {
+        for (TriangleStructure triangle : triangles) {
             if (isCounterClockwise(triangle)) {
                 triangle.changeClockwise();
                 inverseAgain = true;
@@ -418,9 +424,9 @@ public class TriangulationAdvance {
         int rib2 = getIdRib();
         int rib3 = getIdRib();
 
-        Triangle triangles[] = new Triangle[4];
+        TriangleStructure triangles[] = new TriangleStructure[4];
         for (int i = 0; i < 4; i++) {
-            triangles[i] = new Triangle();
+            triangles[i] = new TriangleStructure();
         }
 
 
@@ -448,19 +454,22 @@ public class TriangulationAdvance {
         };
 
 
-        triangles[0].triangles = new Triangle[]{
+        triangles[0].triangles = new TriangleStructure[]{
                 null,
                 triangles[1],
                 beginTriangle.triangles[normalizeSizeBy3(indexLineInTriangle - 1)]
         };
-        triangles[1].triangles = new Triangle[]{
+        triangles[1].triangles = new TriangleStructure[]{
                 null,
                 beginTriangle.triangles[normalizeSizeBy3(indexLineInTriangle + 1)],
                 triangles[0]
         };
 
         if (beginTriangle.triangles[indexLineInTriangle] == null) {
-            addInverseLinkOnTriangle(new Triangle[]{triangles[0], triangles[1]});
+            addInverseLinkOnTriangle(new TriangleStructure[]{triangles[0], triangles[1]});
+
+            NullableTriangle(beginTriangle);
+
             beginTriangle = triangles[0];
             if (!isGoodDelaunay(triangles[0], 2)) {
                 flipTriangles(triangles[0], 2);
@@ -468,11 +477,15 @@ public class TriangulationAdvance {
             if (!isGoodDelaunay(triangles[1], 1)) {
                 flipTriangles(triangles[1], 1);
             }
+            triangleStructureList.add(triangles[0]);
+            triangleStructureList.add(triangles[1]);
             return;
         }
 
         int ribConnectId = beginTriangle.iRibs[indexLineInTriangle];
-        beginTriangle = beginTriangle.triangles[indexLineInTriangle];
+        TriangleStructure nextTriangle = beginTriangle.triangles[indexLineInTriangle];
+        NullableTriangle(beginTriangle);
+        beginTriangle = nextTriangle;
         for (int i = 0; i < 3; i++) {
             if (beginTriangle.iRibs[i] == ribConnectId) {
                 indexLineInTriangle = i;
@@ -505,13 +518,13 @@ public class TriangulationAdvance {
                 beginTriangle.iRibs[normalizeSizeBy3(indexLineInTriangle - 1)]
         };
 
-        triangles[2].triangles = new Triangle[]{
+        triangles[2].triangles = new TriangleStructure[]{
                 triangles[0],
                 beginTriangle.triangles[normalizeSizeBy3(indexLineInTriangle + 1)],
                 triangles[3]
         };
 
-        triangles[3].triangles = new Triangle[]{
+        triangles[3].triangles = new TriangleStructure[]{
                 triangles[1],
                 triangles[2],
                 beginTriangle.triangles[normalizeSizeBy3(indexLineInTriangle - 1)]
@@ -519,6 +532,7 @@ public class TriangulationAdvance {
 
         addInverseLinkOnTriangle(triangles);
 
+        NullableTriangle(beginTriangle);
         beginTriangle = triangles[0];
 
         if (!isGoodDelaunay(triangles[0], 2)) {
@@ -533,39 +547,20 @@ public class TriangulationAdvance {
         if (!isGoodDelaunay(triangles[3], 2)) {
             flipTriangles(triangles[3], 2);
         }
-    }
-
-    /**
-     * Found all triangles
-     * Performance - O(n^2)
-     * @param triangle - begin triangle
-     * @param triangles - list for adding new triangles
-     */
-    private void getTriangleWays(Triangle triangle, List<Triangle> triangles) {
-        if (triangle == null)
-            return;
-        triangles.add(triangle);
-        for (int i = 0; i < triangle.triangles.length; i++) {
-            if (triangle.triangles[i] != null) {
-                boolean isFound = false;
-                for (int j = 0; j < triangles.size(); j++) {
-                    if (triangles.get(j) == triangle.triangles[i]) {
-                        j = triangles.size();
-                        isFound = true;
-                    }
-                }
-                if (!isFound) {
-                    getTriangleWays(triangle.triangles[i], triangles);
-                }
-            }
+        for (TriangleStructure triangle : triangles) {
+            triangleStructureList.add(triangle);
         }
     }
 
     public List<Point[]> getTriangles() {
-        List<Triangle> triangles = new ArrayList<>();
-        getTriangleWays(beginTriangle, triangles);
+        Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
+        while(iterator.hasNext()){
+            if(iterator.next().triangles == null)
+                iterator.remove();
+        }
+        List<TriangleStructure> triangles = new ArrayList<>(triangleStructureList);
         List<Point[]> trianglesPoints = new ArrayList<>();
-        for (Triangle tri : triangles) {
+        for (TriangleStructure tri : triangles) {
             Point[] points = new Point[3];
             for (int i = 0; i < 3; i++) {
                 points[i] = new Point(nodes.get(tri.iNodes[i]));
@@ -633,7 +628,6 @@ public class TriangulationAdvance {
             }
 
             return PointTriangleState.POINT_OUTSIDE;
-
         }
     }
 
@@ -681,7 +675,7 @@ public class TriangulationAdvance {
     }
 
 
-    private static class Geometry {
+    public static class Geometry {
 
         static Value pointOnLine(Point p1, Point p2, Point p3) {
             double value = (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) -
@@ -716,23 +710,23 @@ public class TriangulationAdvance {
             return result.getValueBig().abs().compareTo(Precision.bigEpsilon()) < 0;
         }
 
-        static boolean is3pointsCollinear(Point p1, Point p2, Point p3) {
+        public static boolean is3pointsCollinear(Point p1, Point p2, Point p3) {
             return is3pointsCollinear(pointOnLine(p1, p2, p3));
         }
 
         static boolean isCounterClockwise(Value result) {
             if (result.isValueDouble()) {
-                return result.getValueDouble() > Precision.epsilon();
+                return result.getValueDouble() > 0;
             }
             return result.getValueBig().compareTo(BigDecimal.ZERO) > 0;
         }
 
-        static boolean isCounterClockwise(Point a, Point b, Point c) {
+        public static boolean isCounterClockwise(Point a, Point b, Point c) {
             return isCounterClockwise(pointOnLine(a, b, c));
         }
 
 
-        static boolean isAtRightOf(Point a, Point b, Point c) {
+        public static boolean isAtRightOf(Point a, Point b, Point c) {
             return isCounterClockwise(a, b, c);
         }
 
@@ -786,12 +780,11 @@ public class TriangulationAdvance {
             return Math.signum(a) * (a * z0 - b * x0 + c * y0 - d) < 0;
         }
 
-
         static Point[] convexHull(Point[] inputPoints) {
             if (inputPoints.length < 2)
                 return inputPoints;
 
-            List<Point> array = Arrays.asList(inputPoints);
+            List<Point> array = new ArrayList<>(Arrays.asList(inputPoints));
 
             Collections.sort(array, new Comparator<Point>() {
                 @Override
@@ -811,17 +804,15 @@ public class TriangulationAdvance {
                 }
             });
 
-            Iterator<Point> iterator = array.iterator();
-            Point last = null;
-            while (iterator.hasNext()) {
-                if (last == null) {
-                    last = iterator.next();
-                } else {
-                    Point present = iterator.next();
-                    if (last.equals(present)) {
-                        iterator.remove();
-                    }
+            List<Integer> removedIndex = new ArrayList<>();
+            for (int i = 1; i < array.size(); i++) {
+                if (array.get(i - 1).equals(array.get(i))) {
+                    removedIndex.add(i);
                 }
+            }
+            for (int i = removedIndex.size() - 1; i >= 0; i--) {
+                int position = removedIndex.get(i);
+                array.remove(position);
             }
 
             int n = array.size();

@@ -30,7 +30,13 @@ public class ResearchTest {
                 200,
                 500,
                 1000,
-                2000
+                2000,
+                5000,
+                10000,
+                20000,
+//                50000,
+//                100000,
+//                200000,
         };
         for (int i = 0; i < TYPE_TEST.values().length; i++) {
             System.out.println("TYPE OF TEST: " + TYPE_TEST.values()[i].toString());
@@ -41,7 +47,7 @@ public class ResearchTest {
     }
 
     private static void test(int size, TYPE_TEST type_test) throws Exception {
-        int amountTest = 100;
+        int amountTest = 20;
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
         float averageTime = 0;
