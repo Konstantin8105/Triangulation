@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * triangulationAdvance.TriangulationAdvance
  * for step - triangulation convexHull: "Divide and Conquer"
- * Performance for worst-case: O(N*log(N)) todo: change to true O(n^2)
+ * Performance for worst-case: O(N^2)
  * for step - triangulation with restrictions: "Simple interactive method"
  * Performance for worst-case: O(N^2)
  * Philosophy of triangulation:
