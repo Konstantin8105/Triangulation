@@ -10,7 +10,7 @@ import java.util.List;
 public class MeshView extends JFrame {
 
     final private int WINDOWS_SIZE = 800;
-    final private boolean TEXT_SHOW = true;
+    final private boolean TEXT_SHOW = false;
 
 
     public MeshView(final List<Point[]> mesh) {
