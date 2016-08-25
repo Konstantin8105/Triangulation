@@ -8,12 +8,12 @@ import java.util.Random;
 
 public class TriangulationAdvanceTest {
 
-    final private boolean PRINTABLE = false;
-    final private int AMOUNT_POINTS = 5;
     final private static Random random = new Random();
 
     @Test
     public void randomTestAdvance() {
+        final boolean PRINTABLE = false;
+        final int AMOUNT_POINTS = 5;
         for (int i = 0; i < 20000; i++) {
             Point points[] = new Point[AMOUNT_POINTS];
             for (int j = 0; j < points.length; j++) {

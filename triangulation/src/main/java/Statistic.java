@@ -3,12 +3,12 @@ public class Statistic {
 //    RamMesh dataMesh;
 //    int amount_points;RamMesh dataMesh
 
-    public Statistic() throws Exception {
+    public Statistic() {
 //        this.dataMesh = dataMesh;
 //        calculate();
     }
 
-    private void calculate() throws Exception {
+    private void calculate() {
 //        amount_points = dataMesh.sizePoints();
     }
 //

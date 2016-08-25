@@ -46,7 +46,7 @@ public class ResearchTest {
         }
     }
 
-    private static void test(int size, TYPE_TEST type_test) throws Exception {
+    private static void test(int size, TYPE_TEST type_test){
         int amountTest = 20;
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];

@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 public class Counter {
     final private Map<String, Integer> map = new TreeMap<>();
-    private String name;
+    final private String name;
     private long timeMoment = System.currentTimeMillis();
 
     public Counter(String name) {

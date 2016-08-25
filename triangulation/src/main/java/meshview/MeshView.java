@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MeshView extends JFrame {
 
-    final int WINDOWS_SIZE = 800;
+    final private int WINDOWS_SIZE = 800;
     final private boolean TEXT_SHOW = true;
 
 
