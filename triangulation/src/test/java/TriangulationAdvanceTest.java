@@ -353,13 +353,6 @@ public class TriangulationAdvanceTest {
     }
 
     @Test
-    public void testBigInputData() {
-        Point[] points = (Point[]) ResearchTest.getRandomPoints(20000).toArray();
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
-        Assert.assertTrue(triangulation.getTriangles().size() > 0);
-    }
-
-    @Test
     public void toggleTriangle() {
         double shortDistance = 1.0D;
         for (int i = 0; i < 9; i++) {

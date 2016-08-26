@@ -45,9 +45,52 @@ public class TriangulationAdvance {
     // constructor for create convexHull region at the base on points
     public TriangulationAdvance(final Point[] points) {
         createConvexHullTriangles(createConvexHullWithoutPointInLine(points));
-        for (Point point : points) {
-            addNextPoint(point);
+        int MINIMAL_DELAUNAY_STEP = 100;
+        int delaunayStep = (int) Math.max(Math.sqrt(points.length), MINIMAL_DELAUNAY_STEP);
+        for (int i = 0; i < points.length; i++) {
+            if (i % 2000 == 0) System.out.println("Point " + i + " of " + points.length);
+            //if (i % delaunayStep == 0)
+            //    delaunayMesh();
+            addNextPoint(points[i]);
         }
+    }
+
+    private void delaunayMesh() {
+        class FlipTriangle {
+            public TriangleStructure triangleStructure;
+            public int i;
+
+            public FlipTriangle(TriangleStructure triangleStructure, int i) {
+                this.i = i;
+                this.triangleStructure = triangleStructure;
+            }
+        }
+        List<FlipTriangle> flipTriangle = new LinkedList<>();
+        Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
+        while (iterator.hasNext()) {
+            TriangleStructure triangle = iterator.next();
+            if (triangle == null)
+                continue;
+            if (triangle.triangles == null) {
+                continue;
+            }
+            boolean nextTriangle = false;
+            for (int i = 0; !nextTriangle && i < triangle.triangles.length; i++) {
+                if (triangle.triangles[i] == null) {
+                    continue;
+                }
+                if (!isGoodDelaunay(triangle, i)) {
+                    flipTriangle.add(new FlipTriangle(triangle, i));
+                    nextTriangle = true;
+                }
+            }
+        }
+        for (FlipTriangle flip : flipTriangle) {
+            if (flip != null) {
+                flipTriangles(flip.triangleStructure, flip.i);
+            }
+        }
+        removeNullTriangles();
     }
 
     private void createConvexHullTriangles(List<Point> points) {
@@ -111,6 +154,15 @@ public class TriangulationAdvance {
     }
 
     private void flipTriangles(TriangleStructure triangle, int indexTriangle) {
+
+        if (triangle == null)
+            return;
+
+        if (triangle.triangles == null)
+            return;
+
+        if (triangle.triangles[indexTriangle] == null)
+            return;
 
         int pointNewTriangle = triangle.iNodes[normalizeSizeBy3(indexTriangle + 2)];
         int commonRib = triangle.iRibs[indexTriangle];
@@ -245,7 +297,7 @@ public class TriangulationAdvance {
         beginTriangle = triangles[0];
 
         //add null in old triangles
-        for (TriangleStructure base: baseTriangles) {
+        for (TriangleStructure base : baseTriangles) {
             NullableTriangle(base);
         }
     }
@@ -547,12 +599,16 @@ public class TriangulationAdvance {
         Collections.addAll(triangleStructureList, triangles);
     }
 
-    public List<Point[]> getTriangles() {
+    private void removeNullTriangles() {
         Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
-        while(iterator.hasNext()){
-            if(iterator.next().triangles == null)
+        while (iterator.hasNext()) {
+            if (iterator.next().triangles == null)
                 iterator.remove();
         }
+    }
+
+    public List<Point[]> getTriangles() {
+        removeNullTriangles();
         List<TriangleStructure> triangles = new ArrayList<>(triangleStructureList);
         List<Point[]> trianglesPoints = new ArrayList<>();
         for (TriangleStructure tri : triangles) {
