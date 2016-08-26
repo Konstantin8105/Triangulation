@@ -45,17 +45,15 @@ public class TriangulationAdvance {
     // constructor for create convexHull region at the base on points
     public TriangulationAdvance(final Point[] points) {
         createConvexHullTriangles(createConvexHullWithoutPointInLine(points));
-        int MINIMAL_DELAUNAY_STEP = 100;
-        int delaunayStep = (int) Math.max(Math.sqrt(points.length), MINIMAL_DELAUNAY_STEP);
+        delaunayMesh(1);
+        //int MINIMAL_DELAUNAY_STEP = 100;
+        //int delaunayStep = (int) Math.max(Math.sqrt(points.length), MINIMAL_DELAUNAY_STEP);
         for (int i = 0; i < points.length; i++) {
-            if (i % 2000 == 0) System.out.println("Point " + i + " of " + points.length);
-            //if (i % delaunayStep == 0)
-            //    delaunayMesh();
             addNextPoint(points[i]);
         }
     }
 
-    private void delaunayMesh() {
+    public void delaunayMesh(int amountIteration) {
         class FlipTriangle {
             public TriangleStructure triangleStructure;
             public int i;
@@ -65,32 +63,39 @@ public class TriangulationAdvance {
                 this.triangleStructure = triangleStructure;
             }
         }
-        List<FlipTriangle> flipTriangle = new LinkedList<>();
-        Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
-        while (iterator.hasNext()) {
-            TriangleStructure triangle = iterator.next();
-            if (triangle == null)
-                continue;
-            if (triangle.triangles == null) {
-                continue;
-            }
-            boolean nextTriangle = false;
-            for (int i = 0; !nextTriangle && i < triangle.triangles.length; i++) {
-                if (triangle.triangles[i] == null) {
+        for (int j = 0; j < amountIteration; j++) {
+            List<FlipTriangle> flipTriangle = new LinkedList<>();
+            Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
+            while (iterator.hasNext()) {
+                TriangleStructure triangle = iterator.next();
+                if (triangle == null)
+                    continue;
+                if (triangle.triangles == null) {
                     continue;
                 }
-                if (!isGoodDelaunay(triangle, i)) {
-                    flipTriangle.add(new FlipTriangle(triangle, i));
-                    nextTriangle = true;
+                boolean nextTriangle = false;
+                for (int i = 0; !nextTriangle && i < triangle.triangles.length; i++) {
+                    if (triangle.triangles[i] == null) {
+                        continue;
+                    }
+                    if (!isGoodDelaunay(triangle, i)) {
+                        flipTriangle.add(new FlipTriangle(triangle, i));
+                        nextTriangle = true;
+                    }
                 }
             }
-        }
-        for (FlipTriangle flip : flipTriangle) {
-            if (flip != null) {
-                flipTriangles(flip.triangleStructure, flip.i);
+            boolean isDelaunayFinish = true;
+            for (FlipTriangle flip : flipTriangle) {
+                if (flip != null) {
+                    flipTriangles(flip.triangleStructure, flip.i);
+                    isDelaunayFinish = false;
+                }
             }
+            if (isDelaunayFinish) {
+                break;
+            }
+            removeNullTriangles();
         }
-        removeNullTriangles();
     }
 
     private void createConvexHullTriangles(List<Point> points) {
@@ -100,8 +105,36 @@ public class TriangulationAdvance {
         int indexPoint1 = nodes.size() - 1;
         int commonRib = getIdRib();
         TriangleStructure commonTriangle = null;
+//
+//        for (int i = 2; i < points.size(); i++) {
+//            nodes.add(points.get(i));
+//            int indexPoint2 = nodes.size() - 1;
+//            int rib12 = getIdRib();
+//            int rib20 = getIdRib();
+//
+//            TriangleStructure triangle = new TriangleStructure();
+//            triangle.iNodes = new int[]{
+//                    indexPoint0, indexPoint1, indexPoint2
+//            };
+//            triangle.iRibs = new int[]{
+//                    commonRib, rib12, rib20
+//            };
+//            triangle.triangles = new TriangleStructure[]{commonTriangle, null, null};
+//
+//            if (commonTriangle != null) {
+//                commonTriangle.triangles[2] = triangle;
+//            }
+//
+//            indexPoint1 = i;
+//            commonRib = rib20;
+//            commonTriangle = triangle;
+//
+//            triangleStructureList.add(triangle);
+//        }
 
-        for (int i = 2; i < points.size(); i++) {
+        int i = 2;
+        int k = 0;
+        while (i + k < points.size()) {
             nodes.add(points.get(i));
             int indexPoint2 = nodes.size() - 1;
             int rib12 = getIdRib();
@@ -125,7 +158,36 @@ public class TriangulationAdvance {
             commonTriangle = triangle;
 
             triangleStructureList.add(triangle);
+            i++;
+
+            //
+            if (i + k + 1 > points.size())
+                break;
+            k++;
+            int indexPoint2_last = indexPoint2;
+            int commonRib_last = commonRib;
+            nodes.add(points.get(points.size() - k));
+            indexPoint2 = nodes.size() - 1;
+            rib20 = getIdRib();
+            commonRib = getIdRib();
+            TriangleStructure triangle2 = new TriangleStructure();
+            triangle2.iNodes = new int[]{
+                    indexPoint0, indexPoint2_last, indexPoint2
+            };
+            triangle2.iRibs = new int[]{
+                    commonRib_last,  rib20,commonRib
+            };
+            triangle2.triangles = new TriangleStructure[]{
+                    commonTriangle, null, null
+            };
+
+            commonTriangle.triangles[2] = triangle2;
+
+            indexPoint1 = indexPoint2;
+            commonTriangle = triangle2;
+            triangleStructureList.add(triangle2);
         }
+
         beginTriangle = commonTriangle;
     }
 
@@ -346,8 +408,38 @@ public class TriangulationAdvance {
      * @see Point
      * @see GeometryPointTriangle.PointTriangleState
      */
+    int amountMoving = 0;
+
     private GeometryPointTriangle.PointTriangleState movingByConvexHull(Point point) {
         while (true) {
+            amountMoving++;
+            if (amountMoving > triangleStructureList.size()) {
+                removeNullTriangles();
+                Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
+                while (iterator.hasNext()) {
+                    amountMoving++;
+                    TriangleStructure triangle = iterator.next();
+                    if (triangle.triangles == null)
+                        continue;
+                    Point[] trianglePoint = new Point[]{
+                            nodes.get(triangle.iNodes[0]),
+                            nodes.get(triangle.iNodes[1]),
+                            nodes.get(triangle.iNodes[2])
+                    };
+
+                    GeometryPointTriangle.PointTriangleState state = GeometryPointTriangle.statePointInTriangle(point, trianglePoint);
+
+                    if (state == GeometryPointTriangle.PointTriangleState.POINT_INSIDE ||
+                            state == GeometryPointTriangle.PointTriangleState.POINT_ON_CORNER ||
+                            state == GeometryPointTriangle.PointTriangleState.POINT_ON_LINE_0 ||
+                            state == GeometryPointTriangle.PointTriangleState.POINT_ON_LINE_1 ||
+                            state == GeometryPointTriangle.PointTriangleState.POINT_ON_LINE_2) {
+                        beginTriangle = triangle;
+                        break;
+                    }
+                }
+                break;
+            }
             if (Geometry.isAtRightOf(nodes.get(beginTriangle.iNodes[0]), nodes.get(beginTriangle.iNodes[1]), point)) {
                 beginTriangle = beginTriangle.triangles[0];
             } else {
@@ -374,7 +466,7 @@ public class TriangulationAdvance {
                 }
             }
         }
-
+        amountMoving = 0;
         Point[] trianglePoint = new Point[]{
                 nodes.get(beginTriangle.iNodes[0]),
                 nodes.get(beginTriangle.iNodes[1]),

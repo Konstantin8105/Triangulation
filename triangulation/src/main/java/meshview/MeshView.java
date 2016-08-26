@@ -5,6 +5,7 @@ import triangulationAdvance.Point;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MeshView extends JFrame {
@@ -12,8 +13,7 @@ public class MeshView extends JFrame {
     final private int WINDOWS_SIZE = 800;
     final private boolean TEXT_SHOW = false;
 
-
-    public MeshView(final List<Point[]> mesh) {
+    private void view(final List<Point[]> mesh, final Point point) {
 
         final BorderBox box = new BorderBox();
         for (int i = 0; i < mesh.size(); i++) {
@@ -34,68 +34,94 @@ public class MeshView extends JFrame {
                 Graphics2D g2 = ((Graphics2D) g);
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2.setStroke(new BasicStroke(1));
+
+
+                class Triangle {
+                    public Point[] points;
+                    public String nameTriangle;
+                    public String[] nameCoordinate;
+
+                    public Triangle(Point[] position, String[] names, String s) {
+                        points = position;
+                        nameTriangle = s;
+                        nameCoordinate = names;
+                    }
+                }
+
+                List<Triangle> triangles = new ArrayList<>();
+
                 for (int i = 0; i < mesh.size(); i++) {
                     Point[] position = new Point[3];
+                    String[] names = new String[3];
                     for (int j = 0; j < 3; j++) {
                         position[j] = new Point(
                                 WINDOWS_SIZE / 2 + (mesh.get(i)[j].getX() - box.getCenter().getX()) * scale,
                                 WINDOWS_SIZE / 2 + (mesh.get(i)[j].getY() - box.getCenter().getY()) * scale
                         );
+                        names[j] = "(" + (int) mesh.get(i)[j].getX() + ";" + (int) mesh.get(i)[j].getY() + ")";
                     }
-                    if (TEXT_SHOW) {
-                        g.setColor(Color.RED);
-                        for (int j = 0; j < 3; j++) {
-                            g.drawString(
-                                    "(" + (int) mesh.get(i)[j].getX() + ";" + (int) mesh.get(i)[j].getY() + ")",
-                                    (int) position[j].getX(),
-                                    (int) position[j].getY()
-                            );
-                        }
+                    triangles.add(new Triangle(position, names, i + ""));
+                }
+
+                g.setColor(Color.BLUE);
+                for (int i = 0; i < triangles.size(); i++) {
+                    for (int j = 0; j < 3; j++) {
+                        int next = j + 1 == 3 ? 0 : j + 1;
+                        g.drawLine(
+                                (int) triangles.get(i).points[j].getX(),
+                                (int) triangles.get(i).points[j].getY(),
+                                (int) triangles.get(i).points[next].getX(),
+                                (int) triangles.get(i).points[next].getY()
+                        );
                     }
-                    g.setColor(Color.BLUE);
-                    g.drawLine(
-                            (int) position[0].getX(),
-                            (int) position[0].getY(),
-                            (int) position[1].getX(),
-                            (int) position[1].getY()
-                    );
-                    g.drawLine(
-                            (int) position[1].getX(),
-                            (int) position[1].getY(),
-                            (int) position[2].getX(),
-                            (int) position[2].getY()
-                    );
-                    g.drawLine(
-                            (int) position[2].getX(),
-                            (int) position[2].getY(),
-                            (int) position[0].getX(),
-                            (int) position[0].getY()
-                    );
+                }
 
-                    g.setColor(Color.RED);
-                    g.drawOval((int) position[0].getX(), (int) position[0].getY(), 3, 3);
-                    g.drawOval((int) position[1].getX(), (int) position[1].getY(), 3, 3);
-                    g.drawOval((int) position[2].getX(), (int) position[2].getY(), 3, 3);
+                g.setColor(Color.RED);
+                for (int i = 0; i < triangles.size(); i++) {
+                    for (int j = 0; j < 3; j++) {
+                        g.drawOval(
+                                (int) triangles.get(i).points[j].getX(),
+                                (int) triangles.get(i).points[j].getY(),
+                                3, 3);
+                    }
+                }
 
+                if (TEXT_SHOW) {
                     g.setColor(Color.BLACK);
-                    Point center = new Point(
-                            (position[0].getX() + position[1].getX() + position[2].getX()) / 3,
-                            (position[0].getY() + position[1].getY() + position[2].getY()) / 3
-                    );
-                    if (TEXT_SHOW) {
+                    for (int i = 0; i < triangles.size(); i++) {
+                        Point center = new Point(
+                                (triangles.get(i).points[0].getX() + triangles.get(i).points[1].getX() + triangles.get(i).points[2].getX()) / 3,
+                                (triangles.get(i).points[0].getY() + triangles.get(i).points[1].getY() + triangles.get(i).points[2].getY()) / 3
+                        );
                         g.drawString(
                                 i + "",
                                 (int) center.getX(),
                                 (int) center.getY()
                         );
                     }
+
+                    g.setColor(Color.RED);
+                    for (int i = 0; i < triangles.size(); i++) {
+                        for (int j = 0; j < 3; j++) {
+                            g.drawString(
+                                    triangles.get(i).nameCoordinate[j],
+                                    (int) triangles.get(i).points[j].getX(),
+                                    (int) triangles.get(i).points[j].getY()
+                            );
+                        }
+                    }
                 }
             }
+            //special point
         };
         setContentPane(panel);
-
         this.setSize(new Dimension(WINDOWS_SIZE + 100, WINDOWS_SIZE + 100));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
+
+    public MeshView(final List<Point[]> mesh) {
+        view(mesh, null);
+    }
+
 }
