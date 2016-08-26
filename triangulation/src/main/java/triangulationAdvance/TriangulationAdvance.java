@@ -132,6 +132,7 @@ public class TriangulationAdvance {
 //            triangleStructureList.add(triangle);
 //        }
 
+
         int i = 2;
         int k = 0;
         while (i + k < points.size()) {
