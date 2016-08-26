@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/meshview/MeshView.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/meshview/MeshView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/Precision.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/Precision.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvanceView.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvanceView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceBigData.java" afterPath="$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceBigData.java" />
     </list>
     <ignored path="triangulation/target/test-classes/META-INF/CompilerHints" />
     <ignored path="triangulation/target/classes/META-INF/BenchmarkList" />
@@ -63,8 +58,8 @@
       <file leaf-file-name="TriangulationAdvance.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="148" column="14" selection-start-line="148" selection-start-column="14" selection-end-line="148" selection-end-column="14" />
+            <state relative-caret-position="400">
+              <caret line="162" column="14" selection-start-line="162" selection-start-column="14" selection-end-line="162" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -945,13 +940,6 @@
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
     </task>
-    <task id="LOCAL-00089" summary="optimize Grid">
-      <created>1463643003269</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1463643003269</updated>
-    </task>
     <task id="LOCAL-00090" summary="optimize Grid">
       <created>1463731911397</created>
       <option name="number" value="00090" />
@@ -1288,7 +1276,14 @@
       <option name="project" value="LOCAL" />
       <updated>1472206940280</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="Try to optimize convexHull triangulation">
+      <created>1472228772713</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1472228772714</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1376,7 +1371,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update&#10;" />
     <MESSAGE value="prepare for release&#10;" />
     <MESSAGE value="add grid&#10;" />
     <MESSAGE value="add counter for mesh, triangulation" />
@@ -1401,7 +1395,8 @@
     <MESSAGE value="Add convex algorithm inside for convexHull guarantee.&#10;fix Warnings" />
     <MESSAGE value="Add convex algorithm inside for convexHull guarantee.&#10;fix READ.ME" />
     <MESSAGE value="Try to fix big data problem" />
-    <option name="LAST_COMMIT_MESSAGE" value="Try to fix big data problem" />
+    <MESSAGE value="Try to optimize convexHull triangulation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Try to optimize convexHull triangulation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1649,8 +1644,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="148" column="14" selection-start-line="148" selection-start-column="14" selection-end-line="148" selection-end-column="14" />
+        <state relative-caret-position="400">
+          <caret line="162" column="14" selection-start-line="162" selection-start-column="14" selection-end-line="162" selection-end-column="14" />
           <folding />
         </state>
       </provider>
