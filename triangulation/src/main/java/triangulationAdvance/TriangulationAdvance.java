@@ -44,17 +44,26 @@ public class TriangulationAdvance {
 
     // constructor for create convexHull region at the base on points
     public TriangulationAdvance(final Point[] points) {
+        triangulation(points, false);
+    }
+
+    public TriangulationAdvance(final Point[] points, boolean withDelaunay) {
+        triangulation(points, withDelaunay);
+    }
+
+    private void triangulation(final Point[] points, boolean withDelaunay) {
         createConvexHullTriangles(createConvexHullWithoutPointInLine(points));
         int MINIMAL_DELAUNAY_STEP = 100;
         int delaunayStep = (int) Math.max(Math.sqrt(points.length), MINIMAL_DELAUNAY_STEP);
-        delaunayMesh(1);
+        if (withDelaunay)
+            delaunayMesh(1);
         for (int i = 0; i < points.length; i++) {
             addNextPoint(points[i]);
-            if (i % delaunayStep == 0) delaunayMesh(1);
+            if (withDelaunay && i % delaunayStep == 0) {
+                delaunayMesh(1);
+            }
         }
-//        MeshView meshView = new MeshView(getTriangles());
-//        delaunayMesh(1);
-//        delaunayMesh(500);
+        delaunayMesh(1);
     }
 
     public void delaunayMesh(int amountIteration) {
@@ -68,7 +77,6 @@ public class TriangulationAdvance {
             }
         }
         for (int j = 0; j < amountIteration; j++) {
-//            System.out.println("*");
             List<FlipTriangle> flipTriangle = new LinkedList<>();
             Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
             while (iterator.hasNext()) {
@@ -90,7 +98,6 @@ public class TriangulationAdvance {
                 }
             }
             boolean isDelaunayFinish = true;
-//            System.out.println(flipTriangle.size() + " of " + triangleStructureList.size());
             for (FlipTriangle flip : flipTriangle) {
                 if (flip != null) {
                     flipTriangles(flip.triangleStructure, flip.i);
@@ -98,7 +105,6 @@ public class TriangulationAdvance {
                 }
             }
             if (isDelaunayFinish) {
-//                System.out.println("=");
                 break;
             }
             removeNullTriangles();
@@ -341,6 +347,7 @@ public class TriangulationAdvance {
         if (triangle.triangles[indexTriangle] == null) {
             return true;
         }
+        // TODO: 8/27/16 modify if radiaus is same
         return !Geometry.isPointInCircle(
                 new Point[]{
                         nodes.get(triangle.triangles[indexTriangle].iNodes[0]),

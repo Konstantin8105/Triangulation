@@ -7,6 +7,7 @@ import triangulationAdvance.TriangulationAdvance;
 
 public class TriangulationAdvanceBigData {
 
+    // Preliminary time of test = 6 minutes
     @Ignore
     @Test
     public void testBigInputData1() {

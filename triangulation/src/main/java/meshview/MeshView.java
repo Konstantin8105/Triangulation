@@ -11,9 +11,20 @@ import java.util.List;
 public class MeshView extends JFrame {
 
     final private int WINDOWS_SIZE = 800;
-    final private boolean TEXT_SHOW = false;
 
     private void view(final List<Point[]> mesh, final Point point) {
+
+        final boolean TEXT_SHOW;
+        if (mesh.size() > 100)
+            TEXT_SHOW = false;
+        else
+            TEXT_SHOW = true;
+
+        final boolean POINT_INDICATOR;
+        if (mesh.size() > 999)
+            POINT_INDICATOR = false;
+        else
+            POINT_INDICATOR = true;
 
         final BorderBox box = new BorderBox();
         for (int i = 0; i < mesh.size(); i++) {
@@ -77,12 +88,14 @@ public class MeshView extends JFrame {
                 }
 
                 g.setColor(Color.RED);
-                for (int i = 0; i < triangles.size(); i++) {
-                    for (int j = 0; j < 3; j++) {
-                        g.drawOval(
-                                (int) triangles.get(i).points[j].getX()-1,
-                                (int) triangles.get(i).points[j].getY()-1,
-                                3, 3);
+                if(POINT_INDICATOR) {
+                    for (int i = 0; i < triangles.size(); i++) {
+                        for (int j = 0; j < 3; j++) {
+                            g.drawOval(
+                                    (int) triangles.get(i).points[j].getX() - 1,
+                                    (int) triangles.get(i).points[j].getY() - 1,
+                                    3, 3);
+                        }
                     }
                 }
 
