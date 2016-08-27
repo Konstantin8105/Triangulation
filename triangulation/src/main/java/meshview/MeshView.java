@@ -80,8 +80,8 @@ public class MeshView extends JFrame {
                 for (int i = 0; i < triangles.size(); i++) {
                     for (int j = 0; j < 3; j++) {
                         g.drawOval(
-                                (int) triangles.get(i).points[j].getX(),
-                                (int) triangles.get(i).points[j].getY(),
+                                (int) triangles.get(i).points[j].getX()-1,
+                                (int) triangles.get(i).points[j].getY()-1,
                                 3, 3);
                     }
                 }

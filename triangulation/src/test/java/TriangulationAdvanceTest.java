@@ -333,7 +333,7 @@ public class TriangulationAdvanceTest {
 
     @Test
     public void simpleCircle() {
-        Point[] points = (Point[]) ResearchTest.getCirclePoints(4).toArray();
+        Point[] points = (Point[]) ResearchTest.getCirclePoints(6).toArray();
         TriangulationAdvance triangulation = new TriangulationAdvance(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
