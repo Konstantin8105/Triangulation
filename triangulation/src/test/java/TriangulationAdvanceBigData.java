@@ -13,7 +13,7 @@ public class TriangulationAdvanceBigData {
     @Ignore
     @Test
     public void testBigInputData1() {
-        Point[] points = (Point[]) ResearchTest.getRandomPoints(500_000).toArray();
+        Point[] points = (Point[]) ResearchTest.getRandomPoints(1_000_000).toArray();
         TriangulationAdvance triangulation = new TriangulationAdvance(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
