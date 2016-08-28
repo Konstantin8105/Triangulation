@@ -26,14 +26,19 @@ public class Counter {
             map.put(str, value);
     }
 
+    private String lastMeasure = null;
     public void addTime(String str) {
         long presentMoment = System.currentTimeMillis();
         int time = (int) (presentMoment - timeMoment);
         timeMoment = presentMoment;
 
-        if (map.get(str) == null) {
-            map.put(str, time);
-        } else map.put(str, map.get(str) + time);
+        if(lastMeasure != null) {
+            if (map.get(lastMeasure) == null) {
+                map.put(lastMeasure, time);
+            } else map.put(lastMeasure, map.get(lastMeasure) + time);
+        }
+
+        lastMeasure = str;
     }
 
 

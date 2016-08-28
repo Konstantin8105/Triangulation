@@ -30,12 +30,13 @@ public class TriangulationAdvance {
 
     private class Searcher {
         private BorderBox box;
-        private TriangleStructure searcher[] = new TriangleStructure[2];
+        private TriangleStructure searcher[] = new TriangleStructure[4];
         private int positionSearcher = 0;
 
         Searcher(TriangleStructure init, BorderBox box) {
-            searcher[0] = init;
-            searcher[1] = init;
+            for (int i = 0; i < searcher.length; i++) {
+                searcher[i] = init;
+            }
             this.box = box;
         }
 
@@ -47,32 +48,46 @@ public class TriangulationAdvance {
             this.searcher[positionSearcher] = searcher;
         }
 
-
+        // 0 1
+        // 2 3
         public void chooseSearcher(Point point) {
-            if(box.getCenter().getX() > point.getX()) {
-                positionSearcher = 0;
+            if (box.getCenter().getX() > point.getX()) {
+                if (box.getCenter().getY() > point.getY()) {
+                    positionSearcher = 2;
+                } else {
+                    positionSearcher = 0;
+                }
             } else {
-                positionSearcher = 1;
+                if (box.getCenter().getY() > point.getY()) {
+                    positionSearcher = 3;
+                } else {
+                    positionSearcher = 1;
+                }
             }
-            if(searcher[positionSearcher].triangles != null)
+            if (searcher[positionSearcher].triangles != null)
                 return;
-            if(searcher[alternative(positionSearcher)].triangles != null){
-                searcher[positionSearcher] = searcher[alternative(positionSearcher)];
-                return;
+            for (int i = 0; i < searcher.length; i++) {
+                if (searcher[normalizeSizeByL(positionSearcher + i)].triangles != null) {
+                    searcher[positionSearcher] = searcher[normalizeSizeByL(positionSearcher + i)];
+                    return;
+                }
             }
             Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
-            while (iterator.hasNext()){
+            while (iterator.hasNext()) {
                 TriangleStructure next = iterator.next();
-                if(next.triangles != null){
+                if (next.triangles != null) {
                     searcher[positionSearcher] = next;
                 }
             }
         }
 
-        private int alternative(int position) {
-            if(position == 0)
-                return 1;
-            return 0;
+        private int normalizeSizeByL(int index) {
+            if (0 <= index && index < searcher.length) {
+                return index;
+            }
+            if (index < 0)
+                return normalizeSizeBy3(index + searcher.length);
+            return normalizeSizeBy3(index - searcher.length);
         }
     }
 
@@ -98,6 +113,7 @@ public class TriangulationAdvance {
     public TriangulationAdvance(final Point[] points, boolean withDelaunay) {
         triangulation(points, withDelaunay);
     }
+
 
     private void triangulation(final Point[] points, boolean withDelaunay) {
         createConvexHullTriangles(createConvexHullWithoutPointInLine(points));
@@ -224,7 +240,7 @@ public class TriangulationAdvance {
         for (Point point : points) {
             borderBox.addPoint(point);
         }
-        searcher = new Searcher(beginTriangle,borderBox);
+        searcher = new Searcher(beginTriangle, borderBox);
     }
 
     private List<Point> createConvexHullWithoutPointInLine(final Point[] points) {
@@ -414,7 +430,6 @@ public class TriangulationAdvance {
     }
 
     private void addNextPoint(Point nextPoint) {
-
         searcher.chooseSearcher(nextPoint);
 
         GeometryPointTriangle.PointTriangleState state = movingByConvexHull(nextPoint);
