@@ -7,11 +7,13 @@ import triangulationAdvance.TriangulationAdvance;
 
 public class TriangulationAdvanceBigData {
 
-    // Preliminary time of test = 6 minutes
+    // 250_000 points = 26 sec.
+    // 500_000 points = 77 sec.
+    // 1_000_000 points = 246 sec.
     @Ignore
     @Test
     public void testBigInputData1() {
-        Point[] points = (Point[]) ResearchTest.getRandomPoints(500_000).toArray();
+        Point[] points = (Point[]) ResearchTest.getRandomPoints(1_000_000).toArray();
         TriangulationAdvance triangulation = new TriangulationAdvance(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }

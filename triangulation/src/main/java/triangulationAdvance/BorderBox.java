@@ -13,7 +13,11 @@ public class BorderBox {
     private double y_min;
     private double y_max;
 
+    private boolean calculateCenter;
+    private Point center;
+
     public BorderBox() {
+        calculateCenter = true;
         x_min = Double.MAX_VALUE;
         x_max = -Double.MAX_VALUE;
         y_min = Double.MAX_VALUE;
@@ -27,6 +31,7 @@ public class BorderBox {
      * @see Point
      */
     public void addPoint(Point point) {
+        calculateCenter = true;
         x_min = Math.min(x_min, point.getX());
         x_max = Math.max(x_max, point.getX());
         y_min = Math.min(y_min, point.getY());
@@ -56,10 +61,13 @@ public class BorderBox {
      * @see Point
      */
     public Point getCenter() {
-        return new Point(
-                (x_min + x_max) / 2.0,
-                (y_min + y_max) / 2.0
-        );
+        if (calculateCenter) {
+            center = new Point(
+                    (x_min + x_max) / 2.0,
+                    (y_min + y_max) / 2.0);
+            calculateCenter = false;
+        }
+        return center;
     }
 
     /**

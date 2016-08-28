@@ -332,6 +332,19 @@ public class TriangulationAdvanceTest {
     }
 
     @Test
+    public void simpleTest24() {
+        Point[] points = new Point[]{
+                new Point(10, 40),
+                new Point(36, 27),
+                new Point(1, 12),
+                new Point(6, 42),
+                new Point(41, 24)
+        };
+        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Test
     public void simpleCircle() {
         Point[] points = (Point[]) ResearchTest.getCirclePoints(6).toArray();
         TriangulationAdvance triangulation = new TriangulationAdvance(points);

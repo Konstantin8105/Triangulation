@@ -23,10 +23,58 @@ public class TriangulationAdvance {
     //
     // Array of nodes - type: Point
     private final List<Point> nodes = new ArrayList<>();
-    // Begin triangle - type: Triangle
-    private TriangleStructure beginTriangle = new TriangleStructure();
     // Linked list of triangles
     private final List<TriangleStructure> triangleStructureList = new LinkedList<>();
+
+    private Searcher searcher;
+
+    private class Searcher {
+        private BorderBox box;
+        private TriangleStructure searcher[] = new TriangleStructure[2];
+        private int positionSearcher = 0;
+
+        Searcher(TriangleStructure init, BorderBox box) {
+            searcher[0] = init;
+            searcher[1] = init;
+            this.box = box;
+        }
+
+        TriangleStructure getSearcher() {
+            return searcher[positionSearcher];
+        }
+
+        public void setSearcher(TriangleStructure searcher) {
+            this.searcher[positionSearcher] = searcher;
+        }
+
+
+        public void chooseSearcher(Point point) {
+            if(box.getCenter().getX() > point.getX()) {
+                positionSearcher = 0;
+            } else {
+                positionSearcher = 1;
+            }
+            if(searcher[positionSearcher].triangles != null)
+                return;
+            if(searcher[alternative(positionSearcher)].triangles != null){
+                searcher[positionSearcher] = searcher[alternative(positionSearcher)];
+                return;
+            }
+            Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
+            while (iterator.hasNext()){
+                TriangleStructure next = iterator.next();
+                if(next.triangles != null){
+                    searcher[positionSearcher] = next;
+                }
+            }
+        }
+
+        private int alternative(int position) {
+            if(position == 0)
+                return 1;
+            return 0;
+        }
+    }
 
     private boolean isCounterClockwise(TriangleStructure triangle) {
         return TriangulationAdvance.Geometry.isCounterClockwise(
@@ -112,6 +160,9 @@ public class TriangulationAdvance {
     }
 
     private void createConvexHullTriangles(List<Point> points) {
+
+        TriangleStructure beginTriangle = null;
+
         int i = 0;
         i++;
         nodes.add(points.get(0));
@@ -123,7 +174,7 @@ public class TriangulationAdvance {
         TriangleStructure commonTriangle = null;
 
         int k = 0;
-        while (i + k <= points.size()) {
+        while (i + k < points.size()) {
             i++;
             nodes.add(points.get(i - 1));
             int indexPoint2 = nodes.size() - 1;
@@ -168,6 +219,12 @@ public class TriangulationAdvance {
             commonRib = rib12_next;
             commonTriangle = triangle2;
         }
+
+        BorderBox borderBox = new BorderBox();
+        for (Point point : points) {
+            borderBox.addPoint(point);
+        }
+        searcher = new Searcher(beginTriangle,borderBox);
     }
 
     private List<Point> createConvexHullWithoutPointInLine(final Point[] points) {
@@ -335,7 +392,7 @@ public class TriangulationAdvance {
         triangleStructureList.add(triangles[1]);
 
         //move beginTriangle
-        beginTriangle = triangles[0];
+        searcher.setSearcher(triangles[0]);
 
         //add null in old triangles
         for (TriangleStructure base : baseTriangles) {
@@ -357,6 +414,9 @@ public class TriangulationAdvance {
     }
 
     private void addNextPoint(Point nextPoint) {
+
+        searcher.chooseSearcher(nextPoint);
+
         GeometryPointTriangle.PointTriangleState state = movingByConvexHull(nextPoint);
 
         switch (state) {
@@ -375,7 +435,7 @@ public class TriangulationAdvance {
             case POINT_ON_CORNER:
                 break;
             default:
-                System.out.println("STRANGE");
+                System.out.println("STRANGE POINT : " + nextPoint);
         }
     }
 
@@ -391,6 +451,9 @@ public class TriangulationAdvance {
     int amountMoving = 0;
 
     private GeometryPointTriangle.PointTriangleState movingByConvexHull(Point point) {
+
+        TriangleStructure beginTriangle = searcher.getSearcher();
+
         while (true) {
             amountMoving++;
             if (amountMoving > triangleStructureList.size()) {
@@ -453,10 +516,15 @@ public class TriangulationAdvance {
                 nodes.get(beginTriangle.iNodes[2])
         };
 
+        searcher.setSearcher(beginTriangle);
+
         return GeometryPointTriangle.statePointInTriangle(point, trianglePoint);
     }
 
     private void addNextPointInTriangle(Point nextPoint) {
+
+        TriangleStructure beginTriangle = searcher.getSearcher();
+
         nodes.add(nextPoint);
         int pointIndex = nodes.size() - 1;
         int rib0 = getIdRib();
@@ -483,7 +551,7 @@ public class TriangulationAdvance {
 
         NullableTriangle(beginTriangle);
 
-        beginTriangle = triangles[0];
+        searcher.setSearcher(triangles[0]);
         addInverseLinkOnTriangle(triangles);
 
         for (int i = 0; i < 3; i++) {
@@ -537,6 +605,9 @@ public class TriangulationAdvance {
     }
 
     private void addNextPointOnLine(Point nextPoint, int indexLineInTriangle) {
+
+        TriangleStructure beginTriangle = searcher.getSearcher();
+
         nodes.add(nextPoint);
         int pointIndex = nodes.size() - 1;
 
@@ -591,7 +662,7 @@ public class TriangulationAdvance {
 
             NullableTriangle(beginTriangle);
 
-            beginTriangle = triangles[0];
+            searcher.setSearcher(triangles[0]);
             if (!isGoodDelaunay(triangles[0], 2)) {
                 flipTriangles(triangles[0], 2);
             }
@@ -654,7 +725,7 @@ public class TriangulationAdvance {
         addInverseLinkOnTriangle(triangles);
 
         NullableTriangle(beginTriangle);
-        beginTriangle = triangles[0];
+        searcher.setSearcher(triangles[0]);
 
         if (!isGoodDelaunay(triangles[0], 2)) {
             flipTriangles(triangles[0], 2);
