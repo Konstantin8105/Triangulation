@@ -278,7 +278,7 @@ public class TriangulationAdvance {
         if (triangle.triangles[indexTriangle] == null)
             return;
 
-        int pointNewTriangle = triangle.iNodes[normalizeSizeBy3(indexTriangle + 2)];
+        int pointNewTriangle = triangle.iNodes[normalizeSizeBy3(indexTriangle - 1)];
         int commonRib = triangle.iRibs[indexTriangle];
         TriangleStructure[] baseTriangles = new TriangleStructure[]{
                 triangle,
@@ -301,7 +301,7 @@ public class TriangulationAdvance {
             };
             t1.iNodes = new int[]{
                     internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib + 1)],
-                    internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib + 2)]
+                    internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib - 1)]
             };
             t1.triangles = new TriangleStructure[]{
                     internalTriangle.triangles[normalizeSizeBy3(indexCommonRib + 1)]
@@ -309,14 +309,14 @@ public class TriangulationAdvance {
             region.add(t1);
             TriangleStructure t2 = new TriangleStructure();
             t2.iRibs = new int[]{
-                    internalTriangle.iRibs[normalizeSizeBy3(indexCommonRib + 2)]
+                    internalTriangle.iRibs[normalizeSizeBy3(indexCommonRib - 1)]
             };
             t2.iNodes = new int[]{
-                    internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib + 2)],
-                    internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib + 3)]
+                    internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib - 1)],
+                    internalTriangle.iNodes[normalizeSizeBy3(indexCommonRib)]
             };
             t2.triangles = new TriangleStructure[]{
-                    internalTriangle.triangles[normalizeSizeBy3(indexCommonRib + 2)]
+                    internalTriangle.triangles[normalizeSizeBy3(indexCommonRib - 1)]
             };
             region.add(t2);
         }
@@ -420,16 +420,17 @@ public class TriangulationAdvance {
         if (triangle.triangles[indexTriangle] == null) {
             return true;
         }
-        // TODO: 8/27/16 modify if radiaus is same
+        // TODO: 8/27/16 modify if radius is same
         return !Geometry.isPointInCircle(
                 new Point[]{
                         nodes.get(triangle.triangles[indexTriangle].iNodes[0]),
                         nodes.get(triangle.triangles[indexTriangle].iNodes[1]),
                         nodes.get(triangle.triangles[indexTriangle].iNodes[2])},
-                nodes.get(triangle.iNodes[normalizeSizeBy3(indexTriangle + 2)]));
+                nodes.get(triangle.iNodes[normalizeSizeBy3(indexTriangle - 1)]));
     }
 
     private void addNextPoint(Point nextPoint) {
+
         searcher.chooseSearcher(nextPoint);
 
         GeometryPointTriangle.PointTriangleState state = movingByConvexHull(nextPoint);
@@ -463,10 +464,10 @@ public class TriangulationAdvance {
      * @see Point
      * @see GeometryPointTriangle.PointTriangleState
      */
-    int amountMoving = 0;
 
     private GeometryPointTriangle.PointTriangleState movingByConvexHull(Point point) {
 
+        int amountMoving = 0;
         TriangleStructure beginTriangle = searcher.getSearcher();
 
         while (true) {
@@ -524,7 +525,6 @@ public class TriangulationAdvance {
                 }
             }
         }
-        amountMoving = 0;
         Point[] trianglePoint = new Point[]{
                 nodes.get(beginTriangle.iNodes[0]),
                 nodes.get(beginTriangle.iNodes[1]),
@@ -640,13 +640,13 @@ public class TriangulationAdvance {
         triangles[0].iNodes = new int[]{
                 beginTriangle.iNodes[normalizeSizeBy3(indexLineInTriangle)],
                 pointIndex,
-                beginTriangle.iNodes[normalizeSizeBy3(indexLineInTriangle + 2)]
+                beginTriangle.iNodes[normalizeSizeBy3(indexLineInTriangle - 1)]
         };
 
         triangles[1].iNodes = new int[]{
                 pointIndex,
                 beginTriangle.iNodes[normalizeSizeBy3(indexLineInTriangle + 1)],
-                beginTriangle.iNodes[normalizeSizeBy3(indexLineInTriangle + 2)]
+                beginTriangle.iNodes[normalizeSizeBy3(indexLineInTriangle - 1)]
         };
 
         triangles[0].iRibs = new int[]{
@@ -705,12 +705,12 @@ public class TriangulationAdvance {
         triangles[2].iNodes = new int[]{
                 pointIndex,
                 beginTriangle.iNodes[normalizeSizeBy3(indexLineInTriangle + 1)],
-                beginTriangle.iNodes[normalizeSizeBy3(indexLineInTriangle + 2)]
+                beginTriangle.iNodes[normalizeSizeBy3(indexLineInTriangle - 1)]
         };
         triangles[3].iNodes = new int[]{
                 beginTriangle.iNodes[indexLineInTriangle],
                 pointIndex,
-                beginTriangle.iNodes[normalizeSizeBy3(indexLineInTriangle + 2)]
+                beginTriangle.iNodes[normalizeSizeBy3(indexLineInTriangle - 1)]
         };
 
 
