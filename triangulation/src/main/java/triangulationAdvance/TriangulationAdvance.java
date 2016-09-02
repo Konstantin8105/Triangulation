@@ -420,7 +420,6 @@ public class TriangulationAdvance {
         if (triangle.triangles[indexTriangle] == null) {
             return true;
         }
-        // TODO: 8/27/16 modify if radius is same
         return !Geometry.isPointInCircle(
                 new Point[]{
                         nodes.get(triangle.triangles[indexTriangle].iNodes[0]),
@@ -986,7 +985,7 @@ public class TriangulationAdvance {
             double y0 = point.getY();
             double z0 = x0 * x0 + y0 * y0;
 
-            return Math.signum(a) * (a * z0 - b * x0 + c * y0 - d) < 0;
+            return Math.signum(a) * (a * z0 - b * x0 + c * y0 - d) < Precision.epsilon();
         }
 
         static Point[] convexHull(Point[] inputPoints) {

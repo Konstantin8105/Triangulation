@@ -19,15 +19,15 @@ public class TriangulationAdvanceBenchmark {
             "3", "5",
             "10", "20", "50",
             "100", "200", "500",
-//            "1000", "2000", "5000"
+            "1000", "2000", "5000"
     })
     int size;
 
     @Param({
-            "Random",
+            "Random"/*,
             "Circle",
             "Line_in_line",
-            "In_triangle"
+            "In_triangle"*/
     })
     String test;
 
@@ -39,7 +39,7 @@ public class TriangulationAdvanceBenchmark {
             case "Random":
                 points = (Point[]) ResearchTest.getRandomPoints(size).toArray();
                 break;
-            case "Circle":
+            /*case "Circle":
                 points = (Point[]) ResearchTest.getCirclePoints(size).toArray();
                 break;
             case "Line_in_line":
@@ -47,7 +47,7 @@ public class TriangulationAdvanceBenchmark {
                 break;
             case "In_triangle":
                 points = (Point[]) ResearchTest.getInTriangles(size).toArray();
-                break;
+                break;*/
         }
     }
 
