@@ -988,7 +988,9 @@ public class TriangulationAdvance {
             return Math.signum(a) * (a * z0 - b * x0 + c * y0 - d) < Precision.epsilon();
         }
 
-        static Point[] convexHull(Point[] inputPoints) {
+
+        //Performance O(n*log(n)) in worst case
+        public static Point[] convexHull(Point[] inputPoints) {
             if (inputPoints.length < 2)
                 return inputPoints;
 

@@ -11,23 +11,25 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(value = 2)
 @Warmup(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 10, time = 2, timeUnit = TimeUnit.SECONDS)
-@Timeout(time = 50, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 10, time = 100, timeUnit = TimeUnit.SECONDS)
+@Timeout(time = 200, timeUnit = TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)//.Thread)
 public class TriangulationAdvanceBenchmark {
     @Param({
             "3", "5",
             "10", "20", "50",
             "100", "200", "500",
-            "1000", "2000", "5000"
+            "1000", "2000", "5000",
+            "10000", "20000", "50000",
+//            "100000", "200000", "500000",
     })
     int size;
 
     @Param({
-            "Random"/*,
+            "Random",
             "Circle",
             "Line_in_line",
-            "In_triangle"*/
+            "In_triangle"
     })
     String test;
 
@@ -39,7 +41,7 @@ public class TriangulationAdvanceBenchmark {
             case "Random":
                 points = (Point[]) ResearchTest.getRandomPoints(size).toArray();
                 break;
-            /*case "Circle":
+            case "Circle":
                 points = (Point[]) ResearchTest.getCirclePoints(size).toArray();
                 break;
             case "Line_in_line":
@@ -47,7 +49,7 @@ public class TriangulationAdvanceBenchmark {
                 break;
             case "In_triangle":
                 points = (Point[]) ResearchTest.getInTriangles(size).toArray();
-                break;*/
+                break;
         }
     }
 
