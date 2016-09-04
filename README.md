@@ -88,7 +88,7 @@ Performance with different cases:
     TriangulationAdvanceBenchmark.triangulationMesh   20000   In_triangle  avgt   20    45.646 ±  4.257  ms/op
     TriangulationAdvanceBenchmark.triangulationMesh   50000   In_triangle  avgt   20   118.031 ±  4.780  ms/op
 
-Present algorithm complexity in worst case - O(N*LOG(N)), average - O(N).
+Present algorithm complexity in worst case - O(N*LOG(N)), average - O(N*LOG(N)).
 
 ![CIRCLE](https://github.com/Konstantin8105/Triangulation/blob/master/triangulation/other/CIRCLE.png)
 

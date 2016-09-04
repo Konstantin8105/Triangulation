@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/other/Performance.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/other/Performance.ods" afterPath="$PROJECT_DIR$/triangulation/other/Performance.ods" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/other/RANDOM.png" afterPath="$PROJECT_DIR$/triangulation/other/RANDOM.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/perfomance/TriangulationAdvanceBenchmark.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/perfomance/TriangulationAdvanceBenchmark.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceTest.java" afterPath="$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceTest.java" />
     </list>
     <ignored path="triangulation/target/test-classes/META-INF/CompilerHints" />
     <ignored path="triangulation/target/classes/META-INF/BenchmarkList" />
@@ -66,8 +60,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="1440">
-                <caret line="96" column="100" selection-start-line="96" selection-start-column="100" selection-end-line="96" selection-end-column="100" />
+              <first_editor relative-caret-position="225">
+                <caret line="90" column="80" selection-start-line="90" selection-start-column="80" selection-end-line="90" selection-end-column="80" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -889,13 +883,6 @@
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
     </task>
-    <task id="LOCAL-00097" summary="empty">
-      <created>1470926616829</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1470926616829</updated>
-    </task>
     <task id="LOCAL-00098" summary="class Triangulation ... init">
       <created>1471449142220</created>
       <option name="number" value="00098" />
@@ -1232,7 +1219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1472838325658</updated>
     </task>
-    <option name="localTasksCounter" value="146" />
+    <task id="LOCAL-00146" summary="add graph on READ.ME">
+      <created>1473009634740</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1473009634740</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1320,7 +1314,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create BorderSegmentConvex" />
     <MESSAGE value="optimize BorderLine" />
     <MESSAGE value="optimize Grid" />
     <MESSAGE value="remove empty comments" />
@@ -1345,7 +1338,8 @@
     <MESSAGE value="Optimize normalizeby3" />
     <MESSAGE value="Add 4 searchers" />
     <MESSAGE value="big fix inCircle" />
-    <option name="LAST_COMMIT_MESSAGE" value="big fix inCircle" />
+    <MESSAGE value="add graph on READ.ME" />
+    <option name="LAST_COMMIT_MESSAGE" value="add graph on READ.ME" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1555,8 +1549,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="1440">
-            <caret line="96" column="100" selection-start-line="96" selection-start-column="100" selection-end-line="96" selection-end-column="100" />
+          <first_editor relative-caret-position="225">
+            <caret line="90" column="80" selection-start-line="90" selection-start-column="80" selection-end-line="90" selection-end-column="80" />
             <folding />
           </first_editor>
           <second_editor />
