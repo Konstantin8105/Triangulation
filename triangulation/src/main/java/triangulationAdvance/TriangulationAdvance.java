@@ -130,6 +130,10 @@ public class TriangulationAdvance {
         delaunayMesh(1);
     }
 
+    // TODO: 9/5/16 use another algoritm for delaunay
+    // point on line or in triangle ===> to buffer
+    // flip buffer and result to next buffer and again
+    // all if all is ok then stop flipping
     public void delaunayMesh(int amountIteration) {
         class FlipTriangle {
             public TriangleStructure triangleStructure;
@@ -1032,6 +1036,8 @@ public class TriangulationAdvance {
             }
 
             Point[] H = new Point[2 * n];
+
+            //todo: separate point on convexhull and inside with presort
 
             int k = 0;
             // Build lower hull
