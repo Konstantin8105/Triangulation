@@ -16,10 +16,12 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)//.Thread)
 public class TriangulationAdvanceBenchmark {
     @Param({
-            "10",
-            "100",
-            "1000",
-            "10000", "20000", "30000", "40000", "50000",
+//            "10",
+//            "100",
+//            "1000",
+//            "10000",
+//            "20000", "30000", "40000",
+            "50000",
 //            "100000", "200000", "500000",
     })
     int size;

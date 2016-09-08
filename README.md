@@ -26,6 +26,13 @@ Simple example:
 Performance with different cases:
 
     Benchmark                                        (size)        (test)  Mode  Cnt     Score    Error  Units
+    TriangulationAdvanceBenchmark.triangulationMesh   50000        Random  avgt   20   325.045 ± 13.335  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh   50000        Circle  avgt   20  1007.281 ± 17.755  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh   50000  Line_in_line  avgt   20     5.407 ±  0.238  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh   50000   In_triangle  avgt   20     4.560 ±  0.289  ms/op
+
+
+    Benchmark                                        (size)        (test)  Mode  Cnt     Score    Error  Units
     TriangulationAdvanceBenchmark.triangulationMesh      10        Random  avgt   20  0.065 ± 0.023  ms/op
     TriangulationAdvanceBenchmark.triangulationMesh     100        Random  avgt   20  0.437 ± 0.055  ms/op
     TriangulationAdvanceBenchmark.triangulationMesh    1000        Random  avgt   20  4.744 ± 0.293  ms/op

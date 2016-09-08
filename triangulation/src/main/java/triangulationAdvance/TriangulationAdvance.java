@@ -40,8 +40,8 @@ public class TriangulationAdvance {
                 searcher[i] = init;
             }
             this.box = box;
-            up_mid = (box.getCenter().getY()+box.getY_max())/2.;
-            down_mid = (box.getCenter().getY()+box.getY_min())/2.;
+            up_mid = (box.getCenter().getY() + box.getY_max()) / 2.;
+            down_mid = (box.getCenter().getY() + box.getY_min()) / 2.;
         }
 
         TriangleStructure getSearcher() {
@@ -57,13 +57,13 @@ public class TriangulationAdvance {
         // 2
         // 3
         public void chooseSearcher(Point point) {
-            if(point.getY()>box.getCenter().getY()){
-                if(point.getY() > up_mid)
+            if (point.getY() > box.getCenter().getY()) {
+                if (point.getY() > up_mid)
                     positionSearcher = 0;
                 else
                     positionSearcher = 1;
             } else {
-                if(point.getY() > down_mid)
+                if (point.getY() > down_mid)
                     positionSearcher = 2;
                 else
                     positionSearcher = 3;
@@ -115,12 +115,12 @@ public class TriangulationAdvance {
         triangulation(points, false);
     }
 
-    public TriangulationAdvance(final Point[] points,final boolean withDelaunay) {
+    public TriangulationAdvance(final Point[] points, final boolean withDelaunay) {
         triangulation(points, withDelaunay);
     }
 
 
-    private void triangulation(Point[] points,final boolean withDelaunay) {
+    private void triangulation(Point[] points, final boolean withDelaunay) {
         // sorted points
         Point[][] pointArray = Geometry.convexHullDouble(points);
         List<Point> convexPoints = new ArrayList<>(Arrays.asList(pointArray[0]));
