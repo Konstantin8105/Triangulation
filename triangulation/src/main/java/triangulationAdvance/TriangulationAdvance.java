@@ -32,12 +32,16 @@ public class TriangulationAdvance {
         private BorderBox box;
         private TriangleStructure searcher[] = new TriangleStructure[4];
         private int positionSearcher = 0;
+        private double up_mid;
+        private double down_mid;
 
         Searcher(TriangleStructure init, BorderBox box) {
             for (int i = 0; i < searcher.length; i++) {
                 searcher[i] = init;
             }
             this.box = box;
+            up_mid = (box.getCenter().getY()+box.getY_max())/2.;
+            down_mid = (box.getCenter().getY()+box.getY_min())/2.;
         }
 
         TriangleStructure getSearcher() {
@@ -48,22 +52,23 @@ public class TriangulationAdvance {
             this.searcher[positionSearcher] = searcher;
         }
 
-        // 0 1
-        // 2 3
+        // 0
+        // 1
+        // 2
+        // 3
         public void chooseSearcher(Point point) {
-            if (box.getCenter().getX() > point.getX()) {
-                if (box.getCenter().getY() > point.getY()) {
-                    positionSearcher = 2;
-                } else {
+            if(point.getY()>box.getCenter().getY()){
+                if(point.getY() > up_mid)
                     positionSearcher = 0;
-                }
-            } else {
-                if (box.getCenter().getY() > point.getY()) {
-                    positionSearcher = 3;
-                } else {
+                else
                     positionSearcher = 1;
-                }
+            } else {
+                if(point.getY() > down_mid)
+                    positionSearcher = 2;
+                else
+                    positionSearcher = 3;
             }
+
             if (searcher[positionSearcher].triangles != null)
                 return;
             for (int i = 0; i < searcher.length; i++) {
@@ -110,13 +115,17 @@ public class TriangulationAdvance {
         triangulation(points, false);
     }
 
-    public TriangulationAdvance(final Point[] points, boolean withDelaunay) {
+    public TriangulationAdvance(final Point[] points,final boolean withDelaunay) {
         triangulation(points, withDelaunay);
     }
 
 
-    private void triangulation(final Point[] points, boolean withDelaunay) {
-        createConvexHullTriangles(createConvexHullWithoutPointInLine(points));
+    private void triangulation(Point[] points,final boolean withDelaunay) {
+        // sorted points
+        Point[][] pointArray = Geometry.convexHullDouble(points);
+        List<Point> convexPoints = new ArrayList<>(Arrays.asList(pointArray[0]));
+        createConvexHullTriangles(createConvexHullWithoutPointInLine(convexPoints));
+        points = pointArray[1];
         int MINIMAL_DELAUNAY_STEP = 100;
         int delaunayStep = (int) Math.max(Math.sqrt(points.length), MINIMAL_DELAUNAY_STEP);
         if (withDelaunay)
@@ -243,8 +252,7 @@ public class TriangulationAdvance {
         searcher = new Searcher(beginTriangle, borderBox);
     }
 
-    private List<Point> createConvexHullWithoutPointInLine(final Point[] points) {
-        List<Point> convexPoints = new ArrayList<>(Arrays.asList(Geometry.convexHull(points)));
+    private List<Point> createConvexHullWithoutPointInLine(final List<Point> convexPoints) {
 
         List<Integer> removesIndex = new ArrayList<>();
         for (int i = 0; i < convexPoints.size(); i++) {
@@ -417,7 +425,7 @@ public class TriangulationAdvance {
     }
 
     private boolean isGoodDelaunay(TriangleStructure triangle, int indexTriangle) {
-        if(triangle == null)
+        if (triangle == null)
             return true;
         if (triangle.triangles[indexTriangle] == null) {
             return true;
@@ -1056,6 +1064,76 @@ public class TriangulationAdvance {
             }
             return H;
         }
+
+        //Performance O(n*log(n)) in worst case
+        // Point[0][] - convex points
+        // Point[1][] - sorted list of all points
+        public static Point[][] convexHullDouble(Point[] inputPoints) {
+            if (inputPoints.length < 2) {
+                return new Point[][]{inputPoints, {}};
+            }
+
+            List<Point> array = new ArrayList<>(Arrays.asList(inputPoints));
+
+            Collections.sort(array, new Comparator<Point>() {
+                @Override
+                public int compare(Point first, Point second) {
+                    if ((first).getX() == (second).getX()) {
+                        if ((first).getY() > (second).getY())
+                            return 1;
+                        if ((first).getY() < (second).getY())
+                            return -1;
+                        return 0;
+                    }
+                    if ((first).getX() > (second).getX())
+                        return 1;
+                    if ((first).getX() < (second).getX())
+                        return -1;
+                    return 0;
+                }
+            });
+
+            List<Integer> removedIndex = new ArrayList<>();
+            for (int i = 1; i < array.size(); i++) {
+                if (array.get(i - 1).equals(array.get(i))) {
+                    removedIndex.add(i);
+                }
+            }
+            for (int i = removedIndex.size() - 1; i >= 0; i--) {
+                int position = removedIndex.get(i);
+                array.remove(position);
+            }
+
+            int n = array.size();
+            Point[] P = new Point[n];
+            for (int i = 0; i < n; i++) {
+                P[i] = array.get(i);
+            }
+
+            Point[] H = new Point[2 * n];
+
+            int k = 0;
+            // Build lower hull
+            for (int i = 0; i < n; ++i) {
+                while (k >= 2 && isCounterClockwise(H[k - 2], H[k - 1], P[i])) {
+                    k--;
+                }
+                H[k++] = P[i];
+            }
+
+            // Build upper hull
+            for (int i = n - 2, t = k + 1; i >= 0; i--) {
+                while (k >= t && isCounterClockwise(H[k - 2], H[k - 1], P[i])) {
+                    k--;
+                }
+                H[k++] = P[i];
+            }
+            if (k > 1) {
+                H = Arrays.copyOfRange(H, 0, k - 1); // remove non-hull vertices after k; remove k - 1 which is a duplicate
+            }
+            return new Point[][]{H, array.toArray(new Point[array.size()])};
+        }
+
 
         static double distanceLineAndPoint(Point lineP1, Point lineP2, Point p) {
             double A;

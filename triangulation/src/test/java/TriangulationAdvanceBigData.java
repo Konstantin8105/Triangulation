@@ -10,6 +10,7 @@ public class TriangulationAdvanceBigData {
     // 250_000 points = 20 sec.
     // 500_000 points = 59 sec.
     // 1_000_000 points = 182 sec
+    // 1_000_000 points = 30 sec
     @Ignore
     @Test
     public void testBigInputData1() {

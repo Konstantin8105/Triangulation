@@ -27,21 +27,19 @@ Performance with different cases:
 
     # Run complete. Total time: 1 days, 07:27:20
 
-    Benchmark                                        (size)        (test)  Mode  Cnt     Score    Error  Units
-    TriangulationAdvanceBenchmark.triangulationMesh       3        Random  avgt   20     0.021 ±  0.001  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh       5        Random  avgt   20     0.037 ±  0.001  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh      10        Random  avgt   20     0.055 ±  0.001  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh      20        Random  avgt   20     0.100 ±  0.006  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh      50        Random  avgt   20     0.222 ±  0.012  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh     100        Random  avgt   20     0.381 ±  0.001  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh     200        Random  avgt   20     0.912 ±  0.024  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh     500        Random  avgt   20     2.326 ±  0.027  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh    1000        Random  avgt   20     5.220 ±  0.047  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh    2000        Random  avgt   20    11.280 ±  0.112  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh    5000        Random  avgt   20    36.328 ±  0.191  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   10000        Random  avgt   20    99.056 ±  0.911  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   20000        Random  avgt   20   292.304 ±  1.555  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   50000        Random  avgt   20  1491.496 ± 20.051  ms/op
+    Benchmark                                        (size)  (test)  Mode  Cnt    Score   Error  Units
+    TriangulationAdvanceBenchmark.triangulationMesh      10  Random  avgt   20    0.053 ± 0.001  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh      20  Random  avgt   20    0.110 ± 0.007  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh      50  Random  avgt   20    0.225 ± 0.002  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh     100  Random  avgt   20    0.434 ± 0.005  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh     200  Random  avgt   20    0.848 ± 0.008  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh     500  Random  avgt   20    2.180 ± 0.019  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh    1000  Random  avgt   20    4.566 ± 0.017  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh    2000  Random  avgt   20    9.846 ± 0.052  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh    5000  Random  avgt   20   25.634 ± 0.352  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh   10000  Random  avgt   20   54.966 ± 0.222  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh   20000  Random  avgt   20  113.908 ± 1.724  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh   50000  Random  avgt   20  324.403 ± 4.944  ms/op
 
     TriangulationAdvanceBenchmark.triangulationMesh       3        Circle  avgt   20     0.021 ±  0.002  ms/op
     TriangulationAdvanceBenchmark.triangulationMesh       5        Circle  avgt   20     0.039 ±  0.001  ms/op

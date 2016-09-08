@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)//.Thread)
 public class TriangulationAdvanceBenchmark {
     @Param({
-            "3", "5",
+//            "3", "5",
             "10", "20", "50",
             "100", "200", "500",
             "1000", "2000", "5000",
@@ -27,9 +27,9 @@ public class TriangulationAdvanceBenchmark {
 
     @Param({
             "Random",
-            "Circle",
-            "Line_in_line",
-            "In_triangle"
+//            "Circle",
+//            "Line_in_line",
+//            "In_triangle"
     })
     String test;
 
@@ -41,15 +41,15 @@ public class TriangulationAdvanceBenchmark {
             case "Random":
                 points = (Point[]) ResearchTest.getRandomPoints(size).toArray();
                 break;
-            case "Circle":
-                points = (Point[]) ResearchTest.getCirclePoints(size).toArray();
-                break;
-            case "Line_in_line":
-                points = (Point[]) ResearchTest.getLineOnLine(size).toArray();
-                break;
-            case "In_triangle":
-                points = (Point[]) ResearchTest.getInTriangles(size).toArray();
-                break;
+//            case "Circle":
+//                points = (Point[]) ResearchTest.getCirclePoints(size).toArray();
+//                break;
+//            case "Line_in_line":
+//                points = (Point[]) ResearchTest.getLineOnLine(size).toArray();
+//                break;
+//            case "In_triangle":
+//                points = (Point[]) ResearchTest.getInTriangles(size).toArray();
+//                break;
         }
     }
 
