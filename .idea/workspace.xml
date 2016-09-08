@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/other/Performance.ods" afterPath="$PROJECT_DIR$/triangulation/other/Performance.ods" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/other/Performance.png" afterPath="$PROJECT_DIR$/triangulation/other/Performance.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="triangulation/target/test-classes/META-INF/CompilerHints" />
@@ -73,8 +73,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="289">
-                <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
+              <first_editor relative-caret-position="499">
+                <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -966,13 +966,6 @@
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
     </task>
-    <task id="LOCAL-00104" summary="finding error">
-      <created>1471534532840</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1471534532840</updated>
-    </task>
     <task id="LOCAL-00105" summary="finding error">
       <created>1471534807282</created>
       <option name="number" value="00105" />
@@ -1309,7 +1302,14 @@
       <option name="project" value="LOCAL" />
       <updated>1473353115995</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="update picture">
+      <created>1473353290741</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1473353290741</updated>
+    </task>
+    <option name="localTasksCounter" value="154" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1397,7 +1397,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="empty" />
     <MESSAGE value="class Triangulation ... init" />
     <MESSAGE value="finding error" />
     <MESSAGE value="reapir" />
@@ -1422,7 +1421,8 @@
     <MESSAGE value="add TODO" />
     <MESSAGE value="remove TODO" />
     <MESSAGE value="optimize - use sorted list of points from convexHull for moving" />
-    <option name="LAST_COMMIT_MESSAGE" value="optimize - use sorted list of points from convexHull for moving" />
+    <MESSAGE value="update picture" />
+    <option name="LAST_COMMIT_MESSAGE" value="update picture" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1643,8 +1643,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="289">
-            <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
+          <first_editor relative-caret-position="499">
+            <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
