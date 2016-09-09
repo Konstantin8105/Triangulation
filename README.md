@@ -25,6 +25,39 @@ Simple example:
 
 Performance with different cases:
 
+**java -jar target/microbenchmarks.jar**
+
+
+    --------------
+
+    On work computer
+    Benchmark                                        (size)        (test)  Mode  Cnt     Score     Error  Units
+    TriangulationAdvanceBenchmark.triangulationMesh   50000        Random  avgt   20   245,952 ?   5,228  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh  100000        Random  avgt   20   598,011 ?  45,849  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh  200000        Random  avgt   20  1511,094 ? 177,679  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh  500000        Random  avgt   20  4535,501 ? 476,356  ms/op
+
+    TriangulationAdvanceBenchmark.triangulationMesh   50000        Circle  avgt   20   866,349 ?  12,135  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh  100000        Circle  avgt   20  1750,037 ?  21,049  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh  200000        Circle  avgt   20  3622,938 ?  78,579  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh  500000        Circle  avgt   20  8932,445 ? 169,985  ms/op
+
+    TriangulationAdvanceBenchmark.triangulationMesh   50000  Line_in_line  avgt   20     3,777 ?   0,106  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh  100000  Line_in_line  avgt   20     6,171 ?   0,209  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh  200000  Line_in_line  avgt   20    11,308 ?   0,395  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh  500000  Line_in_line  avgt   20    25,840 ?   0,797  ms/op
+
+    TriangulationAdvanceBenchmark.triangulationMesh   50000   In_triangle  avgt   20     3,242 ?   0,115  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh  100000   In_triangle  avgt   20     5,603 ?   0,203  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh  200000   In_triangle  avgt   20    10,838 ?   0,363  ms/op
+    TriangulationAdvanceBenchmark.triangulationMesh  500000   In_triangle  avgt   20    25,053 ?   0,686  ms/op
+
+    -----------------------------
+
+
+
+
+
     Benchmark                                        (size)        (test)  Mode  Cnt     Score    Error  Units
     TriangulationAdvanceBenchmark.triangulationMesh   50000        Random  avgt   20   325.045 ± 13.335  ms/op
     TriangulationAdvanceBenchmark.triangulationMesh   50000        Circle  avgt   20  1007.281 ± 17.755  ms/op
