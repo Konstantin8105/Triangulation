@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/other/Performance.ods" afterPath="$PROJECT_DIR$/triangulation/other/Performance.ods" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/meshview/MeshView.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/meshview/MeshView.java" />
     </list>
     <ignored path="triangulation/target/test-classes/META-INF/CompilerHints" />
     <ignored path="triangulation/target/classes/META-INF/BenchmarkList" />
@@ -941,13 +939,6 @@
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
     </task>
-    <task id="LOCAL-00108" summary="repair">
-      <created>1471786147018</created>
-      <option name="number" value="00108" />
-      <option name="presentableId" value="LOCAL-00108" />
-      <option name="project" value="LOCAL" />
-      <updated>1471786147032</updated>
-    </task>
     <task id="LOCAL-00109" summary="repair">
       <created>1471793925955</created>
       <option name="number" value="00109" />
@@ -1284,7 +1275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1473405108561</updated>
     </task>
-    <option name="localTasksCounter" value="157" />
+    <task id="LOCAL-00157" summary="fix some warnings">
+      <created>1473405303531</created>
+      <option name="number" value="00157" />
+      <option name="presentableId" value="LOCAL-00157" />
+      <option name="project" value="LOCAL" />
+      <updated>1473405303531</updated>
+    </task>
+    <option name="localTasksCounter" value="158" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1372,7 +1370,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="finding error" />
     <MESSAGE value="reapir" />
     <MESSAGE value="repair" />
     <MESSAGE value="repair flipTriangle" />
@@ -1397,7 +1394,8 @@
     <MESSAGE value="optimize - use sorted list of points from convexHull for moving" />
     <MESSAGE value="update picture" />
     <MESSAGE value="checking on another computer" />
-    <option name="LAST_COMMIT_MESSAGE" value="checking on another computer" />
+    <MESSAGE value="fix some warnings" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix some warnings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
