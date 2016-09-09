@@ -22,8 +22,8 @@ public class MeshView extends JFrame {
 
         final BorderBox box = new BorderBox();
         for (Point[] aMesh : mesh) {
-            for (int j = 0; j < aMesh.length; j++) {
-                box.addPoint(aMesh[j]);
+            for (Point anAMesh : aMesh) {
+                box.addPoint(anAMesh);
             }
         }
 

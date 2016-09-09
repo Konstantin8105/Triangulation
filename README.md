@@ -15,7 +15,7 @@ Simple example:
                 new Point(1.0f, 5.0f)
         };
 
-        Triangulation triangulation = new Triangulation(coordinates);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(coordinates);
         System.out.println(triangulation.getMesh());
 
         assertTrue(triangulation.getMesh().sizeTriangles() > 0);
@@ -27,82 +27,32 @@ Performance with different cases:
 
 **java -jar target/microbenchmarks.jar**
 
+    Benchmark                                         (size)        (test)  Mode  Cnt     Score     Error  Units
+    TriangulationDelaunayBenchmark.triangulationMesh      10        Random  avgt   20     0.088 ±   0.059  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh     100        Random  avgt   20     0.585 ±   0.064  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh    1000        Random  avgt   20     7.166 ±   0.843  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh   10000        Random  avgt   20    86.201 ±   6.242  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh  100000        Random  avgt   20  2116.499 ±  68.317  ms/op
 
-    --------------
+    TriangulationDelaunayBenchmark.triangulationMesh      10        Circle  avgt   20     0.104 ±   0.052  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh     100        Circle  avgt   20     0.848 ±   0.067  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh    1000        Circle  avgt   20    12.771 ±   0.597  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh   10000        Circle  avgt   20   187.117 ±   6.940  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh  100000        Circle  avgt   20  2924.161 ± 142.246  ms/op
 
-    On work computer
-    Benchmark                                        (size)        (test)  Mode  Cnt     Score     Error  Units
-    TriangulationAdvanceBenchmark.triangulationMesh   50000        Random  avgt   20   245,952 ?   5,228  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh  100000        Random  avgt   20   598,011 ?  45,849  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh  200000        Random  avgt   20  1511,094 ? 177,679  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh  500000        Random  avgt   20  4535,501 ? 476,356  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh      10  Line_in_line  avgt   20     0.078 ±   0.008  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh     100  Line_in_line  avgt   20     0.605 ±   0.033  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh    1000  Line_in_line  avgt   20     2.388 ±   0.172  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh   10000  Line_in_line  avgt   20     3.290 ±   0.503  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh  100000  Line_in_line  avgt   20     8.170 ±   0.333  ms/op
 
-    TriangulationAdvanceBenchmark.triangulationMesh   50000        Circle  avgt   20   866,349 ?  12,135  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh  100000        Circle  avgt   20  1750,037 ?  21,049  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh  200000        Circle  avgt   20  3622,938 ?  78,579  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh  500000        Circle  avgt   20  8932,445 ? 169,985  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh      10   In_triangle  avgt   20     0.033 ±   0.012  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh     100   In_triangle  avgt   20     0.231 ±   0.032  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh    1000   In_triangle  avgt   20     0.979 ±   0.144  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh   10000   In_triangle  avgt   20     1.549 ±   0.158  ms/op
+    TriangulationDelaunayBenchmark.triangulationMesh  100000   In_triangle  avgt   20     7.102 ±   0.309  ms/op
 
-    TriangulationAdvanceBenchmark.triangulationMesh   50000  Line_in_line  avgt   20     3,777 ?   0,106  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh  100000  Line_in_line  avgt   20     6,171 ?   0,209  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh  200000  Line_in_line  avgt   20    11,308 ?   0,395  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh  500000  Line_in_line  avgt   20    25,840 ?   0,797  ms/op
-
-    TriangulationAdvanceBenchmark.triangulationMesh   50000   In_triangle  avgt   20     3,242 ?   0,115  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh  100000   In_triangle  avgt   20     5,603 ?   0,203  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh  200000   In_triangle  avgt   20    10,838 ?   0,363  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh  500000   In_triangle  avgt   20    25,053 ?   0,686  ms/op
-
-    -----------------------------
-
-
-
-
-
-    Benchmark                                        (size)        (test)  Mode  Cnt     Score    Error  Units
-    TriangulationAdvanceBenchmark.triangulationMesh   50000        Random  avgt   20   325.045 ± 13.335  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   50000        Circle  avgt   20  1007.281 ± 17.755  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   50000  Line_in_line  avgt   20     5.407 ±  0.238  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   50000   In_triangle  avgt   20     4.560 ±  0.289  ms/op
-
-
-    Benchmark                                        (size)        (test)  Mode  Cnt     Score    Error  Units
-    TriangulationAdvanceBenchmark.triangulationMesh      10        Random  avgt   20  0.065 ± 0.023  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh     100        Random  avgt   20  0.437 ± 0.055  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh    1000        Random  avgt   20  4.744 ± 0.293  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   10000        Random  avgt   20    55.091 ±  1.589  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   20000        Random  avgt   20   120.496 ±  2.794  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   30000        Random  avgt   20   184.443 ± 10.619  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   40000        Random  avgt   20   269.808 ± 14.129  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   50000        Random  avgt   20   354.092 ± 17.693  ms/op
-
-    TriangulationAdvanceBenchmark.triangulationMesh      10        Circle  avgt   20  0.104 ± 0.059  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh     100        Circle  avgt   20  0.806 ± 0.060  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh    1000        Circle  avgt   20  7.974 ± 0.639  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   10000        Circle  avgt   20   201.117 ±  7.926  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   20000        Circle  avgt   20   397.493 ± 12.365  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   30000        Circle  avgt   20   599.424 ± 14.640  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   40000        Circle  avgt   20   863.022 ± 53.199  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   50000        Circle  avgt   20  1066.332 ± 29.487  ms/op
-
-    TriangulationAdvanceBenchmark.triangulationMesh      10  Line_in_line  avgt   20  0.080 ± 0.011  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh     100  Line_in_line  avgt   20  0.626 ± 0.036  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh    1000  Line_in_line  avgt   20  2.530 ± 0.108  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   10000  Line_in_line  avgt   20     3.170 ±  0.262  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   20000  Line_in_line  avgt   20     3.671 ±  0.221  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   30000  Line_in_line  avgt   20     4.335 ±  0.278  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   40000  Line_in_line  avgt   20     4.958 ±  0.357  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   50000  Line_in_line  avgt   20     5.581 ±  0.163  ms/op
-
-    TriangulationAdvanceBenchmark.triangulationMesh      10   In_triangle  avgt   20  0.046 ± 0.016  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh     100   In_triangle  avgt   20  0.318 ± 0.021  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh    1000   In_triangle  avgt   20  1.557 ± 0.196  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   10000   In_triangle  avgt   20     2.196 ±  0.172  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   20000   In_triangle  avgt   20     2.759 ±  0.137  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   30000   In_triangle  avgt   20     3.517 ±  0.286  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   40000   In_triangle  avgt   20     4.057 ±  0.172  ms/op
-    TriangulationAdvanceBenchmark.triangulationMesh   50000   In_triangle  avgt   20     4.643 ±  0.189  ms/op
-
-Present algorithm complexity in worst case - O(N*LOG(N)), average - O(N*LOG(N)).
+Present algorithm complexity in worst case - O(NxLOG(N)), average - O(NxLOG(N)).
 
 ![CIRCLE](https://github.com/Konstantin8105/Triangulation/blob/master/triangulation/other/CIRCLE.png)
 
@@ -115,10 +65,6 @@ Present algorithm complexity in worst case - O(N*LOG(N)), average - O(N*LOG(N)).
     ------------------------+------------------+-------------------+----------------+
                             |                  |                   |                |
     Class name              |    Input data    |    Description    |    Status      |
-                            |                  |                   |                |
-    ------------------------+------------------+-------------------+----------------+
-                            |                  |                   |                |
-    Triangulation           |   Points only    |   triangulation   |   DONE         |
                             |                  |                   |                |
     ------------------------+------------------+-------------------+----------------+
                             |                  |                   |                |

@@ -3,7 +3,7 @@ package perfomance;
 import org.openjdk.jmh.annotations.*;
 import research.ResearchTest;
 import triangulationAdvance.Point;
-import triangulationAdvance.TriangulationAdvance;
+import triangulationAdvance.TriangulationDelaunay;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,17 +12,15 @@ import java.util.concurrent.TimeUnit;
 @Fork(value = 2)
 @Warmup(iterations = 10, time = 50, timeUnit = TimeUnit.MILLISECONDS)
 @Measurement(iterations = 10)
-@Timeout(time = 50, timeUnit = TimeUnit.MILLISECONDS)
+@Timeout(time = 20, timeUnit = TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)//.Thread)
-public class TriangulationAdvanceBenchmark {
+public class TriangulationDelaunayBenchmark {
     @Param({
-//            "10",
-//            "100",
-//            "1000",
-//            "10000",
-//            "20000", "30000", "40000",
-            "50000",
-            "100000", "200000", "500000",
+            "10",
+            "100",
+            "1000",
+            "10000",
+            "100000"
     })
     int size;
 
@@ -56,7 +54,7 @@ public class TriangulationAdvanceBenchmark {
 
     @Benchmark
     public int triangulationMesh() throws Exception {
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         return triangulation.getTriangles().size();
     }
 

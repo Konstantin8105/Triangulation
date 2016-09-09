@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
- * triangulationAdvance.TriangulationAdvance
+ * triangulationAdvance.TriangulationDelaunay
  * for step - triangulation convexHull: "Divide and Conquer"
  * Performance for worst-case: O(N^2)
  * for step - triangulation with restrictions: "Simple interactive method"
@@ -17,31 +17,44 @@ import java.util.*;
  * @author Izyumov Konstantin
  *         book "Algoritm building and analyse triangulation", A.B.Skvorcov.
  */
-public class TriangulationAdvance {
+public class TriangulationDelaunay {
     //
-    // triangulationAdvance.TriangulationAdvance data structure  "Nodes, ribs и triangles"
+    // triangulationAdvance.TriangulationDelaunay data structure  "Nodes, ribs и triangles"
     //
     // Array of nodes - type: Point
     private final List<Point> nodes = new ArrayList<>();
     // Linked list of triangles
     private final List<TriangleStructure> triangleStructureList = new LinkedList<>();
 
+    private final Stack<FlipStructure> flipBuffer = new Stack<>();
+
+    private class FlipStructure {
+        public TriangleStructure triangle;
+        public int side;
+
+        public FlipStructure(TriangleStructure triangle, int side) {
+            this.triangle = triangle;
+            this.side = side;
+        }
+    }
+
     private Searcher searcher;
 
     private class Searcher {
-        private BorderBox box;
-        private TriangleStructure searcher[] = new TriangleStructure[4];
+        private TriangleStructure searcher[];
+        private double[] elevations;
         private int positionSearcher = 0;
-        private double up_mid;
-        private double down_mid;
 
-        Searcher(TriangleStructure init, BorderBox box) {
+        Searcher(TriangleStructure init, BorderBox box, int amountOfPoints) {
+            searcher = new TriangleStructure[(int) Math.max(1.0D, 0.05D * Math.sqrt((double) amountOfPoints))];
             for (int i = 0; i < searcher.length; i++) {
                 searcher[i] = init;
             }
-            this.box = box;
-            up_mid = (box.getCenter().getY() + box.getY_max()) / 2.;
-            down_mid = (box.getCenter().getY() + box.getY_min()) / 2.;
+            double heightStep = (box.getY_max() - box.getY_min()) / (double) searcher.length;
+            elevations = new double[searcher.length];
+            for (int i = 0; i < elevations.length; i++) {
+                elevations[i] = box.getY_min() + i * heightStep;
+            }
         }
 
         TriangleStructure getSearcher() {
@@ -52,36 +65,28 @@ public class TriangulationAdvance {
             this.searcher[positionSearcher] = searcher;
         }
 
-        // 0
-        // 1
-        // 2
-        // 3
         public void chooseSearcher(Point point) {
-            if (point.getY() > box.getCenter().getY()) {
-                if (point.getY() > up_mid)
-                    positionSearcher = 0;
-                else
-                    positionSearcher = 1;
-            } else {
-                if (point.getY() > down_mid)
-                    positionSearcher = 2;
-                else
-                    positionSearcher = 3;
+            for (int i = searcher.length - 1; i >= 0; i--) {
+                if (point.getY() > elevations[i]) {
+                    positionSearcher = i;
+                    break;
+                }
             }
 
             if (searcher[positionSearcher].triangles != null)
                 return;
+
             for (int i = 0; i < searcher.length; i++) {
                 if (searcher[normalizeSizeByL(positionSearcher + i)].triangles != null) {
                     searcher[positionSearcher] = searcher[normalizeSizeByL(positionSearcher + i)];
                     return;
                 }
             }
-            Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
-            while (iterator.hasNext()) {
-                TriangleStructure next = iterator.next();
+
+            for (TriangleStructure next : triangleStructureList) {
                 if (next.triangles != null) {
                     searcher[positionSearcher] = next;
+                    break;
                 }
             }
         }
@@ -97,7 +102,7 @@ public class TriangulationAdvance {
     }
 
     private boolean isCounterClockwise(TriangleStructure triangle) {
-        return TriangulationAdvance.Geometry.isCounterClockwise(
+        return TriangulationDelaunay.Geometry.isCounterClockwise(
                 nodes.get(triangle.iNodes[0]),
                 nodes.get(triangle.iNodes[1]),
                 nodes.get(triangle.iNodes[2])
@@ -111,83 +116,53 @@ public class TriangulationAdvance {
     }
 
     // constructor for create convexHull region at the base on points
-    public TriangulationAdvance(final Point[] points) {
-        triangulation(points, false);
-    }
-
-    public TriangulationAdvance(final Point[] points, final boolean withDelaunay) {
-        triangulation(points, withDelaunay);
-    }
-
-
-    private void triangulation(Point[] points, final boolean withDelaunay) {
-        // sorted points
+    public TriangulationDelaunay(Point[] points) {
         Point[][] pointArray = Geometry.convexHullDouble(points);
         List<Point> convexPoints = new ArrayList<>(Arrays.asList(pointArray[0]));
-        createConvexHullTriangles(createConvexHullWithoutPointInLine(convexPoints));
+        BorderBox box = createConvexHullTriangles(createConvexHullWithoutPointInLine(convexPoints));
+        searcher = new Searcher(triangleStructureList.get(0), box, points.length);
         points = pointArray[1];
-        int MINIMAL_DELAUNAY_STEP = 100;
-        int delaunayStep = (int) Math.max(Math.sqrt(points.length), MINIMAL_DELAUNAY_STEP);
-        if (withDelaunay)
-            delaunayMesh(1);
-        for (int i = 0; i < points.length; i++) {
-            addNextPoint(points[i]);
-            if (withDelaunay && i % delaunayStep == 0) {
-                delaunayMesh(1);
+
+        int sqrtStep = (int) Math.max(200D, Math.sqrt(points.length));
+
+        if ((double) points.length < Math.pow(sqrtStep, 2.)) {
+            for (Point point : points) {
+                addNextPoint(point);
+                checkFlipBuffer();
+            }
+        } else {
+            int position = 0;
+            for (int i = 0; i < sqrtStep; i++) {
+                for (int j = 0; j < sqrtStep; j++) {
+                    addNextPoint(points[position]);
+                    checkFlipBuffer();
+                    position++;
+                    if (position == points.length)
+                        break;
+                }
+                removeNullTriangles();
             }
         }
-        delaunayMesh(1);
+        checkFlipBuffer();
     }
 
-    public void delaunayMesh(int amountIteration) {
-        class FlipTriangle {
-            public TriangleStructure triangleStructure;
-            public int i;
-
-            public FlipTriangle(TriangleStructure triangleStructure, int i) {
-                this.i = i;
-                this.triangleStructure = triangleStructure;
-            }
-        }
-        for (int j = 0; j < amountIteration; j++) {
-            List<FlipTriangle> flipTriangle = new LinkedList<>();
-            Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
-            while (iterator.hasNext()) {
-                TriangleStructure triangle = iterator.next();
-                if (triangle == null)
-                    continue;
-                if (triangle.triangles == null) {
-                    continue;
-                }
-                boolean nextTriangle = false;
-                for (int i = 0; !nextTriangle && i < triangle.triangles.length; i++) {
-                    if (triangle.triangles[i] == null) {
-                        continue;
-                    }
-                    if (!isGoodDelaunay(triangle, i)) {
-                        flipTriangle.add(new FlipTriangle(triangle, i));
-                        nextTriangle = true;
-                    }
+    private void checkFlipBuffer() {
+        int i = 0;
+        while (!flipBuffer.empty()) {
+            FlipStructure next = flipBuffer.pop();
+            flipTriangles(next.triangle, next.side);
+            i++;
+            if(i%5000 == 0 && i>0) {
+                Iterator<FlipStructure> iterator = flipBuffer.iterator();
+                while (iterator.hasNext()) {
+                    if (iterator.next().triangle.triangles == null)
+                        iterator.remove();
                 }
             }
-            boolean isDelaunayFinish = true;
-            for (FlipTriangle flip : flipTriangle) {
-                if (flip != null) {
-                    flipTriangles(flip.triangleStructure, flip.i);
-                    isDelaunayFinish = false;
-                }
-            }
-            if (isDelaunayFinish) {
-                break;
-            }
-            removeNullTriangles();
         }
     }
 
-    private void createConvexHullTriangles(List<Point> points) {
-
-        TriangleStructure beginTriangle = null;
-
+    private BorderBox createConvexHullTriangles(List<Point> points) {
         int i = 0;
         i++;
         nodes.add(points.get(0));
@@ -215,7 +190,6 @@ public class TriangulationAdvance {
             }
 
             triangleStructureList.add(triangle);
-            beginTriangle = triangle;
 
             if (i + k >= points.size())
                 break;
@@ -249,16 +223,15 @@ public class TriangulationAdvance {
         for (Point point : points) {
             borderBox.addPoint(point);
         }
-        searcher = new Searcher(beginTriangle, borderBox);
+        return borderBox;
     }
 
     private List<Point> createConvexHullWithoutPointInLine(final List<Point> convexPoints) {
 
         List<Integer> removesIndex = new ArrayList<>();
-        for (int i = 0; i < convexPoints.size(); i++) {
-            int position0 = i;
-            int position1 = i + 1 >= convexPoints.size() ? i + 1 - convexPoints.size() : i + 1;
-            int position2 = i + 2 >= convexPoints.size() ? i + 2 - convexPoints.size() : i + 2;
+        for (int position0 = 0; position0 < convexPoints.size(); position0++) {
+            int position1 = position0 + 1 >= convexPoints.size() ? position0 + 1 - convexPoints.size() : position0 + 1;
+            int position2 = position0 + 2 >= convexPoints.size() ? position0 + 2 - convexPoints.size() : position0 + 2;
             if (Geometry.is3pointsCollinear(
                     convexPoints.get(position0),
                     convexPoints.get(position1),
@@ -284,6 +257,14 @@ public class TriangulationAdvance {
             return;
 
         if (triangle.triangles[indexTriangle] == null)
+            return;
+
+        if (!Geometry.isPointInCircle(
+                new Point[]{
+                        nodes.get(triangle.triangles[indexTriangle].iNodes[0]),
+                        nodes.get(triangle.triangles[indexTriangle].iNodes[1]),
+                        nodes.get(triangle.triangles[indexTriangle].iNodes[2])},
+                nodes.get(triangle.iNodes[normalizeSizeBy3(indexTriangle - 1)])))
             return;
 
         int pointNewTriangle = triangle.iNodes[normalizeSizeBy3(indexTriangle - 1)];
@@ -422,20 +403,12 @@ public class TriangulationAdvance {
         for (TriangleStructure base : baseTriangles) {
             NullableTriangle(base);
         }
-    }
 
-    private boolean isGoodDelaunay(TriangleStructure triangle, int indexTriangle) {
-        if (triangle == null)
-            return true;
-        if (triangle.triangles[indexTriangle] == null) {
-            return true;
-        }
-        return !Geometry.isPointInCircle(
-                new Point[]{
-                        nodes.get(triangle.triangles[indexTriangle].iNodes[0]),
-                        nodes.get(triangle.triangles[indexTriangle].iNodes[1]),
-                        nodes.get(triangle.triangles[indexTriangle].iNodes[2])},
-                nodes.get(triangle.iNodes[normalizeSizeBy3(indexTriangle - 1)]));
+        flipBuffer.push(new FlipStructure(triangles[0], 0));
+        flipBuffer.push(new FlipStructure(triangles[0], 1));
+
+        flipBuffer.push(new FlipStructure(triangles[1], 0));
+        flipBuffer.push(new FlipStructure(triangles[1], 1));
     }
 
     private void addNextPoint(Point nextPoint) {
@@ -483,10 +456,9 @@ public class TriangulationAdvance {
             amountMoving++;
             if (amountMoving > triangleStructureList.size()) {
                 removeNullTriangles();
-                Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
-                while (iterator.hasNext()) {
+                for (TriangleStructure aTriangleStructureList : triangleStructureList) {
                     amountMoving++;
-                    TriangleStructure triangle = iterator.next();
+                    TriangleStructure triangle = aTriangleStructureList;
                     if (triangle.triangles == null)
                         continue;
                     Point[] trianglePoint = new Point[]{
@@ -579,9 +551,7 @@ public class TriangulationAdvance {
         addInverseLinkOnTriangle(triangles);
 
         for (int i = 0; i < 3; i++) {
-            if (!isGoodDelaunay(triangles[i], 0)) {
-                flipTriangles(triangles[i], 0);
-            }
+            flipBuffer.push(new FlipStructure(triangles[i], 0));
             triangleStructureList.add(triangles[i]);
         }
     }
@@ -687,12 +657,10 @@ public class TriangulationAdvance {
             NullableTriangle(beginTriangle);
 
             searcher.setSearcher(triangles[0]);
-            if (!isGoodDelaunay(triangles[0], 2)) {
-                flipTriangles(triangles[0], 2);
-            }
-            if (!isGoodDelaunay(triangles[1], 1)) {
-                flipTriangles(triangles[1], 1);
-            }
+
+            flipBuffer.push(new FlipStructure(triangles[0], 2));
+            flipBuffer.push(new FlipStructure(triangles[1], 1));
+
             triangleStructureList.add(triangles[0]);
             triangleStructureList.add(triangles[1]);
             return;
@@ -751,18 +719,11 @@ public class TriangulationAdvance {
         NullableTriangle(beginTriangle);
         searcher.setSearcher(triangles[0]);
 
-        if (!isGoodDelaunay(triangles[0], 2)) {
-            flipTriangles(triangles[0], 2);
-        }
-        if (!isGoodDelaunay(triangles[1], 1)) {
-            flipTriangles(triangles[1], 1);
-        }
-        if (!isGoodDelaunay(triangles[2], 1)) {
-            flipTriangles(triangles[2], 1);
-        }
-        if (!isGoodDelaunay(triangles[3], 2)) {
-            flipTriangles(triangles[3], 2);
-        }
+        flipBuffer.push(new FlipStructure(triangles[0], 2));
+        flipBuffer.push(new FlipStructure(triangles[1], 1));
+        flipBuffer.push(new FlipStructure(triangles[2], 1));
+        flipBuffer.push(new FlipStructure(triangles[3], 2));
+
         Collections.addAll(triangleStructureList, triangles);
     }
 
@@ -809,37 +770,37 @@ public class TriangulationAdvance {
                     return PointTriangleState.POINT_ON_CORNER;
             }
 
-            Value line1 = triangulationAdvance.TriangulationAdvance.Geometry.pointOnLine(tri[0], p, tri[1]);
+            Value line1 = TriangulationDelaunay.Geometry.pointOnLine(tri[0], p, tri[1]);
             if (GeometryCoordinate.isPointInRectangle(p, tri[0], tri[1])) {
-                if (triangulationAdvance.TriangulationAdvance.Geometry.is3pointsCollinear(line1))
+                if (TriangulationDelaunay.Geometry.is3pointsCollinear(line1))
                     return PointTriangleState.POINT_ON_LINE_0;
             }
-            if (!triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line1)) {
+            if (!TriangulationDelaunay.Geometry.isCounterClockwise(line1)) {
                 return PointTriangleState.POINT_OUTSIDE_LINE_0;
             }
 
-            Value line2 = triangulationAdvance.TriangulationAdvance.Geometry.pointOnLine(tri[1], p, tri[2]);
+            Value line2 = TriangulationDelaunay.Geometry.pointOnLine(tri[1], p, tri[2]);
             if (GeometryCoordinate.isPointInRectangle(p, tri[1], tri[2])) {
-                if (triangulationAdvance.TriangulationAdvance.Geometry.is3pointsCollinear(line2))
+                if (TriangulationDelaunay.Geometry.is3pointsCollinear(line2))
                     return PointTriangleState.POINT_ON_LINE_1;
             }
-            if (!triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line2)) {
+            if (!TriangulationDelaunay.Geometry.isCounterClockwise(line2)) {
                 return PointTriangleState.POINT_OUTSIDE_LINE_1;
             }
 
-            Value line3 = triangulationAdvance.TriangulationAdvance.Geometry.pointOnLine(tri[2], p, tri[0]);
+            Value line3 = TriangulationDelaunay.Geometry.pointOnLine(tri[2], p, tri[0]);
             if (GeometryCoordinate.isPointInRectangle(p, tri[2], tri[0])) {
-                if (triangulationAdvance.TriangulationAdvance.Geometry.is3pointsCollinear(line3))
+                if (TriangulationDelaunay.Geometry.is3pointsCollinear(line3))
                     return PointTriangleState.POINT_ON_LINE_2;
             }
-            if (!triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line3)) {
+            if (!TriangulationDelaunay.Geometry.isCounterClockwise(line3)) {
                 return PointTriangleState.POINT_OUTSIDE_LINE_2;
             }
 
             boolean[] sign = new boolean[]{
-                    triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line1),
-                    triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line2),
-                    triangulationAdvance.TriangulationAdvance.Geometry.isCounterClockwise(line3)
+                    TriangulationDelaunay.Geometry.isCounterClockwise(line1),
+                    TriangulationDelaunay.Geometry.isCounterClockwise(line2),
+                    TriangulationDelaunay.Geometry.isCounterClockwise(line3)
             };
             if (sign[0] && sign[1] && sign[2]) {
                 return PointTriangleState.POINT_INSIDE;
@@ -849,7 +810,7 @@ public class TriangulationAdvance {
         }
     }
 
-    private static class GeometryCoordinate extends triangulationAdvance.TriangulationAdvance.Geometry {
+    private static class GeometryCoordinate extends TriangulationDelaunay.Geometry {
 
         static boolean isPointInRectangle(Point point, Point... list) {
             //counter.addTime("GeometryCoordinate:isPointInRectangle");

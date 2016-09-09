@@ -2,11 +2,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import research.ResearchTest;
 import triangulationAdvance.Point;
-import triangulationAdvance.TriangulationAdvance;
+import triangulationAdvance.TriangulationDelaunay;
 
 import java.util.Random;
 
-public class TriangulationAdvanceTest {
+public class TriangulationDelaunayTest {
 
     final private static Random random = new Random();
 
@@ -26,7 +26,7 @@ public class TriangulationAdvanceTest {
                     System.out.println(String.format("\"%+5.8f\"", aList.getX()) + "," + String.format("\"%+5.8f\",", aList.getY()));
                 }
             }
-            TriangulationAdvance triangulation = new TriangulationAdvance(points);
+            TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
             if (PRINTABLE) {
                 System.out.println("Amount of triangles = " + triangulation.getTriangles().size());
             }
@@ -44,7 +44,7 @@ public class TriangulationAdvanceTest {
                 new Point(19, 45)
         };
 
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -57,7 +57,7 @@ public class TriangulationAdvanceTest {
                 new Point(24, 29),
                 new Point(33, 34)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -70,7 +70,7 @@ public class TriangulationAdvanceTest {
                 new Point(29, 22),
                 new Point(35, 36)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -83,7 +83,7 @@ public class TriangulationAdvanceTest {
                 new Point(4, 42),
                 new Point(20, 11)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -96,7 +96,7 @@ public class TriangulationAdvanceTest {
                 new Point(28, 36),
                 new Point(43, 23)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -109,7 +109,7 @@ public class TriangulationAdvanceTest {
                 new Point(44, 44),
                 new Point(8, 21)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -122,7 +122,7 @@ public class TriangulationAdvanceTest {
                 new Point(1, 12),
                 new Point(6, 3)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -135,7 +135,7 @@ public class TriangulationAdvanceTest {
                 new Point(0, 46),
                 new Point(11, 32)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -147,7 +147,7 @@ public class TriangulationAdvanceTest {
                 new Point(23, 49),
                 new Point(24, 16)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -163,7 +163,7 @@ public class TriangulationAdvanceTest {
                 new Point(44, 44),
                 new Point(8, 21),
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -176,7 +176,7 @@ public class TriangulationAdvanceTest {
                 new Point(22, 9),
                 new Point(9, 22)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -189,7 +189,7 @@ public class TriangulationAdvanceTest {
                 new Point(31, 5),
                 new Point(14, 16)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -202,7 +202,7 @@ public class TriangulationAdvanceTest {
                 new Point(27, 17),
                 new Point(35, 26)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -213,7 +213,7 @@ public class TriangulationAdvanceTest {
                 new Point(10, 48),
                 new Point(48, 46)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -226,7 +226,7 @@ public class TriangulationAdvanceTest {
                 new Point(7, 38),
                 new Point(16, 0)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -239,7 +239,7 @@ public class TriangulationAdvanceTest {
                 new Point(27, 28),
                 new Point(44, 14)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -252,7 +252,7 @@ public class TriangulationAdvanceTest {
                 new Point(43, 2),
                 new Point(25, 47)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -265,7 +265,7 @@ public class TriangulationAdvanceTest {
                 new Point(8, 33),
                 new Point(32, 37)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -278,7 +278,7 @@ public class TriangulationAdvanceTest {
                 new Point(18, 2),
                 new Point(26, 28)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -291,7 +291,7 @@ public class TriangulationAdvanceTest {
                 new Point(25, 0),
                 new Point(15, 24)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -302,7 +302,7 @@ public class TriangulationAdvanceTest {
                 new Point(1, 1),
                 new Point(1, 0)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -314,7 +314,7 @@ public class TriangulationAdvanceTest {
                 new Point(1, 0),
                 new Point(2, 0)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -327,7 +327,7 @@ public class TriangulationAdvanceTest {
                 new Point(2, 0),
                 new Point(1, 0.5)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -340,28 +340,28 @@ public class TriangulationAdvanceTest {
                 new Point(6, 42),
                 new Point(41, 24)
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
     @Test
     public void simpleCircle() {
         Point[] points = (Point[]) ResearchTest.getCirclePoints(6).toArray();
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
     @Test
     public void simpleInTriangle() {
         Point[] points = (Point[]) ResearchTest.getInTriangles(10).toArray();
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
     @Test
     public void simpleInLine() {
         Point[] points = (Point[]) ResearchTest.getLineOnLine(1).toArray();
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() == 2);
     }
 
@@ -375,7 +375,7 @@ public class TriangulationAdvanceTest {
                     new Point(0.0D, 1.0D),
                     new Point(shortDistance, 0.5D)
             };
-            TriangulationAdvance triangulationAdvance = new TriangulationAdvance(points);
+            TriangulationDelaunay triangulationAdvance = new TriangulationDelaunay(points);
 
             String msg = "shortDistance = " + String.format("%.1e", shortDistance)
                     + ": Size of triangles = " + triangulationAdvance.getTriangles().size();
@@ -388,7 +388,7 @@ public class TriangulationAdvanceTest {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(1, 1);
         Point p3 = new Point(1, 0);
-        Assert.assertTrue(TriangulationAdvance.Geometry.isAtRightOf(p1, p2, p3));
+        Assert.assertTrue(TriangulationDelaunay.Geometry.isAtRightOf(p1, p2, p3));
     }
 
     @Test
@@ -396,7 +396,7 @@ public class TriangulationAdvanceTest {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(1, 0);
         Point p3 = new Point(0.5, -0.5);
-        Assert.assertTrue(TriangulationAdvance.Geometry.isAtRightOf(p1, p2, p3));
+        Assert.assertTrue(TriangulationDelaunay.Geometry.isAtRightOf(p1, p2, p3));
     }
 
     @Test
@@ -404,7 +404,7 @@ public class TriangulationAdvanceTest {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(1, 1);
         Point p3 = new Point(0, 1);
-        Assert.assertFalse(TriangulationAdvance.Geometry.isAtRightOf(p1, p2, p3));
+        Assert.assertFalse(TriangulationDelaunay.Geometry.isAtRightOf(p1, p2, p3));
     }
 
     @Test
@@ -412,7 +412,7 @@ public class TriangulationAdvanceTest {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(0.5, 0.5);
         Point p3 = new Point(1, 0);
-        Assert.assertTrue(TriangulationAdvance.Geometry.isCounterClockwise(p1, p2, p3));
+        Assert.assertTrue(TriangulationDelaunay.Geometry.isCounterClockwise(p1, p2, p3));
     }
 
     @Test
@@ -420,7 +420,7 @@ public class TriangulationAdvanceTest {
         Point p1 = new Point(1, 0);
         Point p2 = new Point(0.5, 0.5);
         Point p3 = new Point(0, 0);
-        Assert.assertFalse(TriangulationAdvance.Geometry.isCounterClockwise(p1, p2, p3));
+        Assert.assertFalse(TriangulationDelaunay.Geometry.isCounterClockwise(p1, p2, p3));
     }
 
     @Test
@@ -428,7 +428,7 @@ public class TriangulationAdvanceTest {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(0.5, 0.5);
         Point p3 = new Point(1, 1);
-        Assert.assertTrue(TriangulationAdvance.Geometry.is3pointsCollinear(p1, p2, p3));
+        Assert.assertTrue(TriangulationDelaunay.Geometry.is3pointsCollinear(p1, p2, p3));
     }
 
     @Test
@@ -436,7 +436,7 @@ public class TriangulationAdvanceTest {
         Point p1 = new Point(1, 1);
         Point p2 = new Point(0.5, 0.5);
         Point p3 = new Point(0, 0);
-        Assert.assertTrue(TriangulationAdvance.Geometry.is3pointsCollinear(p1, p2, p3));
+        Assert.assertTrue(TriangulationDelaunay.Geometry.is3pointsCollinear(p1, p2, p3));
     }
 
     @Test
@@ -448,7 +448,7 @@ public class TriangulationAdvanceTest {
                 new Point(3, 0)
         };
 
-        Point[] convex = TriangulationAdvance.Geometry.convexHull(points);
+        Point[] convex = TriangulationDelaunay.Geometry.convexHull(points);
 
         Assert.assertTrue(points[0].equals(convex[0]));
         Assert.assertTrue(points[3].equals(convex[1]));

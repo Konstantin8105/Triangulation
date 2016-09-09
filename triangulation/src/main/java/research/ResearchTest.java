@@ -1,7 +1,7 @@
 package research;
 
 import triangulationAdvance.Point;
-import triangulationAdvance.TriangulationAdvance;
+import triangulationAdvance.TriangulationDelaunay;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,8 +31,8 @@ public class ResearchTest {
                 500,
                 1000,
                 2000,
-//                5000,
-//                10000,
+                5000,
+                10000,
 //                20000,
 //                50000,
 //                100000,
@@ -72,7 +72,7 @@ public class ResearchTest {
 
         for (int i = 0; i < amountTest; i++) {
             start[i] = System.currentTimeMillis();
-            TriangulationAdvance triangulation = new TriangulationAdvance(points);
+            TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
             finish[i] = System.currentTimeMillis();
             sizeTriangles = triangulation.getTriangles().size();
         }

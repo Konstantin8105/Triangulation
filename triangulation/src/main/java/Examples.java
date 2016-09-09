@@ -1,6 +1,6 @@
 import meshview.MeshView;
 import triangulationAdvance.Point;
-import triangulationAdvance.TriangulationAdvance;
+import triangulationAdvance.TriangulationDelaunay;
 
 public class Examples {
 
@@ -15,7 +15,7 @@ public class Examples {
         coordinates[5] = new Point(500f, 500f);
         coordinates[6] = new Point(100f, 0f);
 
-        TriangulationAdvance triangulation = new TriangulationAdvance(coordinates);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(coordinates);
 
         MeshView meshView = new MeshView(triangulation.getTriangles());
     }

@@ -3,19 +3,17 @@ import org.junit.Ignore;
 import org.junit.Test;
 import research.ResearchTest;
 import triangulationAdvance.Point;
-import triangulationAdvance.TriangulationAdvance;
+import triangulationAdvance.TriangulationDelaunay;
 
 public class TriangulationAdvanceBigData {
 
-    // 250_000 points = 20 sec.
-    // 500_000 points = 59 sec.
     // 1_000_000 points = 182 sec
-    // 1_000_000 points = 30 sec
+    // 1_000_000 points = 44 sec
     @Ignore
     @Test
     public void testBigInputData1() {
         Point[] points = (Point[]) ResearchTest.getRandomPoints(1_000_000).toArray();
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
@@ -23,7 +21,7 @@ public class TriangulationAdvanceBigData {
     public void testBigInputData2() {
         for (int i = 0; i < 1000; i++) {
             Point[] points = (Point[]) ResearchTest.getRandomPoints(500).toArray();
-            TriangulationAdvance triangulation = new TriangulationAdvance(points);
+            TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
             Assert.assertTrue(triangulation.getTriangles().size() > 0);
         }
     }
@@ -532,7 +530,7 @@ public class TriangulationAdvanceBigData {
                 new Point(336.7202196531227, 327.9436027643297),
                 new Point(484.47483288659885, 219.0783031056962),
         };
-        TriangulationAdvance triangulation = new TriangulationAdvance(points);
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 }
