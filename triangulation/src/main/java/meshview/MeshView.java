@@ -15,21 +15,15 @@ public class MeshView extends JFrame {
     private void view(final List<Point[]> mesh, final Point point) {
 
         final boolean TEXT_SHOW;
-        if (mesh.size() > 100)
-            TEXT_SHOW = false;
-        else
-            TEXT_SHOW = true;
+        TEXT_SHOW = mesh.size() <= 100;
 
         final boolean POINT_INDICATOR;
-        if (mesh.size() > 999)
-            POINT_INDICATOR = false;
-        else
-            POINT_INDICATOR = true;
+        POINT_INDICATOR = mesh.size() <= 999;
 
         final BorderBox box = new BorderBox();
-        for (int i = 0; i < mesh.size(); i++) {
-            for (int j = 0; j < mesh.get(i).length; j++) {
-                box.addPoint(mesh.get(i)[j]);
+        for (Point[] aMesh : mesh) {
+            for (int j = 0; j < aMesh.length; j++) {
+                box.addPoint(aMesh[j]);
             }
         }
 
@@ -75,25 +69,25 @@ public class MeshView extends JFrame {
                 }
 
                 g.setColor(Color.BLUE);
-                for (int i = 0; i < triangles.size(); i++) {
+                for (Triangle triangle1 : triangles) {
                     for (int j = 0; j < 3; j++) {
                         int next = j + 1 == 3 ? 0 : j + 1;
                         g.drawLine(
-                                (int) triangles.get(i).points[j].getX(),
-                                (int) triangles.get(i).points[j].getY(),
-                                (int) triangles.get(i).points[next].getX(),
-                                (int) triangles.get(i).points[next].getY()
+                                (int) triangle1.points[j].getX(),
+                                (int) triangle1.points[j].getY(),
+                                (int) triangle1.points[next].getX(),
+                                (int) triangle1.points[next].getY()
                         );
                     }
                 }
 
                 g.setColor(Color.RED);
                 if(POINT_INDICATOR) {
-                    for (int i = 0; i < triangles.size(); i++) {
+                    for (Triangle triangle : triangles) {
                         for (int j = 0; j < 3; j++) {
                             g.drawOval(
-                                    (int) triangles.get(i).points[j].getX() - 1,
-                                    (int) triangles.get(i).points[j].getY() - 1,
+                                    (int) triangle.points[j].getX() - 1,
+                                    (int) triangle.points[j].getY() - 1,
                                     3, 3);
                         }
                     }
@@ -114,12 +108,12 @@ public class MeshView extends JFrame {
                     }
 
                     g.setColor(Color.RED);
-                    for (int i = 0; i < triangles.size(); i++) {
+                    for (Triangle triangle : triangles) {
                         for (int j = 0; j < 3; j++) {
                             g.drawString(
-                                    triangles.get(i).nameCoordinate[j],
-                                    (int) triangles.get(i).points[j].getX(),
-                                    (int) triangles.get(i).points[j].getY()
+                                    triangle.nameCoordinate[j],
+                                    (int) triangle.points[j].getX(),
+                                    (int) triangle.points[j].getY()
                             );
                         }
                     }
