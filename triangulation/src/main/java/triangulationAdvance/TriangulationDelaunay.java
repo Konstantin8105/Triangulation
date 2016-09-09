@@ -4,16 +4,6 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
- * triangulationAdvance.TriangulationDelaunay
- * for step - triangulation convexHull: "Divide and Conquer"
- * Performance for worst-case: O(N^2)
- * for step - triangulation with restrictions: "Simple interactive method"
- * Performance for worst-case: O(N^2)
- * Philosophy of triangulation:
- * 1. Add 4 "fake" point - for guarantee all other point in "fake" region
- * 2. triangulation.Triangulation and delaunay checking
- * 3. Cut triangulation by convexHull region or external region
- *
  * @author Izyumov Konstantin
  *         book "Algoritm building and analyse triangulation", A.B.Skvorcov.
  */
