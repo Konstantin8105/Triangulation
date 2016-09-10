@@ -4,13 +4,12 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
+ * Triangulation data structure  "Nodes, ribs и triangles"
+ *
  * @author Izyumov Konstantin
  *         book "Algoritm building and analyse triangulation", A.B.Skvorcov.
  */
 public class TriangulationDelaunay {
-    //
-    // triangulationAdvance.TriangulationDelaunay data structure  "Nodes, ribs и triangles"
-    //
     // Array of nodes - type: Point
     private final List<Point> nodes = new ArrayList<>();
     // Linked list of triangles
@@ -28,6 +27,10 @@ public class TriangulationDelaunay {
         }
     }
 
+    final private double AMOUNT_SEARCHER_FACTOR = 0.05D;
+    final private double AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE = 0.01D;
+    final private int MINIMAL_POINTS_FOR_CLEANING = 40000;
+
     private Searcher searcher;
 
     private class Searcher {
@@ -36,7 +39,7 @@ public class TriangulationDelaunay {
         private int positionSearcher = 0;
 
         Searcher(TriangleStructure init, BorderBox box, int amountOfPoints) {
-            searcher = new TriangleStructure[(int) Math.max(1.0D, 0.05D * Math.sqrt((double) amountOfPoints))];
+            searcher = new TriangleStructure[(int) Math.max(1.0D, AMOUNT_SEARCHER_FACTOR * Math.sqrt((double) amountOfPoints))];
             for (int i = 0; i < searcher.length; i++) {
                 searcher[i] = init;
             }
@@ -105,6 +108,7 @@ public class TriangulationDelaunay {
         return idMaximalRibs++;
     }
 
+
     // constructor for create convexHull region at the base on points
     public TriangulationDelaunay(Point[] points) {
         Point[][] pointArray = Geometry.convexHullDouble(points);
@@ -113,36 +117,43 @@ public class TriangulationDelaunay {
         searcher = new Searcher(triangleStructureList.get(0), box, points.length);
         points = pointArray[1];
 
-        int sqrtStep = (int) Math.max(200D, Math.sqrt(points.length));
+        int sqrtStep = (int) Math.sqrt(points.length);
 
-        if ((double) points.length < Math.pow(sqrtStep, 2.)) {
+        if (points.length < MINIMAL_POINTS_FOR_CLEANING) {
             for (Point point : points) {
                 addNextPoint(point);
-                checkFlipBuffer();
+                checkFlipBuffer(points.length);
             }
         } else {
             int position = 0;
             for (int i = 0; i < sqrtStep; i++) {
-                for (int j = 0; j < sqrtStep; j++) {
+                int size = min(points.length - position, sqrtStep);
+                for (int j = 0; j < size; j++) {
                     addNextPoint(points[position]);
-                    checkFlipBuffer();
+                    checkFlipBuffer(sqrtStep);
                     position++;
-                    if (position == points.length)
-                        break;
                 }
-                removeNullTriangles();
+                if (i % (int) (AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE * sqrtStep) == 0) {
+                    removeNullTriangles();
+                }
             }
         }
-        checkFlipBuffer();
+        checkFlipBuffer(sqrtStep);
     }
 
-    private void checkFlipBuffer() {
-        int i = 0;
+    private int min(int a, int b) {
+        if (a < b) return a;
+        return b;
+    }
+
+    private void checkFlipBuffer(int cleaningStep) {
+        int step = 0;
         while (!flipBuffer.empty()) {
             FlipStructure next = flipBuffer.pop();
             flipTriangles(next.triangle, next.side);
-            i++;
-            if(i%5000 == 0 && i>0) {
+            step++;
+            if (step % cleaningStep == 0 && step > 0) {
+                step = 0;
                 Iterator<FlipStructure> iterator = flipBuffer.iterator();
                 while (iterator.hasNext()) {
                     if (iterator.next().triangle.triangles == null)
@@ -446,9 +457,8 @@ public class TriangulationDelaunay {
             amountMoving++;
             if (amountMoving > triangleStructureList.size()) {
                 removeNullTriangles();
-                for (TriangleStructure aTriangleStructureList : triangleStructureList) {
+                for (TriangleStructure triangle : triangleStructureList) {
                     amountMoving++;
-                    TriangleStructure triangle = aTriangleStructureList;
                     if (triangle.triangles == null)
                         continue;
                     Point[] trianglePoint = new Point[]{
@@ -1019,7 +1029,7 @@ public class TriangulationDelaunay {
         //Performance O(n*log(n)) in worst case
         // Point[0][] - convex points
         // Point[1][] - sorted list of all points
-        public static Point[][] convexHullDouble(Point[] inputPoints) {
+        static Point[][] convexHullDouble(Point[] inputPoints) {
             if (inputPoints.length < 2) {
                 return new Point[][]{inputPoints, {}};
             }
