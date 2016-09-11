@@ -18,8 +18,8 @@ public class TriangulationDelaunay {
     private final Stack<FlipStructure> flipBuffer = new Stack<>();
 
     private class FlipStructure {
-        public TriangleStructure triangle;
-        public int side;
+        public final TriangleStructure triangle;
+        public final int side;
 
         public FlipStructure(TriangleStructure triangle, int side) {
             this.triangle = triangle;
@@ -34,8 +34,8 @@ public class TriangulationDelaunay {
     private Searcher searcher;
 
     private class Searcher {
-        private TriangleStructure searcher[];
-        private double[] elevations;
+        private final TriangleStructure[] searcher;
+        private final double[] elevations;
         private int positionSearcher = 0;
 
         Searcher(TriangleStructure init, BorderBox box, int amountOfPoints) {
