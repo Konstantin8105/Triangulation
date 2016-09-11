@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 10)
 @Timeout(time = 20, timeUnit = TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
-public class Benchmark {
+public class PerformanceBenchmark {
 
-    // java -jar target/microbenchmarks.jar performance.Benchmark
+    // java -jar target/microbenchmarks.jar performance.PerformanceBenchmark
 
     @Param({
             "10",

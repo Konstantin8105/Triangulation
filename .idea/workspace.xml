@@ -2,25 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/performance/Benchmark1000.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/performance/Benchmark1000Detail.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/performance/BenchmarkCleaning.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/triangulation/src/main/java/performance/BenchmarkSearchers.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/perfomance/TriangulationDelaunayBenchmark.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/performance/Benchmark.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/BorderBox.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/BorderBox.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/Point.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/Point.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/Precision.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/Precision.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangleStructure.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/TriangleStructure.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvanceView.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/TriangulationAdvanceView.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationDelaunay.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/TriangulationDelaunay.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/triangulation/src/main/java/performance/Benchmark.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/performance/PerformanceBenchmark.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/Examples.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/Examples.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/crosssection/Area.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/crosssection/Area.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/meshview/MeshView.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/meshview/MeshView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/research/ResearchTest.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/research/ResearchTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceBigData.java" afterPath="$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceBigData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/test/java/TriangulationDelaunayTest.java" afterPath="$PROJECT_DIR$/triangulation/src/test/java/TriangulationDelaunayTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/triangulation.iml" afterPath="$PROJECT_DIR$/triangulation/triangulation.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/performance/Benchmark1000Detail.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/performance/Benchmark1000Detail.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/performance/BenchmarkSearchers.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/performance/BenchmarkSearchers.java" />
     </list>
     <ignored path="triangulation/target/test-classes/META-INF/CompilerHints" />
     <ignored path="triangulation/target/classes/META-INF/BenchmarkList" />
@@ -37,6 +24,7 @@
     <ignored path="triangulation/target/generated-sources/annotations/org/openjdk/jmh/infra/generated/Blackhole_jmhType_B2.java" />
     <ignored path="triangulation/target/" />
     <ignored path="$PROJECT_DIR$/triangulation/target/site/" />
+    <ignored mask="*.attach_*" />
     <manually-removed-from-ignored>
       <directory path="$PROJECT_DIR$/out/" />
     </manually-removed-from-ignored>
@@ -74,7 +62,18 @@
     <favorites_list name="Triangulation" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ResearchTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/research/ResearchTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -100,8 +99,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulation/elements/Mesh.java" />
-        <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulation/border/BorderBox.java" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationsCompare.java" />
         <option value="$PROJECT_DIR$/triangulation/src/test/java/research/RandomTest.java" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulation/elements/Point.java" />
@@ -132,7 +129,6 @@
         <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvanceView.java" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulationAdvance/TriangulationAdvance.java" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/perfomance/TriangulationAdvanceBenchmark.java" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/meshview/MeshView.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/research/ResearchTest.java" />
@@ -147,10 +143,13 @@
         <option value="$PROJECT_DIR$/triangulation/src/main/java/perfomance/Benchmark10000.java" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/perfomance/Benchmark1000.java" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/performance/Benchmark1000.java" />
-        <option value="$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceBigData.java" />
-        <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulation/TriangulationDelaunay.java" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/performance/BenchmarkSearchers.java" />
         <option value="$PROJECT_DIR$/triangulation/src/main/java/performance/Benchmark1000Detail.java" />
+        <option value="$PROJECT_DIR$/triangulation/src/main/java/triangulation/TriangulationDelaunay.java" />
+        <option value="$PROJECT_DIR$/triangulation/src/main/java/performance/Benchmark.java" />
+        <option value="$PROJECT_DIR$/triangulation/src/main/java/performance/PerformanceBenchmark.java" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceBigData.java" />
       </list>
     </option>
   </component>
@@ -167,12 +166,37 @@
     </option>
   </component>
   <component name="MavenProjectNavigator">
-    <treeState />
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="triangulation" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="triangulation" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="518" />
+    <option name="x" value="1" />
     <option name="y" value="768" />
-    <option name="width" value="1402" />
+    <option name="width" value="1919" />
     <option name="height" value="1080" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -222,20 +246,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Triangulation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="triangulation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -320,7 +330,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="triangulation" />
+              <option name="myItemId" value="research" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -346,23 +356,51 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="research" />
+              <option name="myItemId" value="performance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Triangulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="triangulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="other" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Triangulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="triangulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Changed Files" />
         <subPane subId="Project Files" />
         <subPane subId="Default" />
         <subPane subId="Tests" />
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
@@ -438,69 +476,6 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="TriangulationAdvanceBigData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="triangulation" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TriangulationAdvanceBigData" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="TriangulationDelaunayTest.simpleTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="triangulation" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TriangulationDelaunayTest" />
-      <option name="METHOD_NAME" value="simpleTest1" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="TriangulationDelaunayTest.simpleTest24" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="triangulation" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TriangulationDelaunayTest" />
-      <option name="METHOD_NAME" value="simpleTest24" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
     <configuration default="false" name="java in triangulation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="triangulation" />
@@ -520,6 +495,69 @@
       </option>
       <envs />
       <dir value="$PROJECT_DIR$/triangulation/src/test/java" />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="TriangulationAdvanceBigData.testBigInputDataCircle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="triangulation" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TriangulationAdvanceBigData" />
+      <option name="METHOD_NAME" value="testBigInputDataCircle" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="TriangulationAdvanceBigData.testBigInputData5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="triangulation" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TriangulationAdvanceBigData" />
+      <option name="METHOD_NAME" value="testBigInputData5" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="TriangulationAdvanceBigData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="triangulation" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TriangulationAdvanceBigData" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
       <patterns />
       <method />
     </configuration>
@@ -852,18 +890,18 @@
       <item index="2" class="java.lang.String" itemvalue="JAR Application.unlicense.jar" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.TriangulationDelaunayTest" />
       <item index="4" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceBigData.testBigInputData1" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceBigData" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.TriangulationDelaunayTest.simpleTest1" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.TriangulationDelaunayTest.simpleTest24" />
-      <item index="8" class="java.lang.String" itemvalue="JUnit.java in triangulation" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.java in triangulation" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceBigData.testBigInputDataCircle" />
+      <item index="7" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceBigData.testBigInputData5" />
+      <item index="8" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceBigData" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceBigData.testBigInputData1" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.java in triangulation" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.TriangulationDelaunayTest.simpleTest24" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.TriangulationDelaunayTest.simpleTest1" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceBigData" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceBigData" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceBigData.testBigInputData1" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceBigData.testBigInputData5" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.TriangulationAdvanceBigData.testBigInputDataCircle" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.java in triangulation" />
       </list>
     </recent_temporary>
   </component>
@@ -883,20 +921,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
-    </task>
-    <task id="LOCAL-00114" summary="tests is Ok. prepair for release">
-      <created>1471970971003</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1471970971003</updated>
-    </task>
-    <task id="LOCAL-00115" summary="tests is Ok. prepair for release">
-      <created>1471977724544</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1471977724544</updated>
     </task>
     <task id="LOCAL-00116" summary="tests is Ok. prepair for release">
       <created>1471988476662</created>
@@ -1227,39 +1251,53 @@
       <option name="project" value="LOCAL" />
       <updated>1473500800980</updated>
     </task>
-    <option name="localTasksCounter" value="163" />
+    <task id="LOCAL-00163" summary="optimization">
+      <created>1473596390510</created>
+      <option name="number" value="00163" />
+      <option name="presentableId" value="LOCAL-00163" />
+      <option name="project" value="LOCAL" />
+      <updated>1473596390529</updated>
+    </task>
+    <task id="LOCAL-00164" summary="optimization">
+      <created>1473596526117</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1473596526117</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TriangulationAdvanceBigData_testBigInputData1 - 2016.09.10 at 12h 35m 11s.xml">
+    <history-entry file="TriangulationAdvanceBigData - 2016.09.11 at 16h 44m 59s.xml">
+      <configuration name="TriangulationAdvanceBigData" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TriangulationAdvanceBigData_testBigInputData1 - 2016.09.11 at 16h 14m 32s.xml">
       <configuration name="TriangulationAdvanceBigData.testBigInputData1" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TriangulationAdvanceBigData_testBigInputData1 - 2016.09.10 at 12h 35m 39s.xml">
+    <history-entry file="TriangulationAdvanceBigData_testBigInputData1 - 2016.09.11 at 16h 44m 42s.xml">
       <configuration name="TriangulationAdvanceBigData.testBigInputData1" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TriangulationAdvanceBigData_testBigInputData1 - 2016.09.10 at 12h 40m 47s.xml">
-      <configuration name="TriangulationAdvanceBigData.testBigInputData1" configurationId="JUnit" />
+    <history-entry file="TriangulationAdvanceBigData_testBigInputData5 - 2016.09.11 at 16h 19m 12s.xml">
+      <configuration name="TriangulationAdvanceBigData.testBigInputData5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TriangulationAdvanceBigData_testBigInputData1 - 2016.09.10 at 12h 43m 03s.xml">
-      <configuration name="TriangulationAdvanceBigData.testBigInputData1" configurationId="JUnit" />
+    <history-entry file="TriangulationAdvanceBigData_testBigInputData5 - 2016.09.11 at 16h 23m 48s.xml">
+      <configuration name="TriangulationAdvanceBigData.testBigInputData5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TriangulationAdvanceBigData_testBigInputData1 - 2016.09.11 at 12h 22m 22s.xml">
-      <configuration name="TriangulationAdvanceBigData.testBigInputData1" configurationId="JUnit" />
+    <history-entry file="TriangulationAdvanceBigData_testBigInputData5 - 2016.09.11 at 16h 25m 45s.xml">
+      <configuration name="TriangulationAdvanceBigData.testBigInputData5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TriangulationAdvanceBigData_testBigInputData1 - 2016.09.11 at 13h 47m 52s.xml">
-      <configuration name="TriangulationAdvanceBigData.testBigInputData1" configurationId="JUnit" />
+    <history-entry file="TriangulationAdvanceBigData_testBigInputData5 - 2016.09.11 at 16h 35m 09s.xml">
+      <configuration name="TriangulationAdvanceBigData.testBigInputData5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TriangulationAdvanceBigData_testBigInputData1 - 2016.09.11 at 14h 39m 51s.xml">
-      <configuration name="TriangulationAdvanceBigData.testBigInputData1" configurationId="JUnit" />
+    <history-entry file="TriangulationAdvanceBigData_testBigInputDataCircle - 2016.09.11 at 16h 08m 45s.xml">
+      <configuration name="TriangulationAdvanceBigData.testBigInputDataCircle" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TriangulationAdvanceBigData_testBigInputData1 - 2016.09.11 at 14h 44m 21s.xml">
-      <configuration name="TriangulationAdvanceBigData.testBigInputData1" configurationId="JUnit" />
+    <history-entry file="TriangulationAdvanceBigData_testBigInputDataCircle - 2016.09.11 at 16h 09m 28s.xml">
+      <configuration name="TriangulationAdvanceBigData.testBigInputDataCircle" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TriangulationAdvanceBigData_testBigInputData1 - 2016.09.11 at 15h 04m 10s.xml">
-      <configuration name="TriangulationAdvanceBigData.testBigInputData1" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TriangulationAdvanceBigData_testBigInputData1 - 2016.09.11 at 15h 04m 47s.xml">
-      <configuration name="TriangulationAdvanceBigData.testBigInputData1" configurationId="JUnit" />
+    <history-entry file="TriangulationAdvanceBigData_testBigInputDataCircle - 2016.09.11 at 16h 09m 58s.xml">
+      <configuration name="TriangulationAdvanceBigData.testBigInputDataCircle" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -1272,8 +1310,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="518" y="768" width="1402" height="1080" extended-state="0" />
-    <editor active="false" />
+    <frame x="1" y="768" width="1919" height="1080" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3229491" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1281,15 +1319,14 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2713121" sideWeight="0.509865" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20707597" sideWeight="0.42765275" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2713121" sideWeight="0.49013498" order="9" side_tool="true" content_ui="tabs" x="819" y="1044" width="283" height="508" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29689175" sideWeight="0.40582725" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2112383" sideWeight="0.42765275" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29689175" sideWeight="0.5941727" order="9" side_tool="true" content_ui="tabs" x="819" y="1044" width="283" height="508" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2886266" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27872497" sideWeight="0.66251296" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32398754" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27872497" sideWeight="0.337487" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20150054" sideWeight="0.6524454" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20150054" sideWeight="0.34755462" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896176" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1298,8 +1335,9 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32778355" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3271028" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40872374" sideWeight="0.40236053" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32398754" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1315,7 +1353,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="repair flipTriangle" />
     <MESSAGE value="tests is Ok. prepair for release" />
     <MESSAGE value="tests is Ok. prepair for release&#10;code cleaning" />
     <MESSAGE value="Release" />
@@ -1340,7 +1377,8 @@
     <MESSAGE value="fix some warnings" />
     <MESSAGE value="full delaunay" />
     <MESSAGE value="create global factors" />
-    <option name="LAST_COMMIT_MESSAGE" value="create global factors" />
+    <MESSAGE value="optimization" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimization" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1432,14 +1470,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/test/java/TriangulationDelaunayTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/Examples.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -1451,7 +1481,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1468,24 +1497,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/openjdk-8/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="133" column="23" selection-start-line="133" selection-start-column="23" selection-end-line="133" selection-end-column="23" />
-          <folding>
-            <element signature="e#16411#16412#0" expanded="false" />
-            <element signature="e#16456#16457#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulation/BorderBox.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="356">
           <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding>
-            <element signature="e#1184#1185#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1493,7 +1508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1501,33 +1515,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/Statistic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/meshview/MeshView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="14" column="60" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/target/generated-sources/annotations/perfomance/generated/TriangulationDelaunayBenchmark_triangulationMesh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1994">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/target/generated-sources/annotations/perfomance/generated/TriangulationDelaunayBenchmark_triangulationMesh.java" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1535,53 +1526,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="240">
-            <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/perfomance/Benchmark3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/perfomance/Benchmark3.java" />
     <entry file="file://$PROJECT_DIR$/triangulation/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="470">
           <caret line="60" column="20" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/research/ResearchTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulation/TriangulationDelaunay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="127" column="58" selection-start-line="127" selection-start-column="58" selection-end-line="127" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceBigData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -1602,16 +1551,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/performance/Benchmark.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/performance/Benchmark1000Detail.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1620,10 +1559,83 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/Statistic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/meshview/MeshView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="14" column="60" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/test/java/TriangulationDelaunayTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/openjdk-8/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9225">
+          <caret line="652" column="0" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulation/TriangulationDelaunay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="1062" column="57" selection-start-line="1062" selection-start-column="57" selection-end-line="1062" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/performance/Benchmark1000.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="12" column="68" selection-start-line="12" selection-start-column="68" selection-end-line="12" selection-end-column="68" />
+        <state relative-caret-position="180">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceBigData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="60">
+            <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/performance/PerformanceBenchmark.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/research/ResearchTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -1685,7 +1697,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

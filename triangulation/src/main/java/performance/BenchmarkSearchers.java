@@ -18,7 +18,7 @@ public class BenchmarkSearchers {
 
     // java -jar target/microbenchmarks.jar performance.BenchmarkSearchers
 
-//    Benchmark                             (factor)  (size)  Mode  Cnt      Score      Error  Units
+//    PerformanceBenchmark                             (factor)  (size)  Mode  Cnt      Score      Error  Units
 //    BenchmarkSearchers.triangulationMesh     0.001    1000  avgt   20      7.380 ±    0.914  ms/op
 //    BenchmarkSearchers.triangulationMesh      0.01    1000  avgt   20      7.386 ±    0.786  ms/op
 //    BenchmarkSearchers.triangulationMesh       0.1    1000  avgt   20     11.109 ±    4.327  ms/op

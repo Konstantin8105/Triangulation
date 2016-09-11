@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class Benchmark1000Detail {
 
     // java -jar target/microbenchmarks.jar performance.Benchmark1000Detail
-//    Benchmark                              (cleaningSize)  (searcherSize)  Mode  Cnt  Score   Error  Units
+//    PerformanceBenchmark                              (cleaningSize)  (searcherSize)  Mode  Cnt  Score   Error  Units
 //    Benchmark1000Detail.triangulationMesh             0.1             0.1  avgt   20  7.030 ± 0.782  ms/op
 //    Benchmark1000Detail.triangulationMesh             0.1            0.25  avgt   20  7.101 ± 0.865  ms/op
 //    Benchmark1000Detail.triangulationMesh             0.1             0.5  avgt   20  7.229 ± 0.794  ms/op
