@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba6fdc89-f5b8-4dc4-8c36-1e3a76a83a5a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/konstantin.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/konstantin.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/Statistic.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/Statistic.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/TriangulationDelaunay.java" afterPath="$PROJECT_DIR$/triangulation/src/main/java/triangulation/TriangulationDelaunay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceBigData.java" afterPath="$PROJECT_DIR$/triangulation/src/test/java/TriangulationAdvanceBigData.java" />
     </list>
     <ignored path="triangulation/target/test-classes/META-INF/CompilerHints" />
     <ignored path="triangulation/target/classes/META-INF/BenchmarkList" />
@@ -65,8 +62,8 @@
       <file leaf-file-name="StatisticTriangulation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulation/StatisticTriangulation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+            <state relative-caret-position="240">
+              <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -969,13 +966,6 @@
       <option name="presentableId" value="Default" />
       <updated>1462038526654</updated>
     </task>
-    <task id="LOCAL-00118" summary="tests is Ok. prepair for release&#10;code cleaning">
-      <created>1472035777364</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1472035777365</updated>
-    </task>
     <task id="LOCAL-00119" summary="tests is Ok. prepair for release&#10;code cleaning">
       <created>1472035932701</created>
       <option name="number" value="00119" />
@@ -1312,16 +1302,17 @@
       <option name="project" value="LOCAL" />
       <updated>1473606376581</updated>
     </task>
-    <option name="localTasksCounter" value="167" />
+    <task id="LOCAL-00167" summary="add statistic">
+      <created>1473607043515</created>
+      <option name="number" value="00167" />
+      <option name="presentableId" value="LOCAL-00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1473607043515</updated>
+    </task>
+    <option name="localTasksCounter" value="168" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TriangulationAdvanceBigData_testStatistic - 2016.09.11 at 18h 03m 02s.xml">
-      <configuration name="TriangulationAdvanceBigData.testStatistic" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TriangulationAdvanceBigData_testStatistic - 2016.09.11 at 18h 05m 22s.xml">
-      <configuration name="TriangulationAdvanceBigData.testStatistic" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TriangulationAdvanceBigData_testStatistic - 2016.09.11 at 18h 08m 33s.xml">
       <configuration name="TriangulationAdvanceBigData.testStatistic" configurationId="JUnit" />
     </history-entry>
@@ -1344,6 +1335,12 @@
       <configuration name="TriangulationAdvanceBigData.testStatistic" configurationId="JUnit" />
     </history-entry>
     <history-entry file="TriangulationAdvanceBigData_testStatistic - 2016.09.11 at 18h 16m 16s.xml">
+      <configuration name="TriangulationAdvanceBigData.testStatistic" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TriangulationAdvanceBigData_testStatistic - 2016.09.11 at 18h 38m 57s.xml">
+      <configuration name="TriangulationAdvanceBigData.testStatistic" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TriangulationAdvanceBigData_testStatistic - 2016.09.11 at 18h 40m 02s.xml">
       <configuration name="TriangulationAdvanceBigData.testStatistic" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -1720,14 +1717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulation/Statistic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulation/Precision.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -1744,10 +1733,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulation/Statistic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/triangulation/src/main/java/triangulation/StatisticTriangulation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+        <state relative-caret-position="240">
+          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
