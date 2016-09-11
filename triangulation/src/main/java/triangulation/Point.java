@@ -22,14 +22,6 @@ public class Point {
         return y;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
     @Override
     public String toString() {
         return "Point{"
@@ -43,9 +35,7 @@ public class Point {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Point that = (Point) o;
-        //if (Math.abs(that.x - x) > Precisions.epsilon())
-        //    return false;
-        return x == that.x && y == that.y; //Math.abs(that.y - y) <= Precisions.epsilon();
+        return x == that.x && y == that.y;
     }
 
     @Override
@@ -57,9 +47,5 @@ public class Point {
         temp = Double.doubleToLongBits(y);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
-    }
-
-    public static Point middlePoint(Point pointA, Point pointB) {
-        return new Point((pointA.x + pointB.x) / 2d, (pointA.y + pointB.y) / 2d);
     }
 }

@@ -3,6 +3,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import research.ResearchTest;
 import triangulation.Point;
+import triangulation.StatisticTriangulation;
 import triangulation.TriangulationDelaunay;
 
 public class TriangulationAdvanceBigData {
@@ -16,6 +17,15 @@ public class TriangulationAdvanceBigData {
         Point[] points = (Point[]) ResearchTest.getRandomPoints(1_000_000).toArray();
         TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
+    }
+
+    @Ignore
+    @Test
+    public void testStatistic() {
+        Point[] points = (Point[]) ResearchTest.getRandomPoints(10_000).toArray();
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+        StatisticTriangulation statistic = new StatisticTriangulation(triangulation);
     }
 
     @Test
