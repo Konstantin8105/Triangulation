@@ -212,13 +212,13 @@ public class TriangulationDelaunay {
             k++;
             nodes.add(points.get(points.size() - k));
             int indexPoint2_next = nodes.size() - 1;
-            int rib01_next = rib20;
+
             int rib12_next = getIdRib();
             int rib20_next = getIdRib();
 
             TriangleStructure triangle2 = new TriangleStructure();
             triangle2.iNodes = new int[]{indexPoint0_next, indexPoint1_next, indexPoint2_next};
-            triangle2.iRibs = new int[]{rib01_next, rib12_next, rib20_next};
+            triangle2.iRibs = new int[]{rib20, rib12_next, rib20_next};
             triangle2.triangles = new TriangleStructure[]{
                     triangle, null, null
             };

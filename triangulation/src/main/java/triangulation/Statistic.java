@@ -48,6 +48,6 @@ public class Statistic {
     }
 
     private void show(double intervalMin, double intervalMax, int amount){
-        System.out.println(String.format("%6.1f - %6.1f : %d",intervalMin,intervalMax,amount));
+        System.out.println(String.format("%6.1f - %6.1f : %10d",intervalMin,intervalMax,amount));
     }
 }

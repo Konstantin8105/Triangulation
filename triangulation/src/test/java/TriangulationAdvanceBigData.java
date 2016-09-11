@@ -22,7 +22,7 @@ public class TriangulationAdvanceBigData {
     @Ignore
     @Test
     public void testStatistic() {
-        Point[] points = (Point[]) ResearchTest.getRandomPoints(10_000).toArray();
+        Point[] points = (Point[]) ResearchTest.getRandomPoints(100_000).toArray();
         TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
         StatisticTriangulation statistic = new StatisticTriangulation(triangulation);
