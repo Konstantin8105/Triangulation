@@ -1,4 +1,4 @@
-package triangulationAdvance;
+package triangulation;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -27,9 +27,9 @@ public class TriangulationDelaunay {
         }
     }
 
-    final private double AMOUNT_SEARCHER_FACTOR = 0.05D;
-    final private double AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE = 0.01D;
-    final private int MINIMAL_POINTS_FOR_CLEANING = 40000;
+    public static double AMOUNT_SEARCHER_FACTOR = 0.1D;
+    public static double AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE = 0.1D;
+    public static int MINIMAL_POINTS_FOR_CLEANING = 40000;
 
     private Searcher searcher;
 
@@ -108,9 +108,15 @@ public class TriangulationDelaunay {
         return idMaximalRibs++;
     }
 
+    public TriangulationDelaunay() {
+    }
 
     // constructor for create convexHull region at the base on points
     public TriangulationDelaunay(Point[] points) {
+        run(points);
+    }
+
+    public void run(Point[] points) {
         Point[][] pointArray = Geometry.convexHullDouble(points);
         List<Point> convexPoints = new ArrayList<>(Arrays.asList(pointArray[0]));
         BorderBox box = createConvexHullTriangles(createConvexHullWithoutPointInLine(convexPoints));
@@ -126,19 +132,25 @@ public class TriangulationDelaunay {
             }
         } else {
             int position = 0;
-            for (int i = 0; i < sqrtStep; i++) {
+            int amount = max(1, (int) (AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE * (double) sqrtStep));
+            for (int i = 0; i < sqrtStep + 1; i++) {
                 int size = min(points.length - position, sqrtStep);
                 for (int j = 0; j < size; j++) {
                     addNextPoint(points[position]);
                     checkFlipBuffer(sqrtStep);
                     position++;
                 }
-                if (i % (int) (AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE * sqrtStep) == 0) {
+                if (i % amount == 0) {
                     removeNullTriangles();
                 }
             }
         }
         checkFlipBuffer(sqrtStep);
+    }
+
+    private int max(int a, int b) {
+        if (a > b) return a;
+        return b;
     }
 
     private int min(int a, int b) {

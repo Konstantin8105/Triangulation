@@ -1,4 +1,4 @@
-package triangulationAdvance;
+package triangulation;
 
 import java.math.BigDecimal;
 

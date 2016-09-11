@@ -1,6 +1,6 @@
 package crosssection;
 
-import triangulationAdvance.Point;
+import triangulation.Point;
 //import un.impl.geometry.Point;
 
 //import un.api.collection.Sequence;

@@ -1,7 +1,7 @@
 package research;
 
-import triangulationAdvance.Point;
-import triangulationAdvance.TriangulationDelaunay;
+import triangulation.Point;
+import triangulation.TriangulationDelaunay;
 
 import java.util.ArrayList;
 import java.util.Arrays;

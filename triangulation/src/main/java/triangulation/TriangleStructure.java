@@ -1,4 +1,4 @@
-package triangulationAdvance;
+package triangulation;
 
 
 // Triangle data structure

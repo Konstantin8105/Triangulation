@@ -1,9 +1,9 @@
-package perfomance;
+package performance;
 
 import org.openjdk.jmh.annotations.*;
 import research.ResearchTest;
-import triangulationAdvance.Point;
-import triangulationAdvance.TriangulationDelaunay;
+import triangulation.Point;
+import triangulation.TriangulationDelaunay;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,8 +13,11 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 10, time = 50, timeUnit = TimeUnit.MILLISECONDS)
 @Measurement(iterations = 10)
 @Timeout(time = 20, timeUnit = TimeUnit.MILLISECONDS)
-@State(Scope.Benchmark)//.Thread)
-public class TriangulationDelaunayBenchmark {
+@State(Scope.Benchmark)
+public class Benchmark {
+
+    // java -jar target/microbenchmarks.jar performance.Benchmark
+
     @Param({
             "10",
             "100",
@@ -31,8 +34,6 @@ public class TriangulationDelaunayBenchmark {
             "In_triangle"
     })
     String test;
-
-    Point[] points;
 
     @Setup
     public void prepare() {
@@ -52,10 +53,11 @@ public class TriangulationDelaunayBenchmark {
         }
     }
 
-    @Benchmark
+    Point[] points;
+
+    @org.openjdk.jmh.annotations.Benchmark
     public int triangulationMesh() throws Exception {
         TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         return triangulation.getTriangles().size();
     }
-
 }

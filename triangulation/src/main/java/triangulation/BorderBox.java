@@ -1,4 +1,4 @@
-package triangulationAdvance;
+package triangulation;
 
 /**
  * Create rectangle for future check point outside rectangle.

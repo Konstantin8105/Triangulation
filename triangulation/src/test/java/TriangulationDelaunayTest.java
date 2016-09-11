@@ -1,8 +1,8 @@
 import org.junit.Assert;
 import org.junit.Test;
 import research.ResearchTest;
-import triangulationAdvance.Point;
-import triangulationAdvance.TriangulationDelaunay;
+import triangulation.Point;
+import triangulation.TriangulationDelaunay;
 
 import java.util.Random;
 

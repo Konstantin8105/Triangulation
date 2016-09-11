@@ -1,4 +1,4 @@
-package triangulationAdvance;
+package triangulation;
 
 import meshview.MeshView;
 import research.ResearchTest;

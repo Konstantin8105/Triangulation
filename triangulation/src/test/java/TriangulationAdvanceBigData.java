@@ -1,14 +1,16 @@
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import research.ResearchTest;
-import triangulationAdvance.Point;
-import triangulationAdvance.TriangulationDelaunay;
+import triangulation.Point;
+import triangulation.TriangulationDelaunay;
 
 public class TriangulationAdvanceBigData {
 
     // 1_000_000 points = 182 sec
     // 1_000_000 points = 44 sec
-    //@Ignore
+    // 1_000_000 points = 31 sec
+    @Ignore
     @Test
     public void testBigInputData1() {
         Point[] points = (Point[]) ResearchTest.getRandomPoints(1_000_000).toArray();
