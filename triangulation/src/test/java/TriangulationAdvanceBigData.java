@@ -17,6 +17,7 @@ public class TriangulationAdvanceBigData {
         Point[] points = (Point[]) ResearchTest.getRandomPoints(1_000_000).toArray();
         TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
+        StatisticTriangulation statistic = new StatisticTriangulation(triangulation);
     }
 
     @Ignore
