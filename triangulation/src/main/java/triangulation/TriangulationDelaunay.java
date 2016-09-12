@@ -61,7 +61,6 @@ public class TriangulationDelaunay {
             triangle.triangles = null;
             amountNullableElements++;
             if (amountNullableElements > maxAmountNullableElements) {
-                System.out.println("Remove " + amountNullableElements + " : " + maxAmountNullableElements);
                 removeNullTriangles();
             }
         }
@@ -184,15 +183,22 @@ public class TriangulationDelaunay {
             int amount = max(1, (int) (AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE * (double) sqrtStep));
             triangleList.setMaxAmountNullableElements(amount);
         }
-        for (Point point : points) {
-            addNextPoint(point);
-            checkFlipBuffer(points.length);
+        for (int i=0;i<points.length;i++) {
+            addNextPoint(points[i]);
+            checkFlipBuffer(sqrtStep);
+//            if(i%1000 == 0)
+//                System.out.println(i);
         }
         checkFlipBuffer(sqrtStep);
     }
 
     private int max(int a, int b) {
         if (a > b) return a;
+        return b;
+    }
+
+    private int min(int a, int b) {
+        if (a < b) return a;
         return b;
     }
 
