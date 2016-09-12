@@ -12,8 +12,62 @@ import java.util.*;
 public class TriangulationDelaunay {
     // Array of nodes - type: Point
     private final List<Point> nodes = new ArrayList<>();
+
     // Linked list of triangles
-    private final List<TriangleStructure> triangleStructureList = new LinkedList<>();
+    private class TriangleList {
+
+        private int amountNullableElements = 0;
+        private final List<TriangleStructure> triangleStructureList = new LinkedList<>();
+        private int maxAmountNullableElements = Integer.MAX_VALUE;
+
+        public void add(TriangleStructure triangle) {
+            triangleStructureList.add(triangle);
+        }
+
+        public void addAll(TriangleStructure[] triangles) {
+            Collections.addAll(triangleStructureList, triangles);
+        }
+
+        private void removeNullTriangles() {
+            amountNullableElements = 0;
+            Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
+            while (iterator.hasNext()) {
+                if (iterator.next().triangles == null)
+                    iterator.remove();
+            }
+        }
+
+        public int size() {
+            return triangleStructureList.size();
+        }
+
+        public List<TriangleStructure> get() {
+            removeNullTriangles();
+            return triangleStructureList;
+        }
+
+        public void setMaxAmountNullableElements(int maxAmountNullableElements) {
+            this.maxAmountNullableElements = maxAmountNullableElements;
+        }
+
+        public TriangleStructure getFirstNotNullableElement() {
+            for (TriangleStructure triangle : triangleStructureList)
+                if (triangle.triangles != null)
+                    return triangle;
+            return null;
+        }
+
+        private void NullableTriangle(TriangleStructure triangle) {
+            triangle.triangles = null;
+            amountNullableElements++;
+            if (amountNullableElements > maxAmountNullableElements) {
+                System.out.println("Remove " + amountNullableElements + " : " + maxAmountNullableElements);
+                removeNullTriangles();
+            }
+        }
+    }
+
+    private TriangleList triangleList = new TriangleList();
 
     private final Stack<FlipStructure> flipBuffer = new Stack<>();
 
@@ -76,7 +130,8 @@ public class TriangulationDelaunay {
                 }
             }
 
-            for (TriangleStructure next : triangleStructureList) {
+            List<TriangleStructure> list = triangleList.get();
+            for (TriangleStructure next : list) {
                 if (next.triangles != null) {
                     searcher[positionSearcher] = next;
                     break;
@@ -120,41 +175,24 @@ public class TriangulationDelaunay {
         Point[][] pointArray = Geometry.convexHullDouble(points);
         List<Point> convexPoints = new ArrayList<>(Arrays.asList(pointArray[0]));
         BorderBox box = createConvexHullTriangles(createConvexHullWithoutPointInLine(convexPoints));
-        searcher = new Searcher(triangleStructureList.get(0), box, points.length);
+        searcher = new Searcher(triangleList.getFirstNotNullableElement(), box, points.length);
         points = pointArray[1];
 
         int sqrtStep = (int) Math.sqrt(points.length);
 
-        if (points.length < MINIMAL_POINTS_FOR_CLEANING) {
-            for (Point point : points) {
-                addNextPoint(point);
-                checkFlipBuffer(points.length);
-            }
-        } else {
-            int position = 0;
+        if (points.length > MINIMAL_POINTS_FOR_CLEANING) {
             int amount = max(1, (int) (AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE * (double) sqrtStep));
-            for (int i = 0; i < sqrtStep + 1; i++) {
-                int size = min(points.length - position, sqrtStep);
-                for (int j = 0; j < size; j++) {
-                    addNextPoint(points[position]);
-                    checkFlipBuffer(sqrtStep);
-                    position++;
-                }
-                if (i % amount == 0) {
-                    removeNullTriangles();
-                }
-            }
+            triangleList.setMaxAmountNullableElements(amount);
+        }
+        for (Point point : points) {
+            addNextPoint(point);
+            checkFlipBuffer(points.length);
         }
         checkFlipBuffer(sqrtStep);
     }
 
     private int max(int a, int b) {
         if (a > b) return a;
-        return b;
-    }
-
-    private int min(int a, int b) {
-        if (a < b) return a;
         return b;
     }
 
@@ -202,7 +240,7 @@ public class TriangulationDelaunay {
                 commonTriangle.triangles[1] = triangle;
             }
 
-            triangleStructureList.add(triangle);
+            triangleList.add(triangle);
 
             if (i + k >= points.size())
                 break;
@@ -223,7 +261,7 @@ public class TriangulationDelaunay {
                     triangle, null, null
             };
             triangle.triangles[2] = triangle2;
-            triangleStructureList.add(triangle2);
+            triangleList.add(triangle2);
 
 
             indexPoint0 = indexPoint2_next;
@@ -406,15 +444,15 @@ public class TriangulationDelaunay {
         //inverse link on triangle
         addInverseLinkOnTriangle(triangles);
 
-        triangleStructureList.add(triangles[0]);
-        triangleStructureList.add(triangles[1]);
+        triangleList.add(triangles[0]);
+        triangleList.add(triangles[1]);
 
         //move beginTriangle
         searcher.setSearcher(triangles[0]);
 
         //add null in old triangles
         for (TriangleStructure base : baseTriangles) {
-            NullableTriangle(base);
+            triangleList.NullableTriangle(base);
         }
 
         flipBuffer.push(new FlipStructure(triangles[0], 0));
@@ -467,9 +505,9 @@ public class TriangulationDelaunay {
 
         while (true) {
             amountMoving++;
-            if (amountMoving > triangleStructureList.size()) {
-                removeNullTriangles();
-                for (TriangleStructure triangle : triangleStructureList) {
+            if (amountMoving > triangleList.size()) {
+                List<TriangleStructure> list = triangleList.get();
+                for (TriangleStructure triangle : list) {
                     amountMoving++;
                     if (triangle.triangles == null)
                         continue;
@@ -557,20 +595,17 @@ public class TriangulationDelaunay {
         triangles[1].triangles = new TriangleStructure[]{beginTriangle.triangles[1], triangles[2], triangles[0]};
         triangles[2].triangles = new TriangleStructure[]{beginTriangle.triangles[2], triangles[0], triangles[1]};
 
-        NullableTriangle(beginTriangle);
+        triangleList.NullableTriangle(beginTriangle);
 
         searcher.setSearcher(triangles[0]);
         addInverseLinkOnTriangle(triangles);
 
         for (int i = 0; i < 3; i++) {
             flipBuffer.push(new FlipStructure(triangles[i], 0));
-            triangleStructureList.add(triangles[i]);
+            triangleList.add(triangles[i]);
         }
     }
 
-    private void NullableTriangle(TriangleStructure triangle) {
-        triangle.triangles = null;
-    }
 
     private void addInverseLinkOnTriangle(TriangleStructure[] triangles) {
         for (TriangleStructure triangle : triangles) {
@@ -666,21 +701,21 @@ public class TriangulationDelaunay {
         if (beginTriangle.triangles[indexLineInTriangle] == null) {
             addInverseLinkOnTriangle(new TriangleStructure[]{triangles[0], triangles[1]});
 
-            NullableTriangle(beginTriangle);
+            triangleList.NullableTriangle(beginTriangle);
 
             searcher.setSearcher(triangles[0]);
 
             flipBuffer.push(new FlipStructure(triangles[0], 2));
             flipBuffer.push(new FlipStructure(triangles[1], 1));
 
-            triangleStructureList.add(triangles[0]);
-            triangleStructureList.add(triangles[1]);
+            triangleList.add(triangles[0]);
+            triangleList.add(triangles[1]);
             return;
         }
 
         int ribConnectId = beginTriangle.iRibs[indexLineInTriangle];
         TriangleStructure nextTriangle = beginTriangle.triangles[indexLineInTriangle];
-        NullableTriangle(beginTriangle);
+        triangleList.NullableTriangle(beginTriangle);
         beginTriangle = nextTriangle;
         for (int i = 0; i < 3; i++) {
             if (beginTriangle.iRibs[i] == ribConnectId) {
@@ -728,7 +763,7 @@ public class TriangulationDelaunay {
 
         addInverseLinkOnTriangle(triangles);
 
-        NullableTriangle(beginTriangle);
+        triangleList.NullableTriangle(beginTriangle);
         searcher.setSearcher(triangles[0]);
 
         flipBuffer.push(new FlipStructure(triangles[0], 2));
@@ -736,20 +771,12 @@ public class TriangulationDelaunay {
         flipBuffer.push(new FlipStructure(triangles[2], 1));
         flipBuffer.push(new FlipStructure(triangles[3], 2));
 
-        Collections.addAll(triangleStructureList, triangles);
+        triangleList.addAll(triangles);
     }
 
-    private void removeNullTriangles() {
-        Iterator<TriangleStructure> iterator = triangleStructureList.iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next().triangles == null)
-                iterator.remove();
-        }
-    }
 
     public List<Point[]> getTriangles() {
-        removeNullTriangles();
-        List<TriangleStructure> triangles = new ArrayList<>(triangleStructureList);
+        List<TriangleStructure> triangles = triangleList.get();
         List<Point[]> trianglesPoints = new ArrayList<>();
         for (TriangleStructure tri : triangles) {
             Point[] points = new Point[3];
