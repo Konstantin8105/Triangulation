@@ -67,7 +67,7 @@ public class Statistic {
 
     private void show(double intervalMin, double intervalMax, int amount, int maxInterval) {
         System.out.print(String.format("%6.1f - %6.1f : %10d : ", intervalMin, intervalMax, amount));
-        int amountStars = (int)(15*amount/maxInterval);
+        int amountStars = (int)(15*(double)amount/(double)maxInterval);
         for (int i = 0; i < amountStars; i++) {
             System.out.print("*");
         }

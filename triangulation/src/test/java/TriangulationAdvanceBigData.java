@@ -13,8 +13,17 @@ public class TriangulationAdvanceBigData {
     // 1_000_000 points = 31 sec
     @Ignore
     @Test
-    public void testBigInputData1() {
+    public void testBigRandomData() {
         Point[] points = (Point[]) ResearchTest.getRandomPoints(1_000_000).toArray();
+        TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
+        Assert.assertTrue(triangulation.getTriangles().size() > 0);
+        StatisticTriangulation statistic = new StatisticTriangulation(triangulation);
+    }
+
+    @Ignore
+    @Test
+    public void testBigCircleData() {
+        Point[] points = (Point[]) ResearchTest.getCirclePoints(100_000).toArray();
         TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
         StatisticTriangulation statistic = new StatisticTriangulation(triangulation);

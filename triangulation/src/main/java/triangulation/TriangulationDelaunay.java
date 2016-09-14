@@ -18,7 +18,7 @@ public class TriangulationDelaunay {
 
         private int amountNullableElements = 0;
         private final List<TriangleStructure> triangleStructureList = new LinkedList<>();
-        private int maxAmountNullableElements = Integer.MAX_VALUE;
+        private int maxAmountNullableElements = Integer.MAX_VALUE / 2;
 
         public void add(TriangleStructure triangle) {
             triangleStructureList.add(triangle);
@@ -67,22 +67,58 @@ public class TriangulationDelaunay {
     }
 
     private TriangleList triangleList = new TriangleList();
+    private Flipper flipper = new Flipper();
 
-    private final Stack<FlipStructure> flipBuffer = new Stack<>();
 
-    private class FlipStructure {
-        public final TriangleStructure triangle;
-        public final int side;
+    private class Flipper {
+        private final Stack<FlipStructure> buffer = new Stack<>();
 
-        public FlipStructure(TriangleStructure triangle, int side) {
-            this.triangle = triangle;
-            this.side = side;
+        public void add(TriangleStructure triangle, int index) {
+            buffer.add(new FlipStructure(triangle, index));
+        }
+
+        private class FlipStructure {
+            public TriangleStructure triangle;
+            public int side;
+
+            public FlipStructure(TriangleStructure triangle, int side) {
+                this.triangle = triangle;
+                this.side = side;
+            }
+        }
+
+        void run() {
+            while (!buffer.empty()) {
+                FlipStructure next = buffer.pop();
+
+                if (next.triangle.triangles == null)
+                    continue;
+
+                if (next.triangle.triangles[next.side] == null)
+                    continue;
+
+                Point p0 = nodes.get(next.triangle.iNodes[normalizeSizeBy3(next.side - 1)]);
+                Point p1 = nodes.get(next.triangle.triangles[next.side].iNodes[0]);
+                Point p2 = nodes.get(next.triangle.triangles[next.side].iNodes[1]);
+                Point p3 = nodes.get(next.triangle.triangles[next.side].iNodes[2]);
+
+                double s1 = (p0.getX() - p1.getX()) * (p0.getY() - p3.getY()) - (p0.getX() - p3.getX()) * (p0.getY() - p1.getY());
+                double s2 = (p2.getX() - p3.getX()) * (p2.getX() - p1.getX()) + (p2.getY() - p3.getY()) * (p2.getY() - p1.getY());
+                double s3 = (p0.getX() - p1.getX()) * (p0.getX() - p3.getX()) + (p0.getY() - p1.getY()) * (p0.getY() - p3.getY());
+                double s4 = (p2.getX() - p3.getX()) * (p2.getY() - p1.getY()) - (p2.getX() - p1.getX()) * (p2.getY() - p3.getY());
+                if (s1 * s2 + s3 * s4 >= 0)
+                    continue;
+                else
+                    flipTriangles(next.triangle, next.side);
+
+            }
         }
     }
 
     public static double AMOUNT_SEARCHER_FACTOR = 0.1D;
-    public static double AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE = 0.1D;
-    public static int MINIMAL_POINTS_FOR_CLEANING = 40000;
+    public static double AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE = 1.0D;
+    public static double RATIO_DELETING_CONVEX_POINT_FROM_POINT_LIST = 0.2D;
+    public static int MINIMAL_POINTS_FOR_CLEANING = 100000;
 
     private Searcher searcher;
 
@@ -129,13 +165,7 @@ public class TriangulationDelaunay {
                 }
             }
 
-            List<TriangleStructure> list = triangleList.get();
-            for (TriangleStructure next : list) {
-                if (next.triangles != null) {
-                    searcher[positionSearcher] = next;
-                    break;
-                }
-            }
+            searcher[positionSearcher] = triangleList.getFirstNotNullableElement();
         }
 
         private int normalizeSizeByL(int index) {
@@ -170,26 +200,25 @@ public class TriangulationDelaunay {
         run(points);
     }
 
-    public void run(Point[] points) {
-        Point[][] pointArray = Geometry.convexHullDouble(points);
-        List<Point> convexPoints = new ArrayList<>(Arrays.asList(pointArray[0]));
-        BorderBox box = createConvexHullTriangles(createConvexHullWithoutPointInLine(convexPoints));
-        searcher = new Searcher(triangleList.getFirstNotNullableElement(), box, points.length);
-        points = pointArray[1];
+    public void run(Point[] input) {
+        List<Point>[] pointArray = Geometry.convexHullDouble(input);
+        List<Point> convexPoints = pointArray[0];
+        BorderBox box = createConvexHullTriangles(convexPoints);
+        searcher = new Searcher(triangleList.getFirstNotNullableElement(), box, pointArray[1].size());
 
-        int sqrtStep = (int) Math.sqrt(points.length);
+        int sqrtStep = (int) Math.sqrt(pointArray[1].size());
 
-        if (points.length > MINIMAL_POINTS_FOR_CLEANING) {
-            int amount = max(1, (int) (AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE * (double) sqrtStep));
+        if (pointArray[1].size() >= MINIMAL_POINTS_FOR_CLEANING) {
+            int amount = max(1, (int) (AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE * pointArray[1].size()));// * (double) sqrtStep));
             triangleList.setMaxAmountNullableElements(amount);
         }
-        for (int i=0;i<points.length;i++) {
-            addNextPoint(points[i]);
-            checkFlipBuffer(sqrtStep);
-//            if(i%1000 == 0)
-//                System.out.println(i);
+        for (int i = 0; i < pointArray[1].size(); i++) {
+            addNextPoint(pointArray[1].get(i));
+            flipper.run();
+//            if (i % 1000 == 0)
+//                System.err.println(i);
         }
-        checkFlipBuffer(sqrtStep);
+        flipper.run();
     }
 
     private int max(int a, int b) {
@@ -202,22 +231,6 @@ public class TriangulationDelaunay {
         return b;
     }
 
-    private void checkFlipBuffer(int cleaningStep) {
-        int step = 0;
-        while (!flipBuffer.empty()) {
-            FlipStructure next = flipBuffer.pop();
-            flipTriangles(next.triangle, next.side);
-            step++;
-            if (step % cleaningStep == 0 && step > 0) {
-                step = 0;
-                Iterator<FlipStructure> iterator = flipBuffer.iterator();
-                while (iterator.hasNext()) {
-                    if (iterator.next().triangle.triangles == null)
-                        iterator.remove();
-                }
-            }
-        }
-    }
 
     private BorderBox createConvexHullTriangles(List<Point> points) {
         int i = 0;
@@ -283,46 +296,12 @@ public class TriangulationDelaunay {
         return borderBox;
     }
 
-    private List<Point> createConvexHullWithoutPointInLine(final List<Point> convexPoints) {
-
-        List<Integer> removesIndex = new ArrayList<>();
-        for (int position0 = 0; position0 < convexPoints.size(); position0++) {
-            int position1 = position0 + 1 >= convexPoints.size() ? position0 + 1 - convexPoints.size() : position0 + 1;
-            int position2 = position0 + 2 >= convexPoints.size() ? position0 + 2 - convexPoints.size() : position0 + 2;
-            if (Geometry.is3pointsCollinear(
-                    convexPoints.get(position0),
-                    convexPoints.get(position1),
-                    convexPoints.get(position2))) {
-                removesIndex.add(position1);
-            }
-        }
-
-        Collections.sort(removesIndex);
-        for (int i = removesIndex.size() - 1; i >= 0; i--) {
-            convexPoints.remove((int) removesIndex.get(i));
-        }
-
-        return convexPoints;
-    }
 
     private void flipTriangles(TriangleStructure triangle, int indexTriangle) {
+//        if (triangle == null)
+//            return;
 
-        if (triangle == null)
-            return;
-
-        if (triangle.triangles == null)
-            return;
-
-        if (triangle.triangles[indexTriangle] == null)
-            return;
-
-        if (!Geometry.isPointInCircle(
-                new Point[]{
-                        nodes.get(triangle.triangles[indexTriangle].iNodes[0]),
-                        nodes.get(triangle.triangles[indexTriangle].iNodes[1]),
-                        nodes.get(triangle.triangles[indexTriangle].iNodes[2])},
-                nodes.get(triangle.iNodes[normalizeSizeBy3(indexTriangle - 1)])))
-            return;
+        TriangleStructure[] region = new TriangleStructure[4];
 
         int pointNewTriangle = triangle.iNodes[normalizeSizeBy3(indexTriangle - 1)];
         int commonRib = triangle.iRibs[indexTriangle];
@@ -332,7 +311,7 @@ public class TriangulationDelaunay {
         };
 
         // global region
-        List<TriangleStructure> region = new ArrayList<>();
+        int position = 0;
         for (int i = 0; i < 2; i++) {
             TriangleStructure internalTriangle = baseTriangles[i];
             int indexCommonRib = -1;
@@ -352,7 +331,7 @@ public class TriangulationDelaunay {
             t1.triangles = new TriangleStructure[]{
                     internalTriangle.triangles[normalizeSizeBy3(indexCommonRib + 1)]
             };
-            region.add(t1);
+            region[position++] = t1;
             TriangleStructure t2 = new TriangleStructure();
             t2.iRibs = new int[]{
                     internalTriangle.iRibs[normalizeSizeBy3(indexCommonRib - 1)]
@@ -364,45 +343,26 @@ public class TriangulationDelaunay {
             t2.triangles = new TriangleStructure[]{
                     internalTriangle.triangles[normalizeSizeBy3(indexCommonRib - 1)]
             };
-            region.add(t2);
+            region[position++] = t2;
         }
 
-        //loopization
-        boolean isLoop = true;
-        for (int i = 0; i < region.size(); i++) {
-            int next = i + 1 > region.size() - 1 ? 0 : i + 1;
-            if (region.get(i).iNodes[1] != region.get(next).iNodes[0]) {
-                isLoop = false;
-            }
-        }
-        if (!isLoop) {
+
+        if (Geometry.isCounterClockwise(
+                nodes.get(region[1].iNodes[0]),
+                nodes.get(region[1].iNodes[1]),
+                nodes.get(region[2].iNodes[1])))
             return;
-        }
+
+
+        if (Geometry.isCounterClockwise(
+                nodes.get(region[3].iNodes[0]),
+                nodes.get(region[3].iNodes[1]),
+                nodes.get(region[0].iNodes[1])
+        ))
+            return;
 
         //checking base point
-        if (region.get(0).iNodes[1] != pointNewTriangle) {
-            return;
-        }
-
-        //check - new triangle is not on 1 line
-        if (Geometry.is3pointsCollinear(
-                nodes.get(region.get(0).iNodes[1]),
-                nodes.get(region.get(1).iNodes[1]),
-                nodes.get(region.get(2).iNodes[1])) ||
-                Geometry.is3pointsCollinear(
-                        nodes.get(region.get(3).iNodes[0]),
-                        nodes.get(region.get(3).iNodes[1]),
-                        nodes.get(region.get(0).iNodes[1]))) {
-            return;
-        }
-
-        //convexHull checking
-        if (Geometry.convexHull(new Point[]{
-                nodes.get(region.get(0).iNodes[0]),
-                nodes.get(region.get(1).iNodes[0]),
-                nodes.get(region.get(2).iNodes[0]),
-                nodes.get(region.get(3).iNodes[0]),
-        }).length < 4) {
+        if (region[0].iNodes[1] != pointNewTriangle) {
             return;
         }
 
@@ -416,34 +376,34 @@ public class TriangulationDelaunay {
         }
 
         triangles[0].iNodes = new int[]{
-                region.get(1).iNodes[0],
-                region.get(1).iNodes[1],
-                region.get(2).iNodes[1]
+                region[1].iNodes[0],
+                region[1].iNodes[1],
+                region[2].iNodes[1]
         };
         triangles[0].iRibs = new int[]{
-                region.get(1).iRibs[0],
-                region.get(2).iRibs[0],
+                region[1].iRibs[0],
+                region[2].iRibs[0],
                 newCommonRib
         };
         triangles[0].triangles = new TriangleStructure[]{
-                region.get(1).triangles[0],
-                region.get(2).triangles[0],
+                region[1].triangles[0],
+                region[2].triangles[0],
                 triangles[1]
         };
 
         triangles[1].iNodes = new int[]{
-                region.get(3).iNodes[0],
-                region.get(3).iNodes[1],
-                region.get(0).iNodes[1]
+                region[3].iNodes[0],
+                region[3].iNodes[1],
+                region[0].iNodes[1]
         };
         triangles[1].iRibs = new int[]{
-                region.get(3).iRibs[0],
-                region.get(0).iRibs[0],
+                region[3].iRibs[0],
+                region[0].iRibs[0],
                 newCommonRib
         };
         triangles[1].triangles = new TriangleStructure[]{
-                region.get(3).triangles[0],
-                region.get(0).triangles[0],
+                region[3].triangles[0],
+                region[0].triangles[0],
                 triangles[0]
         };
 
@@ -461,11 +421,11 @@ public class TriangulationDelaunay {
             triangleList.NullableTriangle(base);
         }
 
-        flipBuffer.push(new FlipStructure(triangles[0], 0));
-        flipBuffer.push(new FlipStructure(triangles[0], 1));
+        flipper.add(triangles[0], 0);
+        flipper.add(triangles[0], 1);
 
-        flipBuffer.push(new FlipStructure(triangles[1], 0));
-        flipBuffer.push(new FlipStructure(triangles[1], 1));
+        flipper.add(triangles[1], 0);
+        flipper.add(triangles[1], 1);
     }
 
     private void addNextPoint(Point nextPoint) {
@@ -506,36 +466,9 @@ public class TriangulationDelaunay {
 
     private GeometryPointTriangle.PointTriangleState movingByConvexHull(Point point) {
 
-        int amountMoving = 0;
         TriangleStructure beginTriangle = searcher.getSearcher();
 
         while (true) {
-            amountMoving++;
-            if (amountMoving > triangleList.size()) {
-                List<TriangleStructure> list = triangleList.get();
-                for (TriangleStructure triangle : list) {
-                    amountMoving++;
-                    if (triangle.triangles == null)
-                        continue;
-                    Point[] trianglePoint = new Point[]{
-                            nodes.get(triangle.iNodes[0]),
-                            nodes.get(triangle.iNodes[1]),
-                            nodes.get(triangle.iNodes[2])
-                    };
-
-                    GeometryPointTriangle.PointTriangleState state = GeometryPointTriangle.statePointInTriangle(point, trianglePoint);
-
-                    if (state == GeometryPointTriangle.PointTriangleState.POINT_INSIDE ||
-                            state == GeometryPointTriangle.PointTriangleState.POINT_ON_CORNER ||
-                            state == GeometryPointTriangle.PointTriangleState.POINT_ON_LINE_0 ||
-                            state == GeometryPointTriangle.PointTriangleState.POINT_ON_LINE_1 ||
-                            state == GeometryPointTriangle.PointTriangleState.POINT_ON_LINE_2) {
-                        beginTriangle = triangle;
-                        break;
-                    }
-                }
-                break;
-            }
             if (Geometry.isAtRightOf(nodes.get(beginTriangle.iNodes[0]), nodes.get(beginTriangle.iNodes[1]), point)) {
                 beginTriangle = beginTriangle.triangles[0];
             } else {
@@ -607,7 +540,7 @@ public class TriangulationDelaunay {
         addInverseLinkOnTriangle(triangles);
 
         for (int i = 0; i < 3; i++) {
-            flipBuffer.push(new FlipStructure(triangles[i], 0));
+            flipper.add(triangles[i], 0);
             triangleList.add(triangles[i]);
         }
     }
@@ -711,8 +644,8 @@ public class TriangulationDelaunay {
 
             searcher.setSearcher(triangles[0]);
 
-            flipBuffer.push(new FlipStructure(triangles[0], 2));
-            flipBuffer.push(new FlipStructure(triangles[1], 1));
+            flipper.add(triangles[0], 2);
+            flipper.add(triangles[1], 1);
 
             triangleList.add(triangles[0]);
             triangleList.add(triangles[1]);
@@ -772,10 +705,10 @@ public class TriangulationDelaunay {
         triangleList.NullableTriangle(beginTriangle);
         searcher.setSearcher(triangles[0]);
 
-        flipBuffer.push(new FlipStructure(triangles[0], 2));
-        flipBuffer.push(new FlipStructure(triangles[1], 1));
-        flipBuffer.push(new FlipStructure(triangles[2], 1));
-        flipBuffer.push(new FlipStructure(triangles[3], 2));
+        flipper.add(triangles[0], 2);
+        flipper.add(triangles[1], 1);
+        flipper.add(triangles[2], 1);
+        flipper.add(triangles[3], 2);
 
         triangleList.addAll(triangles);
     }
@@ -960,17 +893,17 @@ public class TriangulationDelaunay {
                     - a[0][2] * a[1][1] * a[2][0] - a[0][1] * a[1][0] * a[2][2] - a[1][2] * a[2][1] * a[0][0];
         }
 
-        static boolean isPointInCircle(Point[] circlePoints, Point point) {
-            double x1 = circlePoints[0].getX();
-            double y1 = circlePoints[0].getY();
+        static boolean isPointInCircle(Point point, Point circlePoints0, Point circlePoints1, Point circlePoints2) {
+            double x1 = circlePoints0.getX();
+            double y1 = circlePoints0.getY();
             double z1 = x1 * x1 + y1 * y1;
 
-            double x2 = circlePoints[1].getX();
-            double y2 = circlePoints[1].getY();
+            double x2 = circlePoints1.getX();
+            double y2 = circlePoints1.getY();
             double z2 = x2 * x2 + y2 * y2;
 
-            double x3 = circlePoints[2].getX();
-            double y3 = circlePoints[2].getY();
+            double x3 = circlePoints2.getX();
+            double y3 = circlePoints2.getY();
             double z3 = x3 * x3 + y3 * y3;
 
             double a = det(new double[][]{
@@ -1001,7 +934,7 @@ public class TriangulationDelaunay {
             double y0 = point.getY();
             double z0 = x0 * x0 + y0 * y0;
 
-            return Math.signum(a) * (a * z0 - b * x0 + c * y0 - d) < Precision.epsilon();
+            return Math.signum(a) * (a * z0 - b * x0 + c * y0 - d) < -Precision.epsilon();
         }
 
 
@@ -1074,12 +1007,12 @@ public class TriangulationDelaunay {
         //Performance O(n*log(n)) in worst case
         // Point[0][] - convex points
         // Point[1][] - sorted list of all points
-        static Point[][] convexHullDouble(Point[] inputPoints) {
+        static List<Point>[] convexHullDouble(Point[] inputPoints) {
             if (inputPoints.length < 2) {
-                return new Point[][]{inputPoints, {}};
+                return null;
             }
 
-            List<Point> array = new ArrayList<>(Arrays.asList(inputPoints));
+            ArrayList<Point> array = new ArrayList<>(Arrays.asList(inputPoints));
 
             Collections.sort(array, new Comparator<Point>() {
                 @Override
@@ -1117,9 +1050,10 @@ public class TriangulationDelaunay {
             }
 
             Point[] H = new Point[2 * n];
+//            List<Point> H = new ArrayList<>(2 * n);
 
             int k = 0;
-            // Build lower hull
+//             Build lower hull
             for (int i = 0; i < n; ++i) {
                 while (k >= 2 && isCounterClockwise(H[k - 2], H[k - 1], P[i])) {
                     k--;
@@ -1134,10 +1068,53 @@ public class TriangulationDelaunay {
                 }
                 H[k++] = P[i];
             }
+            List<Point> convexPoints = new ArrayList<>();
             if (k > 1) {
                 H = Arrays.copyOfRange(H, 0, k - 1); // remove non-hull vertices after k; remove k - 1 which is a duplicate
+                boolean[] removed = new boolean[k - 1];
+                for (int position0 = 0; position0 < removed.length; position0++) {
+                    int position1 = position0 + 1 >= removed.length ? position0 + 1 - removed.length : position0 + 1;
+                    int position2 = position0 + 2 >= removed.length ? position0 + 2 - removed.length : position0 + 2;
+                    if (Geometry.is3pointsCollinear(
+                            H[position0],
+                            H[position1],
+                            H[position2])) {
+                        removed[position1] = true;
+                    }
+                }
+                for (int i = 0; i < removed.length; i++) {
+                    if (!removed[i])
+                        convexPoints.add(H[i]);
+                }
+                if (array.size() > 5) {
+                    if ((double) convexPoints.size() / (double) array.size() > RATIO_DELETING_CONVEX_POINT_FROM_POINT_LIST) {
+                        boolean[] delete = new boolean[array.size()];
+                        int position = 0;
+                        for (int i = 0; i < array.size(); i++) {
+                            if (array.get(i).equals(convexPoints.get(position))) {
+                                delete[i] = true;
+                                position++;
+                            }
+                        }
+                        for (int i = array.size() - 1; i >= 0; i--) {
+                            if (position >= convexPoints.size())
+                                break;
+                            if (array.get(i).equals(convexPoints.get(position))) {
+                                delete[i] = true;
+                                position++;
+                            }
+                        }
+                        ArrayList<Point> newList = new ArrayList<>();
+                        for (int i = 0; i < array.size(); i++) {
+                            if (!delete[i])
+                                newList.add(array.get(i));
+                        }
+                        array = newList;
+                    }
+                }
             }
-            return new Point[][]{H, array.toArray(new Point[array.size()])};
+
+            return new List[]{convexPoints, array};
         }
 
 

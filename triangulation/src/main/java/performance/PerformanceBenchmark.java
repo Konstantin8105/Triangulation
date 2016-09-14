@@ -19,21 +19,21 @@ public class PerformanceBenchmark {
     // java -jar target/microbenchmarks.jar performance.PerformanceBenchmark
 
     @Param({
-            "10",
-            "100",
-            "1000",
-            "10000",
-            "100000"
-    })
-    int size;
-
-    @Param({
             "Random",
             "Circle",
             "Line_in_line",
             "In_triangle"
     })
     String test;
+
+    @Param({
+            "10",
+            "30000",
+            "60000",
+            "90000",
+            "120000",
+    })
+    int size;
 
     @Setup
     public void prepare() {
