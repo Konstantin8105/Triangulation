@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 @Fork(value = 2)
 @Warmup(iterations = 10, time = 50, timeUnit = TimeUnit.MILLISECONDS)
 @Measurement(iterations = 10)
-@Timeout(time = 20, timeUnit = TimeUnit.MILLISECONDS)
+//@Timeout(time = 20, timeUnit = TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
 public class PerformanceBenchmark {
 

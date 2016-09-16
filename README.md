@@ -25,26 +25,30 @@ Simple example:
 
 Performance with different cases:
 
-    Benchmark                               (size)        (test)  Mode  Cnt    Score     Error  Units
-    PerformanceBenchmark.triangulationMesh    5000        Random  avgt   20   22.617 ±   3.468  ms/op
-    PerformanceBenchmark.triangulationMesh   10000        Random  avgt   20   48.490 ±   6.859  ms/op
-    PerformanceBenchmark.triangulationMesh   50000        Random  avgt   20  414.480 ±  64.190  ms/op
-    PerformanceBenchmark.triangulationMesh  100000        Random  avgt   20  817.028 ± 198.210  ms/op
+    Benchmark                               (size)        (test)  Mode  Cnt     Score     Error  Units
+    PerformanceBenchmark.triangulationMesh      10        Random  avgt   20     0.009 ±   0.002  ms/op
+    PerformanceBenchmark.triangulationMesh   30000        Random  avgt   20   183.101 ±  29.021  ms/op
+    PerformanceBenchmark.triangulationMesh   60000        Random  avgt   20   527.194 ± 140.599  ms/op
+    PerformanceBenchmark.triangulationMesh   90000        Random  avgt   20  1328.815 ± 280.890  ms/op
+    PerformanceBenchmark.triangulationMesh  120000        Random  avgt   20  1809.766 ± 388.014  ms/op
 
-    PerformanceBenchmark.triangulationMesh    5000        Circle  avgt   20    5.068 ±   0.816  ms/op
-    PerformanceBenchmark.triangulationMesh   10000        Circle  avgt   20   89.438 ±  11.124  ms/op
-    PerformanceBenchmark.triangulationMesh   50000        Circle  avgt   20  691.605 ± 323.062  ms/op
-    PerformanceBenchmark.triangulationMesh  100000        Circle  avgt   20  890.215 ±  69.800  ms/op
+    PerformanceBenchmark.triangulationMesh      10        Circle  avgt   20     0.015 ±   0.008  ms/op
+    PerformanceBenchmark.triangulationMesh   30000        Circle  avgt   20   227.777 ±   5.877  ms/op
+    PerformanceBenchmark.triangulationMesh   60000        Circle  avgt   20   616.926 ± 140.015  ms/op
+    PerformanceBenchmark.triangulationMesh   90000        Circle  avgt   20  1498.155 ± 167.988  ms/op
+    PerformanceBenchmark.triangulationMesh  120000        Circle  avgt   20  1841.663 ± 133.690  ms/op
 
-    PerformanceBenchmark.triangulationMesh    5000  Line_in_line  avgt   20    1.927 ±   0.091  ms/op
-    PerformanceBenchmark.triangulationMesh   10000  Line_in_line  avgt   20    2.805 ±   0.470  ms/op
-    PerformanceBenchmark.triangulationMesh   50000  Line_in_line  avgt   20    4.848 ±   0.179  ms/op
-    PerformanceBenchmark.triangulationMesh  100000  Line_in_line  avgt   20    8.455 ±   0.612  ms/op
+    PerformanceBenchmark.triangulationMesh      10  Line_in_line  avgt   20     0.043 ±   0.003  ms/op
+    PerformanceBenchmark.triangulationMesh   30000  Line_in_line  avgt   20     3.478 ±   0.124  ms/op
+    PerformanceBenchmark.triangulationMesh   60000  Line_in_line  avgt   20     8.241 ±   2.542  ms/op
+    PerformanceBenchmark.triangulationMesh   90000  Line_in_line  avgt   20    14.951 ±   2.954  ms/op
+    PerformanceBenchmark.triangulationMesh  120000  Line_in_line  avgt   20    15.105 ±   1.750  ms/op
 
-    PerformanceBenchmark.triangulationMesh    5000   In_triangle  avgt   20    0.808 ±   0.094  ms/op
-    PerformanceBenchmark.triangulationMesh   10000   In_triangle  avgt   20    1.587 ±   0.372  ms/op
-    PerformanceBenchmark.triangulationMesh   50000   In_triangle  avgt   20    3.643 ±   0.291  ms/op
-    PerformanceBenchmark.triangulationMesh  100000   In_triangle  avgt   20    7.656 ±   0.771  ms/op
+    PerformanceBenchmark.triangulationMesh      10   In_triangle  avgt   20     0.015 ±   0.003  ms/op
+    PerformanceBenchmark.triangulationMesh   30000   In_triangle  avgt   20     2.515 ±   0.359  ms/op
+    PerformanceBenchmark.triangulationMesh   60000   In_triangle  avgt   20     4.853 ±   0.740  ms/op
+    PerformanceBenchmark.triangulationMesh   90000   In_triangle  avgt   20    11.789 ±   2.682  ms/op
+    PerformanceBenchmark.triangulationMesh  120000   In_triangle  avgt   20    14.340 ±   1.837  ms/op
 
 Present algorithm complexity in worst case - O(NxLOG(N)), average - O(NxLOG(N)).
 

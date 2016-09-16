@@ -66,8 +66,9 @@ public class TriangulationDelaunay {
         }
     }
 
-    private TriangleList triangleList = new TriangleList();
     private Flipper flipper = new Flipper();
+    private Searcher searcher;
+    private TriangleList triangleList = new TriangleList();
 
 
     private class Flipper {
@@ -120,8 +121,6 @@ public class TriangulationDelaunay {
     public static double RATIO_DELETING_CONVEX_POINT_FROM_POINT_LIST = 0.2D;
     public static int MINIMAL_POINTS_FOR_CLEANING = 10000;
 
-    private Searcher searcher;
-
     private class Searcher {
         private final TriangleStructure[] searcher;
         private final double[] elevations;
@@ -159,22 +158,15 @@ public class TriangulationDelaunay {
                 return;
 
             for (int i = 0; i < searcher.length; i++) {
-                if (searcher[normalizeSizeByL(positionSearcher + i)].triangles != null) {
-                    searcher[positionSearcher] = searcher[normalizeSizeByL(positionSearcher + i)];
+                if (searcher[normalize(positionSearcher + i,searcher.length)].triangles != null) {
+                    searcher[positionSearcher] = searcher[normalize(positionSearcher + i,searcher.length)];
                     return;
                 }
             }
-
             searcher[positionSearcher] = triangleList.getFirstNotNullableElement();
         }
-
-        private int normalizeSizeByL(int index) {
-            if (0 <= index && index < searcher.length) {
-                return index;
-            }
-            if (index < 0)
-                return normalizeSizeBy3(index + searcher.length);
-            return normalizeSizeBy3(index - searcher.length);
+        public TriangleStructure[] allTrianglesFromSearchers() {
+            return searcher;
         }
     }
 
@@ -414,6 +406,7 @@ public class TriangulationDelaunay {
         triangleList.add(triangles[1]);
 
         //move beginTriangle
+//        searcher.chooseSearcher(nodes.get(triangles[0].iNodes[0]));
         searcher.setSearcher(triangles[0]);
 
         //add null in old triangles
@@ -469,6 +462,7 @@ public class TriangulationDelaunay {
         TriangleStructure beginTriangle = searcher.getSearcher();
 
         while (true) {
+            //add reserve searching
             if (Geometry.isAtRightOf(nodes.get(beginTriangle.iNodes[0]), nodes.get(beginTriangle.iNodes[1]), point)) {
                 beginTriangle = beginTriangle.triangles[0];
             } else {
@@ -575,13 +569,17 @@ public class TriangulationDelaunay {
     }
 
 
-    private static int normalizeSizeBy3(int index) {
-        if (0 <= index && index < 3) {
+    private static int normalize(int index, int size) {
+        if (0 <= index && index < size) {
             return index;
         }
         if (index < 0)
-            return normalizeSizeBy3(index + 3);
-        return normalizeSizeBy3(index - 3);
+            return normalize(index + size,size);
+        return normalize(index - size,size);
+    }
+
+    private static int normalizeSizeBy3(int index){
+        return normalize(index,3);
     }
 
     private void addNextPointOnLine(Point nextPoint, int indexLineInTriangle) {
@@ -647,8 +645,8 @@ public class TriangulationDelaunay {
             flipper.add(triangles[0], 2);
             flipper.add(triangles[1], 1);
 
-            triangleList.add(triangles[0]);
-            triangleList.add(triangles[1]);
+//            triangleList.add(triangles[0]);
+//            triangleList.add(triangles[1]);
             return;
         }
 
