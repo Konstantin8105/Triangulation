@@ -115,10 +115,10 @@ public class TriangulationDelaunay {
         }
     }
 
-    public static double AMOUNT_SEARCHER_FACTOR = 0.1D;
-    public static double AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE = 1.0D;
+    public static double AMOUNT_SEARCHER_FACTOR = 0.5D;
+    public static double AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE = 2.4D;
     public static double RATIO_DELETING_CONVEX_POINT_FROM_POINT_LIST = 0.2D;
-    public static int MINIMAL_POINTS_FOR_CLEANING = 100000;
+    public static int MINIMAL_POINTS_FOR_CLEANING = 10000;
 
     private Searcher searcher;
 
@@ -149,7 +149,7 @@ public class TriangulationDelaunay {
 
         public void chooseSearcher(Point point) {
             for (int i = searcher.length - 1; i >= 0; i--) {
-                if (point.getY() > elevations[i]) {
+                if (point.getY() > elevations[i] - Precision.epsilon()) {
                     positionSearcher = i;
                     break;
                 }

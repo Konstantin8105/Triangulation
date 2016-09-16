@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(value = 2)
 @Warmup(iterations = 10, time = 50, timeUnit = TimeUnit.MILLISECONDS)
-@Measurement(iterations = 10)
+@Measurement(iterations = 20)
 //@Timeout(time = 20, timeUnit = TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
 public class BenchmarkCleaning {
@@ -123,33 +123,75 @@ public class BenchmarkCleaning {
 //    BenchmarkCleaning.triangulationMesh     100.0    1000  avgt   20     3,042 ?   0,449  ms/op
 //    BenchmarkCleaning.triangulationMesh     100.0   10000  avgt   20    37,747 ?   5,086  ms/op
 //    BenchmarkCleaning.triangulationMesh     100.0  100000  avgt   20   579,278 ? 107,180  ms/op
+
 /*
-    # Parameters: (factor = 0.1, size = 10000)
-    Result "triangulationMesh":
-            46,133 ?(99.9%) 5,590 ms/op [Average]
-            (min, avg, max) = (40,987, 46,133, 59,900), stdev = 6,437
-    CI (99.9%): [40,543, 51,723] (assumes normal distribution)
 
-# Parameters: (factor = 1.0, size = 10000)
-Result "triangulationMesh":
-  42,773 ?(99.9%) 5,535 ms/op [Average]
-  (min, avg, max) = (36,464, 42,773, 53,770), stdev = 6,374
-  CI (99.9%): [37,239, 48,308] (assumes normal distribution)
+Benchmark                            (factor)  (size)  Mode  Cnt   Score    Error  Units
+BenchmarkCleaning.triangulationMesh       0.1   10000  avgt   20  46,138 ?  5,899  ms/op
+BenchmarkCleaning.triangulationMesh       1.0   10000  avgt   20  46,379 ? 15,840  ms/op
+BenchmarkCleaning.triangulationMesh       2.0   10000  avgt   20  44,213 ?  7,440  ms/op
+BenchmarkCleaning.triangulationMesh       2.2   10000  avgt   20  40,610 ?  5,256  ms/op
+BenchmarkCleaning.triangulationMesh       2.4   10000  avgt   20  43,445 ?  8,661  ms/op
+BenchmarkCleaning.triangulationMesh       2.6   10000  avgt   20  39,800 ?  5,354  ms/op
+BenchmarkCleaning.triangulationMesh       2.8   10000  avgt   20  40,492 ?  4,867  ms/op
+BenchmarkCleaning.triangulationMesh       3.0   10000  avgt   20  41,966 ?  6,790  ms/op
+BenchmarkCleaning.triangulationMesh       4.0   10000  avgt   20  40,562 ?  5,096  ms/op
+BenchmarkCleaning.triangulationMesh      10.0   10000  avgt   20  39,257 ?  6,107  ms/op
 
-# Parameters: (factor = 2.0, size = 10000)
-Result "triangulationMesh":
-  41,022 ?(99.9%) 5,178 ms/op [Average]
-  (min, avg, max) = (34,845, 41,022, 51,608), stdev = 5,963
-  CI (99.9%): [35,845, 46,200] (assumes normal distribution)
+Benchmark                            (factor)  (size)  Mode  Cnt    Score    Error  Units
+BenchmarkCleaning.triangulationMesh       0.1   30000  avgt   40  208,653 ? 13,002  ms/op
+BenchmarkCleaning.triangulationMesh       1.0   30000  avgt   40  138,751 ?  7,085  ms/op
+BenchmarkCleaning.triangulationMesh       2.0   30000  avgt   40  130,696 ?  6,916  ms/op
+BenchmarkCleaning.triangulationMesh       2.2   30000  avgt   40  125,426 ?  6,386  ms/op
+BenchmarkCleaning.triangulationMesh       2.4   30000  avgt   40  127,995 ?  7,347  ms/op
+BenchmarkCleaning.triangulationMesh       2.6   30000  avgt   40  128,486 ?  6,828  ms/op
+BenchmarkCleaning.triangulationMesh       2.8   30000  avgt   40  125,136 ?  6,986  ms/op
+BenchmarkCleaning.triangulationMesh       3.0   30000  avgt   40  124,602 ?  6,871  ms/op
+BenchmarkCleaning.triangulationMesh       4.0   30000  avgt   40  123,566 ?  6,499  ms/op
+BenchmarkCleaning.triangulationMesh      10.0   30000  avgt   40  129,366 ?  7,202  ms/op
 
+Benchmark                            (factor)  (size)  Mode  Cnt     Score    Error  Units
+BenchmarkCleaning.triangulationMesh       0.1  100000  avgt   40  1071,889 ? 56,296  ms/op
+BenchmarkCleaning.triangulationMesh       1.0  100000  avgt   40   503,116 ? 12,181  ms/op
+BenchmarkCleaning.triangulationMesh       2.0  100000  avgt   40   477,607 ?  7,994  ms/op
+BenchmarkCleaning.triangulationMesh       2.2  100000  avgt   40   466,779 ?  9,081  ms/op
+BenchmarkCleaning.triangulationMesh       2.4  100000  avgt   40   449,071 ?  5,096  ms/op
+BenchmarkCleaning.triangulationMesh       2.6  100000  avgt   40   452,015 ?  5,155  ms/op
+BenchmarkCleaning.triangulationMesh       2.8  100000  avgt   40   473,128 ?  4,473  ms/op
+BenchmarkCleaning.triangulationMesh       3.0  100000  avgt   40   465,667 ?  9,479  ms/op
+BenchmarkCleaning.triangulationMesh       4.0  100000  avgt   40   461,853 ? 12,198  ms/op
+BenchmarkCleaning.triangulationMesh      10.0  100000  avgt   40   507,926 ? 30,328  ms/op
+BenchmarkCleaning.triangulationMesh      20.0  100000  avgt   40   530,102 ? 25,511  ms/op
+BenchmarkCleaning.triangulationMesh      30.0  100000  avgt   40   513,386 ? 46,840  ms/op
 
+Benchmark                            (factor)  (size)  Mode  Cnt     Score     Error  Units
+BenchmarkCleaning.triangulationMesh       0.1  500000  avgt   40  4609,569 ?  86,783  ms/op
+BenchmarkCleaning.triangulationMesh       0.5  500000  avgt   40  3272,425 ? 132,258  ms/op
+BenchmarkCleaning.triangulationMesh       1.0  500000  avgt   40  3196,638 ? 164,217  ms/op
 
+Benchmark                            (factor)   (size)  Mode  Cnt      Score      Error  Units
+BenchmarkCleaning.triangulationMesh       0.1  1000000  avgt   40  9445,725 ? 262,377  ms/op
+BenchmarkCleaning.triangulationMesh       0.5  1000000  avgt   40  7756,311 ? 308,443  ms/op
+BenchmarkCleaning.triangulationMesh       1.0  1000000  avgt   40  7578,386 ? 271,732  ms/op
+BenchmarkCleaning.triangulationMesh       1.0  1000000  avgt   40   7771,651 ?  394,038  ms/op
+BenchmarkCleaning.triangulationMesh       2.0  1000000  avgt   40   8986,883 ?  343,261  ms/op
+BenchmarkCleaning.triangulationMesh       2.2  1000000  avgt   40   9251,798 ?  519,798  ms/op
+BenchmarkCleaning.triangulationMesh       2.4  1000000  avgt   40   9370,443 ?  311,326  ms/op
+BenchmarkCleaning.triangulationMesh       2.6  1000000  avgt   40   9616,804 ?  355,762  ms/op
+BenchmarkCleaning.triangulationMesh       2.8  1000000  avgt   40   9701,925 ?  420,566  ms/op
+BenchmarkCleaning.triangulationMesh       3.0  1000000  avgt   40   9774,818 ?  324,036  ms/op
+BenchmarkCleaning.triangulationMesh       4.0  1000000  avgt   40  10634,840 ?  450,099  ms/op
+BenchmarkCleaning.triangulationMesh      10.0  1000000  avgt   40  11438,163 ?  194,758  ms/op
+BenchmarkCleaning.triangulationMesh      20.0  1000000  avgt   40  15454,797 ? 1138,569  ms/op
+BenchmarkCleaning.triangulationMesh      30.0  1000000  avgt   40  12651,203 ? 1210,017  ms/op
 
-  */
+*/
     @Param({
 //            "1000",
-            "10000",
+//            "10000",
+//            "30000",
 //            "100000",
+            "500000",
 //            "1000000",
     })
     int size;
@@ -157,22 +199,25 @@ Result "triangulationMesh":
     @Param({
 //            "0.001",
 //            "0.01",
-            "0.1",
+//            "0.1",
 //            "0.5",
-            "1.0",
+//            "1.0",
+            "1.5",
             "2.0",
-            "2.2",
+//            "2.2",
             "2.4",
-            "2.6",
-            "2.8",
+//            "2.6",
+//            "2.8",
             "3.0",
-            "4.0",
+//            "4.0",
 //            "5.0",
 //            "6.0",
 //            "7.0",
 //            "8.0",
 //            "9.0",
-            "10.0",
+//            "10.0",
+//            "20.0",
+//            "30.0",
 //            "100.0"
     })
     String factor;
