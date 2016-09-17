@@ -27,11 +27,11 @@ public class PerformanceBenchmark {
     String test;
 
     @Param({
-//            "10",
+            "10",
             "30000",
-//            "60000",
-//            "90000",
-//            "120000",
+            "60000",
+            "90000",
+            "120000",
     })
     int size;
 
