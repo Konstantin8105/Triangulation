@@ -1,7 +1,7 @@
 package meshview;
 
-import triangulation.BorderBox;
-import triangulation.Point;
+import triangulation.elements.BorderBox;
+import triangulation.elements.Point;
 
 import javax.swing.*;
 import java.awt.*;

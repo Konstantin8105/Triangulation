@@ -1,6 +1,6 @@
 package research;
 
-import triangulation.Point;
+import triangulation.elements.Point;
 import triangulation.TriangulationDelaunay;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class ResearchTest {
         }
     }
 
-    private static void test(int size, TYPE_TEST type_test){
+    private static void test(int size, TYPE_TEST type_test) {
         int amountTest = 20;
         long start[] = new long[amountTest];
         long finish[] = new long[amountTest];
@@ -122,8 +122,8 @@ public class ResearchTest {
         coordinates[2] = new Point(SIZE, SIZE);
         for (int j = 3; j < coordinates.length; j++) {
             coordinates[j] = new Point(
-                    100 + (SIZE - 200) * j / coordinates.length,
-                    100 + (SIZE - 200) * j / coordinates.length
+                    10D + (SIZE - 20D) * j / (double) coordinates.length,
+                    10D + (SIZE - 20D) * j / (double) coordinates.length
             );
         }
         return Arrays.asList(coordinates);
@@ -137,7 +137,7 @@ public class ResearchTest {
         coordinates[3] = new Point(SIZE, SIZE);
         for (int j = 4; j < coordinates.length; j++) {
             coordinates[j] = new Point(
-                    100 + (SIZE - 200) * j / coordinates.length, SIZE / 2
+                    10D + (SIZE - 20D) * j / (double) coordinates.length, SIZE / 2D
             );
         }
         return Arrays.asList(coordinates);

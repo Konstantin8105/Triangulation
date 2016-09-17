@@ -2,8 +2,8 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import research.ResearchTest;
-import triangulation.Point;
-import triangulation.StatisticTriangulation;
+import triangulation.elements.Point;
+import triangulation.statistic.StatisticTriangulation;
 import triangulation.TriangulationDelaunay;
 
 public class TriangulationAdvanceBigData {

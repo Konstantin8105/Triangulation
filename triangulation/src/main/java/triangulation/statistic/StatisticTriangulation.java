@@ -1,6 +1,8 @@
-package triangulation;
+package triangulation.statistic;
 
 import crosssection.Area;
+import triangulation.TriangulationDelaunay;
+import triangulation.elements.Point;
 
 import java.util.ArrayList;
 import java.util.List;

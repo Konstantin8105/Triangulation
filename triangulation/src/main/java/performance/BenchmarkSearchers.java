@@ -2,8 +2,9 @@ package performance;
 
 import org.openjdk.jmh.annotations.*;
 import research.ResearchTest;
-import triangulation.Point;
+import triangulation.elements.Point;
 import triangulation.TriangulationDelaunay;
+import triangulation.FastSearcher;
 
 import java.util.concurrent.TimeUnit;
 
@@ -118,7 +119,7 @@ BenchmarkSearchers.triangulationMesh     100.0  100000  avgt   20  9922,326 ? 19
     public int triangulationMesh() throws Exception {
         TriangulationDelaunay triangulation = new TriangulationDelaunay();
         TriangulationDelaunay.MINIMAL_POINTS_FOR_CLEANING = 3;
-        TriangulationDelaunay.AMOUNT_SEARCHER_FACTOR = Double.parseDouble(factor);
+        FastSearcher.AMOUNT_SEARCHER_FACTOR = Double.parseDouble(factor);
         triangulation.run(points);
         return triangulation.getTriangles().size();
     }

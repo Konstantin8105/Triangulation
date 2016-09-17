@@ -1,8 +1,9 @@
 import org.junit.Assert;
 import org.junit.Test;
 import research.ResearchTest;
-import triangulation.Point;
 import triangulation.TriangulationDelaunay;
+import triangulation.elements.Point;
+import triangulation.geometries.Geometry;
 
 import java.util.Random;
 
@@ -388,7 +389,7 @@ public class TriangulationDelaunayTest {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(1, 1);
         Point p3 = new Point(1, 0);
-        Assert.assertTrue(TriangulationDelaunay.Geometry.isAtRightOf(p1, p2, p3));
+        Assert.assertTrue(Geometry.isAtRightOf(p1, p2, p3));
     }
 
     @Test
@@ -396,7 +397,7 @@ public class TriangulationDelaunayTest {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(1, 0);
         Point p3 = new Point(0.5, -0.5);
-        Assert.assertTrue(TriangulationDelaunay.Geometry.isAtRightOf(p1, p2, p3));
+        Assert.assertTrue(Geometry.isAtRightOf(p1, p2, p3));
     }
 
     @Test
@@ -404,7 +405,7 @@ public class TriangulationDelaunayTest {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(1, 1);
         Point p3 = new Point(0, 1);
-        Assert.assertFalse(TriangulationDelaunay.Geometry.isAtRightOf(p1, p2, p3));
+        Assert.assertFalse(Geometry.isAtRightOf(p1, p2, p3));
     }
 
     @Test
@@ -412,7 +413,7 @@ public class TriangulationDelaunayTest {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(0.5, 0.5);
         Point p3 = new Point(1, 0);
-        Assert.assertTrue(TriangulationDelaunay.Geometry.isCounterClockwise(p1, p2, p3));
+        Assert.assertTrue(Geometry.isCounterClockwise(p1, p2, p3));
     }
 
     @Test
@@ -420,7 +421,7 @@ public class TriangulationDelaunayTest {
         Point p1 = new Point(1, 0);
         Point p2 = new Point(0.5, 0.5);
         Point p3 = new Point(0, 0);
-        Assert.assertFalse(TriangulationDelaunay.Geometry.isCounterClockwise(p1, p2, p3));
+        Assert.assertFalse(Geometry.isCounterClockwise(p1, p2, p3));
     }
 
     @Test
@@ -428,7 +429,7 @@ public class TriangulationDelaunayTest {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(0.5, 0.5);
         Point p3 = new Point(1, 1);
-        Assert.assertTrue(TriangulationDelaunay.Geometry.is3pointsCollinear(p1, p2, p3));
+        Assert.assertTrue(Geometry.is3pointsCollinear(p1, p2, p3));
     }
 
     @Test
@@ -436,7 +437,7 @@ public class TriangulationDelaunayTest {
         Point p1 = new Point(1, 1);
         Point p2 = new Point(0.5, 0.5);
         Point p3 = new Point(0, 0);
-        Assert.assertTrue(TriangulationDelaunay.Geometry.is3pointsCollinear(p1, p2, p3));
+        Assert.assertTrue(Geometry.is3pointsCollinear(p1, p2, p3));
     }
 
     @Test
@@ -448,7 +449,7 @@ public class TriangulationDelaunayTest {
                 new Point(3, 0)
         };
 
-        Point[] convex = TriangulationDelaunay.Geometry.convexHull(points);
+        Point[] convex = Geometry.convexHull(points);
 
         Assert.assertTrue(points[0].equals(convex[0]));
         Assert.assertTrue(points[3].equals(convex[1]));

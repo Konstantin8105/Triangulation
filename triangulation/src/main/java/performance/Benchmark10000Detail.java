@@ -2,8 +2,9 @@ package performance;
 
 import org.openjdk.jmh.annotations.*;
 import research.ResearchTest;
-import triangulation.Point;
+import triangulation.elements.Point;
 import triangulation.TriangulationDelaunay;
+import triangulation.FastSearcher;
 
 import java.util.concurrent.TimeUnit;
 
@@ -113,7 +114,7 @@ public class Benchmark10000Detail {
         TriangulationDelaunay triangulation = new TriangulationDelaunay();
         TriangulationDelaunay.MINIMAL_POINTS_FOR_CLEANING = 3;
         TriangulationDelaunay.AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE = Double.parseDouble(cleaningSize);
-        TriangulationDelaunay.AMOUNT_SEARCHER_FACTOR = Double.parseDouble(searcherSize);
+        FastSearcher.AMOUNT_SEARCHER_FACTOR = Double.parseDouble(searcherSize);
         triangulation.run(points);
         return triangulation.getTriangles().size();
     }

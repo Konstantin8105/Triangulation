@@ -1,4 +1,4 @@
-package triangulation;
+package triangulation.statistic;
 
 import java.util.List;
 

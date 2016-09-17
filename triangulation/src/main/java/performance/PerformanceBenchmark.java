@@ -2,7 +2,7 @@ package performance;
 
 import org.openjdk.jmh.annotations.*;
 import research.ResearchTest;
-import triangulation.Point;
+import triangulation.elements.Point;
 import triangulation.TriangulationDelaunay;
 
 import java.util.concurrent.TimeUnit;

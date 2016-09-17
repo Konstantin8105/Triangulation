@@ -1,4 +1,4 @@
-package triangulation;
+package triangulation.elements;
 
 public class Point {
     private double x;

@@ -1,4 +1,4 @@
-package triangulation;
+package triangulation.elements;
 
 /**
  * Create rectangle for future check point outside rectangle.

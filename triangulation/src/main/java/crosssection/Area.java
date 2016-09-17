@@ -1,6 +1,6 @@
 package crosssection;
 
-import triangulation.Point;
+import triangulation.elements.Point;
 
 public class Area {
     static public double area_3point(Point[] points) {
