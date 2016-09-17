@@ -6,6 +6,7 @@ import triangulation.elements.Point;
 import triangulation.elements.Precision;
 import triangulation.geometries.Geometry;
 import triangulation.geometries.GeometryPointTriangle;
+import triangulation.geometries.Value;
 import triangulation.searchers.Searcher;
 
 public class FastSearcher implements Searcher {
@@ -69,19 +70,25 @@ public class FastSearcher implements Searcher {
      * @see Point
      * @see GeometryPointTriangle.PointTriangleState
      */
+    private Value[] value = new Value[3];
+    private Point[] trianglePoint = new Point[3];
+
     @Override
     public GeometryPointTriangle.PointTriangleState movingByConvexHull(Point point) {
         TriangleStructure beginTriangle = getSearcher();
         while (true) {
             //add reserve searching
-            if (Geometry.isAtRightOf(triangulation.getNode(beginTriangle.iNodes[0]), triangulation.getNode(beginTriangle.iNodes[1]), point)) {
+            value[0] = Geometry.calculateValuePointOnLine(triangulation.getNode(beginTriangle.iNodes[0]), triangulation.getNode(beginTriangle.iNodes[1]), point);
+            if (Geometry.isAtRightOf(value[0])) {
                 beginTriangle = beginTriangle.triangles[0];
             } else {
                 int whichOp = 0;
-                if (Geometry.isAtRightOf(triangulation.getNode(beginTriangle.iNodes[1]), triangulation.getNode(beginTriangle.iNodes[2]), point)) {
+                value[1] = Geometry.calculateValuePointOnLine(triangulation.getNode(beginTriangle.iNodes[1]), triangulation.getNode(beginTriangle.iNodes[2]), point);
+                if (Geometry.isAtRightOf(value[1])) {
                     whichOp += 1;
                 }
-                if (Geometry.isAtRightOf(triangulation.getNode(beginTriangle.iNodes[2]), triangulation.getNode(beginTriangle.iNodes[0]), point)) {
+                value[2] = Geometry.calculateValuePointOnLine(triangulation.getNode(beginTriangle.iNodes[2]), triangulation.getNode(beginTriangle.iNodes[0]), point);
+                if (Geometry.isAtRightOf(value[2])) {
                     whichOp += 2;
                 }
                 if (whichOp == 0) {
@@ -100,16 +107,12 @@ public class FastSearcher implements Searcher {
                 }
             }
         }
-        Point[] trianglePoint = new Point[]{
+        trianglePoint = new Point[]{
                 triangulation.getNode(beginTriangle.iNodes[0]),
                 triangulation.getNode(beginTriangle.iNodes[1]),
                 triangulation.getNode(beginTriangle.iNodes[2])
         };
         setSearcher(beginTriangle);
-        return GeometryPointTriangle.statePointInTriangle(point, trianglePoint);
-    }
-
-    public TriangleStructure[] allTrianglesFromSearchers() {
-        return searcher;
+        return GeometryPointTriangle.statePointInTriangle(point, trianglePoint, value);
     }
 }

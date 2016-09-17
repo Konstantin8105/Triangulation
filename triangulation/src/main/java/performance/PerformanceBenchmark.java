@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(value = 2)
 @Warmup(iterations = 10, time = 50, timeUnit = TimeUnit.MILLISECONDS)
-@Measurement(iterations = 10)
+@Measurement(iterations = 30)
 //@Timeout(time = 20, timeUnit = TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
 public class PerformanceBenchmark {
@@ -27,11 +27,11 @@ public class PerformanceBenchmark {
     String test;
 
     @Param({
-            "10",
+//            "10",
             "30000",
-            "60000",
-            "90000",
-            "120000",
+//            "60000",
+//            "90000",
+//            "120000",
     })
     int size;
 

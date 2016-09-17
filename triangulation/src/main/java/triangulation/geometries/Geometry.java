@@ -9,7 +9,7 @@ import java.util.*;
 public class Geometry {
 
 
-    static Value pointOnLine(Point p1, Point p2, Point p3) {
+    static public Value calculateValuePointOnLine(Point p1, Point p2, Point p3) {
         double value = (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) -
                 (p3.getY() - p2.getY()) * (p2.getX() - p1.getX());
         if (Math.abs(value) > Precision.valueFactor()) {
@@ -43,7 +43,7 @@ public class Geometry {
     }
 
     public static boolean is3pointsCollinear(Point p1, Point p2, Point p3) {
-        return is3pointsCollinear(pointOnLine(p1, p2, p3));
+        return is3pointsCollinear(calculateValuePointOnLine(p1, p2, p3));
     }
 
     static boolean isCounterClockwise(Value result) {
@@ -54,12 +54,15 @@ public class Geometry {
     }
 
     public static boolean isCounterClockwise(Point a, Point b, Point c) {
-        return isCounterClockwise(pointOnLine(a, b, c));
+        return isCounterClockwise(calculateValuePointOnLine(a, b, c));
     }
 
 
     public static boolean isAtRightOf(Point a, Point b, Point c) {
         return isCounterClockwise(a, b, c);
+    }
+    public static boolean isAtRightOf(Value value) {
+        return isCounterClockwise(value);
     }
 
 

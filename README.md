@@ -25,6 +25,55 @@ Simple example:
 
 Performance with different cases:
 
+    Benchmark                               (size)        (test)  Mode  Cnt    Score   Error  Units
+    PerformanceBenchmark.triangulationMesh   30000        Random  avgt   40  169.965 ± 7.768  ms/op
+    PerformanceBenchmark.triangulationMesh   30000        Circle  avgt   40  226.381 ± 3.448  ms/op
+    PerformanceBenchmark.triangulationMesh   30000  Line_in_line  avgt   40  413.181 ± 4.414  ms/op
+    PerformanceBenchmark.triangulationMesh   30000   In_triangle  avgt   40   46.241 ± 3.122  ms/op
+
+
+    Benchmark                               (size)        (test)  Mode  Cnt    Score    Error  Units
+    PerformanceBenchmark.triangulationMesh   30000        Random  avgt   20  158.900 ± 14.101  ms/op
+    PerformanceBenchmark.triangulationMesh   30000        Circle  avgt   20  233.645 ±  5.158  ms/op
+    PerformanceBenchmark.triangulationMesh   30000  Line_in_line  avgt   20  488.676 ± 97.908  ms/op
+    PerformanceBenchmark.triangulationMesh   30000   In_triangle  avgt   20   54.815 ±  8.940  ms/op
+
+
+    Benchmark                               (size)        (test)  Mode  Cnt    Score    Error  Units
+    PerformanceBenchmark.triangulationMesh   30000        Random  avgt   20  153.197 ± 13.648  ms/op
+    PerformanceBenchmark.triangulationMesh   30000        Circle  avgt   20  225.358 ± 16.321  ms/op
+    PerformanceBenchmark.triangulationMesh   30000  Line_in_line  avgt   20  467.489 ± 11.421  ms/op
+    PerformanceBenchmark.triangulationMesh   30000   In_triangle  avgt   20   45.809 ±  5.518  ms/op
+
+
+
+    Benchmark                               (size)        (test)  Mode  Cnt     Score    Error  Units
+    PerformanceBenchmark.triangulationMesh      10        Random  avgt   20     0.008 ±  0.002  ms/op
+    PerformanceBenchmark.triangulationMesh   30000        Random  avgt   20   151.959 ± 10.109  ms/op
+    PerformanceBenchmark.triangulationMesh   60000        Random  avgt   20   316.025 ±  4.422  ms/op
+    PerformanceBenchmark.triangulationMesh   90000        Random  avgt   20   541.247 ± 29.210  ms/op
+    PerformanceBenchmark.triangulationMesh  120000        Random  avgt   20   798.090 ± 93.325  ms/op
+
+    PerformanceBenchmark.triangulationMesh      10        Circle  avgt   20     0.012 ±  0.004  ms/op
+    PerformanceBenchmark.triangulationMesh   30000        Circle  avgt   20   217.098 ±  2.738  ms/op
+    PerformanceBenchmark.triangulationMesh   60000        Circle  avgt   20   451.756 ±  4.817  ms/op
+    PerformanceBenchmark.triangulationMesh   90000        Circle  avgt   20   707.342 ± 10.608  ms/op
+    PerformanceBenchmark.triangulationMesh  120000        Circle  avgt   20   940.377 ± 14.467  ms/op
+
+    PerformanceBenchmark.triangulationMesh      10  Line_in_line  avgt   20     0.153 ±  0.014  ms/op
+    PerformanceBenchmark.triangulationMesh   30000  Line_in_line  avgt   20   471.739 ±  2.900  ms/op
+    PerformanceBenchmark.triangulationMesh   60000  Line_in_line  avgt   20   966.265 ± 11.532  ms/op
+    PerformanceBenchmark.triangulationMesh   90000  Line_in_line  avgt   20  1482.843 ± 19.834  ms/op
+    PerformanceBenchmark.triangulationMesh  120000  Line_in_line  avgt   20  2007.071 ± 47.624  ms/op
+
+    PerformanceBenchmark.triangulationMesh      10   In_triangle  avgt   20     0.010 ±  0.002  ms/op
+    PerformanceBenchmark.triangulationMesh   30000   In_triangle  avgt   20    47.007 ±  5.872  ms/op
+    PerformanceBenchmark.triangulationMesh   60000   In_triangle  avgt   20    92.403 ± 10.208  ms/op
+    PerformanceBenchmark.triangulationMesh   90000   In_triangle  avgt   20   137.063 ± 11.289  ms/op
+    PerformanceBenchmark.triangulationMesh  120000   In_triangle  avgt   20   192.586 ± 18.874  ms/op
+
+
+
     Benchmark                               (size)        (test)  Mode  Cnt     Score     Error  Units
     PerformanceBenchmark.triangulationMesh      10        Random  avgt   20     0.009 ±   0.002  ms/op
     PerformanceBenchmark.triangulationMesh   30000        Random  avgt   20   183.101 ±  29.021  ms/op
