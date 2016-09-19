@@ -4,7 +4,6 @@ import triangulation.elements.Point;
 import triangulation.elements.Precision;
 
 import java.math.BigDecimal;
-import java.util.*;
 
 public class Geometry {
 
@@ -63,123 +62,6 @@ public class Geometry {
     }
     public static boolean isAtRightOf(Value value) {
         return isCounterClockwise(value);
-    }
-
-
-    static double det(double a[][]) {
-        return a[0][0] * a[1][1] * a[2][2] + a[1][0] * a[2][1] * a[0][2] + a[0][1] * a[1][2] * a[2][0]
-                - a[0][2] * a[1][1] * a[2][0] - a[0][1] * a[1][0] * a[2][2] - a[1][2] * a[2][1] * a[0][0];
-    }
-
-    static boolean isPointInCircle(Point point, Point circlePoints0, Point circlePoints1, Point circlePoints2) {
-        double x1 = circlePoints0.getX();
-        double y1 = circlePoints0.getY();
-        double z1 = x1 * x1 + y1 * y1;
-
-        double x2 = circlePoints1.getX();
-        double y2 = circlePoints1.getY();
-        double z2 = x2 * x2 + y2 * y2;
-
-        double x3 = circlePoints2.getX();
-        double y3 = circlePoints2.getY();
-        double z3 = x3 * x3 + y3 * y3;
-
-        double a = det(new double[][]{
-                {x1, y1, 1},
-                {x2, y2, 1},
-                {x3, y3, 1}
-        });
-
-        double b = det(new double[][]{
-                {z1, y1, 1},
-                {z2, y2, 1},
-                {z3, y3, 1}
-        });
-
-        double c = det(new double[][]{
-                {z1, x1, 1},
-                {z2, x2, 1},
-                {z3, x3, 1}
-        });
-
-        double d = det(new double[][]{
-                {z1, x1, y1},
-                {z2, x2, y2},
-                {z3, x3, y3}
-        });
-
-        double x0 = point.getX();
-        double y0 = point.getY();
-        double z0 = x0 * x0 + y0 * y0;
-
-        return Math.signum(a) * (a * z0 - b * x0 + c * y0 - d) < -Precision.epsilon();
-    }
-
-
-    //Performance O(n*log(n)) in worst case
-    public static Point[] convexHull(Point[] inputPoints) {
-        if (inputPoints.length < 2)
-            return inputPoints;
-
-        List<Point> array = new ArrayList<>(Arrays.asList(inputPoints));
-
-        Collections.sort(array, new Comparator<Point>() {
-            @Override
-            public int compare(Point first, Point second) {
-                if ((first).getX() == (second).getX()) {
-                    if ((first).getY() > (second).getY())
-                        return 1;
-                    if ((first).getY() < (second).getY())
-                        return -1;
-                    return 0;
-                }
-                if ((first).getX() > (second).getX())
-                    return 1;
-                if ((first).getX() < (second).getX())
-                    return -1;
-                return 0;
-            }
-        });
-
-        List<Integer> removedIndex = new ArrayList<>();
-        for (int i = 1; i < array.size(); i++) {
-            if (array.get(i - 1).equals(array.get(i))) {
-                removedIndex.add(i);
-            }
-        }
-        for (int i = removedIndex.size() - 1; i >= 0; i--) {
-            int position = removedIndex.get(i);
-            array.remove(position);
-        }
-
-        int n = array.size();
-        Point[] P = new Point[n];
-        for (int i = 0; i < n; i++) {
-            P[i] = array.get(i);
-        }
-
-        Point[] H = new Point[2 * n];
-
-        int k = 0;
-        // Build lower hull
-        for (int i = 0; i < n; ++i) {
-            while (k >= 2 && isCounterClockwise(H[k - 2], H[k - 1], P[i])) {
-                k--;
-            }
-            H[k++] = P[i];
-        }
-
-        // Build upper hull
-        for (int i = n - 2, t = k + 1; i >= 0; i--) {
-            while (k >= t && isCounterClockwise(H[k - 2], H[k - 1], P[i])) {
-                k--;
-            }
-            H[k++] = P[i];
-        }
-        if (k > 1) {
-            H = Arrays.copyOfRange(H, 0, k - 1); // remove non-hull vertices after k; remove k - 1 which is a duplicate
-        }
-        return H;
     }
 
     public static double distanceLineAndPoint(Point lineP1, Point lineP2, Point p) {

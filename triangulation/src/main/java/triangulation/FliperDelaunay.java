@@ -17,7 +17,7 @@ public class FliperDelaunay implements Fliper {
 
     @Override
     public void add(TriangleStructure triangle, int index) {
-        buffer.add(new FlipStructure(triangle, index));
+        buffer.add(new FlipStructure(triangle,(byte) index));
     }
 
     @Override

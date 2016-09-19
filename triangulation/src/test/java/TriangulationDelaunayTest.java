@@ -439,21 +439,4 @@ public class TriangulationDelaunayTest {
         Point p3 = new Point(0, 0);
         Assert.assertTrue(Geometry.is3pointsCollinear(p1, p2, p3));
     }
-
-    @Test
-    public void ConvexHullTest() {
-        Point[] points = new Point[]{
-                new Point(0, 0),
-                new Point(1, 1),
-                new Point(3, 2),
-                new Point(3, 0)
-        };
-
-        Point[] convex = Geometry.convexHull(points);
-
-        Assert.assertTrue(points[0].equals(convex[0]));
-        Assert.assertTrue(points[3].equals(convex[1]));
-        Assert.assertTrue(points[2].equals(convex[2]));
-        Assert.assertTrue(points[1].equals(convex[3]));
-    }
 }

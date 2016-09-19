@@ -33,14 +33,10 @@ public class TriangulationDelaunay {
     public static double RATIO_DELETING_CONVEX_POINT_FROM_POINT_LIST = 0.2D;
     public static int MINIMAL_POINTS_FOR_CLEANING = 10000;
 
-
-
-
     // constructor for create convexHull region at the base on points
     public TriangulationDelaunay(Point[] points) {
         run(points);
     }
-
 
     public TriangulationDelaunay() {
     }
