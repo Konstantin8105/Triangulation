@@ -4,9 +4,9 @@ import triangulation.TriangleStructure;
 
 public class FlipStructure {
     public TriangleStructure triangle;
-    public byte side;
+    public int side;
 
-    public FlipStructure(TriangleStructure triangle, byte side) {
+    public FlipStructure(TriangleStructure triangle, int side) {
         this.triangle = triangle;
         this.side = side;
     }
