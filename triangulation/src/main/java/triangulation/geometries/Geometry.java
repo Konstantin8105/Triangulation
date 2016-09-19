@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 
 public class Geometry {
 
+create checkin precition and perfomance
+    Math.abs(value) > Precision.valueFactor() ===> Math.abs(value/LENGHT) > Precision.valueFactor()
 
     static public Value calculateValuePointOnLine(Point p1, Point p2, Point p3) {
         double value = (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) -
