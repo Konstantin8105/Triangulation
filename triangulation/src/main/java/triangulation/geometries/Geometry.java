@@ -13,20 +13,31 @@ public class Geometry {
     // if return -1 - result is less 0
     // if return 0 - result is 0
     // if return 1 - result is more 0
-    private static final int RESULT_IS_LESS_ZERO = -1;
-    private static final int RESULT_IS_ZERO = 0;
-    private static final int RESULT_IS_MORE_ZERO = 1;
+//    private static final int RESULT_IS_LESS_ZERO = -1;
+//    private static final int RESULT_IS_ZERO = 0;
+//    private static final int RESULT_IS_MORE_ZERO = 1;
 
-    static public int calculateValuePointOnLine(Point p1, Point p2, Point p3) {
+    public enum POINT_ON_LINE{
+        RESULT_IS_LESS_ZERO(-1),
+        RESULT_IS_ZERO(0),
+        RESULT_IS_MORE_ZERO(1);
+
+        private final int data;
+        POINT_ON_LINE(int input) {
+            data = input;
+        }
+    }
+
+
+    static public POINT_ON_LINE calculateValuePointOnLine(Point p1, Point p2, Point p3) {
         double value = (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) -
                 (p3.getY() - p2.getY()) * (p2.getX() - p1.getX());
         if (Math.abs(value / ((p2.getY() - p1.getY()) + (p2.getX() - p1.getX()))) > Precision.valueFactor()) {
-            //return new Value(value);
             if (value > Precision.epsilon())
-                return RESULT_IS_MORE_ZERO;
+                return POINT_ON_LINE.RESULT_IS_MORE_ZERO;
             if (Math.abs(value) > Precision.epsilon())
-                return RESULT_IS_LESS_ZERO;
-            return RESULT_IS_ZERO;
+                return POINT_ON_LINE.RESULT_IS_LESS_ZERO;
+            return POINT_ON_LINE.RESULT_IS_ZERO;
         }
 
         BigDecimal bdX1 = new BigDecimal(p1.getX());
@@ -46,29 +57,26 @@ public class Geometry {
         BigDecimal result = left.add(right);
 
         if (result.compareTo(Precision.bigEpsilon()) > 0)
-            return RESULT_IS_MORE_ZERO;
+            return POINT_ON_LINE.RESULT_IS_MORE_ZERO;
         if (result.abs().compareTo(Precision.bigEpsilon()) > 0)
-            return RESULT_IS_LESS_ZERO;
-        return RESULT_IS_ZERO;
-//        return new Value(result);
+            return POINT_ON_LINE.RESULT_IS_LESS_ZERO;
+        return POINT_ON_LINE.RESULT_IS_ZERO;
     }
 
-    static boolean is3pointsCollinear(Value result) {
-        if (result.isValueDouble()) {
-            return Math.abs(result.getValueDouble()) < Precision.epsilon();
-        }
-        return result.getValueBig().abs().compareTo(Precision.bigEpsilon()) < 0;
+    static boolean is3pointsCollinear(POINT_ON_LINE result) {
+        if(result == POINT_ON_LINE.RESULT_IS_ZERO)
+            return true;
+        return false;
     }
 
     public static boolean is3pointsCollinear(Point p1, Point p2, Point p3) {
         return is3pointsCollinear(calculateValuePointOnLine(p1, p2, p3));
     }
 
-    static boolean isCounterClockwise(Value result) {
-        if (result.isValueDouble()) {
-            return result.getValueDouble() > 0;
-        }
-        return result.getValueBig().compareTo(BigDecimal.ZERO) > 0;
+    static boolean isCounterClockwise(POINT_ON_LINE result) {
+        if(result == POINT_ON_LINE.RESULT_IS_MORE_ZERO)
+            return true;
+        return false;
     }
 
     public static boolean isCounterClockwise(Point a, Point b, Point c) {
@@ -80,7 +88,7 @@ public class Geometry {
         return isCounterClockwise(a, b, c);
     }
 
-    public static boolean isAtRightOf(Value value) {
+    public static boolean isAtRightOf(POINT_ON_LINE value) {
         return isCounterClockwise(value);
     }
 

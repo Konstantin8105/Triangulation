@@ -15,7 +15,7 @@ public class GeometryPointTriangle {
         POINT_OUTSIDE_LINE_2,
     }
 
-    public static PointTriangleState statePointInTriangle(Point p, Point[] tri, Value[] values) {
+    public static PointTriangleState statePointInTriangle(Point p, Point[] tri, Geometry.POINT_ON_LINE[] values) {
         for (Point aTri : tri) {
             if (p.equals(aTri))
                 return PointTriangleState.POINT_ON_CORNER;

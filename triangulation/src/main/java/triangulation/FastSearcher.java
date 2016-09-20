@@ -6,7 +6,6 @@ import triangulation.elements.Point;
 import triangulation.elements.Precision;
 import triangulation.geometries.Geometry;
 import triangulation.geometries.GeometryPointTriangle;
-import triangulation.geometries.Value;
 import triangulation.searchers.Searcher;
 
 public class FastSearcher implements Searcher {
@@ -70,7 +69,7 @@ public class FastSearcher implements Searcher {
      * @see Point
      * @see GeometryPointTriangle.PointTriangleState
      */
-    private Value[] value = new Value[3];
+    private Geometry.POINT_ON_LINE[] value = new Geometry.POINT_ON_LINE[3];
     private Point[] trianglePoint = new Point[3];
 
     @Override

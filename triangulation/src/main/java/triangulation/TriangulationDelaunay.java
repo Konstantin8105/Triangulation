@@ -288,13 +288,9 @@ public class TriangulationDelaunay {
 
 
 
-    private boolean isCounterClockwise(TriangleStructure triangle) {
-        return Geometry.isCounterClockwise(
-                nodes.get(triangle.iNodes[0]),
-                nodes.get(triangle.iNodes[1]),
-                nodes.get(triangle.iNodes[2])
-        );
-    }
+//    private boolean isCounterClockwise(TriangleStructure triangle) {
+//        return ;
+//    }
 
     private int idMaximalRibs = 0;
 
@@ -687,7 +683,10 @@ public class TriangulationDelaunay {
         }
         boolean inverseAgain = false;
         for (TriangleStructure triangle : triangles) {
-            if (isCounterClockwise(triangle)) {
+            if (Geometry.isCounterClockwise(
+                    nodes.get(triangle.iNodes[0]),
+                    nodes.get(triangle.iNodes[1]),
+                    nodes.get(triangle.iNodes[2]))) {
                 triangle.changeClockwise();
                 inverseAgain = true;
             }
