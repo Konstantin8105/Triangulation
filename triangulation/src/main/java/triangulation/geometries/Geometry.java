@@ -7,14 +7,26 @@ import java.math.BigDecimal;
 
 public class Geometry {
 
-//create checkin precition and perfomance
+//todo create checkin precition and perfomance
 //    Math.abs(value) > Precision.valueFactor() ===> Math.abs(value/LENGHT) > Precision.valueFactor()
 
-    static public Value calculateValuePointOnLine(Point p1, Point p2, Point p3) {
+    // if return -1 - result is less 0
+    // if return 0 - result is 0
+    // if return 1 - result is more 0
+    private static final int RESULT_IS_LESS_ZERO = -1;
+    private static final int RESULT_IS_ZERO = 0;
+    private static final int RESULT_IS_MORE_ZERO = 1;
+
+    static public int calculateValuePointOnLine(Point p1, Point p2, Point p3) {
         double value = (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) -
                 (p3.getY() - p2.getY()) * (p2.getX() - p1.getX());
-        if (Math.abs(value/((p2.getY() - p1.getY())+(p2.getX() - p1.getX()))) > Precision.valueFactor()) {
-            return new Value(value);
+        if (Math.abs(value / ((p2.getY() - p1.getY()) + (p2.getX() - p1.getX()))) > Precision.valueFactor()) {
+            //return new Value(value);
+            if (value > Precision.epsilon())
+                return RESULT_IS_MORE_ZERO;
+            if (Math.abs(value) > Precision.epsilon())
+                return RESULT_IS_LESS_ZERO;
+            return RESULT_IS_ZERO;
         }
 
         BigDecimal bdX1 = new BigDecimal(p1.getX());
@@ -33,7 +45,12 @@ public class Geometry {
 
         BigDecimal result = left.add(right);
 
-        return new Value(result);
+        if (result.compareTo(Precision.bigEpsilon()) > 0)
+            return RESULT_IS_MORE_ZERO;
+        if (result.abs().compareTo(Precision.bigEpsilon()) > 0)
+            return RESULT_IS_LESS_ZERO;
+        return RESULT_IS_ZERO;
+//        return new Value(result);
     }
 
     static boolean is3pointsCollinear(Value result) {
@@ -62,6 +79,7 @@ public class Geometry {
     public static boolean isAtRightOf(Point a, Point b, Point c) {
         return isCounterClockwise(a, b, c);
     }
+
     public static boolean isAtRightOf(Value value) {
         return isCounterClockwise(value);
     }
