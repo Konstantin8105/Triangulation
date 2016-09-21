@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class ResearchTest {
+public class ResearchTriangulation {
 
     public enum TYPE_TEST {
         RANDOM,

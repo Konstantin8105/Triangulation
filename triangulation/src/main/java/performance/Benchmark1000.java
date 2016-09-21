@@ -1,7 +1,7 @@
 package performance;
 
 import org.openjdk.jmh.annotations.*;
-import research.ResearchTest;
+import research.ResearchTriangulation;
 import triangulation.elements.Point;
 import triangulation.TriangulationDelaunay;
 import triangulation.FastSearcher;
@@ -83,7 +83,7 @@ public class Benchmark1000 {
 
     @Setup
     public void prepare() {
-        points = (Point[]) ResearchTest.getRandomPoints(1_000).toArray();
+        points = (Point[]) ResearchTriangulation.getRandomPoints(1_000).toArray();
     }
 
     Point[] points;

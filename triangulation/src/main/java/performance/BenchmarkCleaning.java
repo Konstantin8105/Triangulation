@@ -1,7 +1,7 @@
 package performance;
 
 import org.openjdk.jmh.annotations.*;
-import research.ResearchTest;
+import research.ResearchTriangulation;
 import triangulation.elements.Point;
 import triangulation.TriangulationDelaunay;
 
@@ -225,7 +225,7 @@ BenchmarkCleaning.triangulationMesh      30.0  1000000  avgt   40  12651,203 ? 1
 
     @Setup
     public void prepare() {
-        points = (Point[]) ResearchTest.getRandomPoints(size).toArray();
+        points = (Point[]) ResearchTriangulation.getRandomPoints(size).toArray();
     }
 
     Point[] points;

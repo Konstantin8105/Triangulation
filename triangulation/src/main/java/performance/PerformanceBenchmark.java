@@ -1,7 +1,7 @@
 package performance;
 
 import org.openjdk.jmh.annotations.*;
-import research.ResearchTest;
+import research.ResearchTriangulation;
 import triangulation.elements.Point;
 import triangulation.TriangulationDelaunay;
 
@@ -39,16 +39,16 @@ public class PerformanceBenchmark {
     public void prepare() {
         switch (test) {
             case "Random":
-                points = (Point[]) ResearchTest.getRandomPoints(size).toArray();
+                points = (Point[]) ResearchTriangulation.getRandomPoints(size).toArray();
                 break;
             case "Circle":
-                points = (Point[]) ResearchTest.getCirclePoints(size).toArray();
+                points = (Point[]) ResearchTriangulation.getCirclePoints(size).toArray();
                 break;
             case "Line_in_line":
-                points = (Point[]) ResearchTest.getLineOnLine(size).toArray();
+                points = (Point[]) ResearchTriangulation.getLineOnLine(size).toArray();
                 break;
             case "In_triangle":
-                points = (Point[]) ResearchTest.getInTriangles(size).toArray();
+                points = (Point[]) ResearchTriangulation.getInTriangles(size).toArray();
                 break;
         }
     }

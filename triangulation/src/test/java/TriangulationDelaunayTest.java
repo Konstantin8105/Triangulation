@@ -1,6 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
-import research.ResearchTest;
+import research.ResearchTriangulation;
 import triangulation.TriangulationDelaunay;
 import triangulation.elements.Point;
 import triangulation.geometries.Geometry;
@@ -347,21 +347,21 @@ public class TriangulationDelaunayTest {
 
     @Test
     public void simpleCircle() {
-        Point[] points = (Point[]) ResearchTest.getCirclePoints(6).toArray();
+        Point[] points = (Point[]) ResearchTriangulation.getCirclePoints(6).toArray();
         TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
     @Test
     public void simpleInTriangle() {
-        Point[] points = (Point[]) ResearchTest.getInTriangles(10).toArray();
+        Point[] points = (Point[]) ResearchTriangulation.getInTriangles(10).toArray();
         TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
     }
 
     @Test
     public void simpleInLine() {
-        Point[] points = (Point[]) ResearchTest.getLineOnLine(1).toArray();
+        Point[] points = (Point[]) ResearchTriangulation.getLineOnLine(1).toArray();
         TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() == 2);
     }

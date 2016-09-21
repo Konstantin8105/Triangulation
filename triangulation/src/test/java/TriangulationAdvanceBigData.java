@@ -1,7 +1,7 @@
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import research.ResearchTest;
+import research.ResearchTriangulation;
 import triangulation.elements.Point;
 import triangulation.statistic.StatisticTriangulation;
 import triangulation.TriangulationDelaunay;
@@ -14,7 +14,7 @@ public class TriangulationAdvanceBigData {
     @Ignore
     @Test
     public void testBigRandomData() {
-        Point[] points = (Point[]) ResearchTest.getRandomPoints(1_000_000).toArray();
+        Point[] points = (Point[]) ResearchTriangulation.getRandomPoints(1_000_000).toArray();
         TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
         StatisticTriangulation statistic = new StatisticTriangulation(triangulation);
@@ -23,7 +23,7 @@ public class TriangulationAdvanceBigData {
     @Ignore
     @Test
     public void testBigCircleData() {
-        Point[] points = (Point[]) ResearchTest.getCirclePoints(100_000).toArray();
+        Point[] points = (Point[]) ResearchTriangulation.getCirclePoints(100_000).toArray();
         TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
         StatisticTriangulation statistic = new StatisticTriangulation(triangulation);
@@ -32,7 +32,7 @@ public class TriangulationAdvanceBigData {
     @Ignore
     @Test
     public void testStatistic() {
-        Point[] points = (Point[]) ResearchTest.getRandomPoints(100_000).toArray();
+        Point[] points = (Point[]) ResearchTriangulation.getRandomPoints(100_000).toArray();
         TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         Assert.assertTrue(triangulation.getTriangles().size() > 0);
         StatisticTriangulation statistic = new StatisticTriangulation(triangulation);
@@ -41,7 +41,7 @@ public class TriangulationAdvanceBigData {
     @Test
     public void testBigInputData2() {
         for (int i = 0; i < 1000; i++) {
-            Point[] points = (Point[]) ResearchTest.getRandomPoints(500).toArray();
+            Point[] points = (Point[]) ResearchTriangulation.getRandomPoints(500).toArray();
             TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
             Assert.assertTrue(triangulation.getTriangles().size() > 0);
         }

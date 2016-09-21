@@ -7,64 +7,70 @@ import java.math.BigDecimal;
 
 public class Geometry {
 
-//todo create checkin precition and perfomance
-//    Math.abs(value) > Precision.valueFactor() ===> Math.abs(value/LENGHT) > Precision.valueFactor()
+    public enum POINT_ON_LINE {
+        RESULT_IS_LESS_ZERO,
+        RESULT_IS_ZERO,
+        RESULT_IS_MORE_ZERO
+    }
+
+    public static final class PointOnLineCalculator {
+        public static double calculateDouble(Point p1, Point p2, Point p3) {
+            return (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) -
+                    (p3.getY() - p2.getY()) * (p2.getX() - p1.getX());
+        }
+
+        public static BigDecimal calculateBigDecimal(Point p1, Point p2, Point p3) {
+            BigDecimal bdX1 = new BigDecimal(p1.getX());
+            BigDecimal bdX2 = new BigDecimal(p2.getX());
+            BigDecimal bdX3 = new BigDecimal(p3.getX());
+            BigDecimal bdY1 = new BigDecimal(p1.getY());
+            BigDecimal bdY2 = new BigDecimal(p2.getY());
+            BigDecimal bdY3 = new BigDecimal(p3.getY());
+            BigDecimal dX21 = bdX2.add(bdX1.negate());
+            BigDecimal dY21 = bdY2.add(bdY1.negate());
+            BigDecimal dX32 = bdX3.add(bdX2.negate());
+            BigDecimal dY32 = bdY3.add(bdY2.negate());
+
+            BigDecimal left = dY21.multiply(dX32);
+            BigDecimal right = dY32.multiply(dX21).negate();
+
+            BigDecimal result = left.add(right);
+            return result;
+        }
+    }
 
     // if return -1 - result is less 0
     // if return 0 - result is 0
     // if return 1 - result is more 0
-//    private static final int RESULT_IS_LESS_ZERO = -1;
-//    private static final int RESULT_IS_ZERO = 0;
-//    private static final int RESULT_IS_MORE_ZERO = 1;
+    static public POINT_ON_LINE calculateValuePointOnLine(Point p1, Point p2, Point p3) {
+        double value = PointOnLineCalculator.calculateDouble(p1, p2, p3);
 
-    public enum POINT_ON_LINE{
-        RESULT_IS_LESS_ZERO(-1),
-        RESULT_IS_ZERO(0),
-        RESULT_IS_MORE_ZERO(1);
-
-        private final int data;
-        POINT_ON_LINE(int input) {
-            data = input;
+        if (Math.abs(value / ((p2.getY() - p1.getY()) + (p2.getX() - p1.getX()))) > Precision.valueFactor()) {
+            return calculateValuePointOnLine(value);
         }
+
+        BigDecimal result = PointOnLineCalculator.calculateBigDecimal(p1, p2, p3);
+        return calculateValuePointOnLine(result);
     }
 
-
-    static public POINT_ON_LINE calculateValuePointOnLine(Point p1, Point p2, Point p3) {
-        double value = (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) -
-                (p3.getY() - p2.getY()) * (p2.getX() - p1.getX());
-        if (Math.abs(value / ((p2.getY() - p1.getY()) + (p2.getX() - p1.getX()))) > Precision.valueFactor()) {
-            if (value > Precision.epsilon())
-                return POINT_ON_LINE.RESULT_IS_MORE_ZERO;
-            if (Math.abs(value) > Precision.epsilon())
-                return POINT_ON_LINE.RESULT_IS_LESS_ZERO;
-            return POINT_ON_LINE.RESULT_IS_ZERO;
-        }
-
-        BigDecimal bdX1 = new BigDecimal(p1.getX());
-        BigDecimal bdX2 = new BigDecimal(p2.getX());
-        BigDecimal bdX3 = new BigDecimal(p3.getX());
-        BigDecimal bdY1 = new BigDecimal(p1.getY());
-        BigDecimal bdY2 = new BigDecimal(p2.getY());
-        BigDecimal bdY3 = new BigDecimal(p3.getY());
-        BigDecimal dX21 = bdX2.add(bdX1.negate());
-        BigDecimal dY21 = bdY2.add(bdY1.negate());
-        BigDecimal dX32 = bdX3.add(bdX2.negate());
-        BigDecimal dY32 = bdY3.add(bdY2.negate());
-
-        BigDecimal left = dY21.multiply(dX32);
-        BigDecimal right = dY32.multiply(dX21).negate();
-
-        BigDecimal result = left.add(right);
-
-        if (result.compareTo(Precision.bigEpsilon()) > 0)
+    static public POINT_ON_LINE calculateValuePointOnLine(double value) {
+        if (value > Precision.epsilon())
             return POINT_ON_LINE.RESULT_IS_MORE_ZERO;
-        if (result.abs().compareTo(Precision.bigEpsilon()) > 0)
+        if (Math.abs(value) > Precision.epsilon())
+            return POINT_ON_LINE.RESULT_IS_LESS_ZERO;
+        return POINT_ON_LINE.RESULT_IS_ZERO;
+    }
+
+    static public POINT_ON_LINE calculateValuePointOnLine(BigDecimal value) {
+        if (value.compareTo(Precision.bigEpsilon()) > 0)
+            return POINT_ON_LINE.RESULT_IS_MORE_ZERO;
+        if (value.abs().compareTo(Precision.bigEpsilon()) > 0)
             return POINT_ON_LINE.RESULT_IS_LESS_ZERO;
         return POINT_ON_LINE.RESULT_IS_ZERO;
     }
 
     static boolean is3pointsCollinear(POINT_ON_LINE result) {
-        if(result == POINT_ON_LINE.RESULT_IS_ZERO)
+        if (result == POINT_ON_LINE.RESULT_IS_ZERO)
             return true;
         return false;
     }
@@ -74,7 +80,7 @@ public class Geometry {
     }
 
     static boolean isCounterClockwise(POINT_ON_LINE result) {
-        if(result == POINT_ON_LINE.RESULT_IS_MORE_ZERO)
+        if (result == POINT_ON_LINE.RESULT_IS_MORE_ZERO)
             return true;
         return false;
     }
