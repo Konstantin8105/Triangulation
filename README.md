@@ -25,30 +25,31 @@ Simple example:
 
 Performance with different cases:
 
-    Benchmark                               (size)        (test)  Mode  Cnt     Score    Error  Units
-    PerformanceBenchmark.triangulationMesh      10        Random  avgt   60     0.008 ±  0.001  ms/op
-    PerformanceBenchmark.triangulationMesh   30000        Random  avgt   60   158.032 ±  5.777  ms/op
-    PerformanceBenchmark.triangulationMesh   60000        Random  avgt   60   329.993 ±  9.647  ms/op
-    PerformanceBenchmark.triangulationMesh   90000        Random  avgt   60   522.203 ± 22.679  ms/op
-    PerformanceBenchmark.triangulationMesh  120000        Random  avgt   60   792.240 ± 38.973  ms/op
 
-    PerformanceBenchmark.triangulationMesh      10        Circle  avgt   60     0.009 ±  0.001  ms/op
-    PerformanceBenchmark.triangulationMesh   30000        Circle  avgt   60   222.203 ±  4.764  ms/op
-    PerformanceBenchmark.triangulationMesh   60000        Circle  avgt   60   467.556 ± 21.560  ms/op
-    PerformanceBenchmark.triangulationMesh   90000        Circle  avgt   60   669.681 ±  3.911  ms/op
-    PerformanceBenchmark.triangulationMesh  120000        Circle  avgt   60   932.616 ± 24.791  ms/op
+    Benchmark                               (size)        (test)  Mode  Cnt    Score     Error  Units
+    PerformanceBenchmark.triangulationMesh      10        Random  avgt   20    0.007 ±   0.001  ms/op
+    PerformanceBenchmark.triangulationMesh   30000        Random  avgt   20  156.381 ±   2.236  ms/op
+    PerformanceBenchmark.triangulationMesh   60000        Random  avgt   20  342.539 ±   9.282  ms/op
+    PerformanceBenchmark.triangulationMesh   90000        Random  avgt   20  586.725 ±  54.283  ms/op
+    PerformanceBenchmark.triangulationMesh  120000        Random  avgt   20  932.582 ± 223.114  ms/op
 
-    PerformanceBenchmark.triangulationMesh      10  Line_in_line  avgt   60     0.128 ±  0.005  ms/op
-    PerformanceBenchmark.triangulationMesh   30000  Line_in_line  avgt   60   392.184 ±  5.562  ms/op
-    PerformanceBenchmark.triangulationMesh   60000  Line_in_line  avgt   60   872.671 ± 70.395  ms/op
-    PerformanceBenchmark.triangulationMesh   90000  Line_in_line  avgt   60  1238.298 ± 26.651  ms/op
-    PerformanceBenchmark.triangulationMesh  120000  Line_in_line  avgt   60  1644.480 ± 24.890  ms/op
+    PerformanceBenchmark.triangulationMesh      10        Circle  avgt   20    0.002 ±   0.001  ms/op
+    PerformanceBenchmark.triangulationMesh   30000        Circle  avgt   20    5.047 ±   0.351  ms/op
+    PerformanceBenchmark.triangulationMesh   60000        Circle  avgt   20   10.827 ±   0.659  ms/op
+    PerformanceBenchmark.triangulationMesh   90000        Circle  avgt   20   88.873 ±   5.979  ms/op
+    PerformanceBenchmark.triangulationMesh  120000        Circle  avgt   20   20.291 ±   0.295  ms/op
 
-    PerformanceBenchmark.triangulationMesh      10   In_triangle  avgt   60     0.010 ±  0.001  ms/op
-    PerformanceBenchmark.triangulationMesh   30000   In_triangle  avgt   60    43.634 ±  2.228  ms/op
-    PerformanceBenchmark.triangulationMesh   60000   In_triangle  avgt   60    91.832 ±  4.443  ms/op
-    PerformanceBenchmark.triangulationMesh   90000   In_triangle  avgt   60   144.639 ±  9.812  ms/op
-    PerformanceBenchmark.triangulationMesh  120000   In_triangle  avgt   60   185.268 ±  4.815  ms/op
+    PerformanceBenchmark.triangulationMesh      10  Line_in_line  avgt   20    0.005 ±   0.001  ms/op
+    PerformanceBenchmark.triangulationMesh   30000  Line_in_line  avgt   20   14.626 ±   0.208  ms/op
+    PerformanceBenchmark.triangulationMesh   60000  Line_in_line  avgt   20   31.025 ±   0.969  ms/op
+    PerformanceBenchmark.triangulationMesh   90000  Line_in_line  avgt   20   60.588 ±   9.938  ms/op
+    PerformanceBenchmark.triangulationMesh  120000  Line_in_line  avgt   20   63.440 ±   0.720  ms/op
+
+    PerformanceBenchmark.triangulationMesh      10   In_triangle  avgt   20    0.010 ±   0.001  ms/op
+    PerformanceBenchmark.triangulationMesh   30000   In_triangle  avgt   20   44.317 ±   0.615  ms/op
+    PerformanceBenchmark.triangulationMesh   60000   In_triangle  avgt   20   97.107 ±  10.877  ms/op
+    PerformanceBenchmark.triangulationMesh   90000   In_triangle  avgt   20  145.108 ±   3.980  ms/op
+    PerformanceBenchmark.triangulationMesh  120000   In_triangle  avgt   20  197.915 ±  16.130  ms/op
 
 Present algorithm complexity in worst case - O(NxLOG(N)), average - O(NxLOG(N)).
 
