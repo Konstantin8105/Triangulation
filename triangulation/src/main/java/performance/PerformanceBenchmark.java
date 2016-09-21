@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(value = 2)
-@Warmup(iterations = 10, time = 50, timeUnit = TimeUnit.MILLISECONDS)
+@Warmup(iterations = 20, time = 50, timeUnit = TimeUnit.MILLISECONDS)
 @Measurement(iterations = 30)
 //@Timeout(time = 20, timeUnit = TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
@@ -56,7 +56,7 @@ public class PerformanceBenchmark {
     Point[] points;
 
     @org.openjdk.jmh.annotations.Benchmark
-    public int triangulationMesh() throws Exception {
+    public int triangulationMesh(){
         TriangulationDelaunay triangulation = new TriangulationDelaunay(points);
         return triangulation.getTriangles().size();
     }

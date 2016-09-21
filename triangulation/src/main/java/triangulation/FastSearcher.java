@@ -69,7 +69,7 @@ public class FastSearcher implements Searcher {
      * @see Point
      * @see GeometryPointTriangle.PointTriangleState
      */
-    private Geometry.POINT_ON_LINE[] value = new Geometry.POINT_ON_LINE[3];
+    private final Geometry.POINT_ON_LINE[] value = new Geometry.POINT_ON_LINE[3];
     private Point[] trianglePoint = new Point[3];
 
     @Override

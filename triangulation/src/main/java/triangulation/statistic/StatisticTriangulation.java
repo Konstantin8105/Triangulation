@@ -18,8 +18,8 @@ public class StatisticTriangulation {
         List<Double> angles = new ArrayList<>();
         for (Point[] points:triangles) {
             double[] angle = Area.angleBetween(points);
-            for (int i = 0; i < angle.length; i++) {
-                angles.add(angle[i]);
+            for (double anAngle : angle) {
+                angles.add(anAngle);
             }
         }
         double [] areaLimit = new double[]{

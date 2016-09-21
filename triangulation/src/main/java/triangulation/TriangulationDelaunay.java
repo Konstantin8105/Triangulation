@@ -27,10 +27,10 @@ public class TriangulationDelaunay {
 
     private Fliper flipper;
     private Searcher searcher;
-    private TriangleList triangleList = new TriangleList();
+    private final TriangleList triangleList = new TriangleList();
 
     public static double AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE = 2.4D;
-    public static double RATIO_DELETING_CONVEX_POINT_FROM_POINT_LIST = 0.2D;
+    public static final double RATIO_DELETING_CONVEX_POINT_FROM_POINT_LIST = 0.2D;
     public static int MINIMAL_POINTS_FOR_CLEANING = 10000;
 
     // constructor for create convexHull region at the base on points
@@ -44,9 +44,11 @@ public class TriangulationDelaunay {
     public void run(Point[] input) {
         flipper = new FliperDelaunay(this);
         List<Point>[] pointArray = convexHullDouble(input);
+        if(pointArray == null)
+            return;
         List<Point> convexPoints = pointArray[0];
         BorderBox box = createConvexHullTriangles(convexPoints);
-        searcher = new FastSearcher(this,triangleList.getFirstNotNullableElement(), box, pointArray[1].size());
+        searcher = new FastSearcher(this, triangleList.getFirstNotNullableElement(), box, pointArray[1].size());
 
         if (pointArray[1].size() >= MINIMAL_POINTS_FOR_CLEANING) {
             int amount = (int) (AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE * pointArray[1].size());
@@ -91,7 +93,7 @@ public class TriangulationDelaunay {
 
     //Performance O(n*log(n)) in worst case
     // Point[0][] - convex points
-    // Point[1][] - sorted list of all points
+    // Point[1][] - sorted list of all points without convexPointd
     static List[] convexHullDouble(Point[] inputPoints) {
         if (inputPoints.length < 2) {
             return null;
@@ -135,10 +137,9 @@ public class TriangulationDelaunay {
         }
 
         Point[] H = new Point[2 * n];
-//            List<Point> H = new ArrayList<>(2 * n);
 
         int k = 0;
-//             Build lower hull
+        // Build lower hull
         for (int i = 0; i < n; ++i) {
             while (k >= 2 && Geometry.isCounterClockwise(H[k - 2], H[k - 1], P[i])) {
                 k--;
@@ -202,34 +203,6 @@ public class TriangulationDelaunay {
         return new List[]{convexPoints, array};
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // Linked list of triangles
     private class TriangleList {
 
@@ -282,15 +255,6 @@ public class TriangulationDelaunay {
             }
         }
     }
-
-
-
-
-
-
-//    private boolean isCounterClockwise(TriangleStructure triangle) {
-//        return ;
-//    }
 
     private int idMaximalRibs = 0;
 
@@ -364,9 +328,6 @@ public class TriangulationDelaunay {
 
 
     protected void flipTriangles(TriangleStructure triangle, int indexTriangle) {
-//        if (triangle == null)
-//            return;
-
         TriangleStructure[] region = new TriangleStructure[4];
 
         int pointNewTriangle = triangle.iNodes[ArrayIndexCorrection.normalizeSizeBy3(indexTriangle - 1)];
@@ -433,7 +394,6 @@ public class TriangulationDelaunay {
         }
 
         //separate on 2 triangles
-
         int newCommonRib = getIdRib();
 
         TriangleStructure[] triangles = new TriangleStructure[2];
@@ -480,7 +440,6 @@ public class TriangulationDelaunay {
         triangleList.add(triangles[1]);
 
         //move beginTriangle
-//        searcher.chooseSearcher(nodes.get(triangles[0].iNodes[0]));
         searcher.setSearcher(triangles[0]);
 
         //add null in old triangles
@@ -697,7 +656,6 @@ public class TriangulationDelaunay {
     }
 
 
-
     public List<Point[]> getTriangles() {
         List<TriangleStructure> triangles = triangleList.get();
         List<Point[]> trianglesPoints = new ArrayList<>();
@@ -710,5 +668,4 @@ public class TriangulationDelaunay {
         }
         return trianglesPoints;
     }
-
 }

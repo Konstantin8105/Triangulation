@@ -45,12 +45,12 @@ public class Geometry {
     static public POINT_ON_LINE calculateValuePointOnLine(Point p1, Point p2, Point p3) {
         double value = PointOnLineCalculator.calculateDouble(p1, p2, p3);
 
-        if (Math.abs(value / ((p2.getY() - p1.getY()) + (p2.getX() - p1.getX()))) > Precision.valueFactor()) {
+//        if (Math.abs(value / ((p2.getY() - p1.getY()) + (p2.getX() - p1.getX()))) > Precision.valueFactor()) {
             return calculateValuePointOnLine(value);
-        }
-
-        BigDecimal result = PointOnLineCalculator.calculateBigDecimal(p1, p2, p3);
-        return calculateValuePointOnLine(result);
+//        }
+//
+//        BigDecimal result = PointOnLineCalculator.calculateBigDecimal(p1, p2, p3);
+//        return calculateValuePointOnLine(result);
     }
 
     static public POINT_ON_LINE calculateValuePointOnLine(double value) {
@@ -70,9 +70,7 @@ public class Geometry {
     }
 
     static boolean is3pointsCollinear(POINT_ON_LINE result) {
-        if (result == POINT_ON_LINE.RESULT_IS_ZERO)
-            return true;
-        return false;
+        return result == POINT_ON_LINE.RESULT_IS_ZERO;
     }
 
     public static boolean is3pointsCollinear(Point p1, Point p2, Point p3) {
@@ -80,9 +78,7 @@ public class Geometry {
     }
 
     static boolean isCounterClockwise(POINT_ON_LINE result) {
-        if (result == POINT_ON_LINE.RESULT_IS_MORE_ZERO)
-            return true;
-        return false;
+        return result == POINT_ON_LINE.RESULT_IS_MORE_ZERO;
     }
 
     public static boolean isCounterClockwise(Point a, Point b, Point c) {

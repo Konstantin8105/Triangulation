@@ -14,8 +14,7 @@ public class Counter {
     }
 
     public void add(String str) {
-        if (map.get(str) == null)
-            map.put(str, 0);
+        map.putIfAbsent(str, 0);
         map.put(str, map.get(str) + 1);
     }
 
