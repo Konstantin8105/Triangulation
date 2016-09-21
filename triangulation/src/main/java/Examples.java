@@ -1,6 +1,6 @@
 import meshview.MeshView;
-import triangulation.elements.Point;
 import triangulation.TriangulationDelaunay;
+import triangulation.elements.Point;
 
 public class Examples {
 

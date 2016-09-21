@@ -5,7 +5,6 @@ import triangulation.elements.Point;
 
 public class GeometryCoordinate {
     static boolean isPointInRectangle(Point point, Point... list) {
-        //counter.addTime("GeometryCoordinate:isPointInRectangle");
         BorderBox borderBox = new BorderBox();
         for (int i = 0; i < list.length; i++) {
             borderBox.addPoint(list[i]);

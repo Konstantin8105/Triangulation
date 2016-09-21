@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(value = 2)
-@Warmup(iterations = 20, time = 50, timeUnit = TimeUnit.MILLISECONDS)
-@Measurement(iterations = 30)
+@Warmup(iterations = 10)//, time = 50, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 10)
 //@Timeout(time = 20, timeUnit = TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
 public class PerformanceBenchmark {

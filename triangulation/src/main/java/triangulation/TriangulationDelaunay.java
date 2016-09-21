@@ -44,7 +44,7 @@ public class TriangulationDelaunay {
     public void run(Point[] input) {
         flipper = new FliperDelaunay(this);
         List<Point>[] pointArray = convexHullDouble(input);
-        if(pointArray == null)
+        if (pointArray == null)
             return;
         List<Point> convexPoints = pointArray[0];
         BorderBox box = createConvexHullTriangles(convexPoints);

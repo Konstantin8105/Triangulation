@@ -7,11 +7,11 @@ public class ArrayIndexCorrection {
             return index;
         }
         if (index < 0)
-            return normalize(index + size,size);
-        return normalize(index - size,size);
+            return normalize(index + size, size);
+        return normalize(index - size, size);
     }
 
-    public static int normalizeSizeBy3(int index){
-        return normalize(index,3);
+    public static int normalizeSizeBy3(int index) {
+        return normalize(index, 3);
     }
 }
