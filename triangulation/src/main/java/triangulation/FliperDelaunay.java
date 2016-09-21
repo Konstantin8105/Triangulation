@@ -69,45 +69,62 @@ public class FliperDelaunay implements Fliper {
         // todo create another algoritm with 15 multiplications
         double x1 = circlePoints[0].getX();
         double y1 = circlePoints[0].getY();
-        double z1 = x1 * x1 + y1 * y1;
 
         double x2 = circlePoints[1].getX();
         double y2 = circlePoints[1].getY();
-        double z2 = x2 * x2 + y2 * y2;
 
         double x3 = circlePoints[2].getX();
         double y3 = circlePoints[2].getY();
-        double z3 = x3 * x3 + y3 * y3;
 
-        double a = det(new double[][]{
-                {x1, y1, 1},
-                {x2, y2, 1},
-                {x3, y3, 1}
+//        double z2 = x2 * x2 + y2 * y2;
+//        double z1 = x1 * x1 + y1 * y1;
+//        double z3 = x3 * x3 + y3 * y3;
+//
+//        double a = det(new double[][]{
+//                {x1, y1, 1},
+//                {x2, y2, 1},
+//                {x3, y3, 1}
+//        });
+//
+//        double b = det(new double[][]{
+//                {z1, y1, 1},
+//                {z2, y2, 1},
+//                {z3, y3, 1}
+//        });
+//
+//        double c = det(new double[][]{
+//                {z1, x1, 1},
+//                {z2, x2, 1},
+//                {z3, x3, 1}
+//        });
+//
+//        double d = det(new double[][]{
+//                {z1, x1, y1},
+//                {z2, x2, y2},
+//                {z3, x3, y3}
+//        });
+//
+//        double x0 = point.getX();
+//        double y0 = point.getY();
+//        double z0 = x0 * x0 + y0 * y0;
+//
+//        return Math.signum(a) * (a * z0 - b * x0 + c * y0 - d) < Precision.epsilon();
+
+        double x1x = x1 - point.getX();
+        double y1y = y1 - point.getY();
+
+        double x2x = x2 - point.getX();
+        double y2y = y2 - point.getY();
+
+        double x3x = x3 - point.getX();
+        double y3y = y3 - point.getY();
+
+        double result = det(new double[][]{
+                {x1x * x1x + y1y * y1y, x1x, y1y},
+                {x2x * x2x + y2y * y2y, x2x, y2y},
+                {x3x * x3x + y3y * y3y, x3x, y3y},
         });
-
-        double b = det(new double[][]{
-                {z1, y1, 1},
-                {z2, y2, 1},
-                {z3, y3, 1}
-        });
-
-        double c = det(new double[][]{
-                {z1, x1, 1},
-                {z2, x2, 1},
-                {z3, x3, 1}
-        });
-
-        double d = det(new double[][]{
-                {z1, x1, y1},
-                {z2, x2, y2},
-                {z3, x3, y3}
-        });
-
-        double x0 = point.getX();
-        double y0 = point.getY();
-        double z0 = x0 * x0 + y0 * y0;
-
-        return Math.signum(a) * (a * z0 - b * x0 + c * y0 - d) < Precision.epsilon();
+        return result > Precision.epsilon();
     }
 
 }
