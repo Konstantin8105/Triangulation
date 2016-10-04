@@ -33,7 +33,7 @@ public class FliperDelaunay implements Fliper {
             if (next.triangle.triangles[next.side] == null)
                 continue;
 
-            if (!isPointInCircle(
+            if (!Geometry.isPointInCircle(
                     new Point[]{
                             triangulation.getNode(next.triangle.triangles[next.side].iNodes[0]),
                             triangulation.getNode(next.triangle.triangles[next.side].iNodes[1]),
@@ -66,7 +66,7 @@ public class FliperDelaunay implements Fliper {
 
     static boolean isPointInCircle(Point[] circlePoints, Point point) {
 
-        // todo create another algorithm with 15 multiplications
+        // todo create another algoritm with 15 multiplications
         double x1 = circlePoints[0].getX();
         double y1 = circlePoints[0].getY();
 

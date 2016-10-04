@@ -61,7 +61,7 @@ PerformanceMemory.add  1000000  avgt   40  4769,300 ? 866,137  ns/op
             "1000000",
     })
     int size;
-    List<Integer> list = new LinkedList<>();
+    final List<Integer> list = new LinkedList<>();
 
     @Setup(Level.Invocation)
     public void prepare() {
@@ -72,7 +72,7 @@ PerformanceMemory.add  1000000  avgt   40  4769,300 ? 866,137  ns/op
     }
 
     @Benchmark
-    public boolean add() throws Exception {
+    public boolean add(){
         return list.add(12);
     }
 }

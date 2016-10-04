@@ -44,12 +44,12 @@ public class Geometry {
     static public POINT_ON_LINE calculateValuePointOnLine(Point p1, Point p2, Point p3) {
         double value = PointOnLineCalculator.calculateDouble(p1, p2, p3);
 
-        if (Math.abs(value / ((p2.getY() - p1.getY()) + (p2.getX() - p1.getX()))) > Precision.valueFactor()) {
+//        if (Math.abs(value / ((p2.getY() - p1.getY()) + (p2.getX() - p1.getX()))) > Precision.valueFactor()) {
             return calculateValuePointOnLine(value);
-        }
-
-        BigDecimal result = PointOnLineCalculator.calculateBigDecimal(p1, p2, p3);
-        return calculateValuePointOnLine(result);
+//        }
+//
+//        BigDecimal result = PointOnLineCalculator.calculateBigDecimal(p1, p2, p3);
+//        return calculateValuePointOnLine(result);
     }
 
     static public POINT_ON_LINE calculateValuePointOnLine(double value) {
@@ -76,7 +76,7 @@ public class Geometry {
         return is3pointsCollinear(calculateValuePointOnLine(p1, p2, p3));
     }
 
-    private static boolean isCounterClockwise(POINT_ON_LINE result) {
+    static boolean isCounterClockwise(POINT_ON_LINE result) {
         return result == POINT_ON_LINE.RESULT_IS_MORE_ZERO;
     }
 
@@ -109,5 +109,29 @@ public class Geometry {
         }
 
         return distance;
+    }
+
+    public static double det(double a[][]) {
+        return a[0][0] * a[1][1] * a[2][2] + a[1][0] * a[2][1] * a[0][2] + a[0][1] * a[1][2] * a[2][0]
+                - a[0][2] * a[1][1] * a[2][0] - a[0][1] * a[1][0] * a[2][2] - a[1][2] * a[2][1] * a[0][0];
+    }
+
+    public static boolean isPointInCircle(Point[] circlePoints, Point point) {
+
+        double x1x = circlePoints[0].getX() - point.getX();
+        double y1y = circlePoints[0].getY() - point.getY();
+
+        double x2x = circlePoints[1].getX() - point.getX();
+        double y2y = circlePoints[1].getY() - point.getY();
+
+        double x3x = circlePoints[2].getX() - point.getX();
+        double y3y = circlePoints[2].getY() - point.getY();
+
+        double result = det(new double[][]{
+                {x1x * x1x + y1y * y1y, x1x, y1y},
+                {x2x * x2x + y2y * y2y, x2x, y2y},
+                {x3x * x3x + y3y * y3y, x3x, y3y},
+        });
+        return result > Precision.epsilon();
     }
 }

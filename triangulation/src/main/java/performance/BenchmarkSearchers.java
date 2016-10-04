@@ -116,7 +116,7 @@ BenchmarkSearchers.triangulationMesh     100.0  100000  avgt   20  9922,326 ? 19
     Point[] points;
 
     @org.openjdk.jmh.annotations.Benchmark
-    public int triangulationMesh() throws Exception {
+    public int triangulationMesh(){
         TriangulationDelaunay triangulation = new TriangulationDelaunay();
         TriangulationDelaunay.MINIMAL_POINTS_FOR_CLEANING = 3;
         FastSearcher.AMOUNT_SEARCHER_FACTOR = Double.parseDouble(factor);

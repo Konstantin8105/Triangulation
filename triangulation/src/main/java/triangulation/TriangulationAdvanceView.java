@@ -17,17 +17,17 @@ public class TriangulationAdvanceView {
         }
         {
             List<Point> points = ResearchTriangulation.getCirclePoints(AMOUNT_POINTS);
-            TriangulationDelaunay triangulation = new TriangulationDelaunay((Point[])points.toArray());
+            TriangulationDelaunay triangulation = new TriangulationDelaunay((Point[]) points.toArray());
             MeshView meshView = new MeshView(triangulation.getTriangles());
         }
         {
             List<Point> points = ResearchTriangulation.getLineOnLine(AMOUNT_POINTS);
-            TriangulationDelaunay triangulation = new TriangulationDelaunay((Point[])points.toArray());
+            TriangulationDelaunay triangulation = new TriangulationDelaunay((Point[]) points.toArray());
             MeshView meshView = new MeshView(triangulation.getTriangles());
         }
         {
             List<Point> points = ResearchTriangulation.getInTriangles(AMOUNT_POINTS);
-            TriangulationDelaunay triangulation = new TriangulationDelaunay((Point[])points.toArray());
+            TriangulationDelaunay triangulation = new TriangulationDelaunay((Point[]) points.toArray());
             MeshView meshView = new MeshView(triangulation.getTriangles());
         }
     }

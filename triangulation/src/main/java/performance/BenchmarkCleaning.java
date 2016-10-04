@@ -231,7 +231,7 @@ BenchmarkCleaning.triangulationMesh      30.0  1000000  avgt   40  12651,203 ? 1
     Point[] points;
 
     @org.openjdk.jmh.annotations.Benchmark
-    public int triangulationMesh() throws Exception {
+    public int triangulationMesh(){
         TriangulationDelaunay triangulation = new TriangulationDelaunay();
         TriangulationDelaunay.MINIMAL_POINTS_FOR_CLEANING = 3;
         TriangulationDelaunay.AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE = Double.parseDouble(factor);
