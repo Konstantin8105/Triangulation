@@ -33,7 +33,7 @@ public class FliperDelaunay implements Fliper {
             if (next.triangle.triangles[next.side] == null)
                 continue;
 
-            if (!Geometry.isPointInCircle(
+            if (!isPointInCircle(
                     new Point[]{
                             triangulation.getNode(next.triangle.triangles[next.side].iNodes[0]),
                             triangulation.getNode(next.triangle.triangles[next.side].iNodes[1]),
