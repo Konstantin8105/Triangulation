@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class Counter {
+class Counter {
     final private Map<String, Integer> map = new TreeMap<>();
     final private String name;
     private long timeMoment = System.currentTimeMillis();

@@ -16,6 +16,7 @@ import java.util.*;
  * @author Izyumov Konstantin
  *         book "Algoritm building and analyse triangulation", A.B.Skvorcov.
  */
+@SuppressWarnings("Convert2streamapi")
 public class TriangulationDelaunay {
     // Array of nodes - type: Point
     private final List<Point> nodes = new ArrayList<>();
@@ -27,7 +28,7 @@ public class TriangulationDelaunay {
 
     private Fliper flipper;
     private Searcher searcher;
-    private TriangleList triangleList = new TriangleList();
+    private final TriangleList triangleList = new TriangleList();
 
     public static double AMOUNT_CLEANING_FACTOR_TRIANGLE_STRUCTURE = 2.4D;
     public static double RATIO_DELETING_CONVEX_POINT_FROM_POINT_LIST = 0.2D;
@@ -92,7 +93,7 @@ public class TriangulationDelaunay {
     //Performance O(n*log(n)) in worst case
     // Point[0][] - convex points
     // Point[1][] - sorted list of all points
-    static List[] convexHullDouble(Point[] inputPoints) {
+    private static List[] convexHullDouble(Point[] inputPoints) {
         if (inputPoints.length < 2) {
             return null;
         }

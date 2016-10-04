@@ -3,7 +3,7 @@ package triangulation.geometries;
 import triangulation.elements.BorderBox;
 import triangulation.elements.Point;
 
-public class GeometryCoordinate {
+class GeometryCoordinate {
     static boolean isPointInRectangle(Point point, Point... list) {
         //counter.addTime("GeometryCoordinate:isPointInRectangle");
         BorderBox borderBox = new BorderBox();

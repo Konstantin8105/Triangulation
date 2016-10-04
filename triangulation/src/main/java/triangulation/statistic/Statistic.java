@@ -3,7 +3,7 @@ package triangulation.statistic;
 import java.util.List;
 
 
-public class Statistic {
+class Statistic {
 
     public Statistic() {
     }

@@ -6,6 +6,7 @@ import triangulation.elements.Point;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StatisticTriangulation {
     public StatisticTriangulation(TriangulationDelaunay triangulation) {
@@ -18,8 +19,8 @@ public class StatisticTriangulation {
         List<Double> angles = new ArrayList<>();
         for (Point[] points:triangles) {
             double[] angle = Area.angleBetween(points);
-            for (int i = 0; i < angle.length; i++) {
-                angles.add(angle[i]);
+            for (double anAngle : angle) {
+                angles.add(anAngle);
             }
         }
         double [] areaLimit = new double[]{
@@ -33,10 +34,7 @@ public class StatisticTriangulation {
     }
 
     private void area(List<Point[]> triangles){
-        List<Double> areas = new ArrayList<>();
-        for (Point[] points:triangles) {
-            areas.add(Area.area_3point(points));
-        }
+        List<Double> areas = triangles.stream().map(Area::area_3point).collect(Collectors.toList());
         double [] areaLimit = new double[]{
                 0,1.5,2,2.5,3,
                 4,6,10,15,25,50,

@@ -34,8 +34,7 @@ public class Geometry {
             BigDecimal left = dY21.multiply(dX32);
             BigDecimal right = dY32.multiply(dX21).negate();
 
-            BigDecimal result = left.add(right);
-            return result;
+            return left.add(right);
         }
     }
 
@@ -70,19 +69,15 @@ public class Geometry {
     }
 
     static boolean is3pointsCollinear(POINT_ON_LINE result) {
-        if (result == POINT_ON_LINE.RESULT_IS_ZERO)
-            return true;
-        return false;
+        return result == POINT_ON_LINE.RESULT_IS_ZERO;
     }
 
     public static boolean is3pointsCollinear(Point p1, Point p2, Point p3) {
         return is3pointsCollinear(calculateValuePointOnLine(p1, p2, p3));
     }
 
-    static boolean isCounterClockwise(POINT_ON_LINE result) {
-        if (result == POINT_ON_LINE.RESULT_IS_MORE_ZERO)
-            return true;
-        return false;
+    private static boolean isCounterClockwise(POINT_ON_LINE result) {
+        return result == POINT_ON_LINE.RESULT_IS_MORE_ZERO;
     }
 
     public static boolean isCounterClockwise(Point a, Point b, Point c) {

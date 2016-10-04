@@ -66,7 +66,7 @@ public class FliperDelaunay implements Fliper {
 
     static boolean isPointInCircle(Point[] circlePoints, Point point) {
 
-        // todo create another algoritm with 15 multiplications
+        // todo create another algorithm with 15 multiplications
         double x1 = circlePoints[0].getX();
         double y1 = circlePoints[0].getY();
 
